@@ -1,0 +1,15 @@
+{
+  "installed": [
+    "skill",
+    "test",
+    "schema",
+    "event",
+    "view"
+  ],
+  "events": {
+    "lastSync": {},
+    "listenerCacheKeys": {
+      "httpsdevelopermercuryspruceai": ""
+    }
+  }
+}
