@@ -5,9 +5,9 @@
   "skill": {
     "namespace": "adventure"
   },
-  "homepage": "https://github.com/[YOUR REPO PATH]",
+  "homepage": "https://github.com/sprucelabsai/spruce-adventure-skill",
   "bugs": {
-    "url": "https://github.com/[YOUR REPO PATH]/issues"
+    "url": "https://github.com/sprucelabsai/spruce-adventure-skill/issues"
   },
   "keywords": [],
   "scripts": {
