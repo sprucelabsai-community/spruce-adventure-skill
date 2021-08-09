@@ -37,6 +37,31 @@ jobs:
           name: "Running Tests"
           command: |
             yarn test
+      - run: yarn add @sprucelabs/heartwood-browser-test
+      - run:
+          name: "Booting Adventure and Polish Checking"
+          command: |
+            echo SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot
+            coproc bootfd { SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot; }
+
+            while true
+            do
+              if [[ -n ${bootfd[@]} ]]; then
+                IFS= read boot_output <&"${bootfd[0]}"
+                echo "$boot_output"
+                if [[ $boot_output == *"Skill booted"* ]]; then
+                  DO_ADVENTURE=true DO_HEARTWOOD=false yarn heartwood-browser-test
+                  if [[ $? -eq 1 ]]; then
+                    exit 1
+                  fi
+                  break
+                fi
+              else
+                echo "oh no - error/exit"
+                exit 1
+                break
+              fi
+            done
       - run:
           name: Check branch for auto-upgrade
           command: |
