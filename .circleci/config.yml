@@ -4,7 +4,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:12-browsers
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -37,7 +37,7 @@ jobs:
           name: "Running Tests"
           command: |
             yarn test
-      - run: yarn add @sprucelabs/heartwood-browser-test
+      - run: yarn global add @sprucelabs/heartwood-browser-test
       - run:
           name: "Booting Adventure and Polish Checking"
           command: |
@@ -50,14 +50,15 @@ jobs:
                 IFS= read boot_output <&"${bootfd[0]}"
                 echo "$boot_output"
                 if [[ $boot_output == *"Skill booted"* ]]; then
-                  DO_ADVENTURE=true DO_HEARTWOOD=false yarn heartwood-browser-test
+                  DO_ADVENTURE=true DO_HEARTWOOD=false ~/.yarn/bin/heartwood-browser-test
                   if [[ $? -eq 1 ]]; then
+                    echo "Polish check failed"
                     exit 1
                   fi
                   break
                 fi
               else
-                echo "oh no - error/exit"
+                echo "Oh no! The Skill exited"
                 exit 1
                 break
               fi
