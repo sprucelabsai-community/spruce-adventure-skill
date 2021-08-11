@@ -51,7 +51,7 @@
     "@sprucelabs/spruce-event-plugin": "^5.4.11",
     "@sprucelabs/spruce-event-utils": "^15.2.5",
     "@sprucelabs/spruce-skill-booter": "^5.4.11",
-    "@sprucelabs/spruce-skill-utils": "^20.5.1",
+    "@sprucelabs/spruce-skill-utils": "^20.5.2",
     "@sprucelabs/spruce-view-plugin": "^5.4.11",
     "dotenv": "^10.0.0",
     "globby": "^11.0.4"
