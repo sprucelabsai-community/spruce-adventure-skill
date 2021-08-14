@@ -14,6 +14,12 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import heartwoodTest1628887294568Count28TestRegisterSkillViews1628887286402EventContract_v2021_08_13, {
+	TestRegisterSkillViews1628887286402EventContract as HeartwoodTest1628887294568Count28TestRegisterSkillViews1628887286402EventContract_v2021_08_13,
+} from '#spruce/events/heartwoodTest1628887294568Count28/testRegisterSkillViews1628887286402.v2021_08_13.contract'
+import mySecondSkill1628887207605Count91MyNewEventEventContract_v2021_08_13, {
+	MyNewEventEventContract as MySecondSkill1628887207605Count91MyNewEventEventContract_v2021_08_13,
+} from '#spruce/events/mySecondSkill1628887207605Count91/myNewEvent.v2021_08_13.contract'
 
 export default [
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
@@ -21,6 +27,8 @@ export default [
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
+	mySecondSkill1628887207605Count91MyNewEventEventContract_v2021_08_13,
+	heartwoodTest1628887294568Count28TestRegisterSkillViews1628887286402EventContract_v2021_08_13,
 	...coreEventContracts,
 ]
 
@@ -35,5 +43,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 
 		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
+		'my-second-skill-1628887207605-count-91.my-new-event::v2021_08_13': MySecondSkill1628887207605Count91MyNewEventEventContract_v2021_08_13['eventSignatures']['my-second-skill-1628887207605-count-91.my-new-event::v2021_08_13']
+
+		'heartwood-test-1628887294568-count-28.test-register-skill-views1628887286402::v2021_08_13': HeartwoodTest1628887294568Count28TestRegisterSkillViews1628887286402EventContract_v2021_08_13['eventSignatures']['heartwood-test-1628887294568-count-28.test-register-skill-views1628887286402::v2021_08_13']
 	}
 }
