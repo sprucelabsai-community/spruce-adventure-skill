@@ -3,7 +3,10 @@
   "description": "An adventure looking for a hero!",
   "version": "1.0.36",
   "skill": {
-    "namespace": "adventure"
+    "namespace": "adventure",
+    "upgradeIgnoreList": [
+      "globby"
+    ]
   },
   "homepage": "https://github.com/sprucelabsai/spruce-adventure-skill",
   "bugs": {
@@ -43,24 +46,24 @@
   },
   "dependencies": {
     "@sprucelabs/error": "^4.1.16",
-    "@sprucelabs/heartwood-view-controllers": "^33.0.19",
-    "@sprucelabs/mercury-client": "^16.10.8",
+    "@sprucelabs/heartwood-view-controllers": "^33.0.22",
+    "@sprucelabs/mercury-client": "^16.10.10",
     "@sprucelabs/mercury-types": "^24.1.0",
     "@sprucelabs/schema": "^21.4.8",
     "@sprucelabs/spruce-core-schemas": "^22.5.22",
-    "@sprucelabs/spruce-event-plugin": "^5.4.13",
+    "@sprucelabs/spruce-event-plugin": "^5.4.15",
     "@sprucelabs/spruce-event-utils": "^15.2.7",
-    "@sprucelabs/spruce-skill-booter": "^5.4.13",
+    "@sprucelabs/spruce-skill-booter": "^5.4.15",
     "@sprucelabs/spruce-skill-utils": "^20.5.4",
-    "@sprucelabs/spruce-view-plugin": "^5.4.13",
+    "@sprucelabs/spruce-view-plugin": "^5.4.15",
     "dotenv": "^10.0.0",
     "globby": "^11.0.4"
   },
   "devDependencies": {
     "@sprucelabs/jest-json-reporter": "^6.0.25",
-    "@sprucelabs/resolve-path-aliases": "^1.0.59",
+    "@sprucelabs/resolve-path-aliases": "^1.0.60",
     "@sprucelabs/semantic-release": "^4.0.6",
-    "@sprucelabs/spruce-test-fixtures": "^5.4.13",
+    "@sprucelabs/spruce-test-fixtures": "^5.4.15",
     "@sprucelabs/test": "^7.7.53",
     "@sprucelabs/test-utils": "^3.0.53",
     "@types/node": "^15.14.7",
