@@ -49,6 +49,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface DidRegisterSkillViewsEmitTargetAndPayload {
 			
+				/** Source. */
+				'source'?: SpruceSchemas.Heartwood.v2021_02_11.EventSource| undefined | null
 				
 				'payload': SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitPayload
 		}
@@ -59,6 +61,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.EventSourceSchema,}
+			            },
 			            /** . */
 			            'payload': {
 			                type: 'schema',
@@ -137,6 +145,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface GenerateUrlEmitTargetAndPayload {
 			
+				/** Source. */
+				'source'?: SpruceSchemas.Heartwood.v2021_02_11.EventSource| undefined | null
 				
 				'target'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTarget| undefined | null
 				
@@ -149,6 +159,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.EventSourceSchema,}
+			            },
 			            /** . */
 			            'target': {
 			                type: 'schema',
@@ -231,6 +247,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface GetSkillViewsEmitTargetAndPayload {
 			
+				/** Source. */
+				'source'?: SpruceSchemas.Heartwood.v2021_02_11.EventSource| undefined | null
 				
 				'target': SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTarget
 		}
@@ -241,6 +259,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.EventSourceSchema,}
+			            },
 			            /** . */
 			            'target': {
 			                type: 'schema',
@@ -251,6 +275,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type GetSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface RegisterationTheme {
+			
+				
+				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
+		}
+
+		interface RegisterationThemeSchema extends SpruceSchema.Schema {
+			id: 'registerationTheme',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'props': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema,}
+			            },
+			    }
+		}
+
+		type RegisterationThemeEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterationThemeSchema>
 
 	}
 
@@ -311,73 +364,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface RegisterationTheme {
+		interface EventSource {
 			
-				
-				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
+				/** Proxy token. */
+				'proxyToken'?: string| undefined | null
 		}
 
-		interface RegisterationThemeSchema extends SpruceSchema.Schema {
-			id: 'registerationTheme',
+		interface EventSourceSchema extends SpruceSchema.Schema {
+			id: 'eventSource',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
-			            /** . */
-			            'props': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemePropsSchema,}
+			            /** Proxy token. */
+			            'proxyToken': {
+			                label: 'Proxy token',
+			                type: 'id',
+			                options: undefined
 			            },
 			    }
 		}
 
-		type RegisterationThemeEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterationThemeSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface RegisterSkillViewsEmitPayload {
-			
-				
-				'ids': string[]
-				
-				'source': string
-				
-				'theme'?: SpruceSchemas.Heartwood.v2021_02_11.RegisterationTheme| undefined | null
-		}
-
-		interface RegisterSkillViewsEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'registerSkillViewsEmitPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'ids': {
-			                type: 'text',
-			                isRequired: true,
-			                isArray: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'source': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'theme': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.RegisterationThemeSchema,}
-			            },
-			    }
-		}
-
-		type RegisterSkillViewsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitPayloadSchema>
+		type EventSourceEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.EventSourceSchema>
 
 	}
 
@@ -415,6 +423,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		
 		interface RegisterSkillViewsEmitTargetAndPayload {
 			
+				/** Source. */
+				'source'?: SpruceSchemas.Heartwood.v2021_02_11.EventSource| undefined | null
 				
 				'target'?: SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTarget| undefined | null
 				
@@ -427,6 +437,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			namespace: 'Heartwood',
 			name: '',
 			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.EventSourceSchema,}
+			            },
 			            /** . */
 			            'target': {
 			                type: 'schema',
@@ -442,6 +458,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type RegisterSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface RegisterSkillViewsEmitPayload {
+			
+				
+				'ids': string[]
+				
+				'source': string
+				
+				'theme'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme| undefined | null
+		}
+
+		interface RegisterSkillViewsEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'registerSkillViewsEmitPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'ids': {
+			                type: 'text',
+			                isRequired: true,
+			                isArray: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'source': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'theme': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema,}
+			            },
+			    }
+		}
+
+		type RegisterSkillViewsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitPayloadSchema>
 
 	}
 
@@ -479,6 +540,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
+		interface EventSource {
+			
+				/** Proxy token. */
+				'proxyToken'?: string| undefined | null
+		}
+
+		interface EventSourceSchema extends SpruceSchema.Schema {
+			id: 'eventSource',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
+			name: '',
+			    fields: {
+			            /** Proxy token. */
+			            'proxyToken': {
+			                label: 'Proxy token',
+			                type: 'id',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type EventSourceEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.EventSourceSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
+
+		
 		interface DidBookAppointmentsEmitTarget {
 			
 				
@@ -500,42 +590,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DidBookAppointmentsEmitTargetEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Appointments.v2021_06_23 {
-
-		
-		interface DidBookAppointmentsEmitTargetAndPayload {
-			
-				
-				'target'?: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTarget| undefined | null
-				
-				'payload': SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayload
-		}
-
-		interface DidBookAppointmentsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'didBookAppointmentsEmitTargetAndPayload',
-			version: 'v2021_06_23',
-			namespace: 'Appointments',
-			name: '',
-			    fields: {
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type DidBookAppointmentsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetAndPayloadSchema>
 
 	}
 
@@ -594,6 +648,50 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DidBookAppointmentsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
+
+		
+		interface DidBookAppointmentsEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.Appointments.v2021_06_23.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTarget| undefined | null
+				
+				'payload': SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayload
+		}
+
+		interface DidBookAppointmentsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'didBookAppointmentsEmitTargetAndPayload',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type DidBookAppointmentsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetAndPayloadSchema>
 
 	}
 
