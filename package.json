@@ -52,7 +52,7 @@
     "@sprucelabs/schema": "^21.4.9",
     "@sprucelabs/spruce-core-schemas": "^22.5.25",
     "@sprucelabs/spruce-event-plugin": "^5.4.22",
-    "@sprucelabs/spruce-event-utils": "^15.2.13",
+    "@sprucelabs/spruce-event-utils": "^15.2.14",
     "@sprucelabs/spruce-skill-booter": "^5.4.22",
     "@sprucelabs/spruce-skill-utils": "^20.5.6",
     "@sprucelabs/spruce-view-plugin": "^5.4.22",
