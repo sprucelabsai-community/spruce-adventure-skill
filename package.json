@@ -45,11 +45,11 @@
     "update.dependencies": "yarn clean.dependencies && yarn"
   },
   "dependencies": {
-    "@sprucelabs/error": "^4.1.16",
+    "@sprucelabs/error": "^5.0.1",
     "@sprucelabs/heartwood-view-controllers": "^33.0.26",
     "@sprucelabs/mercury-client": "^16.10.13",
     "@sprucelabs/mercury-types": "^25.0.9",
-    "@sprucelabs/schema": "^21.4.9",
+    "@sprucelabs/schema": "^22.0.0",
     "@sprucelabs/spruce-core-schemas": "^22.5.26",
     "@sprucelabs/spruce-event-plugin": "^5.4.23",
     "@sprucelabs/spruce-event-utils": "^15.2.17",
