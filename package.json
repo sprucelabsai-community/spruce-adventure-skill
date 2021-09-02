@@ -78,8 +78,11 @@
     "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
   },
+  "resolutions": {
+		"**/terser-webpack-plugin": "5.1.4"
+  },
   "engines": {
-    "node": "12.x",
+    "node": ">=12.x",
     "yarn": "1.x"
   },
   "jest": {
