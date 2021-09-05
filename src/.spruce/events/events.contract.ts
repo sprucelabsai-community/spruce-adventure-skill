@@ -2,6 +2,12 @@ import { coreEventContracts } from '@sprucelabs/mercury-types'
 import appointmentsDidBookAppointmentsEventContract_v2021_06_23, {
 	DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23,
 } from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
+import calendarCreateCalendarEventTypeEventContract_v2021_05_19, {
+	CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19,
+} from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
+import calendarListCalendarEventTypesEventContract_v2021_05_19, {
+	ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19,
+} from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, {
 	DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
@@ -14,26 +20,44 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import heartwoodTest1630884950133Count47TestRegisterSkillViews1630884948423EventContract_v2021_09_05, {
+	TestRegisterSkillViews1630884948423EventContract as HeartwoodTest1630884950133Count47TestRegisterSkillViews1630884948423EventContract_v2021_09_05,
+} from '#spruce/events/heartwoodTest1630884950133Count47/testRegisterSkillViews1630884948423.v2021_09_05.contract'
+import heartwoodTest1630885165815Count96TestEventEventContract_v2020_01_01, {
+	TestEventEventContract as HeartwoodTest1630885165815Count96TestEventEventContract_v2020_01_01,
+} from '#spruce/events/heartwoodTest1630885165815Count96/testEvent.v2020_01_01.contract'
 
 export default [
-	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodGenerateUrlEventContract_v2021_02_11,
-	heartwoodGetSkillViewsEventContract_v2021_02_11,
-	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
+	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	heartwoodGenerateUrlEventContract_v2021_02_11,
+	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
+	heartwoodGetSkillViewsEventContract_v2021_02_11,
+	heartwoodTest1630884950133Count47TestRegisterSkillViews1630884948423EventContract_v2021_09_05,
+	heartwoodTest1630885165815Count96TestEventEventContract_v2020_01_01,
 	...coreEventContracts,
 ]
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
-		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
-		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
 
-		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
+
+		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
+
+		'heartwood-test-1630884950133-count-47.test-register-skill-views1630884948423::v2021_09_05': HeartwoodTest1630884950133Count47TestRegisterSkillViews1630884948423EventContract_v2021_09_05['eventSignatures']['heartwood-test-1630884950133-count-47.test-register-skill-views1630884948423::v2021_09_05']
+
+		'heartwood-test-1630885165815-count-96.test-event::v2020_01_01': HeartwoodTest1630885165815Count96TestEventEventContract_v2020_01_01['eventSignatures']['heartwood-test-1630885165815-count-96.test-event::v2020_01_01']
 	}
 }
