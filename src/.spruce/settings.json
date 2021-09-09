@@ -4,12 +4,16 @@
     "test",
     "schema",
     "event",
-    "view"
+    "view",
+    "error"
   ],
   "events": {
     "lastSync": {},
     "listenerCacheKeys": {
       "httpsdevelopermercuryspruceai": "buildlistenersskillwillbootv2021_08_03listenerjs"
     }
+  },
+  "scriptUpdater": {
+    "skipped": []
   }
 }
