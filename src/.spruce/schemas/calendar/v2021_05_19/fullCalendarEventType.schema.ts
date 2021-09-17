@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import eventSourceSchema_v2021_05_19 from '#spruce/schemas/calendar/v2021_05_19/eventSource.schema'
+import eventSourceSchema_v2021_09_13 from '#spruce/schemas/spruceEventUtils/v2021_09_13/eventSource.schema'
 
 const fullCalendarEventTypeSchema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema  = {
 	id: 'fullCalendarEventType',
@@ -29,7 +29,7 @@ const fullCalendarEventTypeSchema: SpruceSchemas.Calendar.v2021_05_19.FullCalend
 	            /** . */
 	            'source': {
 	                type: 'schema',
-	                options: {schema: eventSourceSchema_v2021_05_19,}
+	                options: {schema: eventSourceSchema_v2021_09_13,}
 	            },
 	    }
 }

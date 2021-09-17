@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import eventSourceSchema_v2021_05_19 from '#spruce/schemas/calendar/v2021_05_19/eventSource.schema'
+import eventSourceSchema_v2021_09_13 from '#spruce/schemas/spruceEventUtils/v2021_09_13/eventSource.schema'
 import createCalendarEventTypeEmitPayloadSchema_v2021_05_19 from '#spruce/schemas/calendar/v2021_05_19/createCalendarEventTypeEmitPayload.schema'
 
 const createCalendarEventTypeEmitTargetAndPayloadSchema: SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitTargetAndPayloadSchema  = {
@@ -14,7 +14,7 @@ const createCalendarEventTypeEmitTargetAndPayloadSchema: SpruceSchemas.Calendar.
 	            'source': {
 	                label: 'Source',
 	                type: 'schema',
-	                options: {schema: eventSourceSchema_v2021_05_19,}
+	                options: {schema: eventSourceSchema_v2021_09_13,}
 	            },
 	            /** . */
 	            'payload': {
