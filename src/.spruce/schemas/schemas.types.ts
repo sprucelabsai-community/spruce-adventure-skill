@@ -15,191 +15,6 @@ import { SkillViewControllerId } from '@sprucelabs/heartwood-view-controllers'
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
 
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface CreateCalendarEventTypeEmitPayload {
-			
-				
-				'name': string
-				
-				'slug': string
-		}
-
-		interface CreateCalendarEventTypeEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeEmitPayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** . */
-			            'name': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'slug': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		type CreateCalendarEventTypeEmitPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface CreateCalendarEventTypeEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'payload': SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayload
-		}
-
-		interface CreateCalendarEventTypeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeEmitTargetAndPayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type CreateCalendarEventTypeEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface FullCalendarEventType {
-			
-				
-				'id'?: string| undefined | null
-				
-				'name': string
-				
-				'slug': string
-				
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-		}
-
-		interface FullCalendarEventTypeSchema extends SpruceSchema.Schema {
-			id: 'fullCalendarEventType',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'name': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'slug': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'source': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			    }
-		}
-
-		type FullCalendarEventTypeEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface CreateCalendarEventTypeResponsePayload {
-			
-				
-				'calendarEventType': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType
-		}
-
-		interface CreateCalendarEventTypeResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeResponsePayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** . */
-			            'calendarEventType': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
-			            },
-			    }
-		}
-
-		type CreateCalendarEventTypeResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface ListCalendarEventTypesResponsePayload {
-			
-				
-				'calendarEventTypes': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType[]
-		}
-
-		interface ListCalendarEventTypesResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listCalendarEventTypesResponsePayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** . */
-			            'calendarEventTypes': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
-			            },
-			    }
-		}
-
-		type ListCalendarEventTypesResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.ListCalendarEventTypesResponsePayloadSchema>
-
-	}
-
-
 	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
@@ -532,6 +347,72 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface GetViewControllersEmitTarget {
+			
+				
+				'namespace': string
+		}
+
+		interface GetViewControllersEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'getViewControllersEmitTarget',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'namespace': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		type GetViewControllersEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GetSkillViewsEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target': SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTarget
+		}
+
+		interface GetSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'getSkillViewsEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		type GetSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface GetSkillViewsResponsePayload {
 			
 				
@@ -585,6 +466,34 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface RegisterSkillViewsEmitTarget {
+			
+				
+				'personId'?: string| undefined | null
+		}
+
+		interface RegisterSkillViewsEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'registerSkillViewsEmitTarget',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'personId': {
+			                type: 'id',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type RegisterSkillViewsEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface RegisterSkillViewsEmitPayload {
 			
 				
@@ -623,34 +532,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type RegisterSkillViewsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface RegisterSkillViewsEmitTarget {
-			
-				
-				'personId'?: string| undefined | null
-		}
-
-		interface RegisterSkillViewsEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'registerSkillViewsEmitTarget',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'personId': {
-			                type: 'id',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type RegisterSkillViewsEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetSchema>
 
 	}
 
@@ -729,23 +610,31 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
 
 		
-		interface GetViewControllersEmitTarget {
+		interface CreateCalendarEventTypeEmitPayload {
 			
 				
-				'namespace': string
+				'name': string
+				
+				'slug': string
 		}
 
-		interface GetViewControllersEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'getViewControllersEmitTarget',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+		interface CreateCalendarEventTypeEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeEmitPayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
 			name: '',
 			    fields: {
 			            /** . */
-			            'namespace': {
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'slug': {
 			                type: 'text',
 			                isRequired: true,
 			                options: undefined
@@ -753,26 +642,26 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    }
 		}
 
-		type GetViewControllersEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema>
+		type CreateCalendarEventTypeEmitPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
 
 		
-		interface GetSkillViewsEmitTargetAndPayload {
+		interface CreateCalendarEventTypeEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'target': SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTarget
+				'payload': SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayload
 		}
 
-		interface GetSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'getSkillViewsEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
+		interface CreateCalendarEventTypeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeEmitTargetAndPayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
 			name: '',
 			    fields: {
 			            /** Source. */
@@ -782,15 +671,126 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
 			            /** . */
-			            'target': {
+			            'payload': {
 			                type: 'schema',
 			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema,}
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type GetSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsEmitTargetAndPayloadSchema>
+		type CreateCalendarEventTypeEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
+
+		
+		interface FullCalendarEventType {
+			
+				
+				'id'?: string| undefined | null
+				
+				'name': string
+				
+				'slug': string
+				
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+		}
+
+		interface FullCalendarEventTypeSchema extends SpruceSchema.Schema {
+			id: 'fullCalendarEventType',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
+			name: '',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'slug': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'source': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			    }
+		}
+
+		type FullCalendarEventTypeEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
+
+		
+		interface CreateCalendarEventTypeResponsePayload {
+			
+				
+				'calendarEventType': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType
+		}
+
+		interface CreateCalendarEventTypeResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeResponsePayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
+			name: '',
+			    fields: {
+			            /** . */
+			            'calendarEventType': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
+			            },
+			    }
+		}
+
+		type CreateCalendarEventTypeResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
+
+		
+		interface ListCalendarEventTypesResponsePayload {
+			
+				
+				'calendarEventTypes': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType[]
+		}
+
+		interface ListCalendarEventTypesResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listCalendarEventTypesResponsePayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
+			name: '',
+			    fields: {
+			            /** . */
+			            'calendarEventTypes': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
+			            },
+			    }
+		}
+
+		type ListCalendarEventTypesResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.ListCalendarEventTypesResponsePayloadSchema>
 
 	}
 
@@ -1020,43 +1020,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Forms.v2021_07_02 {
 
 		
-		interface DeleteCompletedFormEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target': SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTarget
-		}
-
-		interface DeleteCompletedFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'deleteCompletedFormEmitTargetAndPayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		type DeleteCompletedFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
 		interface DeleteCompletedFormResponsePayload {
 			
 				
@@ -1272,72 +1235,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Forms.v2021_07_02 {
 
 		
-		interface DidSaveFormEmitPayload {
-			
-				
-				'completedFormId': string
-		}
-
-		interface DidSaveFormEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'didSaveFormEmitPayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** . */
-			            'completedFormId': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		type DidSaveFormEmitPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
-		interface DidUpdateCompletedFormEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'payload': SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayload
-		}
-
-		interface DidUpdateCompletedFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'didUpdateCompletedFormEmitTargetAndPayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type DidUpdateCompletedFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DidUpdateCompletedFormEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
 		interface GetCompletedFormEmitTarget {
 			
 				
@@ -1397,6 +1294,35 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type GetCompletedFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface GetCompletedFormResponsePayload {
+			
+				
+				'completedForm': SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventForm
+		}
+
+		interface GetCompletedFormResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'getCompletedFormResponsePayload',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** . */
+			            'completedForm': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventFormSchema,}
+			            },
+			    }
+		}
+
+		type GetCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormResponsePayloadSchema>
 
 	}
 
@@ -1536,28 +1462,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Forms.v2021_07_02 {
 
 		
-		interface GetCompletedFormResponsePayload {
+		interface DidSaveFormEmitPayload {
 			
 				
-				'completedForm': SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventForm
+				'completedFormId': string
 		}
 
-		interface GetCompletedFormResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'getCompletedFormResponsePayload',
+		interface DidSaveFormEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'didSaveFormEmitPayload',
 			version: 'v2021_07_02',
 			namespace: 'Forms',
 			name: '',
 			    fields: {
 			            /** . */
-			            'completedForm': {
-			                type: 'schema',
+			            'completedFormId': {
+			                type: 'id',
 			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventFormSchema,}
+			                options: undefined
 			            },
 			    }
 		}
 
-		type GetCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormResponsePayloadSchema>
+		type DidSaveFormEmitPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayloadSchema>
 
 	}
 
@@ -1727,6 +1653,80 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type ListFormsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.ListFormsResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface DeleteCompletedFormEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target': SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTarget
+		}
+
+		interface DeleteCompletedFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'deleteCompletedFormEmitTargetAndPayload',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		type DeleteCompletedFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface DidUpdateCompletedFormEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'payload': SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayload
+		}
+
+		interface DidUpdateCompletedFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'didUpdateCompletedFormEmitTargetAndPayload',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.DidSaveFormEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type DidUpdateCompletedFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DidUpdateCompletedFormEmitTargetAndPayloadSchema>
 
 	}
 
