@@ -144,6 +144,7 @@ jobs:
       - run:
           name: "Create PR"
           command: |
+            git add --all
             git commit -a -m "chore(auto-upgrade): upgraded packages [upgrade-all]"
             git push --force origin $TARGETBRANCH
             git push --set-upstream origin $TARGETBRANCH
