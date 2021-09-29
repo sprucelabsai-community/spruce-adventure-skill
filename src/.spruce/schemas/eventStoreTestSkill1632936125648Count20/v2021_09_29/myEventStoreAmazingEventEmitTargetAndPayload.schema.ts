@@ -2,13 +2,13 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import eventSourceSchema_v2021_09_13 from '#spruce/schemas/spruceEventUtils/v2021_09_13/eventSource.schema'
-import myEventStoreAmazingEventEmitTargetSchema_v2021_09_29 from '#spruce/schemas/eventStoreTestSkill1632926835367Count7/v2021_09_29/myEventStoreAmazingEventEmitTarget.schema'
-import myEventStoreAmazingEventEmitPayloadSchema_v2021_09_29 from '#spruce/schemas/eventStoreTestSkill1632926835367Count7/v2021_09_29/myEventStoreAmazingEventEmitPayload.schema'
+import myEventStoreAmazingEventEmitTargetSchema_v2021_09_29 from '#spruce/schemas/eventStoreTestSkill1632936125648Count20/v2021_09_29/myEventStoreAmazingEventEmitTarget.schema'
+import myEventStoreAmazingEventEmitPayloadSchema_v2021_09_29 from '#spruce/schemas/eventStoreTestSkill1632936125648Count20/v2021_09_29/myEventStoreAmazingEventEmitPayload.schema'
 
-const myEventStoreAmazingEventEmitTargetAndPayloadSchema: SpruceSchemas.EventStoreTestSkill1632926835367Count7.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema  = {
+const myEventStoreAmazingEventEmitTargetAndPayloadSchema: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema  = {
 	id: 'myEventStoreAmazingEventEmitTargetAndPayload',
 	version: 'v2021_09_29',
-	namespace: 'EventStoreTestSkill1632926835367Count7',
+	namespace: 'EventStoreTestSkill1632936125648Count20',
 	name: '',
 	    fields: {
 	            /** Source. */
