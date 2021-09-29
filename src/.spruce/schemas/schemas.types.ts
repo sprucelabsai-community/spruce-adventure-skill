@@ -15,81 +15,51 @@ import { SkillViewControllerId } from '@sprucelabs/heartwood-view-controllers'
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
 
-	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
-		interface MyEventStoreAmazingEventEmitTarget {
+		interface DidBookAppointmentsEmitTarget {
 			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
+				
+				'organizationId'?: string| undefined | null
 		}
 
-		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTarget',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936065850Count19',
+		interface DidBookAppointmentsEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'didBookAppointmentsEmitTarget',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
 			name: '',
 			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
+			            /** . */
+			            'organizationId': {
+			                type: 'id',
 			                options: undefined
 			            },
 			    }
 		}
 
-		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema>
+		type DidBookAppointmentsEmitTargetEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema>
 
 	}
 
 
-	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
-		interface MyEventStoreAmazingEventEmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitPayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936065850Count19',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
-
-		
-		interface MyEventStoreAmazingEventEmitTargetAndPayload {
+		interface DidBookAppointmentsEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'target'?: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTarget| undefined | null
+				'target'?: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTarget| undefined | null
 				
-				'payload'?: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayload| undefined | null
+				'payload': SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayload
 		}
 
-		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936065850Count19',
+		interface DidBookAppointmentsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'didBookAppointmentsEmitTargetAndPayload',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
 			name: '',
 			    fields: {
 			            /** Source. */
@@ -101,125 +71,132 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'target': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema,}
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema,}
 			            },
 			            /** . */
 			            'payload': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema,}
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
+		type DidBookAppointmentsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetAndPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
-		interface MyEventStoreAmazingEventResponsePayload {
+		interface Appointments {
 			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
+				
+				'guestId'?: string| undefined | null
 		}
 
-		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventResponsePayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936065850Count19',
+		interface AppointmentsSchema extends SpruceSchema.Schema {
+			id: 'appointments',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
 			name: '',
 			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
+			            /** . */
+			            'guestId': {
 			                type: 'text',
 			                options: undefined
 			            },
 			    }
 		}
 
-		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventResponsePayloadSchema>
+		type AppointmentsEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.AppointmentsSchema>
 
 	}
 
 
-	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
+	namespace SpruceSchemas.Appointments.v2021_06_23 {
 
 		
-		interface TestRegisterSkillViews1632936092618EmitTarget {
+		interface DidBookAppointmentsEmitPayload {
 			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
+				
+				'appointments': SpruceSchemas.Appointments.v2021_06_23.Appointments[]
 		}
 
-		interface TestRegisterSkillViews1632936092618EmitTargetSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1632936092618EmitTarget',
-			version: 'v2021_09_29',
-			namespace: 'HeartwoodTest1632936095722Count87',
+		interface DidBookAppointmentsEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'didBookAppointmentsEmitPayload',
+			version: 'v2021_06_23',
+			namespace: 'Appointments',
 			name: '',
 			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
+			            /** . */
+			            'appointments': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.AppointmentsSchema,}
+			            },
+			    }
+		}
+
+		type DidBookAppointmentsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
+
+		
+		interface CreateCalendarEventTypeEmitPayload {
+			
+				
+				'name': string
+				
+				'slug': string
+		}
+
+		interface CreateCalendarEventTypeEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeEmitPayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
+			name: '',
+			    fields: {
+			            /** . */
+			            'name': {
 			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'slug': {
+			                type: 'text',
+			                isRequired: true,
 			                options: undefined
 			            },
 			    }
 		}
 
-		type TestRegisterSkillViews1632936092618EmitTargetEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetSchema>
+		type CreateCalendarEventTypeEmitPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
 
 		
-		interface TestRegisterSkillViews1632936092618EmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface TestRegisterSkillViews1632936092618EmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1632936092618EmitPayload',
-			version: 'v2021_09_29',
-			namespace: 'HeartwoodTest1632936095722Count87',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1632936092618EmitPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
-
-		
-		interface TestRegisterSkillViews1632936092618EmitTargetAndPayload {
+		interface CreateCalendarEventTypeEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'target'?: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayload| undefined | null
+				'payload': SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayload
 		}
 
-		interface TestRegisterSkillViews1632936092618EmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1632936092618EmitTargetAndPayload',
-			version: 'v2021_09_29',
-			namespace: 'HeartwoodTest1632936095722Count87',
+		interface CreateCalendarEventTypeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeEmitTargetAndPayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
 			name: '',
 			    fields: {
 			            /** Source. */
@@ -229,178 +206,126 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
 			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetSchema,}
-			            },
-			            /** . */
 			            'payload': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayloadSchema,}
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type TestRegisterSkillViews1632936092618EmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetAndPayloadSchema>
+		type CreateCalendarEventTypeEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitTargetAndPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
 
 		
-		interface TestRegisterSkillViews1632936092618ResponsePayload {
+		interface FullCalendarEventType {
 			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface TestRegisterSkillViews1632936092618ResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1632936092618ResponsePayload',
-			version: 'v2021_09_29',
-			namespace: 'HeartwoodTest1632936095722Count87',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1632936092618ResponsePayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618ResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
-
-		
-		interface MyEventStoreAmazingEventEmitTarget {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTarget',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936125648Count20',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
-
-		
-		interface MyEventStoreAmazingEventEmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitPayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936125648Count20',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
-
-		
-		interface MyEventStoreAmazingEventEmitTargetAndPayload {
-			
-				/** Source. */
+				
+				'id'?: string| undefined | null
+				
+				'name': string
+				
+				'slug': string
+				
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayload| undefined | null
 		}
 
-		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936125648Count20',
+		interface FullCalendarEventTypeSchema extends SpruceSchema.Schema {
+			id: 'fullCalendarEventType',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
 			name: '',
 			    fields: {
-			            /** Source. */
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'slug': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
 			            'source': {
-			                label: 'Source',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema,}
-			            },
 			    }
 		}
 
-		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
+		type FullCalendarEventTypeEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema>
 
 	}
 
 
-	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
 
 		
-		interface MyEventStoreAmazingEventResponsePayload {
+		interface CreateCalendarEventTypeResponsePayload {
 			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
+				
+				'calendarEventType': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType
 		}
 
-		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventResponsePayload',
-			version: 'v2021_09_29',
-			namespace: 'EventStoreTestSkill1632936125648Count20',
+		interface CreateCalendarEventTypeResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'createCalendarEventTypeResponsePayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
 			name: '',
 			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
+			            /** . */
+			            'calendarEventType': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
 			            },
 			    }
 		}
 
-		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventResponsePayloadSchema>
+		type CreateCalendarEventTypeResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Calendar.v2021_05_19 {
+
+		
+		interface ListCalendarEventTypesResponsePayload {
+			
+				
+				'calendarEventTypes': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType[]
+		}
+
+		interface ListCalendarEventTypesResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listCalendarEventTypesResponsePayload',
+			version: 'v2021_05_19',
+			namespace: 'Calendar',
+			name: '',
+			    fields: {
+			            /** . */
+			            'calendarEventTypes': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
+			            },
+			    }
+		}
+
+		type ListCalendarEventTypesResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.ListCalendarEventTypesResponsePayloadSchema>
 
 	}
 
@@ -870,51 +795,81 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	}
 
 
-	namespace SpruceSchemas.Appointments.v2021_06_23 {
+	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
 
 		
-		interface DidBookAppointmentsEmitTarget {
+		interface MyEventStoreAmazingEventEmitTarget {
 			
-				
-				'organizationId'?: string| undefined | null
+				/** Update me. */
+				'aTextField'?: string| undefined | null
 		}
 
-		interface DidBookAppointmentsEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'didBookAppointmentsEmitTarget',
-			version: 'v2021_06_23',
-			namespace: 'Appointments',
+		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTarget',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936065850Count19',
 			name: '',
 			    fields: {
-			            /** . */
-			            'organizationId': {
-			                type: 'id',
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
 			                options: undefined
 			            },
 			    }
 		}
 
-		type DidBookAppointmentsEmitTargetEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema>
+		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Appointments.v2021_06_23 {
+	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
 
 		
-		interface DidBookAppointmentsEmitTargetAndPayload {
+		interface MyEventStoreAmazingEventEmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitPayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936065850Count19',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
+
+		
+		interface MyEventStoreAmazingEventEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'target'?: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTarget| undefined | null
+				'target'?: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTarget| undefined | null
 				
-				'payload': SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayload
+				'payload'?: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayload| undefined | null
 		}
 
-		interface DidBookAppointmentsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'didBookAppointmentsEmitTargetAndPayload',
-			version: 'v2021_06_23',
-			namespace: 'Appointments',
+		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936065850Count19',
 			name: '',
 			    fields: {
 			            /** Source. */
@@ -926,132 +881,125 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'target': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetSchema,}
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema,}
 			            },
 			            /** . */
 			            'payload': {
 			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema,}
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type DidBookAppointmentsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitTargetAndPayloadSchema>
+		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Appointments.v2021_06_23 {
+	namespace SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29 {
 
 		
-		interface Appointments {
+		interface MyEventStoreAmazingEventResponsePayload {
 			
-				
-				'guestId'?: string| undefined | null
+				/** Update me. */
+				'aTextField'?: string| undefined | null
 		}
 
-		interface AppointmentsSchema extends SpruceSchema.Schema {
-			id: 'appointments',
-			version: 'v2021_06_23',
-			namespace: 'Appointments',
+		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventResponsePayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936065850Count19',
 			name: '',
 			    fields: {
-			            /** . */
-			            'guestId': {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
 			                type: 'text',
 			                options: undefined
 			            },
 			    }
 		}
 
-		type AppointmentsEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.AppointmentsSchema>
+		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936065850Count19.v2021_09_29.MyEventStoreAmazingEventResponsePayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Appointments.v2021_06_23 {
+	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
 
 		
-		interface DidBookAppointmentsEmitPayload {
+		interface TestRegisterSkillViews1632936092618EmitTarget {
 			
-				
-				'appointments': SpruceSchemas.Appointments.v2021_06_23.Appointments[]
+				/** Update me. */
+				'aTextField'?: string| undefined | null
 		}
 
-		interface DidBookAppointmentsEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'didBookAppointmentsEmitPayload',
-			version: 'v2021_06_23',
-			namespace: 'Appointments',
+		interface TestRegisterSkillViews1632936092618EmitTargetSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1632936092618EmitTarget',
+			version: 'v2021_09_29',
+			namespace: 'HeartwoodTest1632936095722Count87',
 			name: '',
 			    fields: {
-			            /** . */
-			            'appointments': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.Appointments.v2021_06_23.AppointmentsSchema,}
-			            },
-			    }
-		}
-
-		type DidBookAppointmentsEmitPayloadEntity = SchemaEntity<SpruceSchemas.Appointments.v2021_06_23.DidBookAppointmentsEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface CreateCalendarEventTypeEmitPayload {
-			
-				
-				'name': string
-				
-				'slug': string
-		}
-
-		interface CreateCalendarEventTypeEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeEmitPayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
-			            /** . */
-			            'name': {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
 			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'slug': {
-			                type: 'text',
-			                isRequired: true,
 			                options: undefined
 			            },
 			    }
 		}
 
-		type CreateCalendarEventTypeEmitPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema>
+		type TestRegisterSkillViews1632936092618EmitTargetEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
+	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
 
 		
-		interface CreateCalendarEventTypeEmitTargetAndPayload {
+		interface TestRegisterSkillViews1632936092618EmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface TestRegisterSkillViews1632936092618EmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1632936092618EmitPayload',
+			version: 'v2021_09_29',
+			namespace: 'HeartwoodTest1632936095722Count87',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type TestRegisterSkillViews1632936092618EmitPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
+
+		
+		interface TestRegisterSkillViews1632936092618EmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'payload': SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayload
+				'target'?: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayload| undefined | null
 		}
 
-		interface CreateCalendarEventTypeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeEmitTargetAndPayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
+		interface TestRegisterSkillViews1632936092618EmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1632936092618EmitTargetAndPayload',
+			version: 'v2021_09_29',
+			namespace: 'HeartwoodTest1632936095722Count87',
 			name: '',
 			    fields: {
 			            /** Source. */
@@ -1061,126 +1009,178 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
 			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetSchema,}
+			            },
+			            /** . */
 			            'payload': {
 			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitPayloadSchema,}
+			                options: {schema: SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type CreateCalendarEventTypeEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeEmitTargetAndPayloadSchema>
+		type TestRegisterSkillViews1632936092618EmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618EmitTargetAndPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
+	namespace SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29 {
 
 		
-		interface FullCalendarEventType {
+		interface TestRegisterSkillViews1632936092618ResponsePayload {
 			
-				
-				'id'?: string| undefined | null
-				
-				'name': string
-				
-				'slug': string
-				
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				/** Update me. */
+				'aTextField'?: string| undefined | null
 		}
 
-		interface FullCalendarEventTypeSchema extends SpruceSchema.Schema {
-			id: 'fullCalendarEventType',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
+		interface TestRegisterSkillViews1632936092618ResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1632936092618ResponsePayload',
+			version: 'v2021_09_29',
+			namespace: 'HeartwoodTest1632936095722Count87',
 			name: '',
 			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                options: undefined
-			            },
-			            /** . */
-			            'name': {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
 			                type: 'text',
-			                isRequired: true,
 			                options: undefined
 			            },
-			            /** . */
-			            'slug': {
+			    }
+		}
+
+		type TestRegisterSkillViews1632936092618ResponsePayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1632936095722Count87.v2021_09_29.TestRegisterSkillViews1632936092618ResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
+
+		
+		interface MyEventStoreAmazingEventEmitTarget {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTarget',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936125648Count20',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
 			                type: 'text',
-			                isRequired: true,
 			                options: undefined
 			            },
-			            /** . */
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
+
+		
+		interface MyEventStoreAmazingEventEmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitPayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936125648Count20',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
+
+		
+		interface MyEventStoreAmazingEventEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayload| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936125648Count20',
+			name: '',
+			    fields: {
+			            /** Source. */
 			            'source': {
+			                label: 'Source',
 			                type: 'schema',
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
-			    }
-		}
-
-		type FullCalendarEventTypeEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
-
-		
-		interface CreateCalendarEventTypeResponsePayload {
-			
-				
-				'calendarEventType': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType
-		}
-
-		interface CreateCalendarEventTypeResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'createCalendarEventTypeResponsePayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
-			name: '',
-			    fields: {
 			            /** . */
-			            'calendarEventType': {
+			            'target': {
 			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitPayloadSchema,}
 			            },
 			    }
 		}
 
-		type CreateCalendarEventTypeResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.CreateCalendarEventTypeResponsePayloadSchema>
+		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
 
 	}
 
 
-	namespace SpruceSchemas.Calendar.v2021_05_19 {
+	namespace SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29 {
 
 		
-		interface ListCalendarEventTypesResponsePayload {
+		interface MyEventStoreAmazingEventResponsePayload {
 			
-				
-				'calendarEventTypes': SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventType[]
+				/** Update me. */
+				'aTextField'?: string| undefined | null
 		}
 
-		interface ListCalendarEventTypesResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listCalendarEventTypesResponsePayload',
-			version: 'v2021_05_19',
-			namespace: 'Calendar',
+		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventResponsePayload',
+			version: 'v2021_09_29',
+			namespace: 'EventStoreTestSkill1632936125648Count20',
 			name: '',
 			    fields: {
-			            /** . */
-			            'calendarEventTypes': {
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Calendar.v2021_05_19.FullCalendarEventTypeSchema,}
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
 			            },
 			    }
 		}
 
-		type ListCalendarEventTypesResponsePayloadEntity = SchemaEntity<SpruceSchemas.Calendar.v2021_05_19.ListCalendarEventTypesResponsePayloadSchema>
+		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1632936125648Count20.v2021_09_29.MyEventStoreAmazingEventResponsePayloadSchema>
 
 	}
 
