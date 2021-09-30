@@ -68,8 +68,6 @@ import mySecondSkill1632991419707Count30MyNewEventEventContract_v2021_09_30, {
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
-	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	mySecondSkill1632991419707Count30MyNewEventEventContract_v2021_09_30,
 	aTempSkill1632991436767Count91TestSyncEventContract_v2021_01_01,
 	heartwoodTest1632991642980Count43TestEventEventContract_v2020_01_01,
@@ -77,13 +75,15 @@ export default [
 	eventStoreTestSkill1632991717659Count65MyEventStoreAmazingEventEventContract_v2021_09_30,
 	heartwoodTest1632991792976Count17TestRegisterSkillViews1632991790684EventContract_v2021_09_30,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
+	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	formsConvertPdfToFormEventContract_v2021_07_02,
+	formsCreateFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
-	formsCreateFormEventContract_v2021_07_02,
 	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
 	formsListCompletedFormsEventContract_v2021_07_02,
@@ -95,10 +95,6 @@ export default [
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
 		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
-		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
-
-		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
 
 		'my-second-skill-1632991419707-count-30.my-new-event::v2021_09_30': MySecondSkill1632991419707Count30MyNewEventEventContract_v2021_09_30['eventSignatures']['my-second-skill-1632991419707-count-30.my-new-event::v2021_09_30']
 
@@ -114,19 +110,23 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
 
-		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
-
 		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
+
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
+
+		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
 
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
 
 		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
-
-		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
 
 		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
 
