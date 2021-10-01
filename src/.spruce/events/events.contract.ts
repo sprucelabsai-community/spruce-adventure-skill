@@ -56,7 +56,9 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
-import heartwoodTest1633079267746Count77TestEventEventContract_v2020_01_01, { TestEventEventContract as HeartwoodTest1633079267746Count77TestEventEventContract_v2020_01_01  } from '#spruce/events/heartwoodTest1633079267746Count77/testEvent.v2020_01_01.contract'
+import heartwoodTest1633079267746Count77TestEventEventContract_v2020_01_01, {
+	TestEventEventContract as HeartwoodTest1633079267746Count77TestEventEventContract_v2020_01_01,
+} from '#spruce/events/heartwoodTest1633079267746Count77/testEvent.v2020_01_01.contract'
 import heartwoodTest1633079473817Count9TestRegisterSkillViews1633079466450EventContract_v2021_10_01, {
 	TestRegisterSkillViews1633079466450EventContract as HeartwoodTest1633079473817Count9TestRegisterSkillViews1633079466450EventContract_v2021_10_01,
 } from '#spruce/events/heartwoodTest1633079473817Count9/testRegisterSkillViews1633079466450.v2021_10_01.contract'
@@ -65,6 +67,9 @@ import mySecondSkill1633079318866Count96MyNewEventEventContract_v2021_10_01, {
 } from '#spruce/events/mySecondSkill1633079318866Count96/myNewEvent.v2021_10_01.contract'
 
 export default [
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
@@ -80,9 +85,6 @@ export default [
 	eventStoreTestSkill1633079328012Count31MyEventStoreAmazingEventEventContract_v2021_10_01,
 	eventStoreTestSkill1633079374825Count32MyEventStoreAmazingEventEventContract_v2021_10_01,
 	heartwoodTest1633079473817Count9TestRegisterSkillViews1633079466450EventContract_v2021_10_01,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
-	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
@@ -92,6 +94,12 @@ export default [
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
+
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
@@ -121,12 +129,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'event-store-test-skill-1633079374825-count-32.my-event-store-amazing-event::v2021_10_01': EventStoreTestSkill1633079374825Count32MyEventStoreAmazingEventEventContract_v2021_10_01['eventSignatures']['event-store-test-skill-1633079374825-count-32.my-event-store-amazing-event::v2021_10_01']
 
 		'heartwood-test-1633079473817-count-9.test-register-skill-views1633079466450::v2021_10_01': HeartwoodTest1633079473817Count9TestRegisterSkillViews1633079466450EventContract_v2021_10_01['eventSignatures']['heartwood-test-1633079473817-count-9.test-register-skill-views1633079466450::v2021_10_01']
-
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
-		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
-
-		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
 
 		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
 
