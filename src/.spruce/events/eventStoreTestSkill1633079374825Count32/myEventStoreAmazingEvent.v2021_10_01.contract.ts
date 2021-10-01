@@ -1,11 +1,11 @@
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
-import myEventStoreAmazingEventEmitTargetAndPayloadSchema from '#spruce/schemas/eventStoreTestSkill1633078238195Count70/v2021_10_01/myEventStoreAmazingEventEmitTargetAndPayload.schema'
-import myEventStoreAmazingEventResponsePayloadSchema from '#spruce/schemas/eventStoreTestSkill1633078238195Count70/v2021_10_01/myEventStoreAmazingEventResponsePayload.schema'
+import myEventStoreAmazingEventEmitTargetAndPayloadSchema from '#spruce/schemas/eventStoreTestSkill1633079374825Count32/v2021_10_01/myEventStoreAmazingEventEmitTargetAndPayload.schema'
+import myEventStoreAmazingEventResponsePayloadSchema from '#spruce/schemas/eventStoreTestSkill1633079374825Count32/v2021_10_01/myEventStoreAmazingEventResponsePayload.schema'
 
 const myEventStoreAmazingEventEventContract = buildEventContract({
 	eventSignatures: {
-		'event-store-test-skill-1633078238195-count-70.my-event-store-amazing-event::v2021_10_01':
+		'event-store-test-skill-1633079374825-count-32.my-event-store-amazing-event::v2021_10_01':
 			{
 				isGlobal: true,
 				emitPayloadSchema: myEventStoreAmazingEventEmitTargetAndPayloadSchema,
@@ -13,32 +13,50 @@ const myEventStoreAmazingEventEventContract = buildEventContract({
 				emitPermissionContract: buildPermissionContract({
 					id: 'myEventStoreAmazingEventEmitPermissions',
 					name: 'my event store amazing event',
+					description: null,
 					requireAllPermissions: false,
 					permissions: [
 						{
 							id: 'can-high-five',
 							name: 'Can give high five',
 							description: 'Will this person be allowed to high five?',
+							requireAllStatuses: false,
 							defaults: {
 								skill: false,
+								owner: null,
+								groupManager: null,
+								manager: null,
+								teammate: null,
+								guest: null,
+								anonymous: null,
+								loggedIn: null,
 							},
-							requireAllStatuses: false,
+							can: null,
 						},
 					],
 				}),
 				listenPermissionContract: buildPermissionContract({
 					id: 'myEventStoreAmazingEventListenPermissions',
 					name: 'my event store amazing event',
+					description: null,
 					requireAllPermissions: false,
 					permissions: [
 						{
 							id: 'can-high-five',
 							name: 'Can give high five',
 							description: 'Will this person be allowed to high five?',
+							requireAllStatuses: false,
 							defaults: {
 								skill: false,
+								owner: null,
+								groupManager: null,
+								manager: null,
+								teammate: null,
+								guest: null,
+								anonymous: null,
+								loggedIn: null,
 							},
-							requireAllStatuses: false,
+							can: null,
 						},
 					],
 				}),
