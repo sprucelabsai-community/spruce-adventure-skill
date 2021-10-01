@@ -60,6 +60,12 @@ import mySecondSkill1633049329656Count27MyNewEventEventContract_v2021_10_01, {
 import heartwoodTest1633049418118Count15TestRegisterSkillViews1633049415573EventContract_v2021_10_01, {
 	TestRegisterSkillViews1633049415573EventContract as HeartwoodTest1633049418118Count15TestRegisterSkillViews1633049415573EventContract_v2021_10_01,
 } from '#spruce/events/heartwoodTest1633049418118Count15/testRegisterSkillViews1633049415573.v2021_10_01.contract'
+import mySkill16330575536641645MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16330575536641645MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16330575536641645/myCoolEvent.v2021_01_22.contract'
+import mySkill16330577362281698MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16330577362281698MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16330577362281698/myCoolEvent.v2021_01_22.contract'
 import formsListFormsEventContract_v2021_07_02, {
 	ListFormsEventContract as FormsListFormsEventContract_v2021_07_02,
 } from '#spruce/events/forms/listForms.v2021_07_02.contract'
@@ -90,9 +96,11 @@ export default [
 	eventStoreTestSkill1633049308113Count60MyEventStoreAmazingEventEventContract_v2021_10_01,
 	eventStoreTestSkill1633049346373Count61MyEventStoreAmazingEventEventContract_v2021_10_01,
 	heartwoodTest1633049418118Count15TestRegisterSkillViews1633049415573EventContract_v2021_10_01,
+	mySkill16330575536641645MyCoolEventEventContract_v2021_01_22,
+	mySkill16330577362281698MyCoolEventEventContract_v2021_01_22,
 	formsConvertPdfToFormEventContract_v2021_07_02,
-	formsCreateFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
+	formsCreateFormEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
@@ -148,11 +156,15 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'heartwood-test-1633049418118-count-15.test-register-skill-views1633049415573::v2021_10_01': HeartwoodTest1633049418118Count15TestRegisterSkillViews1633049415573EventContract_v2021_10_01['eventSignatures']['heartwood-test-1633049418118-count-15.test-register-skill-views1633049415573::v2021_10_01']
 
+		'my-skill-1633057553664-1645.my-cool-event::v2021_01_22': MySkill16330575536641645MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633057553664-1645.my-cool-event::v2021_01_22']
+
+		'my-skill-1633057736228-1698.my-cool-event::v2021_01_22': MySkill16330577362281698MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633057736228-1698.my-cool-event::v2021_01_22']
+
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
-		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
-
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
+
+		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
 
 		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
 
