@@ -2,7 +2,7 @@ import { buildEventContract } from '@sprucelabs/mercury-types'
 
 const myNewEventEventContract = buildEventContract({
 	eventSignatures: {
-		'my-second-skill-1633105300336-count-97.my-new-event::v2021_10_01': {
+		'my-second-skill-1633121181053-count-98.my-new-event::v2021_10_01': {
 			isGlobal: true,
 		},
 	},
