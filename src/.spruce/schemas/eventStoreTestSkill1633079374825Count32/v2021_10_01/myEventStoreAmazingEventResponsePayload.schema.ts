@@ -3,10 +3,10 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const myEventStoreAmazingEventResponsePayloadSchema: SpruceSchemas.EventStoreTestSkill1633078194336Count69.v2021_10_01.MyEventStoreAmazingEventResponsePayloadSchema  = {
+const myEventStoreAmazingEventResponsePayloadSchema: SpruceSchemas.EventStoreTestSkill1633079374825Count32.v2021_10_01.MyEventStoreAmazingEventResponsePayloadSchema  = {
 	id: 'myEventStoreAmazingEventResponsePayload',
 	version: 'v2021_10_01',
-	namespace: 'EventStoreTestSkill1633078194336Count69',
+	namespace: 'EventStoreTestSkill1633079374825Count32',
 	name: '',
 	    fields: {
 	            /** Update me. */
