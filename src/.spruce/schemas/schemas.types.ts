@@ -330,396 +330,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	}
 
 
-	namespace SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitTarget {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTarget',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035928137Count44',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitPayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035928137Count44',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitPayload| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035928137Count44',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventResponsePayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventResponsePayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035928137Count44',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035928137Count44.v2021_09_30.MyEventStoreAmazingEventResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitTarget {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTarget',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035963311Count45',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitPayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035963311Count45',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitPayload| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035963311Count45',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30 {
-
-		
-		interface MyEventStoreAmazingEventResponsePayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'myEventStoreAmazingEventResponsePayload',
-			version: 'v2021_09_30',
-			namespace: 'EventStoreTestSkill1633035963311Count45',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633035963311Count45.v2021_09_30.MyEventStoreAmazingEventResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30 {
-
-		
-		interface TestRegisterSkillViews1633036115297EmitTarget {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface TestRegisterSkillViews1633036115297EmitTargetSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1633036115297EmitTarget',
-			version: 'v2021_09_30',
-			namespace: 'HeartwoodTest1633036120872Count43',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1633036115297EmitTargetEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30 {
-
-		
-		interface TestRegisterSkillViews1633036115297EmitPayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface TestRegisterSkillViews1633036115297EmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1633036115297EmitPayload',
-			version: 'v2021_09_30',
-			namespace: 'HeartwoodTest1633036120872Count43',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1633036115297EmitPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30 {
-
-		
-		interface TestRegisterSkillViews1633036115297EmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitPayload| undefined | null
-		}
-
-		interface TestRegisterSkillViews1633036115297EmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1633036115297EmitTargetAndPayload',
-			version: 'v2021_09_30',
-			namespace: 'HeartwoodTest1633036120872Count43',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1633036115297EmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297EmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30 {
-
-		
-		interface TestRegisterSkillViews1633036115297ResponsePayload {
-			
-				/** Update me. */
-				'aTextField'?: string| undefined | null
-		}
-
-		interface TestRegisterSkillViews1633036115297ResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'testRegisterSkillViews1633036115297ResponsePayload',
-			version: 'v2021_09_30',
-			namespace: 'HeartwoodTest1633036120872Count43',
-			name: '',
-			    fields: {
-			            /** Update me. */
-			            'aTextField': {
-			                label: 'Update me',
-			                type: 'text',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type TestRegisterSkillViews1633036115297ResponsePayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633036120872Count43.v2021_09_30.TestRegisterSkillViews1633036115297ResponsePayloadSchema>
-
-	}
-
-
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
@@ -783,6 +393,249 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DidRegisterSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GenerateUrlEmitTarget {
+			
+				/** Skill View Id. */
+				'skillViewId'?: (SkillViewControllerId)| undefined | null
+		}
+
+		interface GenerateUrlEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'generateUrlEmitTarget',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			importsWhenRemote: ['import { SkillViewControllerId } from \'@sprucelabs/heartwood-view-controllers\'',],
+			    fields: {
+			            /** Skill View Id. */
+			            'skillViewId': {
+			                label: 'Skill View Id',
+			                type: 'raw',
+			                options: {valueType: `SkillViewControllerId`,}
+			            },
+			    }
+		}
+
+		type GenerateUrlEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GenerateUrlEmitPayload {
+			
+				/** Load args. */
+				'args'?: (Record<string, any>)| undefined | null
+		}
+
+		interface GenerateUrlEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'generateUrlEmitPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Load args. */
+			            'args': {
+			                label: 'Load args',
+			                type: 'raw',
+			                options: {valueType: `Record<string, any>`,}
+			            },
+			    }
+		}
+
+		type GenerateUrlEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GenerateUrlEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayload| undefined | null
+		}
+
+		interface GenerateUrlEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'generateUrlEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type GenerateUrlEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GenerateUrlResponsePayload {
+			
+				/** Url. */
+				'url': string
+		}
+
+		interface GenerateUrlResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'generateUrlResponsePayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Url. */
+			            'url': {
+			                label: 'Url',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		type GenerateUrlResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface GetSkillViewsResponsePayload {
+			
+				
+				'id': string
+				
+				'ids': string[]
+				
+				'source': string
+				
+				'theme'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme| undefined | null
+		}
+
+		interface GetSkillViewsResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'getSkillViewsResponsePayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'ids': {
+			                type: 'text',
+			                isRequired: true,
+			                isArray: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'source': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'theme': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema,}
+			            },
+			    }
+		}
+
+		type GetSkillViewsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface RegisterSkillViewsEmitTarget {
+			
+				
+				'personId'?: string| undefined | null
+		}
+
+		interface RegisterSkillViewsEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'registerSkillViewsEmitTarget',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . */
+			            'personId': {
+			                type: 'id',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type RegisterSkillViewsEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface RegisterSkillViewsResponsePayload {
+			
+				/** . Views that were registered. Will match the number of ids you sent. */
+				'totalRegistered': number
+		}
+
+		interface RegisterSkillViewsResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'registerSkillViewsResponsePayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** . Views that were registered. Will match the number of ids you sent. */
+			            'totalRegistered': {
+			                type: 'number',
+			                isRequired: true,
+			                hint: 'Views that were registered. Will match the number of ids you sent.',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type RegisterSkillViewsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsResponsePayloadSchema>
 
 	}
 
@@ -938,249 +791,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type RegisterSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GenerateUrlEmitTarget {
-			
-				/** Skill View Id. */
-				'skillViewId'?: (SkillViewControllerId)| undefined | null
-		}
-
-		interface GenerateUrlEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'generateUrlEmitTarget',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			importsWhenRemote: ['import { SkillViewControllerId } from \'@sprucelabs/heartwood-view-controllers\'',],
-			    fields: {
-			            /** Skill View Id. */
-			            'skillViewId': {
-			                label: 'Skill View Id',
-			                type: 'raw',
-			                options: {valueType: `SkillViewControllerId`,}
-			            },
-			    }
-		}
-
-		type GenerateUrlEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GenerateUrlEmitPayload {
-			
-				/** Load args. */
-				'args'?: (Record<string, any>)| undefined | null
-		}
-
-		interface GenerateUrlEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'generateUrlEmitPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Load args. */
-			            'args': {
-			                label: 'Load args',
-			                type: 'raw',
-			                options: {valueType: `Record<string, any>`,}
-			            },
-			    }
-		}
-
-		type GenerateUrlEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GenerateUrlEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayload| undefined | null
-		}
-
-		interface GenerateUrlEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'generateUrlEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		type GenerateUrlEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GenerateUrlResponsePayload {
-			
-				/** Url. */
-				'url': string
-		}
-
-		interface GenerateUrlResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'generateUrlResponsePayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Url. */
-			            'url': {
-			                label: 'Url',
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		type GenerateUrlResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface RegisterSkillViewsEmitTarget {
-			
-				
-				'personId'?: string| undefined | null
-		}
-
-		interface RegisterSkillViewsEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'registerSkillViewsEmitTarget',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'personId': {
-			                type: 'id',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type RegisterSkillViewsEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsEmitTargetSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface RegisterSkillViewsResponsePayload {
-			
-				/** . Views that were registered. Will match the number of ids you sent. */
-				'totalRegistered': number
-		}
-
-		interface RegisterSkillViewsResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'registerSkillViewsResponsePayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . Views that were registered. Will match the number of ids you sent. */
-			            'totalRegistered': {
-			                type: 'number',
-			                isRequired: true,
-			                hint: 'Views that were registered. Will match the number of ids you sent.',
-			                options: undefined
-			            },
-			    }
-		}
-
-		type RegisterSkillViewsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GetSkillViewsResponsePayload {
-			
-				
-				'id': string
-				
-				'ids': string[]
-				
-				'source': string
-				
-				'theme'?: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Theme| undefined | null
-		}
-
-		interface GetSkillViewsResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'getSkillViewsResponsePayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** . */
-			            'id': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'ids': {
-			                type: 'text',
-			                isRequired: true,
-			                isArray: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'source': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'theme': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeSchema,}
-			            },
-			    }
-		}
-
-		type GetSkillViewsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsResponsePayloadSchema>
 
 	}
 
@@ -1381,80 +991,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Forms.v2021_07_02 {
 
 		
-		interface CreateFormEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'payload': SpruceSchemas.Forms.v2021_07_02.CreateBuiltForm
-		}
-
-		interface CreateFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'createFormEmitTargetAndPayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.CreateBuiltFormSchema,}
-			            },
-			    }
-		}
-
-		type CreateFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateFormEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
-		interface CreateFormResponsePayload {
-			
-				
-				'form': SpruceSchemas.Forms.v2021_07_02.BuiltForm
-				
-				'values'?: (Record<string, any>)[]| undefined | null
-		}
-
-		interface CreateFormResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'createFormResponsePayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** . */
-			            'form': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.BuiltFormSchema,}
-			            },
-			            /** . */
-			            'values': {
-			                type: 'raw',
-			                isArray: true,
-			                options: {valueType: `Record<string, any>`,}
-			            },
-			    }
-		}
-
-		type CreateFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateFormResponsePayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
 		interface DeleteCompletedFormEmitTarget {
 			
 				
@@ -1543,6 +1079,192 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type DeleteCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.DeleteCompletedFormResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface CreateBuiltForm {
+			
+				/** Title. */
+				'title': string
+				/** Subtitle. */
+				'subtitle'?: string| undefined | null
+				/** Pages. */
+				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
+		}
+
+		interface CreateBuiltFormSchema extends SpruceSchema.Schema {
+			id: 'createBuiltForm',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Subtitle. */
+			            'subtitle': {
+			                label: 'Subtitle',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Pages. */
+			            'pages': {
+			                label: 'Pages',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
+			            },
+			    }
+		}
+
+		type CreateBuiltFormEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateBuiltFormSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface CreateFormEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'payload': SpruceSchemas.Forms.v2021_07_02.CreateBuiltForm
+		}
+
+		interface CreateFormEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'createFormEmitTargetAndPayload',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.CreateBuiltFormSchema,}
+			            },
+			    }
+		}
+
+		type CreateFormEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateFormEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface BuiltForm {
+			
+				
+				'id': string
+				
+				'dateDeleted'?: number| undefined | null
+				/** Title. */
+				'title': string
+				/** Subtitle. */
+				'subtitle'?: string| undefined | null
+				/** Pages. */
+				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
+		}
+
+		interface BuiltFormSchema extends SpruceSchema.Schema {
+			id: 'builtForm',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'dateDeleted': {
+			                type: 'number',
+			                isPrivate: true,
+			                options: undefined
+			            },
+			            /** Title. */
+			            'title': {
+			                label: 'Title',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Subtitle. */
+			            'subtitle': {
+			                label: 'Subtitle',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Pages. */
+			            'pages': {
+			                label: 'Pages',
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
+			            },
+			    }
+		}
+
+		type BuiltFormEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.BuiltFormSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Forms.v2021_07_02 {
+
+		
+		interface CreateFormResponsePayload {
+			
+				
+				'form': SpruceSchemas.Forms.v2021_07_02.BuiltForm
+				
+				'values'?: (Record<string, any>)[]| undefined | null
+		}
+
+		interface CreateFormResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'createFormResponsePayload',
+			version: 'v2021_07_02',
+			namespace: 'Forms',
+			name: '',
+			    fields: {
+			            /** . */
+			            'form': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.BuiltFormSchema,}
+			            },
+			            /** . */
+			            'values': {
+			                type: 'raw',
+			                isArray: true,
+			                options: {valueType: `Record<string, any>`,}
+			            },
+			    }
+		}
+
+		type CreateFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateFormResponsePayloadSchema>
 
 	}
 
@@ -1682,111 +1404,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Forms.v2021_07_02 {
 
 		
-		interface CreateBuiltForm {
-			
-				/** Title. */
-				'title': string
-				/** Subtitle. */
-				'subtitle'?: string| undefined | null
-				/** Pages. */
-				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
-		}
-
-		interface CreateBuiltFormSchema extends SpruceSchema.Schema {
-			id: 'createBuiltForm',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Subtitle. */
-			            'subtitle': {
-			                label: 'Subtitle',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Pages. */
-			            'pages': {
-			                label: 'Pages',
-			                type: 'schema',
-			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
-			            },
-			    }
-		}
-
-		type CreateBuiltFormEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.CreateBuiltFormSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
-		interface BuiltForm {
+		interface GetCompletedFormResponsePayload {
 			
 				
-				'id': string
-				
-				'dateDeleted'?: number| undefined | null
-				/** Title. */
-				'title': string
-				/** Subtitle. */
-				'subtitle'?: string| undefined | null
-				/** Pages. */
-				'pages': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPage[]
+				'completedForm': SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventForm
 		}
 
-		interface BuiltFormSchema extends SpruceSchema.Schema {
-			id: 'builtForm',
+		interface GetCompletedFormResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'getCompletedFormResponsePayload',
 			version: 'v2021_07_02',
 			namespace: 'Forms',
 			name: '',
 			    fields: {
 			            /** . */
-			            'id': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'dateDeleted': {
-			                type: 'number',
-			                isPrivate: true,
-			                options: undefined
-			            },
-			            /** Title. */
-			            'title': {
-			                label: 'Title',
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Subtitle. */
-			            'subtitle': {
-			                label: 'Subtitle',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** Pages. */
-			            'pages': {
-			                label: 'Pages',
+			            'completedForm': {
 			                type: 'schema',
 			                isRequired: true,
-			                isArray: true,
-			                options: {schema: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.BuilderImportExportPageSchema,}
+			                options: {schema: SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventFormSchema,}
 			            },
 			    }
 		}
 
-		type BuiltFormEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.BuiltFormSchema>
+		type GetCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormResponsePayloadSchema>
 
 	}
 
@@ -1919,35 +1558,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type GetCompletedFormEventFormEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventFormSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Forms.v2021_07_02 {
-
-		
-		interface GetCompletedFormResponsePayload {
-			
-				
-				'completedForm': SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventForm
-		}
-
-		interface GetCompletedFormResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'getCompletedFormResponsePayload',
-			version: 'v2021_07_02',
-			namespace: 'Forms',
-			name: '',
-			    fields: {
-			            /** . */
-			            'completedForm': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Forms.v2021_07_02.GetCompletedFormEventFormSchema,}
-			            },
-			    }
-		}
-
-		type GetCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.GetCompletedFormResponsePayloadSchema>
 
 	}
 
@@ -2220,6 +1830,396 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type UpdateCompletedFormResponsePayloadEntity = SchemaEntity<SpruceSchemas.Forms.v2021_07_02.UpdateCompletedFormResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitTarget {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTarget',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049308113Count60',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitPayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049308113Count60',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitPayload| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049308113Count60',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventResponsePayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventResponsePayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049308113Count60',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049308113Count60.v2021_10_01.MyEventStoreAmazingEventResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitTarget {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTarget',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049346373Count61',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitTargetEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitPayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049346373Count61',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitPayload| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventEmitTargetAndPayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049346373Count61',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01 {
+
+		
+		interface MyEventStoreAmazingEventResponsePayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface MyEventStoreAmazingEventResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'myEventStoreAmazingEventResponsePayload',
+			version: 'v2021_10_01',
+			namespace: 'EventStoreTestSkill1633049346373Count61',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type MyEventStoreAmazingEventResponsePayloadEntity = SchemaEntity<SpruceSchemas.EventStoreTestSkill1633049346373Count61.v2021_10_01.MyEventStoreAmazingEventResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01 {
+
+		
+		interface TestRegisterSkillViews1633049415573EmitTarget {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface TestRegisterSkillViews1633049415573EmitTargetSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1633049415573EmitTarget',
+			version: 'v2021_10_01',
+			namespace: 'HeartwoodTest1633049418118Count15',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type TestRegisterSkillViews1633049415573EmitTargetEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01 {
+
+		
+		interface TestRegisterSkillViews1633049415573EmitPayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface TestRegisterSkillViews1633049415573EmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1633049415573EmitPayload',
+			version: 'v2021_10_01',
+			namespace: 'HeartwoodTest1633049418118Count15',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type TestRegisterSkillViews1633049415573EmitPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01 {
+
+		
+		interface TestRegisterSkillViews1633049415573EmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitPayload| undefined | null
+		}
+
+		interface TestRegisterSkillViews1633049415573EmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1633049415573EmitTargetAndPayload',
+			version: 'v2021_10_01',
+			namespace: 'HeartwoodTest1633049418118Count15',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type TestRegisterSkillViews1633049415573EmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573EmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01 {
+
+		
+		interface TestRegisterSkillViews1633049415573ResponsePayload {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface TestRegisterSkillViews1633049415573ResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'testRegisterSkillViews1633049415573ResponsePayload',
+			version: 'v2021_10_01',
+			namespace: 'HeartwoodTest1633049418118Count15',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type TestRegisterSkillViews1633049415573ResponsePayloadEntity = SchemaEntity<SpruceSchemas.HeartwoodTest1633049418118Count15.v2021_10_01.TestRegisterSkillViews1633049415573ResponsePayloadSchema>
 
 	}
 
