@@ -2,12 +2,21 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import appointmentsDidBookAppointmentsEventContract_v2021_06_23, {
 	DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23,
 } from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
+import aTempSkill1633164504942Count98TestSyncEventContract_v2021_01_01, {
+	TestSyncEventContract as ATempSkill1633164504942Count98TestSyncEventContract_v2021_01_01,
+} from '#spruce/events/aTempSkill1633164504942Count98/testSync.v2021_01_01.contract'
 import calendarCreateCalendarEventTypeEventContract_v2021_05_19, {
 	CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19,
 } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
 import calendarListCalendarEventTypesEventContract_v2021_05_19, {
 	ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19,
 } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
+import eventStoreTestSkill1633164659386Count100MyEventStoreAmazingEventEventContract_v2021_10_02, {
+	MyEventStoreAmazingEventEventContract as EventStoreTestSkill1633164659386Count100MyEventStoreAmazingEventEventContract_v2021_10_02,
+} from '#spruce/events/eventStoreTestSkill1633164659386Count100/myEventStoreAmazingEvent.v2021_10_02.contract'
+import eventStoreTestSkill1633164719093Count101MyEventStoreAmazingEventEventContract_v2021_10_02, {
+	MyEventStoreAmazingEventEventContract as EventStoreTestSkill1633164719093Count101MyEventStoreAmazingEventEventContract_v2021_10_02,
+} from '#spruce/events/eventStoreTestSkill1633164719093Count101/myEventStoreAmazingEvent.v2021_10_02.contract'
 import formsConvertPdfToFormEventContract_v2021_07_02, {
 	ConvertPdfToFormEventContract as FormsConvertPdfToFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/convertPdfToForm.v2021_07_02.contract'
@@ -47,6 +56,15 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import heartwoodTest1633164720452Count74TestEventEventContract_v2020_01_01, {
+	TestEventEventContract as HeartwoodTest1633164720452Count74TestEventEventContract_v2020_01_01,
+} from '#spruce/events/heartwoodTest1633164720452Count74/testEvent.v2020_01_01.contract'
+import heartwoodTest1633164962282Count23TestRegisterSkillViews1633164954899EventContract_v2021_10_02, {
+	TestRegisterSkillViews1633164954899EventContract as HeartwoodTest1633164962282Count23TestRegisterSkillViews1633164954899EventContract_v2021_10_02,
+} from '#spruce/events/heartwoodTest1633164962282Count23/testRegisterSkillViews1633164954899.v2021_10_02.contract'
+import mySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02, {
+	MyNewEventEventContract as MySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02,
+} from '#spruce/events/mySecondSkill1633164499497Count50/myNewEvent.v2021_10_02.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -65,6 +83,12 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
+	mySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02,
+	aTempSkill1633164504942Count98TestSyncEventContract_v2021_01_01,
+	eventStoreTestSkill1633164659386Count100MyEventStoreAmazingEventEventContract_v2021_10_02,
+	heartwoodTest1633164720452Count74TestEventEventContract_v2020_01_01,
+	eventStoreTestSkill1633164719093Count101MyEventStoreAmazingEventEventContract_v2021_10_02,
+	heartwoodTest1633164962282Count23TestRegisterSkillViews1633164954899EventContract_v2021_10_02,
 	...coreEventContracts,
 ]
 
@@ -101,5 +125,17 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
+
+		'my-second-skill-1633164499497-count-50.my-new-event::v2021_10_02': MySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02['eventSignatures']['my-second-skill-1633164499497-count-50.my-new-event::v2021_10_02']
+
+		'a-temp-skill-1633164504942-count-98.test-sync::v2021_01_01': ATempSkill1633164504942Count98TestSyncEventContract_v2021_01_01['eventSignatures']['a-temp-skill-1633164504942-count-98.test-sync::v2021_01_01']
+
+		'event-store-test-skill-1633164659386-count-100.my-event-store-amazing-event::v2021_10_02': EventStoreTestSkill1633164659386Count100MyEventStoreAmazingEventEventContract_v2021_10_02['eventSignatures']['event-store-test-skill-1633164659386-count-100.my-event-store-amazing-event::v2021_10_02']
+
+		'heartwood-test-1633164720452-count-74.test-event::v2020_01_01': HeartwoodTest1633164720452Count74TestEventEventContract_v2020_01_01['eventSignatures']['heartwood-test-1633164720452-count-74.test-event::v2020_01_01']
+
+		'event-store-test-skill-1633164719093-count-101.my-event-store-amazing-event::v2021_10_02': EventStoreTestSkill1633164719093Count101MyEventStoreAmazingEventEventContract_v2021_10_02['eventSignatures']['event-store-test-skill-1633164719093-count-101.my-event-store-amazing-event::v2021_10_02']
+
+		'heartwood-test-1633164962282-count-23.test-register-skill-views1633164954899::v2021_10_02': HeartwoodTest1633164962282Count23TestRegisterSkillViews1633164954899EventContract_v2021_10_02['eventSignatures']['heartwood-test-1633164962282-count-23.test-register-skill-views1633164954899::v2021_10_02']
 	}
 }
