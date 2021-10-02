@@ -65,21 +65,14 @@ import mySkill16331874836471508MyCoolEventEventContract_v2021_01_22, {
 import mySkill16331876795801600MyCoolEventEventContract_v2021_01_22, {
 	MyCoolEventEventContract as MySkill16331876795801600MyCoolEventEventContract_v2021_01_22,
 } from '#spruce/events/mySkill16331876795801600/myCoolEvent.v2021_01_22.contract'
+import mySkill16331977371681573MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16331977371681573MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16331977371681573/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
 	calendarListCalendarEventTypesEventContract_v2021_05_19,
-	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodGenerateUrlEventContract_v2021_02_11,
-	heartwoodGetSkillViewsEventContract_v2021_02_11,
-	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
-	mySkill16331664622311607MyCoolEventEventContract_v2021_01_22,
-	mySkill16331666567631610MyCoolEventEventContract_v2021_01_22,
-	mySkill16331766479951550MyCoolEventEventContract_v2021_01_22,
-	mySkill16331768467451583MyCoolEventEventContract_v2021_01_22,
-	mySkill16331874836471508MyCoolEventEventContract_v2021_01_22,
-	mySkill16331876795801600MyCoolEventEventContract_v2021_01_22,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
@@ -89,6 +82,17 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
+	mySkill16331664622311607MyCoolEventEventContract_v2021_01_22,
+	mySkill16331666567631610MyCoolEventEventContract_v2021_01_22,
+	mySkill16331766479951550MyCoolEventEventContract_v2021_01_22,
+	mySkill16331768467451583MyCoolEventEventContract_v2021_01_22,
+	mySkill16331874836471508MyCoolEventEventContract_v2021_01_22,
+	mySkill16331876795801600MyCoolEventEventContract_v2021_01_22,
+	mySkill16331977371681573MyCoolEventEventContract_v2021_01_22,
+	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
+	heartwoodGenerateUrlEventContract_v2021_02_11,
+	heartwoodGetSkillViewsEventContract_v2021_02_11,
+	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	...coreEventContracts,
 ]
 
@@ -99,26 +103,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
 		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
-
-		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
-
-		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
-
-		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
-
-		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
-
-		'my-skill-1633166462231-1607.my-cool-event::v2021_01_22': MySkill16331664622311607MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633166462231-1607.my-cool-event::v2021_01_22']
-
-		'my-skill-1633166656763-1610.my-cool-event::v2021_01_22': MySkill16331666567631610MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633166656763-1610.my-cool-event::v2021_01_22']
-
-		'my-skill-1633176647995-1550.my-cool-event::v2021_01_22': MySkill16331766479951550MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633176647995-1550.my-cool-event::v2021_01_22']
-
-		'my-skill-1633176846745-1583.my-cool-event::v2021_01_22': MySkill16331768467451583MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633176846745-1583.my-cool-event::v2021_01_22']
-
-		'my-skill-1633187483647-1508.my-cool-event::v2021_01_22': MySkill16331874836471508MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633187483647-1508.my-cool-event::v2021_01_22']
-
-		'my-skill-1633187679580-1600.my-cool-event::v2021_01_22': MySkill16331876795801600MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633187679580-1600.my-cool-event::v2021_01_22']
 
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
@@ -137,5 +121,27 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
+
+		'my-skill-1633166462231-1607.my-cool-event::v2021_01_22': MySkill16331664622311607MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633166462231-1607.my-cool-event::v2021_01_22']
+
+		'my-skill-1633166656763-1610.my-cool-event::v2021_01_22': MySkill16331666567631610MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633166656763-1610.my-cool-event::v2021_01_22']
+
+		'my-skill-1633176647995-1550.my-cool-event::v2021_01_22': MySkill16331766479951550MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633176647995-1550.my-cool-event::v2021_01_22']
+
+		'my-skill-1633176846745-1583.my-cool-event::v2021_01_22': MySkill16331768467451583MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633176846745-1583.my-cool-event::v2021_01_22']
+
+		'my-skill-1633187483647-1508.my-cool-event::v2021_01_22': MySkill16331874836471508MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633187483647-1508.my-cool-event::v2021_01_22']
+
+		'my-skill-1633187679580-1600.my-cool-event::v2021_01_22': MySkill16331876795801600MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633187679580-1600.my-cool-event::v2021_01_22']
+
+		'my-skill-1633197737168-1573.my-cool-event::v2021_01_22': MySkill16331977371681573MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633197737168-1573.my-cool-event::v2021_01_22']
+
+		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
+
+		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
+
+		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 	}
 }
