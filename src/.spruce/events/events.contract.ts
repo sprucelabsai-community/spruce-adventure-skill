@@ -49,6 +49,7 @@ import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
 
 export default [
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
 	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
@@ -64,12 +65,13 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	...coreEventContracts,
 ]
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
 		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
 		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
@@ -99,7 +101,5 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
-
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 	}
 }
