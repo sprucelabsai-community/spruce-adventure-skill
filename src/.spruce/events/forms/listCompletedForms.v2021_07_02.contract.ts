@@ -11,37 +11,20 @@ const listCompletedFormsEventContract = buildEventContract({
 			emitPermissionContract: buildPermissionContract({
 				id: 'listCompletedFormsEmitPermissions',
 				name: 'list completed forms',
-				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
 						id: 'can-list-completed-forms',
 						name: 'Can list completed forms',
-						description: null,
-						requireAllStatuses: null,
 						defaults: {
-							skill: true,
-							owner: null,
-							groupManager: null,
-							manager: null,
-							teammate: null,
-							guest: null,
-							anonymous: {
-								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
-							},
 							loggedIn: {
 								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
 							},
+							anonymous: {
+								default: true,
+							},
+							skill: true,
 						},
-						can: null,
 					},
 				],
 			}),
