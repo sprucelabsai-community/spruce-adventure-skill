@@ -23,12 +23,8 @@ import formsConvertPdfToFormEventContract_v2021_07_02, {
 import formsConvertPdfToSchemasEventContract_v2021_07_02, {
 	ConvertPdfToSchemasEventContract as FormsConvertPdfToSchemasEventContract_v2021_07_02,
 } from '#spruce/events/forms/convertPdfToSchemas.v2021_07_02.contract'
-import formsCreateFormEventContract_v2021_07_02, {
-	CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02,
-} from '#spruce/events/forms/createForm.v2021_07_02.contract'
-import formsDeleteCompletedFormEventContract_v2021_07_02, {
-	DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02,
-} from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
+import formsCreateFormEventContract_v2021_07_02, { CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02  } from '#spruce/events/forms/createForm.v2021_07_02.contract'
+import formsDeleteCompletedFormEventContract_v2021_07_02, { DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
 import formsDidUpdateCompletedFormEventContract_v2021_07_02, {
 	DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
@@ -76,15 +72,6 @@ export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
 	calendarListCalendarEventTypesEventContract_v2021_05_19,
-	formsConvertPdfToFormEventContract_v2021_07_02,
-	formsConvertPdfToSchemasEventContract_v2021_07_02,
-	formsDeleteCompletedFormEventContract_v2021_07_02,
-	formsCreateFormEventContract_v2021_07_02,
-	formsDidUpdateCompletedFormEventContract_v2021_07_02,
-	formsGetCompletedFormEventContract_v2021_07_02,
-	formsListCompletedFormsEventContract_v2021_07_02,
-	formsListFormsEventContract_v2021_07_02,
-	formsUpdateCompletedFormEventContract_v2021_07_02,
 	mySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02,
 	aTempSkill1633164504942Count98TestSyncEventContract_v2021_01_01,
 	eventStoreTestSkill1633164659386Count100MyEventStoreAmazingEventEventContract_v2021_10_02,
@@ -97,6 +84,15 @@ export default [
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	formsConvertPdfToFormEventContract_v2021_07_02,
+	formsConvertPdfToSchemasEventContract_v2021_07_02,
+	formsDeleteCompletedFormEventContract_v2021_07_02,
+	formsCreateFormEventContract_v2021_07_02,
+	formsDidUpdateCompletedFormEventContract_v2021_07_02,
+	formsGetCompletedFormEventContract_v2021_07_02,
+	formsListCompletedFormsEventContract_v2021_07_02,
+	formsListFormsEventContract_v2021_07_02,
+	formsUpdateCompletedFormEventContract_v2021_07_02,
 	...coreEventContracts,
 ]
 
@@ -107,24 +103,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
 		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
-
-		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
-
-		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
-
-		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
-
-		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
-
-		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
-
-		'forms.get-completed-form::v2021_07_02': FormsGetCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.get-completed-form::v2021_07_02']
-
-		'forms.list-completed-forms::v2021_07_02': FormsListCompletedFormsEventContract_v2021_07_02['eventSignatures']['forms.list-completed-forms::v2021_07_02']
-
-		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
-
-		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
 
 		'my-second-skill-1633164499497-count-50.my-new-event::v2021_10_02': MySecondSkill1633164499497Count50MyNewEventEventContract_v2021_10_02['eventSignatures']['my-second-skill-1633164499497-count-50.my-new-event::v2021_10_02']
 
@@ -149,5 +127,23 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
+
+		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
+
+		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
+
+		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
+
+		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
+
+		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
+
+		'forms.get-completed-form::v2021_07_02': FormsGetCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.get-completed-form::v2021_07_02']
+
+		'forms.list-completed-forms::v2021_07_02': FormsListCompletedFormsEventContract_v2021_07_02['eventSignatures']['forms.list-completed-forms::v2021_07_02']
+
+		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
+
+		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
 	}
 }
