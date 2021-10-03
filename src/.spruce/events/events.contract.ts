@@ -21,8 +21,8 @@ import formsConvertPdfToFormEventContract_v2021_07_02, { ConvertPdfToFormEventCo
 import formsConvertPdfToSchemasEventContract_v2021_07_02, { ConvertPdfToSchemasEventContract as FormsConvertPdfToSchemasEventContract_v2021_07_02  } from '#spruce/events/forms/convertPdfToSchemas.v2021_07_02.contract'
 import formsCreateFormEventContract_v2021_07_02, { CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02  } from '#spruce/events/forms/createForm.v2021_07_02.contract'
 import formsDeleteCompletedFormEventContract_v2021_07_02, { DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
-import formsDidUpdateCompletedFormEventContract_v2021_07_02, { DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
 import formsGetCompletedFormEventContract_v2021_07_02, { GetCompletedFormEventContract as FormsGetCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/getCompletedForm.v2021_07_02.contract'
+import formsDidUpdateCompletedFormEventContract_v2021_07_02, { DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
 import formsListCompletedFormsEventContract_v2021_07_02, { ListCompletedFormsEventContract as FormsListCompletedFormsEventContract_v2021_07_02  } from '#spruce/events/forms/listCompletedForms.v2021_07_02.contract'
 import formsListFormsEventContract_v2021_07_02, { ListFormsEventContract as FormsListFormsEventContract_v2021_07_02  } from '#spruce/events/forms/listForms.v2021_07_02.contract'
 import formsUpdateCompletedFormEventContract_v2021_07_02, { UpdateCompletedFormEventContract as FormsUpdateCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/updateCompletedForm.v2021_07_02.contract'
@@ -70,8 +70,8 @@ export default [
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
-	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
+	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
@@ -120,9 +120,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
 
-		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
-
 		'forms.get-completed-form::v2021_07_02': FormsGetCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.get-completed-form::v2021_07_02']
+
+		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
 
 		'forms.list-completed-forms::v2021_07_02': FormsListCompletedFormsEventContract_v2021_07_02['eventSignatures']['forms.list-completed-forms::v2021_07_02']
 
