@@ -23,8 +23,12 @@ import formsConvertPdfToFormEventContract_v2021_07_02, {
 import formsConvertPdfToSchemasEventContract_v2021_07_02, {
 	ConvertPdfToSchemasEventContract as FormsConvertPdfToSchemasEventContract_v2021_07_02,
 } from '#spruce/events/forms/convertPdfToSchemas.v2021_07_02.contract'
-import formsCreateFormEventContract_v2021_07_02, { CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02  } from '#spruce/events/forms/createForm.v2021_07_02.contract'
-import formsDeleteCompletedFormEventContract_v2021_07_02, { DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02  } from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
+import formsCreateFormEventContract_v2021_07_02, {
+	CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02,
+} from '#spruce/events/forms/createForm.v2021_07_02.contract'
+import formsDeleteCompletedFormEventContract_v2021_07_02, {
+	DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02,
+} from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
 import formsDidUpdateCompletedFormEventContract_v2021_07_02, {
 	DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
@@ -86,8 +90,8 @@ export default [
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
-	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
+	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
 	formsListCompletedFormsEventContract_v2021_07_02,
@@ -132,9 +136,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
 
-		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
-
 		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
+
+		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
 
 		'forms.did-update-completed-form::v2021_07_02': FormsDidUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.did-update-completed-form::v2021_07_02']
 
