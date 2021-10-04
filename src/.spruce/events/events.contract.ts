@@ -100,15 +100,15 @@ export default [
 	mySkill16333058669271550MyCoolEventEventContract_v2021_01_22,
 	mySkill16333165643731534MyCoolEventEventContract_v2021_01_22,
 	mySkill16333167700121601MyCoolEventEventContract_v2021_01_22,
-	formsCreateFormEventContract_v2021_07_02,
 	formsConvertPdfToFormEventContract_v2021_07_02,
+	formsCreateFormEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
 	formsListCompletedFormsEventContract_v2021_07_02,
-	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
+	formsListFormsEventContract_v2021_07_02,
 	...coreEventContracts,
 ]
 
@@ -150,9 +150,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'my-skill-1633316770012-1601.my-cool-event::v2021_01_22': MySkill16333167700121601MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633316770012-1601.my-cool-event::v2021_01_22']
 
-		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
-
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
+
+		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
 
 		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
 
@@ -164,8 +164,8 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'forms.list-completed-forms::v2021_07_02': FormsListCompletedFormsEventContract_v2021_07_02['eventSignatures']['forms.list-completed-forms::v2021_07_02']
 
-		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
-
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
+
+		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 	}
 }
