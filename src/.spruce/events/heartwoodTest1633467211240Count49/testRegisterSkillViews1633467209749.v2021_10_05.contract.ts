@@ -1,18 +1,20 @@
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
-import myEventStoreAmazingEventEmitTargetAndPayloadSchema from '#spruce/schemas/eventStoreTestSkill1633445580235Count31/v2021_10_05/myEventStoreAmazingEventEmitTargetAndPayload.schema'
-import myEventStoreAmazingEventResponsePayloadSchema from '#spruce/schemas/eventStoreTestSkill1633445580235Count31/v2021_10_05/myEventStoreAmazingEventResponsePayload.schema'
+import testRegisterSkillViews1633467209749EmitTargetAndPayloadSchema from '#spruce/schemas/heartwoodTest1633467211240Count49/v2021_10_05/testRegisterSkillViews1633467209749EmitTargetAndPayload.schema'
+import testRegisterSkillViews1633467209749ResponsePayloadSchema from '#spruce/schemas/heartwoodTest1633467211240Count49/v2021_10_05/testRegisterSkillViews1633467209749ResponsePayload.schema'
 
-const myEventStoreAmazingEventEventContract = buildEventContract({
+const testRegisterSkillViews1633467209749EventContract = buildEventContract({
 	eventSignatures: {
-		'event-store-test-skill-1633445530927-count-30.my-event-store-amazing-event::v2021_10_05':
+		'heartwood-test-1633467211240-count-49.test-register-skill-views1633467209749::v2021_10_05':
 			{
 				isGlobal: true,
-				emitPayloadSchema: myEventStoreAmazingEventEmitTargetAndPayloadSchema,
-				responsePayloadSchema: myEventStoreAmazingEventResponsePayloadSchema,
+				emitPayloadSchema:
+					testRegisterSkillViews1633467209749EmitTargetAndPayloadSchema,
+				responsePayloadSchema:
+					testRegisterSkillViews1633467209749ResponsePayloadSchema,
 				emitPermissionContract: buildPermissionContract({
-					id: 'myEventStoreAmazingEventEmitPermissions',
-					name: 'my event store amazing event',
+					id: 'testRegisterSkillViews1633467209749EmitPermissions',
+					name: 'did book appointment',
 					description: null,
 					requireAllPermissions: false,
 					permissions: [
@@ -36,8 +38,8 @@ const myEventStoreAmazingEventEventContract = buildEventContract({
 					],
 				}),
 				listenPermissionContract: buildPermissionContract({
-					id: 'myEventStoreAmazingEventListenPermissions',
-					name: 'my event store amazing event',
+					id: 'testRegisterSkillViews1633467209749ListenPermissions',
+					name: 'did book appointment',
 					description: null,
 					requireAllPermissions: false,
 					permissions: [
@@ -63,7 +65,7 @@ const myEventStoreAmazingEventEventContract = buildEventContract({
 			},
 	},
 })
-export default myEventStoreAmazingEventEventContract
+export default testRegisterSkillViews1633467209749EventContract
 
-export type MyEventStoreAmazingEventEventContract =
-	typeof myEventStoreAmazingEventEventContract
+export type TestRegisterSkillViews1633467209749EventContract =
+	typeof testRegisterSkillViews1633467209749EventContract
