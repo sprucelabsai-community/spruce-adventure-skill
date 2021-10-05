@@ -75,7 +75,6 @@ export default [
 	heartwoodTest1633445655780Count39TestEventEventContract_v2020_01_01,
 	heartwoodTest1633445688362Count97TestRegisterSkillViews1633445686496EventContract_v2021_10_05,
 	mySkill16334605759581566MyCoolEventEventContract_v2021_01_22,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	formsCreateFormEventContract_v2021_07_02,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
@@ -85,6 +84,7 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	...coreEventContracts,
 ]
 
@@ -116,8 +116,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'my-skill-1633460575958-1566.my-cool-event::v2021_01_22': MySkill16334605759581566MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633460575958-1566.my-cool-event::v2021_01_22']
 
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
 		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
 
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
@@ -135,5 +133,7 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
+
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 	}
 }
