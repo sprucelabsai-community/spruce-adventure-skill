@@ -2,7 +2,7 @@ import { buildEventContract } from '@sprucelabs/mercury-types'
 
 const testSyncEventContract = buildEventContract({
 	eventSignatures: {
-		'a-temp-skill-1633380523983-count-66.test-sync::v2021_01_01': {
+		'a-temp-skill-1633394748133-count-76.test-sync::v2021_01_01': {
 			isGlobal: true,
 		},
 	},

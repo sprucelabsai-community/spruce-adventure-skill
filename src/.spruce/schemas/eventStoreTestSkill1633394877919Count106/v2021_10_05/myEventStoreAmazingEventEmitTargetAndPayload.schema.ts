@@ -2,13 +2,13 @@ import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
 import eventSourceSchema_v2021_09_13 from '#spruce/schemas/spruceEventUtils/v2021_09_13/eventSource.schema'
-import myEventStoreAmazingEventEmitTargetSchema_v2021_10_04 from '#spruce/schemas/eventStoreTestSkill1633380530727Count31/v2021_10_04/myEventStoreAmazingEventEmitTarget.schema'
-import myEventStoreAmazingEventEmitPayloadSchema_v2021_10_04 from '#spruce/schemas/eventStoreTestSkill1633380530727Count31/v2021_10_04/myEventStoreAmazingEventEmitPayload.schema'
+import myEventStoreAmazingEventEmitTargetSchema_v2021_10_05 from '#spruce/schemas/eventStoreTestSkill1633394877919Count106/v2021_10_05/myEventStoreAmazingEventEmitTarget.schema'
+import myEventStoreAmazingEventEmitPayloadSchema_v2021_10_05 from '#spruce/schemas/eventStoreTestSkill1633394877919Count106/v2021_10_05/myEventStoreAmazingEventEmitPayload.schema'
 
-const myEventStoreAmazingEventEmitTargetAndPayloadSchema: SpruceSchemas.EventStoreTestSkill1633380530727Count31.v2021_10_04.MyEventStoreAmazingEventEmitTargetAndPayloadSchema  = {
+const myEventStoreAmazingEventEmitTargetAndPayloadSchema: SpruceSchemas.EventStoreTestSkill1633394877919Count106.v2021_10_05.MyEventStoreAmazingEventEmitTargetAndPayloadSchema  = {
 	id: 'myEventStoreAmazingEventEmitTargetAndPayload',
-	version: 'v2021_10_04',
-	namespace: 'EventStoreTestSkill1633380530727Count31',
+	version: 'v2021_10_05',
+	namespace: 'EventStoreTestSkill1633394877919Count106',
 	name: '',
 	    fields: {
 	            /** Source. */
@@ -20,12 +20,12 @@ const myEventStoreAmazingEventEmitTargetAndPayloadSchema: SpruceSchemas.EventSto
 	            /** . */
 	            'target': {
 	                type: 'schema',
-	                options: {schema: myEventStoreAmazingEventEmitTargetSchema_v2021_10_04,}
+	                options: {schema: myEventStoreAmazingEventEmitTargetSchema_v2021_10_05,}
 	            },
 	            /** . */
 	            'payload': {
 	                type: 'schema',
-	                options: {schema: myEventStoreAmazingEventEmitPayloadSchema_v2021_10_04,}
+	                options: {schema: myEventStoreAmazingEventEmitPayloadSchema_v2021_10_05,}
 	            },
 	    }
 }
