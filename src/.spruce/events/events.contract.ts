@@ -1,16 +1,8 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
-import appointmentsDidBookAppointmentsEventContract_v2021_06_23, {
-	DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23,
-} from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
-import aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01, {
-	TestSyncEventContract as ATempSkill1633553109601Count88TestSyncEventContract_v2021_01_01,
-} from '#spruce/events/aTempSkill1633553109601Count88/testSync.v2021_01_01.contract'
-import calendarCreateCalendarEventTypeEventContract_v2021_05_19, {
-	CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19,
-} from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
-import calendarListCalendarEventTypesEventContract_v2021_05_19, {
-	ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19,
-} from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
+import appointmentsDidBookAppointmentsEventContract_v2021_06_23, { DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23  } from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
+import aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01, { TestSyncEventContract as ATempSkill1633553109601Count88TestSyncEventContract_v2021_01_01  } from '#spruce/events/aTempSkill1633553109601Count88/testSync.v2021_01_01.contract'
+import calendarCreateCalendarEventTypeEventContract_v2021_05_19, { CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19  } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
+import calendarListCalendarEventTypesEventContract_v2021_05_19, { ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19  } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import formsConvertPdfToFormEventContract_v2021_07_02, {
 	ConvertPdfToFormEventContract as FormsConvertPdfToFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/convertPdfToForm.v2021_07_02.contract'
@@ -61,8 +53,17 @@ import mySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06, {
 } from '#spruce/events/mySecondSkill1633553093941Count70/myNewEvent.v2021_10_06.contract'
 
 export default [
+	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
+	heartwoodGenerateUrlEventContract_v2021_02_11,
+	heartwoodGetSkillViewsEventContract_v2021_02_11,
+	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	mySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06,
+	heartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01,
+	aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01,
+	heartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
 	calendarListCalendarEventTypesEventContract_v2021_05_19,
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
@@ -72,23 +73,32 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
-	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodGenerateUrlEventContract_v2021_02_11,
-	heartwoodGetSkillViewsEventContract_v2021_02_11,
-	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
-	mySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06,
-	heartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01,
-	aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01,
-	heartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	...coreEventContracts,
 ]
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
+
+		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
+
+		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
+
+		'my-second-skill-1633553093941-count-70.my-new-event::v2021_10_06': MySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06['eventSignatures']['my-second-skill-1633553093941-count-70.my-new-event::v2021_10_06']
+
+		'heartwood-test-1633553100267-count-75.test-event::v2020_01_01': HeartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01['eventSignatures']['heartwood-test-1633553100267-count-75.test-event::v2020_01_01']
+
+		'a-temp-skill-1633553109601-count-88.test-sync::v2021_01_01': ATempSkill1633553109601Count88TestSyncEventContract_v2021_01_01['eventSignatures']['a-temp-skill-1633553109601-count-88.test-sync::v2021_01_01']
+
+		'heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06': HeartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06['eventSignatures']['heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06']
+
 		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
 		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
@@ -107,23 +117,5 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
-
-		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
-
-		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
-
-		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
-
-		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
-
-		'my-second-skill-1633553093941-count-70.my-new-event::v2021_10_06': MySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06['eventSignatures']['my-second-skill-1633553093941-count-70.my-new-event::v2021_10_06']
-
-		'heartwood-test-1633553100267-count-75.test-event::v2020_01_01': HeartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01['eventSignatures']['heartwood-test-1633553100267-count-75.test-event::v2020_01_01']
-
-		'a-temp-skill-1633553109601-count-88.test-sync::v2021_01_01': ATempSkill1633553109601Count88TestSyncEventContract_v2021_01_01['eventSignatures']['a-temp-skill-1633553109601-count-88.test-sync::v2021_01_01']
-
-		'heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06': HeartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06['eventSignatures']['heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06']
-
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 	}
 }
