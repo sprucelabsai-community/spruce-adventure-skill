@@ -2,7 +2,7 @@ import { buildEventContract } from '@sprucelabs/mercury-types'
 
 const testEventEventContract = buildEventContract({
 	eventSignatures: {
-		'heartwood-test-1633549164638-count-35.test-event::v2020_01_01': {
+		'heartwood-test-1633553100267-count-75.test-event::v2020_01_01': {
 			isGlobal: true,
 		},
 	},
