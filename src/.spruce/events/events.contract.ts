@@ -5,8 +5,12 @@ import appointmentsDidBookAppointmentsEventContract_v2021_06_23, {
 import aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01, {
 	TestSyncEventContract as ATempSkill1633553109601Count88TestSyncEventContract_v2021_01_01,
 } from '#spruce/events/aTempSkill1633553109601Count88/testSync.v2021_01_01.contract'
-import calendarCreateCalendarEventTypeEventContract_v2021_05_19, { CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19  } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
-import calendarListCalendarEventTypesEventContract_v2021_05_19, { ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19  } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
+import calendarCreateCalendarEventTypeEventContract_v2021_05_19, {
+	CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19,
+} from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
+import calendarListCalendarEventTypesEventContract_v2021_05_19, {
+	ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19,
+} from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import formsConvertPdfToFormEventContract_v2021_07_02, {
 	ConvertPdfToFormEventContract as FormsConvertPdfToFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/convertPdfToForm.v2021_07_02.contract'
@@ -19,21 +23,9 @@ import formsCreateFormEventContract_v2021_07_02, {
 import formsDeleteCompletedFormEventContract_v2021_07_02, {
 	DeleteCompletedFormEventContract as FormsDeleteCompletedFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/deleteCompletedForm.v2021_07_02.contract'
-import formsDidUpdateCompletedFormEventContract_v2021_07_02, {
-	DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02,
-} from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
 import formsGetCompletedFormEventContract_v2021_07_02, {
 	GetCompletedFormEventContract as FormsGetCompletedFormEventContract_v2021_07_02,
 } from '#spruce/events/forms/getCompletedForm.v2021_07_02.contract'
-import formsListCompletedFormsEventContract_v2021_07_02, {
-	ListCompletedFormsEventContract as FormsListCompletedFormsEventContract_v2021_07_02,
-} from '#spruce/events/forms/listCompletedForms.v2021_07_02.contract'
-import formsListFormsEventContract_v2021_07_02, {
-	ListFormsEventContract as FormsListFormsEventContract_v2021_07_02,
-} from '#spruce/events/forms/listForms.v2021_07_02.contract'
-import formsUpdateCompletedFormEventContract_v2021_07_02, {
-	UpdateCompletedFormEventContract as FormsUpdateCompletedFormEventContract_v2021_07_02,
-} from '#spruce/events/forms/updateCompletedForm.v2021_07_02.contract'
 import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, {
 	DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
@@ -46,15 +38,23 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
-import heartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01, {
-	TestEventEventContract as HeartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01,
-} from '#spruce/events/heartwoodTest1633553100267Count75/testEvent.v2020_01_01.contract'
+import heartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01, { TestEventEventContract as HeartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01  } from '#spruce/events/heartwoodTest1633553100267Count75/testEvent.v2020_01_01.contract'
+import mySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06, { MyNewEventEventContract as MySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06  } from '#spruce/events/mySecondSkill1633553093941Count70/myNewEvent.v2021_10_06.contract'
 import heartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06, {
 	TestRegisterSkillViews1633553575175EventContract as HeartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06,
 } from '#spruce/events/heartwoodTest1633553580968Count17/testRegisterSkillViews1633553575175.v2021_10_06.contract'
-import mySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06, {
-	MyNewEventEventContract as MySecondSkill1633553093941Count70MyNewEventEventContract_v2021_10_06,
-} from '#spruce/events/mySecondSkill1633553093941Count70/myNewEvent.v2021_10_06.contract'
+import formsDidUpdateCompletedFormEventContract_v2021_07_02, {
+	DidUpdateCompletedFormEventContract as FormsDidUpdateCompletedFormEventContract_v2021_07_02,
+} from '#spruce/events/forms/didUpdateCompletedForm.v2021_07_02.contract'
+import formsListCompletedFormsEventContract_v2021_07_02, {
+	ListCompletedFormsEventContract as FormsListCompletedFormsEventContract_v2021_07_02,
+} from '#spruce/events/forms/listCompletedForms.v2021_07_02.contract'
+import formsListFormsEventContract_v2021_07_02, {
+	ListFormsEventContract as FormsListFormsEventContract_v2021_07_02,
+} from '#spruce/events/forms/listForms.v2021_07_02.contract'
+import formsUpdateCompletedFormEventContract_v2021_07_02, {
+	UpdateCompletedFormEventContract as FormsUpdateCompletedFormEventContract_v2021_07_02,
+} from '#spruce/events/forms/updateCompletedForm.v2021_07_02.contract'
 
 export default [
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
@@ -65,9 +65,6 @@ export default [
 	heartwoodTest1633553100267Count75TestEventEventContract_v2020_01_01,
 	aTempSkill1633553109601Count88TestSyncEventContract_v2021_01_01,
 	heartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06,
-	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-	calendarListCalendarEventTypesEventContract_v2021_05_19,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
@@ -77,6 +74,9 @@ export default [
 	formsListCompletedFormsEventContract_v2021_07_02,
 	formsListFormsEventContract_v2021_07_02,
 	formsUpdateCompletedFormEventContract_v2021_07_02,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	...coreEventContracts,
 ]
 
@@ -98,12 +98,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06': HeartwoodTest1633553580968Count17TestRegisterSkillViews1633553575175EventContract_v2021_10_06['eventSignatures']['heartwood-test-1633553580968-count-17.test-register-skill-views1633553575175::v2021_10_06']
 
-		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
-
-		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
-
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
@@ -121,5 +115,11 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'forms.list-forms::v2021_07_02': FormsListFormsEventContract_v2021_07_02['eventSignatures']['forms.list-forms::v2021_07_02']
 
 		'forms.update-completed-form::v2021_07_02': FormsUpdateCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.update-completed-form::v2021_07_02']
+
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
+
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 	}
 }
