@@ -1,12 +1,8 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
+import calendarCreateCalendarEventTypeEventContract_v2021_05_19, { CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19  } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
+import calendarListCalendarEventTypesEventContract_v2021_05_19, { ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19  } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import appointmentsDidBookAppointmentsEventContract_v2021_06_23, { DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23  } from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
 import aTempSkill1633596329612Count70TestSyncEventContract_v2021_01_01, { TestSyncEventContract as ATempSkill1633596329612Count70TestSyncEventContract_v2021_01_01  } from '#spruce/events/aTempSkill1633596329612Count70/testSync.v2021_01_01.contract'
-import calendarCreateCalendarEventTypeEventContract_v2021_05_19, {
-	CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19,
-} from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
-import calendarListCalendarEventTypesEventContract_v2021_05_19, {
-	ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19,
-} from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import eventStoreTestSkill1633596347874Count89MyEventStoreAmazingEventEventContract_v2021_10_07, { MyEventStoreAmazingEventEventContract as EventStoreTestSkill1633596347874Count89MyEventStoreAmazingEventEventContract_v2021_10_07  } from '#spruce/events/eventStoreTestSkill1633596347874Count89/myEventStoreAmazingEvent.v2021_10_07.contract'
 import eventStoreTestSkill1633596389578Count90MyEventStoreAmazingEventEventContract_v2021_10_07, { MyEventStoreAmazingEventEventContract as EventStoreTestSkill1633596389578Count90MyEventStoreAmazingEventEventContract_v2021_10_07  } from '#spruce/events/eventStoreTestSkill1633596389578Count90/myEventStoreAmazingEvent.v2021_10_07.contract'
 import formsConvertPdfToFormEventContract_v2021_07_02, {
@@ -67,12 +63,12 @@ export default [
 	eventStoreTestSkill1633596347874Count89MyEventStoreAmazingEventEventContract_v2021_10_07,
 	eventStoreTestSkill1633596389578Count90MyEventStoreAmazingEventEventContract_v2021_10_07,
 	heartwoodTest1633596480324Count36TestRegisterSkillViews1633596477795EventContract_v2021_10_07,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
 	calendarListCalendarEventTypesEventContract_v2021_05_19,
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	formsConvertPdfToFormEventContract_v2021_07_02,
-	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
+	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsDidUpdateCompletedFormEventContract_v2021_07_02,
 	formsGetCompletedFormEventContract_v2021_07_02,
@@ -104,17 +100,17 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'heartwood-test-1633596480324-count-36.test-register-skill-views1633596477795::v2021_10_07': HeartwoodTest1633596480324Count36TestRegisterSkillViews1633596477795EventContract_v2021_10_07['eventSignatures']['heartwood-test-1633596480324-count-36.test-register-skill-views1633596477795::v2021_10_07']
 
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
 		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
 
 		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
 
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
-		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
-
 		'forms.create-form::v2021_07_02': FormsCreateFormEventContract_v2021_07_02['eventSignatures']['forms.create-form::v2021_07_02']
+
+		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
 
 		'forms.delete-completed-form::v2021_07_02': FormsDeleteCompletedFormEventContract_v2021_07_02['eventSignatures']['forms.delete-completed-form::v2021_07_02']
 
