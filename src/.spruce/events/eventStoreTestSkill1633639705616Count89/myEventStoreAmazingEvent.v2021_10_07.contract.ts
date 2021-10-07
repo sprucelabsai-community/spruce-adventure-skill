@@ -1,11 +1,11 @@
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
-import myEventStoreAmazingEventEmitTargetAndPayloadSchema from '#spruce/schemas/eventStoreTestSkill1633618206730Count74/v2021_10_07/myEventStoreAmazingEventEmitTargetAndPayload.schema'
-import myEventStoreAmazingEventResponsePayloadSchema from '#spruce/schemas/eventStoreTestSkill1633618206730Count74/v2021_10_07/myEventStoreAmazingEventResponsePayload.schema'
+import myEventStoreAmazingEventEmitTargetAndPayloadSchema from '#spruce/schemas/eventStoreTestSkill1633639705616Count89/v2021_10_07/myEventStoreAmazingEventEmitTargetAndPayload.schema'
+import myEventStoreAmazingEventResponsePayloadSchema from '#spruce/schemas/eventStoreTestSkill1633639705616Count89/v2021_10_07/myEventStoreAmazingEventResponsePayload.schema'
 
 const myEventStoreAmazingEventEventContract = buildEventContract({
 	eventSignatures: {
-		'event-store-test-skill-1633618206730-count-74.my-event-store-amazing-event::v2021_10_07':
+		'event-store-test-skill-1633639705616-count-89.my-event-store-amazing-event::v2021_10_07':
 			{
 				isGlobal: true,
 				emitPayloadSchema: myEventStoreAmazingEventEmitTargetAndPayloadSchema,
