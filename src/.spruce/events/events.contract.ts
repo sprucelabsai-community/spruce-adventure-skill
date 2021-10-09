@@ -47,6 +47,12 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import mySkill16337702620641636MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16337702620641636MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16337702620641636/myCoolEvent.v2021_01_22.contract'
+import mySkill16337704313931650MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16337704313931650MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16337704313931650/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -56,6 +62,8 @@ export default [
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
+	mySkill16337702620641636MyCoolEventEventContract_v2021_01_22,
+	mySkill16337704313931650MyCoolEventEventContract_v2021_01_22,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsDeleteCompletedFormEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
@@ -83,6 +91,10 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 
 		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'my-skill-1633770262064-1636.my-cool-event::v2021_01_22': MySkill16337702620641636MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633770262064-1636.my-cool-event::v2021_01_22']
+
+		'my-skill-1633770431393-1650.my-cool-event::v2021_01_22': MySkill16337704313931650MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633770431393-1650.my-cool-event::v2021_01_22']
 
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
