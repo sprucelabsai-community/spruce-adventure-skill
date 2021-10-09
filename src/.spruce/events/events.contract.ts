@@ -59,13 +59,13 @@ import mySkill16337919204341700MyCoolEventEventContract_v2021_01_22, {
 } from '#spruce/events/mySkill16337919204341700/myCoolEvent.v2021_01_22.contract'
 
 export default [
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	mySkill16337702620641636MyCoolEventEventContract_v2021_01_22,
 	mySkill16337704313931650MyCoolEventEventContract_v2021_01_22,
 	mySkill16337808796021613MyCoolEventEventContract_v2021_01_22,
 	mySkill16337810429601640MyCoolEventEventContract_v2021_01_22,
-	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-	calendarListCalendarEventTypesEventContract_v2021_05_19,
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	mySkill16337917557101580MyCoolEventEventContract_v2021_01_22,
 	heartwoodTest1633791824217Count14TestEventEventContract_v2020_01_01,
 	aTempSkill1633791840280Count96TestSyncEventContract_v2021_01_01,
@@ -92,6 +92,12 @@ export default [
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
+
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
 		'my-skill-1633770262064-1636.my-cool-event::v2021_01_22': MySkill16337702620641636MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633770262064-1636.my-cool-event::v2021_01_22']
 
 		'my-skill-1633770431393-1650.my-cool-event::v2021_01_22': MySkill16337704313931650MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633770431393-1650.my-cool-event::v2021_01_22']
@@ -99,12 +105,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'my-skill-1633780879602-1613.my-cool-event::v2021_01_22': MySkill16337808796021613MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633780879602-1613.my-cool-event::v2021_01_22']
 
 		'my-skill-1633781042960-1640.my-cool-event::v2021_01_22': MySkill16337810429601640MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633781042960-1640.my-cool-event::v2021_01_22']
-
-		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
-
-		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
-
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
 
 		'my-skill-1633791755710-1580.my-cool-event::v2021_01_22': MySkill16337917557101580MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1633791755710-1580.my-cool-event::v2021_01_22']
 
