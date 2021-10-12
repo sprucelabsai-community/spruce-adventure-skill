@@ -2,8 +2,6 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 
 import appointmentsDidBookAppointmentsEventContract_v2021_06_23, { DidBookAppointmentsEventContract as AppointmentsDidBookAppointmentsEventContract_v2021_06_23  } from '#spruce/events/appointments/didBookAppointments.v2021_06_23.contract'
 import mySecondSkill1634049651713Count71MyNewEventEventContract_v2021_10_12, { MyNewEventEventContract as MySecondSkill1634049651713Count71MyNewEventEventContract_v2021_10_12  } from '#spruce/events/mySecondSkill1634049651713Count71/myNewEvent.v2021_10_12.contract'
-import calendarCreateCalendarEventTypeEventContract_v2021_05_19, { CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19  } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
-import calendarListCalendarEventTypesEventContract_v2021_05_19, { ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19  } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 import formsConvertPdfToFormEventContract_v2021_07_02, { ConvertPdfToFormEventContract as FormsConvertPdfToFormEventContract_v2021_07_02  } from '#spruce/events/forms/convertPdfToForm.v2021_07_02.contract'
 import formsConvertPdfToSchemasEventContract_v2021_07_02, { ConvertPdfToSchemasEventContract as FormsConvertPdfToSchemasEventContract_v2021_07_02  } from '#spruce/events/forms/convertPdfToSchemas.v2021_07_02.contract'
 import formsCreateFormEventContract_v2021_07_02, { CreateFormEventContract as FormsCreateFormEventContract_v2021_07_02  } from '#spruce/events/forms/createForm.v2021_07_02.contract'
@@ -26,12 +24,12 @@ import mySkill16340510246601641MyCoolEventEventContract_v2021_01_22, { MyCoolEve
 import mySkill16340512316921614MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340512316921614MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340512316921614/myCoolEvent.v2021_01_22.contract'
 import mySkill16340616787851617MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340616787851617MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340616787851617/myCoolEvent.v2021_01_22.contract'
 import mySkill16340618742321647MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340618742321647MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340618742321647/myCoolEvent.v2021_01_22.contract'
+import calendarCreateCalendarEventTypeEventContract_v2021_05_19, { CreateCalendarEventTypeEventContract as CalendarCreateCalendarEventTypeEventContract_v2021_05_19  } from '#spruce/events/calendar/createCalendarEventType.v2021_05_19.contract'
+import calendarListCalendarEventTypesEventContract_v2021_05_19, { ListCalendarEventTypesEventContract as CalendarListCalendarEventTypesEventContract_v2021_05_19  } from '#spruce/events/calendar/listCalendarEventTypes.v2021_05_19.contract'
 
 export default [
     appointmentsDidBookAppointmentsEventContract_v2021_06_23,
     mySecondSkill1634049651713Count71MyNewEventEventContract_v2021_10_12,
-    calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-    calendarListCalendarEventTypesEventContract_v2021_05_19,
     formsConvertPdfToFormEventContract_v2021_07_02,
     formsConvertPdfToSchemasEventContract_v2021_07_02,
     formsCreateFormEventContract_v2021_07_02,
@@ -54,6 +52,8 @@ export default [
     mySkill16340512316921614MyCoolEventEventContract_v2021_01_22,
     mySkill16340616787851617MyCoolEventEventContract_v2021_01_22,
     mySkill16340618742321647MyCoolEventEventContract_v2021_01_22,
+    calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+    calendarListCalendarEventTypesEventContract_v2021_05_19,
     ...coreEventContracts,
 ]
 
@@ -64,12 +64,6 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'my-second-skill-1634049651713-count-71.my-new-event::v2021_10_12': MySecondSkill1634049651713Count71MyNewEventEventContract_v2021_10_12['eventSignatures']['my-second-skill-1634049651713-count-71.my-new-event::v2021_10_12'],
-    
-    
-    'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19'],
-    
-    
-    'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19'],
     
     
     'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02'],
@@ -136,6 +130,12 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'my-skill-1634061874232-1647.my-cool-event::v2021_01_22': MySkill16340618742321647MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634061874232-1647.my-cool-event::v2021_01_22'],
+    
+    
+    'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19'],
+    
+    
+    'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19'],
     
     }
 }
