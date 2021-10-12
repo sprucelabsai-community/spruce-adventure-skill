@@ -13,32 +13,50 @@ const testRegisterSkillViews1634049904958EventContract = buildEventContract({
             emitPermissionContract: buildPermissionContract({
   "id": "testRegisterSkillViews1634049904958EmitPermissions",
   "name": "did book appointment",
+  "description": null,
   "requireAllPermissions": false,
   "permissions": [
     {
       "id": "can-high-five",
       "name": "Can give high five",
       "description": "Will this person be allowed to high five?",
+      "requireAllStatuses": false,
       "defaults": {
-        "skill": false
+        "skill": false,
+        "owner": null,
+        "groupManager": null,
+        "manager": null,
+        "teammate": null,
+        "guest": null,
+        "anonymous": null,
+        "loggedIn": null
       },
-      "requireAllStatuses": false
+      "can": null
     }
   ]
 }),
             listenPermissionContract: buildPermissionContract({
   "id": "testRegisterSkillViews1634049904958ListenPermissions",
   "name": "did book appointment",
+  "description": null,
   "requireAllPermissions": false,
   "permissions": [
     {
       "id": "can-high-five",
       "name": "Can give high five",
       "description": "Will this person be allowed to high five?",
+      "requireAllStatuses": false,
       "defaults": {
-        "skill": false
+        "skill": false,
+        "owner": null,
+        "groupManager": null,
+        "manager": null,
+        "teammate": null,
+        "guest": null,
+        "anonymous": null,
+        "loggedIn": null
       },
-      "requireAllStatuses": false
+      "can": null
     }
   ]
 }),

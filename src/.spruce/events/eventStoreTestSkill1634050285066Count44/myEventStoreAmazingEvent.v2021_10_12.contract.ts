@@ -13,32 +13,50 @@ const myEventStoreAmazingEventEventContract = buildEventContract({
             emitPermissionContract: buildPermissionContract({
   "id": "myEventStoreAmazingEventEmitPermissions",
   "name": "my event store amazing event",
+  "description": null,
   "requireAllPermissions": false,
   "permissions": [
     {
       "id": "can-high-five",
       "name": "Can give high five",
       "description": "Will this person be allowed to high five?",
+      "requireAllStatuses": false,
       "defaults": {
-        "skill": false
+        "skill": false,
+        "owner": null,
+        "groupManager": null,
+        "manager": null,
+        "teammate": null,
+        "guest": null,
+        "anonymous": null,
+        "loggedIn": null
       },
-      "requireAllStatuses": false
+      "can": null
     }
   ]
 }),
             listenPermissionContract: buildPermissionContract({
   "id": "myEventStoreAmazingEventListenPermissions",
   "name": "my event store amazing event",
+  "description": null,
   "requireAllPermissions": false,
   "permissions": [
     {
       "id": "can-high-five",
       "name": "Can give high five",
       "description": "Will this person be allowed to high five?",
+      "requireAllStatuses": false,
       "defaults": {
-        "skill": false
+        "skill": false,
+        "owner": null,
+        "groupManager": null,
+        "manager": null,
+        "teammate": null,
+        "guest": null,
+        "anonymous": null,
+        "loggedIn": null
       },
-      "requireAllStatuses": false
+      "can": null
     }
   ]
 }),
