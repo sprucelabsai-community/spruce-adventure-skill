@@ -28,6 +28,8 @@ import eventStoreTestSkill1634072197451Count26MyEventStoreAmazingEventEventContr
 import heartwoodTest1634072239317Count18TestRegisterSkillViews1634072237723EventContract_v2021_10_12, { TestRegisterSkillViews1634072237723EventContract as HeartwoodTest1634072239317Count18TestRegisterSkillViews1634072237723EventContract_v2021_10_12  } from '#spruce/events/heartwoodTest1634072239317Count18/testRegisterSkillViews1634072237723.v2021_10_12.contract'
 import mySkill16340725554051577MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340725554051577MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340725554051577/myCoolEvent.v2021_01_22.contract'
 import mySkill16340727241551592MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340727241551592MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340727241551592/myCoolEvent.v2021_01_22.contract'
+import mySkill16340832887811670MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340832887811670MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340832887811670/myCoolEvent.v2021_01_22.contract'
+import mySkill16340834643141573MyCoolEventEventContract_v2021_01_22, { MyCoolEventEventContract as MySkill16340834643141573MyCoolEventEventContract_v2021_01_22  } from '#spruce/events/mySkill16340834643141573/myCoolEvent.v2021_01_22.contract'
 
 export default [
     appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -58,6 +60,8 @@ export default [
     heartwoodTest1634072239317Count18TestRegisterSkillViews1634072237723EventContract_v2021_10_12,
     mySkill16340725554051577MyCoolEventEventContract_v2021_01_22,
     mySkill16340727241551592MyCoolEventEventContract_v2021_01_22,
+    mySkill16340832887811670MyCoolEventEventContract_v2021_01_22,
+    mySkill16340834643141573MyCoolEventEventContract_v2021_01_22,
     ...coreEventContracts,
 ]
 
@@ -146,6 +150,12 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'my-skill-1634072724155-1592.my-cool-event::v2021_01_22': MySkill16340727241551592MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634072724155-1592.my-cool-event::v2021_01_22'],
+    
+    
+    'my-skill-1634083288781-1670.my-cool-event::v2021_01_22': MySkill16340832887811670MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634083288781-1670.my-cool-event::v2021_01_22'],
+    
+    
+    'my-skill-1634083464314-1573.my-cool-event::v2021_01_22': MySkill16340834643141573MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634083464314-1573.my-cool-event::v2021_01_22'],
     
     }
 }
