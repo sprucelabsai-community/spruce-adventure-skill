@@ -53,11 +53,14 @@ import mySkill16341157385601612MyCoolEventEventContract_v2021_01_22, {
 import mySkill16341159127311483MyCoolEventEventContract_v2021_01_22, {
 	MyCoolEventEventContract as MySkill16341159127311483MyCoolEventEventContract_v2021_01_22,
 } from '#spruce/events/mySkill16341159127311483/myCoolEvent.v2021_01_22.contract'
+import mySkill16341266497921601MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16341266497921601MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16341266497921601/myCoolEvent.v2021_01_22.contract'
+import mySkill16341268486881630MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16341268486881630MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16341268486881630/myCoolEvent.v2021_01_22.contract'
 
 export default [
-	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
-	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
-	calendarListCalendarEventTypesEventContract_v2021_05_19,
 	formsConvertPdfToFormEventContract_v2021_07_02,
 	formsConvertPdfToSchemasEventContract_v2021_07_02,
 	formsCreateFormEventContract_v2021_07_02,
@@ -73,17 +76,16 @@ export default [
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	mySkill16341157385601612MyCoolEventEventContract_v2021_01_22,
 	mySkill16341159127311483MyCoolEventEventContract_v2021_01_22,
+	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
+	calendarListCalendarEventTypesEventContract_v2021_05_19,
+	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
+	mySkill16341266497921601MyCoolEventEventContract_v2021_01_22,
+	mySkill16341268486881630MyCoolEventEventContract_v2021_01_22,
 	...coreEventContracts,
 ]
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
-		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
-
-		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
-
-		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
-
 		'forms.convert-pdf-to-form::v2021_07_02': FormsConvertPdfToFormEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-form::v2021_07_02']
 
 		'forms.convert-pdf-to-schemas::v2021_07_02': FormsConvertPdfToSchemasEventContract_v2021_07_02['eventSignatures']['forms.convert-pdf-to-schemas::v2021_07_02']
@@ -113,5 +115,15 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'my-skill-1634115738560-1612.my-cool-event::v2021_01_22': MySkill16341157385601612MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634115738560-1612.my-cool-event::v2021_01_22']
 
 		'my-skill-1634115912731-1483.my-cool-event::v2021_01_22': MySkill16341159127311483MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634115912731-1483.my-cool-event::v2021_01_22']
+
+		'calendar.create-calendar-event-type::v2021_05_19': CalendarCreateCalendarEventTypeEventContract_v2021_05_19['eventSignatures']['calendar.create-calendar-event-type::v2021_05_19']
+
+		'calendar.list-calendar-event-types::v2021_05_19': CalendarListCalendarEventTypesEventContract_v2021_05_19['eventSignatures']['calendar.list-calendar-event-types::v2021_05_19']
+
+		'appointments.did-book-appointments::v2021_06_23': AppointmentsDidBookAppointmentsEventContract_v2021_06_23['eventSignatures']['appointments.did-book-appointments::v2021_06_23']
+
+		'my-skill-1634126649792-1601.my-cool-event::v2021_01_22': MySkill16341266497921601MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634126649792-1601.my-cool-event::v2021_01_22']
+
+		'my-skill-1634126848688-1630.my-cool-event::v2021_01_22': MySkill16341268486881630MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634126848688-1630.my-cool-event::v2021_01_22']
 	}
 }
