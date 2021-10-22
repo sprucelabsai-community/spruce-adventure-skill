@@ -52,7 +52,7 @@
     "@sprucelabs/mercury-client": "^16.13.121",
     "@sprucelabs/mercury-core-events": "^1.2.616",
     "@sprucelabs/mercury-types": "^26.1.528",
-    "@sprucelabs/schema": "^25.3.371",
+    "@sprucelabs/schema": "^25.3.372",
     "@sprucelabs/spruce-core-schemas": "^22.5.488",
     "@sprucelabs/spruce-event-plugin": "^5.5.22",
     "@sprucelabs/spruce-event-utils": "^16.0.539",
