@@ -4,7 +4,7 @@ import '#spruce/schemas/schemas.types'
 const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 	/**
 	 ************************************
-	 * START Background
+	 * Background
 	 ************************************
 	 */
 	color1: '#ffffff',
@@ -13,7 +13,7 @@ const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 
 	/**
 	 ************************************
-	 * START Cards
+	 * Cards
 	 ************************************
 	 */
 	color2: '#c8c5c6',
@@ -23,7 +23,7 @@ const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 
 	/**
 	 ************************************
-	 * START Hearders
+	 * Headers
 	 ************************************
 	 */
 	color3: 'white',
@@ -32,7 +32,7 @@ const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 
 	/**
 	 ************************************
-	 * START Buttons
+	 * Buttons
 	 ************************************
 	 */
 	color4: '#c8c5c6',
@@ -42,7 +42,7 @@ const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 
 	/**
 	 ************************************
-	 * START Control bar
+	 * Control bar
 	 ************************************
 	 */
 	controlBarColor1: 'white',
@@ -50,7 +50,14 @@ const theme: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps = {
 
 	/**
 	 ************************************
-	 * START Errors
+	 * Tool belt
+	 ************************************
+	 */
+	toolBeltColor2: '#282728',
+
+	/**
+	 ************************************
+	 * Errors
 	 ************************************
 	 */
 	errorColor1: '#fff',
