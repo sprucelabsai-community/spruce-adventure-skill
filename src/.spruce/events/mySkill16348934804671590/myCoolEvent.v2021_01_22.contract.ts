@@ -3,7 +3,7 @@ import { buildPermissionContract } from '@sprucelabs/mercury-types'
 
 const myCoolEventEventContract = buildEventContract({
 	eventSignatures: {
-		'my-skill-1634137365593-1640.my-cool-event::v2021_01_22': {
+		'my-skill-1634893480467-1590.my-cool-event::v2021_01_22': {
 			isGlobal: true,
 
 			emitPermissionContract: buildPermissionContract({
