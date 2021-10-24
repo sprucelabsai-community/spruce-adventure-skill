@@ -26,6 +26,12 @@ import mySkill16350661507851609MyCoolEventEventContract_v2021_01_22, {
 import mySkill16350663289831598MyCoolEventEventContract_v2021_01_22, {
 	MyCoolEventEventContract as MySkill16350663289831598MyCoolEventEventContract_v2021_01_22,
 } from '#spruce/events/mySkill16350663289831598/myCoolEvent.v2021_01_22.contract'
+import mySkill16350768822561610MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16350768822561610MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16350768822561610/myCoolEvent.v2021_01_22.contract'
+import mySkill16350771082241588MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16350771082241588MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16350771082241588/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -37,6 +43,8 @@ export default [
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	mySkill16350661507851609MyCoolEventEventContract_v2021_01_22,
 	mySkill16350663289831598MyCoolEventEventContract_v2021_01_22,
+	mySkill16350768822561610MyCoolEventEventContract_v2021_01_22,
+	mySkill16350771082241588MyCoolEventEventContract_v2021_01_22,
 	...coreEventContracts,
 ]
 
@@ -59,5 +67,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'my-skill-1635066150785-1609.my-cool-event::v2021_01_22': MySkill16350661507851609MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635066150785-1609.my-cool-event::v2021_01_22']
 
 		'my-skill-1635066328983-1598.my-cool-event::v2021_01_22': MySkill16350663289831598MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635066328983-1598.my-cool-event::v2021_01_22']
+
+		'my-skill-1635076882256-1610.my-cool-event::v2021_01_22': MySkill16350768822561610MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635076882256-1610.my-cool-event::v2021_01_22']
+
+		'my-skill-1635077108224-1588.my-cool-event::v2021_01_22': MySkill16350771082241588MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635077108224-1588.my-cool-event::v2021_01_22']
 	}
 }
