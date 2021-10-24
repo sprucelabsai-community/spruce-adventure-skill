@@ -38,13 +38,19 @@ import mySkill16350228487561537MyCoolEventEventContract_v2021_01_22, {
 import mySkill16350230175611585MyCoolEventEventContract_v2021_01_22, {
 	MyCoolEventEventContract as MySkill16350230175611585MyCoolEventEventContract_v2021_01_22,
 } from '#spruce/events/mySkill16350230175611585/myCoolEvent.v2021_01_22.contract'
+import mySkill16350444746331582MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16350444746331582MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16350444746331582/myCoolEvent.v2021_01_22.contract'
+import mySkill16350446661961674MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16350446661961674MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16350446661961674/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
+	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
 	mySkill16349905010951609MyCoolEventEventContract_v2021_01_22,
 	mySkill16349907241111639MyCoolEventEventContract_v2021_01_22,
 	calendarCreateCalendarEventTypeEventContract_v2021_05_19,
@@ -53,6 +59,8 @@ export default [
 	mySkill16350122763851646MyCoolEventEventContract_v2021_01_22,
 	mySkill16350228487561537MyCoolEventEventContract_v2021_01_22,
 	mySkill16350230175611585MyCoolEventEventContract_v2021_01_22,
+	mySkill16350444746331582MyCoolEventEventContract_v2021_01_22,
+	mySkill16350446661961674MyCoolEventEventContract_v2021_01_22,
 	...coreEventContracts,
 ]
 
@@ -62,11 +70,11 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 
 		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
 
-		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
-
 		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']
+
+		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
 
 		'my-skill-1634990501095-1609.my-cool-event::v2021_01_22': MySkill16349905010951609MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1634990501095-1609.my-cool-event::v2021_01_22']
 
@@ -83,5 +91,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'my-skill-1635022848756-1537.my-cool-event::v2021_01_22': MySkill16350228487561537MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635022848756-1537.my-cool-event::v2021_01_22']
 
 		'my-skill-1635023017561-1585.my-cool-event::v2021_01_22': MySkill16350230175611585MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635023017561-1585.my-cool-event::v2021_01_22']
+
+		'my-skill-1635044474633-1582.my-cool-event::v2021_01_22': MySkill16350444746331582MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635044474633-1582.my-cool-event::v2021_01_22']
+
+		'my-skill-1635044666196-1674.my-cool-event::v2021_01_22': MySkill16350446661961674MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635044666196-1674.my-cool-event::v2021_01_22']
 	}
 }
