@@ -32,6 +32,9 @@ import mySkill16350768822561610MyCoolEventEventContract_v2021_01_22, {
 import mySkill16350771082241588MyCoolEventEventContract_v2021_01_22, {
 	MyCoolEventEventContract as MySkill16350771082241588MyCoolEventEventContract_v2021_01_22,
 } from '#spruce/events/mySkill16350771082241588/myCoolEvent.v2021_01_22.contract'
+import mySkill16350877395071683MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16350877395071683MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16350877395071683/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -45,6 +48,7 @@ export default [
 	mySkill16350663289831598MyCoolEventEventContract_v2021_01_22,
 	mySkill16350768822561610MyCoolEventEventContract_v2021_01_22,
 	mySkill16350771082241588MyCoolEventEventContract_v2021_01_22,
+	mySkill16350877395071683MyCoolEventEventContract_v2021_01_22,
 	...coreEventContracts,
 ]
 
@@ -71,5 +75,7 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'my-skill-1635076882256-1610.my-cool-event::v2021_01_22': MySkill16350768822561610MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635076882256-1610.my-cool-event::v2021_01_22']
 
 		'my-skill-1635077108224-1588.my-cool-event::v2021_01_22': MySkill16350771082241588MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635077108224-1588.my-cool-event::v2021_01_22']
+
+		'my-skill-1635087739507-1683.my-cool-event::v2021_01_22': MySkill16350877395071683MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635087739507-1683.my-cool-event::v2021_01_22']
 	}
 }
