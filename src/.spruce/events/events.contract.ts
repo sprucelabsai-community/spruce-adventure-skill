@@ -20,6 +20,12 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import mySkill16352497034081696MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16352497034081696MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16352497034081696/myCoolEvent.v2021_01_22.contract'
+import mySkill16352498922231666MyCoolEventEventContract_v2021_01_22, {
+	MyCoolEventEventContract as MySkill16352498922231666MyCoolEventEventContract_v2021_01_22,
+} from '#spruce/events/mySkill16352498922231666/myCoolEvent.v2021_01_22.contract'
 
 export default [
 	appointmentsDidBookAppointmentsEventContract_v2021_06_23,
@@ -29,6 +35,8 @@ export default [
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
+	mySkill16352497034081696MyCoolEventEventContract_v2021_01_22,
+	mySkill16352498922231666MyCoolEventEventContract_v2021_01_22,
 	...coreEventContracts,
 ]
 
@@ -47,5 +55,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
+
+		'my-skill-1635249703408-1696.my-cool-event::v2021_01_22': MySkill16352497034081696MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635249703408-1696.my-cool-event::v2021_01_22']
+
+		'my-skill-1635249892223-1666.my-cool-event::v2021_01_22': MySkill16352498922231666MyCoolEventEventContract_v2021_01_22['eventSignatures']['my-skill-1635249892223-1666.my-cool-event::v2021_01_22']
 	}
 }
