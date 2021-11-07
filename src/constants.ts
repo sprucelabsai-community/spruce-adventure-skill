@@ -76,3 +76,36 @@ export const armors: EquipmentItem[] = [
 		description: 'Keeps you safe from everything including airborn viruses.',
 	},
 ]
+
+export const gems: EquipmentItem[] = [
+	{
+		name: 'Wicked Fravor',
+		image: 'storybook-support/gems/1.png',
+		description: 'So many',
+	},
+	{
+		name: 'Lindy Hop',
+		image: 'storybook-support/gems/2.png',
+		description: 'Dance',
+	},
+	{
+		name: 'Unicorn Sprinkle',
+		image: 'storybook-support/gems/3.png',
+		description: 'Coming soon',
+	},
+	{
+		name: 'Sunshine Grapefruit',
+		image: 'storybook-support/gems/4.png',
+		description: 'Tacos as well!',
+	},
+	{
+		name: 'Another Gemstone!',
+		image: 'storybook-support/gems/5.png',
+		description: 'Buy one and win the chance to take it home!',
+	},
+	{
+		name: 'Necklace Face',
+		image: 'storybook-support/gems/6.png',
+		description: "Don't smell the table!",
+	},
+]

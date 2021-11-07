@@ -7,7 +7,7 @@ import {
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { armors, EquipmentItem, weapons } from '../constants'
+import { armors, EquipmentItem, gems, weapons } from '../constants'
 import { characters, Epithet } from './Profile.svc'
 
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
@@ -24,27 +24,6 @@ export const armorButtons: Button[] = armors.map((w) => ({
 	shouldShowHintIcon: !!w.description,
 }))
 
-export const gems: Button[] = [
-	{
-		image: 'storybook-support/gems/1.png',
-	},
-	{
-		image: 'storybook-support/gems/2.png',
-	},
-	{
-		image: 'storybook-support/gems/3.png',
-	},
-	{
-		image: 'storybook-support/gems/4.png',
-	},
-	{
-		image: 'storybook-support/gems/5.png',
-	},
-	{
-		image: 'storybook-support/gems/6.png',
-	},
-]
-
 interface Args {
 	name: string
 	epithet: Epithet
@@ -58,6 +37,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	private gemButtonGroupVc: ButtonGroupViewController
 	private selectedArmors: number[] = []
 	private selectedWeapons: number[] = []
+	private selectedGems: number[] = []
 	private name!: string
 	private epithet!: Epithet
 
@@ -78,7 +58,8 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		})
 
 		this.gemButtonGroupVc = this.vcFactory.Controller('buttonGroup', {
-			onSelectionChange: this.handleWeaponSelectionChange.bind(this),
+			onSelectionChange: this.handleGemSelectionChange.bind(this),
+			onClickHintIcon: this.handleClickGemHint.bind(this),
 			buttons: gems,
 		})
 
@@ -110,6 +91,13 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 				},
 				{
 					title: 'Begin adventure',
+					talkingSprucebot: {
+						sentences: [
+							{
+								words: `I'm seriously not sure what is supposed to happen next.`,
+							},
+						],
+					},
 				},
 			],
 		})
@@ -124,15 +112,11 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private buildCardFooter(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter {
-		const labels = [
-			'Confirm Weapon',
-			'Confirm Armor',
-			'Confirm Shoes',
-			'Confirm',
-		]
+		const labels = ['Confirm Weapon', 'Confirm Armor', 'Confirm Gem', 'Confirm']
 		const enabled = [
 			this.selectedWeapons.length > 0,
 			this.selectedArmors.length > 0,
+			this.selectedGems.length > 0,
 		]
 		const label = labels[this.swipeVc?.getPresentSlide() ?? 0]
 		const isEnabled = enabled[this.swipeVc?.getPresentSlide() ?? 0] ?? false
@@ -169,6 +153,15 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		this.swipeVc.setSlide(1, {
 			...this.swipeVc.getSlide(1),
 			buttons: this.armorButtonGroupVc.render(),
+		})
+		this.swipeVc.setFooter(this.buildCardFooter())
+	}
+
+	private handleGemSelectionChange(idxs: number[]) {
+		this.selectedGems = idxs
+		this.swipeVc.setSlide(2, {
+			...this.swipeVc.getSlide(2),
+			buttons: this.gemButtonGroupVc.render(),
 		})
 		this.swipeVc.setFooter(this.buildCardFooter())
 	}
@@ -219,6 +212,14 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			return
 		}
 		this.renderEquipmentDialog(armor)
+	}
+
+	private handleClickGemHint(idx: number) {
+		const gem = gems[idx]
+		if (!gem) {
+			return
+		}
+		this.renderEquipmentDialog(gem)
 	}
 
 	private renderEquipmentDialog(weapon: EquipmentItem) {

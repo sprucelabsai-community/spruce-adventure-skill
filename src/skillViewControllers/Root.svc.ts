@@ -18,10 +18,6 @@ export default class RootSkillViewController extends AbstractSkillViewController
 
 	public async load({ router }: SkillViewControllerLoadOptions) {
 		this.router = router
-		setTimeout(() => {
-			this.isAnimating = false
-			this.triggerRender()
-		}, 21000)
 	}
 
 	private buildIntroCard(): Card {
@@ -34,6 +30,10 @@ export default class RootSkillViewController extends AbstractSkillViewController
 					{
 						talkingSprucebot: {
 							size: 'medium',
+							onComplete: () => {
+								this.isAnimating = false
+								this.triggerRender()
+							},
 							defaultAvatar: {
 								stateOfMind: 'chill',
 							},
@@ -43,7 +43,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 									endDelay: buildDuration(3000),
 								},
 								{
-									words: `Tay, one of my creators, built this adventure for his 4 year old daughter as a way to get her engaged in engineering and also to test out my capabilities.`,
+									words: `Tay, one of my creators, built this adventure for his people daughters as a way to get them engaged in engineering and also to test out my capabilities.`,
 									endDelay: buildDuration(6000),
 								},
 								{
@@ -55,7 +55,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 									endDelay: buildDuration(3000),
 								},
 								{
-									words: `With a soon-to-be hero (that's you!).`,
+									words: `With a hero in the making (that's you!).`,
 									endDelay: buildDuration(3000),
 								},
 							],
