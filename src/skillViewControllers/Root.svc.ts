@@ -34,7 +34,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 								this.isAnimating = false
 								this.triggerRender()
 							},
-							defaultAvatar: {
+							avatar: {
 								stateOfMind: 'chill',
 							},
 							sentences: [
