@@ -40,23 +40,22 @@ export default class RootSkillViewController extends AbstractSkillViewController
 							sentences: [
 								{
 									words: `Hello there! My name is Sprucebot.`,
-									endDelay: buildDuration(3000),
 								},
 								{
-									words: `Tay, one of my creators, built this adventure for his people daughters as a way to get them engaged in engineering and also to test out my capabilities.`,
-									endDelay: buildDuration(6000),
+									words: `Tay, one of my creators, built me to test out my capabilities`,
 								},
 								{
-									words: `Are you ready? It's going to be so much fun!`,
-									endDelay: buildDuration(3000),
+									words:
+										'And to show his people daughters how fun engineering can be!',
+								},
+								{
+									words: `Ok...Are you ready? It's going to be so much fun!`,
 								},
 								{
 									words: `This adventures starts like so many others.`,
-									endDelay: buildDuration(3000),
 								},
 								{
 									words: `With a hero in the making (that's you!).`,
-									endDelay: buildDuration(3000),
 								},
 							],
 						},
