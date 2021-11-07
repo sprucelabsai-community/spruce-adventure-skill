@@ -18,9 +18,6 @@ const getSkillViewsEventContract = buildEventContract({
 						id: 'can-get-skill-views',
 						name: 'Can get skill views',
 						defaults: {
-							guest: {
-								default: true,
-							},
 							anonymous: {
 								default: true,
 							},

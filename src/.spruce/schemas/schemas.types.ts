@@ -283,6 +283,43 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface GetSkillViewsEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target': SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTarget
+		}
+
+		interface GetSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'getSkillViewsEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		type GetSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsEmitTargetAndPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface GetSkillViewsResponsePayload {
 			
 				
@@ -381,43 +418,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface GetSkillViewsEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target': SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTarget
-		}
-
-		interface GetSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'getSkillViewsEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetViewControllersEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		type GetSkillViewsEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetSkillViewsEmitTargetAndPayloadSchema>
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
 		interface RegisterSkillViewsEmitTargetAndPayload {
 			
 				/** Source. */
@@ -478,6 +478,134 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		type RegisterSkillViewsResponsePayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.RegisterSkillViewsResponsePayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface SubmitErrorMessageFeedbackEmitTarget {
+			
+				/** Update me. */
+				'aTextField'?: string| undefined | null
+		}
+
+		interface SubmitErrorMessageFeedbackEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'submitErrorMessageFeedbackEmitTarget',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Update me. */
+			            'aTextField': {
+			                label: 'Update me',
+			                type: 'text',
+			                options: undefined
+			            },
+			    }
+		}
+
+		type SubmitErrorMessageFeedbackEmitTargetEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitTargetSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface SubmitErrorMessageFeedbackEmitPayload {
+			
+				/** Error code. */
+				'errorCode'?: string| undefined | null
+				/** Error message. */
+				'errorMessage': string
+				/** Stack traces. */
+				'stackTrace': string
+				
+				'thoughts': string
+		}
+
+		interface SubmitErrorMessageFeedbackEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'submitErrorMessageFeedbackEmitPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Error code. */
+			            'errorCode': {
+			                label: 'Error code',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** Error message. */
+			            'errorMessage': {
+			                label: 'Error message',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Stack traces. */
+			            'stackTrace': {
+			                label: 'Stack traces',
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'thoughts': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		type SubmitErrorMessageFeedbackEmitPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitPayloadSchema>
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
+		interface SubmitErrorMessageFeedbackEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitTarget| undefined | null
+				
+				'payload': SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitPayload
+		}
+
+		interface SubmitErrorMessageFeedbackEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'submitErrorMessageFeedbackEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		type SubmitErrorMessageFeedbackEmitTargetAndPayloadEntity = SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.SubmitErrorMessageFeedbackEmitTargetAndPayloadSchema>
 
 	}
 
