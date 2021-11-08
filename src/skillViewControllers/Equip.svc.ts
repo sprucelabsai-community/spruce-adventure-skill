@@ -118,19 +118,35 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			this.selectedArmors.length > 0,
 			this.selectedGems.length > 0,
 		]
-		const label = labels[this.swipeVc?.getPresentSlide() ?? 0]
-		const isEnabled = enabled[this.swipeVc?.getPresentSlide() ?? 0] ?? false
 
-		return {
-			isEnabled,
-			buttons: [
+		const slide = this.swipeVc?.getPresentSlide() ?? 0
+		const label = labels[slide]
+		const isEnabled = enabled[slide] ?? false
+
+		const buttons: SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button[] =
+			[
 				{
 					label,
 					type: 'primary',
 					onClick: this.handleSubmit.bind(this),
 				},
-			],
+			]
+
+		if (slide === this.swipeVc.getTotalSlides() - 1) {
+			buttons.push({
+				label: 'I want more!',
+				onClick: this.handleVoteForMore.bind(this),
+			})
 		}
+
+		return {
+			isEnabled,
+			buttons,
+		}
+	}
+
+	private async handleVoteForMore() {
+		// await this.askf
 	}
 
 	private async handleSubmit() {
