@@ -92,6 +92,10 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 				{
 					title: 'Begin adventure',
 					talkingSprucebot: {
+						avatar: {
+							stateOfMind: 'chill',
+						},
+						size: 'medium',
 						sentences: [
 							{
 								words: `I'm seriously not sure what is supposed to happen next.`,
@@ -112,11 +116,17 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private buildCardFooter(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter {
-		const labels = ['Confirm Weapon', 'Confirm Armor', 'Confirm Gem', 'Confirm']
+		const labels = [
+			'Confirm Weapon',
+			'Confirm Armor',
+			'Confirm Gem',
+			'Take me out of here!',
+		]
 		const enabled = [
 			this.selectedWeapons.length > 0,
 			this.selectedArmors.length > 0,
 			this.selectedGems.length > 0,
+			true,
 		]
 
 		const slide = this.swipeVc?.getPresentSlide() ?? 0
@@ -132,11 +142,13 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 				},
 			]
 
-		if (slide === this.swipeVc.getTotalSlides() - 1) {
-			buttons.push({
-				label: 'I want more!',
-				onClick: this.handleVoteForMore.bind(this),
-			})
+		if (this.swipeVc) {
+			if (slide === this.swipeVc.getTotalSlides() - 1) {
+				buttons.push({
+					label: 'I want more!',
+					onClick: this.handleVoteForMore.bind(this),
+				})
+			}
 		}
 
 		return {
@@ -146,10 +158,22 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private async handleVoteForMore() {
-		// await this.askf
+		await this.askForAVote({
+			featureKey: 'more-adventure',
+			skillNamespace: 'adventure',
+			howCoolWouldItBeIf:
+				'you and I could keep playing!?? Maybe even invite some friends and go an a real world adventure together?',
+		})
+
+		await this.router?.redirect('heartwood.root')
 	}
 
 	private async handleSubmit() {
+		if (this.swipeVc.getPresentSlide() === this.swipeVc.getTotalSlides() - 1) {
+			await this.router?.redirect('heartwood.root')
+			return
+		}
+
 		const nextSlide = this.swipeVc.getPresentSlide() + 1
 		await this.swipeVc.jumpToSlide(nextSlide)
 	}

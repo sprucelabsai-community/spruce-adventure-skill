@@ -43,7 +43,7 @@ const profileSchema = buildSchema({
 type ProfileSchema = typeof profileSchema
 
 export default class ProfileSkillViewController extends AbstractSkillViewController {
-	private router!: Router
+	private router?: Router
 	private profileFormVc: FormViewController<ProfileSchema>
 	private name?: string
 	private epithet?: Epithet = 'the-brave'
@@ -106,7 +106,7 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 		const confirm = await this.confirm({ message: 'You sure?' })
 
 		if (confirm && this.name && this.epithet) {
-			await this.router.redirect('adventure.equip', {
+			await this.router?.redirect('adventure.equip', {
 				name: this.name,
 				epithet: this.epithet,
 			})
