@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.0.545...v1.1.0) (2021-11-08)
+
+
+### Features
+
+* Better end of journey experience ([49a185e](https://github.com/sprucelabsai/spruce-adventure-skill/commit/49a185e))
+* gem names and selections and begin adventure placeholder ([e527125](https://github.com/sprucelabsai/spruce-adventure-skill/commit/e527125))
+
 ## [1.0.545](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.0.544...v1.0.545) (2021-11-04)
 
 ## [1.0.544](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.0.543...v1.0.544) (2021-11-03)
