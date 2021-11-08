@@ -64,6 +64,26 @@ jobs:
               fi
             done
       - run:
+          name: "Publish to Sandbox"
+          command: |
+            if [[ ${CIRCLE_BRANCH} != "upgrade-"* ]]; then
+              echo | tee -a .env
+              echo HOST="https://sandbox.mercury.spruce.ai" | tee -a .env
+              ~/.yarn/bin/spruce boot || true
+            fi
+      - run:
+          name: "Publish to Prod"
+          command: |
+            if [[ ${CIRCLE_BRANCH} != "upgrade-"* ]]; then
+              mv .env .env.temp
+              echo HOST="https://mercury.spruce.ai" > .env
+              echo SKILL_ID=$PROD_SKILL_ID >> .env
+              echo SKILL_API_KEY=$PROD_SKILL_API_KEY >> .env
+              ~/.yarn/bin/spruce boot || true
+              mv .env .env.prod
+              mv .env.temp .env
+            fi
+      - run:
           name: Check branch for auto-upgrade
           command: |
             if [[ ${CIRCLE_BRANCH} != "upgrade-"* ]]; then
