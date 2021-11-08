@@ -6,7 +6,6 @@ import {
 	SkillViewControllerLoadOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { buildDuration } from '@sprucelabs/schema'
 
 type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
 
