@@ -45,25 +45,25 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 
-		this.weaponButtonGroupVc = this.vcFactory.Controller('buttonGroup', {
+		this.weaponButtonGroupVc = this.Controller('buttonGroup', {
 			onSelectionChange: this.handleWeaponSelectionChange.bind(this),
 			onClickHintIcon: this.handleClickWeaponHint.bind(this),
 			buttons: weaponButtons,
 		})
 
-		this.armorButtonGroupVc = this.vcFactory.Controller('buttonGroup', {
+		this.armorButtonGroupVc = this.Controller('buttonGroup', {
 			onSelectionChange: this.handleArmorSelectionChange.bind(this),
 			onClickHintIcon: this.handleClickArmorHint.bind(this),
 			buttons: armorButtons,
 		})
 
-		this.gemButtonGroupVc = this.vcFactory.Controller('buttonGroup', {
+		this.gemButtonGroupVc = this.Controller('buttonGroup', {
 			onSelectionChange: this.handleGemSelectionChange.bind(this),
 			onClickHintIcon: this.handleClickGemHint.bind(this),
 			buttons: gems,
 		})
 
-		this.swipeVc = this.vcFactory.Controller('swipe', {
+		this.swipeVc = this.Controller('swipe', {
 			header: {
 				title: `...`,
 				subtitle: 'Equip her wisely!',

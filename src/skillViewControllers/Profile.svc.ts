@@ -53,7 +53,7 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 
-		this.profileFormVc = this.vcFactory.Controller(
+		this.profileFormVc = this.Controller(
 			'form',
 			buildForm({
 				id: 'heroForm',
@@ -85,7 +85,7 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 			})
 		) as any
 
-		this.cardVc = this.vcFactory.Controller('card', {
+		this.cardVc = this.Controller('card', {
 			header: {
 				title: this.getHeroName(),
 				subtitle: this.renderEpithet(),
