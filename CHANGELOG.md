@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.1.7...v1.2.0) (2021-11-12)
+
+
+### Features
+
+* Gems have descriptions on the equip creen ([110c672](https://github.com/sprucelabsai/spruce-adventure-skill/commit/110c672))
+
 ## [1.1.7](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.1.6...v1.1.7) (2021-11-12)
 
 ## [1.1.6](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.1.5...v1.1.6) (2021-11-11)
