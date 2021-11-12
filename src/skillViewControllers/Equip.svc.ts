@@ -24,6 +24,12 @@ export const armorButtons: Button[] = armors.map((w) => ({
 	shouldShowHintIcon: !!w.description,
 }))
 
+export const gemButtons: Button[] = gems.map((w) => ({
+	image: w.image,
+	label: w.name,
+	shouldShowHintIcon: !!w.description,
+}))
+
 interface Args {
 	name: string
 	epithet: Epithet
