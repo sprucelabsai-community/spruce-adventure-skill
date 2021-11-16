@@ -10,7 +10,6 @@ const submitErrorMessageFeedbackEventContract = buildEventContract({
 			emitPermissionContract: buildPermissionContract({
 				id: 'submitErrorMessageFeedbackEmitPermissions',
 				name: 'Submit error message feedback',
-				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
@@ -18,30 +17,15 @@ const submitErrorMessageFeedbackEventContract = buildEventContract({
 						name: 'Can submit error message feeback!',
 						description:
 							'This is the ability to submit the form on @heartwood.error.',
-						requireAllStatuses: false,
 						defaults: {
-							skill: null,
-							owner: null,
-							groupManager: null,
-							manager: null,
-							teammate: null,
-							guest: null,
 							anonymous: {
 								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
 							},
 							loggedIn: {
 								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
 							},
 						},
-						can: null,
+						requireAllStatuses: false,
 					},
 				],
 			}),
