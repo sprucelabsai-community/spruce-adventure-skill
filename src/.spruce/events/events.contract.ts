@@ -11,16 +11,12 @@ import heartwoodGetSkillViewsEventContract_v2021_02_11, {
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
 	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
-import heartwoodSubmitErrorMessageFeedbackEventContract_v2021_02_11, {
-	SubmitErrorMessageFeedbackEventContract as HeartwoodSubmitErrorMessageFeedbackEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/submitErrorMessageFeedback.v2021_02_11.contract'
 
 export default [
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	heartwoodRegisterSkillViewsEventContract_v2021_02_11,
-	heartwoodSubmitErrorMessageFeedbackEventContract_v2021_02_11,
 	...coreEventContracts,
 ]
 
@@ -33,7 +29,5 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'heartwood.register-skill-views::v2021_02_11': HeartwoodRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.register-skill-views::v2021_02_11']
-
-		'heartwood.submit-error-message-feedback::v2021_02_11': HeartwoodSubmitErrorMessageFeedbackEventContract_v2021_02_11['eventSignatures']['heartwood.submit-error-message-feedback::v2021_02_11']
 	}
 }
