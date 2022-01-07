@@ -8,10 +8,7 @@
     "error"
   ],
   "events": {
-    "lastSync": {},
-    "listenerCacheKeys": {
-      "httpsdevelopermercuryspruceai": "willbootskillv2021_08_03"
-    }
+    "lastSync": {}
   },
   "scriptUpdater": {
     "skipped": []
