@@ -10,21 +10,24 @@ import { SpruceSchemas } from '@sprucelabs/mercury-types'
 import { armors, EquipmentItem, gems, weapons } from '../constants'
 import { characters, Epithet } from './Profile.svc'
 
-type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Button
+type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton
 
 export const weaponButtons: Button[] = weapons.map((w) => ({
+	id: w.id,
 	image: w.image,
 	label: w.name,
 	shouldShowHintIcon: !!w.description,
 }))
 
 export const armorButtons: Button[] = armors.map((w) => ({
+	id: w.id,
 	image: w.image,
 	label: w.name,
 	shouldShowHintIcon: !!w.description,
 }))
 
 export const gemButtons: Button[] = gems.map((w) => ({
+	id: w.id,
 	image: w.image,
 	label: w.name,
 	shouldShowHintIcon: !!w.description,
@@ -41,9 +44,9 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	private weaponButtonGroupVc: ButtonGroupViewController
 	private armorButtonGroupVc: ButtonGroupViewController
 	private gemButtonGroupVc: ButtonGroupViewController
-	private selectedArmors: number[] = []
-	private selectedWeapons: number[] = []
-	private selectedGems: number[] = []
+	private selectedArmors: string[] = []
+	private selectedWeapons: string[] = []
+	private selectedGems: string[] = []
 	private name!: string
 	private epithet!: Epithet
 
@@ -184,8 +187,8 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		await this.swipeVc.jumpToSlide(nextSlide)
 	}
 
-	private handleWeaponSelectionChange(idxs: number[]) {
-		this.selectedWeapons = idxs
+	private handleWeaponSelectionChange(ids: string[]) {
+		this.selectedWeapons = ids
 		const slide = this.swipeVc.getSlide(0)
 		this.swipeVc.setSlide(0, {
 			...slide,
@@ -194,8 +197,8 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		this.swipeVc.setFooter(this.buildCardFooter())
 	}
 
-	private handleArmorSelectionChange(idxs: number[]) {
-		this.selectedArmors = idxs
+	private handleArmorSelectionChange(ids: string[]) {
+		this.selectedArmors = ids
 		this.swipeVc.setSlide(1, {
 			...this.swipeVc.getSlide(1),
 			buttons: this.armorButtonGroupVc.render(),
@@ -203,8 +206,8 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		this.swipeVc.setFooter(this.buildCardFooter())
 	}
 
-	private handleGemSelectionChange(idxs: number[]) {
-		this.selectedGems = idxs
+	private handleGemSelectionChange(ids: string[]) {
+		this.selectedGems = ids
 		this.swipeVc.setSlide(2, {
 			...this.swipeVc.getSlide(2),
 			buttons: this.gemButtonGroupVc.render(),
@@ -244,24 +247,24 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		}
 	}
 
-	private handleClickWeaponHint(idx: number) {
-		const weapon = weapons[idx]
+	private handleClickWeaponHint(id: string) {
+		const weapon = weapons.find((a) => a.id === id)
 		if (!weapon) {
 			return
 		}
 		this.renderEquipmentDialog(weapon)
 	}
 
-	private handleClickArmorHint(idx: number) {
-		const armor = armors[idx]
+	private handleClickArmorHint(id: string) {
+		const armor = armors.find((a) => a.id === id)
 		if (!armor) {
 			return
 		}
 		this.renderEquipmentDialog(armor)
 	}
 
-	private handleClickGemHint(idx: number) {
-		const gem = gems[idx]
+	private handleClickGemHint(id: string) {
+		const gem = gems.find((a) => a.id === id)
 		if (!gem) {
 			return
 		}
