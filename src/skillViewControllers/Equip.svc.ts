@@ -3,7 +3,7 @@ import {
 	ButtonGroupViewController,
 	Router,
 	SkillViewControllerLoadOptions,
-	SwipeViewController,
+	SwipeCardViewController,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
@@ -40,7 +40,7 @@ interface Args {
 
 export default class EquipSkillViewController extends AbstractSkillViewController<Args> {
 	private router!: Router
-	private swipeVc: SwipeViewController
+	private swipeVc: SwipeCardViewController
 	private weaponButtonGroupVc: ButtonGroupViewController
 	private armorButtonGroupVc: ButtonGroupViewController
 	private gemButtonGroupVc: ButtonGroupViewController
