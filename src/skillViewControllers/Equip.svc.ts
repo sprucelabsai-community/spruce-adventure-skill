@@ -80,7 +80,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 					void this.router.back()
 				},
 			},
-			footer: this.buildCardFooter(),
+			footer: this.renderCardFooter(),
 			onSlideChange: this.handleSlideChange.bind(this),
 			slides: [
 				{
@@ -121,10 +121,10 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private updateFooter() {
-		this.swipeVc.setFooter(this.buildCardFooter())
+		this.swipeVc.setFooter(this.renderCardFooter())
 	}
 
-	private buildCardFooter(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter {
+	private renderCardFooter(): SpruceSchemas.HeartwoodViewControllers.v2021_02_11.CardFooter {
 		const labels = [
 			'Confirm Weapon',
 			'Confirm Armor',
@@ -194,7 +194,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			...slide,
 			buttons: this.weaponButtonGroupVc.render(),
 		})
-		this.swipeVc.setFooter(this.buildCardFooter())
+		this.swipeVc.setFooter(this.renderCardFooter())
 	}
 
 	private handleArmorSelectionChange(ids: string[]) {
@@ -203,7 +203,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			...this.swipeVc.getSlide(1),
 			buttons: this.armorButtonGroupVc.render(),
 		})
-		this.swipeVc.setFooter(this.buildCardFooter())
+		this.swipeVc.setFooter(this.renderCardFooter())
 	}
 
 	private handleGemSelectionChange(ids: string[]) {
@@ -212,7 +212,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			...this.swipeVc.getSlide(2),
 			buttons: this.gemButtonGroupVc.render(),
 		})
-		this.swipeVc.setFooter(this.buildCardFooter())
+		this.swipeVc.setFooter(this.renderCardFooter())
 	}
 
 	public async load(options: SkillViewControllerLoadOptions<Args>) {
@@ -223,7 +223,6 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		}
 
 		this.router = router
-
 		this.name = name
 		this.epithet = epithet
 
