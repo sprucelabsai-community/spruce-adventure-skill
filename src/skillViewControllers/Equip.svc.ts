@@ -72,7 +72,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			buttons: gems,
 		})
 
-		this.swipeVc = this.Controller('swipe', {
+		this.swipeVc = this.Controller('swipeCard', {
 			header: {
 				title: `...`,
 				subtitle: 'Equip her wisely!',
