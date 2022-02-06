@@ -3,7 +3,7 @@ import {
 	ButtonGroupViewController,
 	Router,
 	SkillViewControllerLoadOptions,
-	SwipeViewController,
+	SwipeCardViewController,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
@@ -40,7 +40,7 @@ interface Args {
 
 export default class EquipSkillViewController extends AbstractSkillViewController<Args> {
 	private router!: Router
-	private swipeVc: SwipeViewController
+	private swipeVc: SwipeCardViewController
 	private weaponButtonGroupVc: ButtonGroupViewController
 	private armorButtonGroupVc: ButtonGroupViewController
 	private gemButtonGroupVc: ButtonGroupViewController
@@ -72,7 +72,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 			buttons: gems,
 		})
 
-		this.swipeVc = this.Controller('swipe', {
+		this.swipeVc = this.Controller('swipeCard', {
 			header: {
 				title: `...`,
 				subtitle: 'Equip her wisely!',
@@ -236,14 +236,8 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		return `${this.epithet ? characters[this.epithet] : ''}`
 	}
 
-	public render() {
-		return {
-			layouts: [
-				{
-					cards: [this.swipeVc.render()],
-				},
-			],
-		}
+	public getSwipeVc() {
+		return this.swipeVc
 	}
 
 	private handleClickWeaponHint(id: string) {
@@ -263,6 +257,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private handleClickGemHint(id: string) {
+		debugger
 		const gem = gems.find((a) => a.id === id)
 		if (!gem) {
 			return
@@ -297,5 +292,15 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 				],
 			},
 		})
+	}
+
+	public render() {
+		return {
+			layouts: [
+				{
+					cards: [this.swipeVc.render()],
+				},
+			],
+		}
 	}
 }

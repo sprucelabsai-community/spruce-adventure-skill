@@ -1,6 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
-import { test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test'
+import EquipSkillViewController from '../../skillViewControllers/Equip.svc'
 
 export default class SelectingEquipmentTest extends AbstractViewControllerTest {
 	private static vc: EquipSkillViewController
@@ -17,13 +18,14 @@ export default class SelectingEquipmentTest extends AbstractViewControllerTest {
 
 	@test()
 	protected static rendersSwipeVc() {
-		vcAssert.assertSkillViewRendersSwipeView()
+		const swipeVc = vcAssert.assertSkillViewRendersSwipeCard(this.vc)
+		assert.isEqual(swipeVc, this.vc.getSwipeVc())
 	}
 
-	@test()
+	@test.only()
 	protected static async clickingGemRendersAlert() {
 		await vcAssert.assertRendersDialog(this.vc, () =>
-			interactor.clickButton(this.vc, 'grapefruit')
+			interactor.clickButton(this.vc.getSwipeVc(), 'grapefruit')
 		)
 	}
 }
