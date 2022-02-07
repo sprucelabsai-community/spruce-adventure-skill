@@ -22,10 +22,10 @@ export default class SelectingEquipmentTest extends AbstractViewControllerTest {
 		assert.isEqual(swipeVc, this.vc.getSwipeVc())
 	}
 
-	@test.only()
+	@test()
 	protected static async clickingGemRendersAlert() {
 		await vcAssert.assertRendersDialog(this.vc, () =>
-			interactor.clickButton(this.vc.getSwipeVc(), 'grapefruit')
+			interactor.clickButtonHint(this.vc.getSwipeVc(), 'grapefruit')
 		)
 	}
 }
