@@ -257,7 +257,6 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 	}
 
 	private handleClickGemHint(id: string) {
-		debugger
 		const gem = gems.find((a) => a.id === id)
 		if (!gem) {
 			return
