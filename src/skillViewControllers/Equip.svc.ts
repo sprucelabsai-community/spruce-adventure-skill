@@ -69,7 +69,7 @@ export default class EquipSkillViewController extends AbstractSkillViewControlle
 		this.gemButtonGroupVc = this.Controller('buttonGroup', {
 			onSelectionChange: this.handleGemSelectionChange.bind(this),
 			onClickHintIcon: this.handleClickGemHint.bind(this),
-			buttons: gems,
+			buttons: gemButtons,
 		})
 
 		this.swipeVc = this.Controller('swipeCard', {
