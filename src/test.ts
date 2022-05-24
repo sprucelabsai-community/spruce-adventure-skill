@@ -3,6 +3,7 @@ import { ViewControllerFactory } from '@sprucelabs/heartwood-view-controllers'
 
 const vcFactory = ViewControllerFactory.Factory({
 	controllerMap: {},
+	device: {} as any,
 	connectToApi: async () => {
 		return 'yes' as any
 	},
