@@ -12,25 +12,14 @@ const registerSkillViewsEventContract = buildEventContract({
 			emitPermissionContract: buildPermissionContract({
 				id: 'registerSkillViewsEmitPermissions',
 				name: 'Register skill views',
-				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
 						id: 'can-register-skill-views',
 						name: 'Can register skill views',
-						description: null,
-						requireAllStatuses: null,
 						defaults: {
 							skill: true,
-							owner: null,
-							groupManager: null,
-							manager: null,
-							teammate: null,
-							anonymous: null,
-							loggedIn: null,
-							guest: null,
 						},
-						can: null,
 					},
 				],
 			}),
