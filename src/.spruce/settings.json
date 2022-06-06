@@ -8,10 +8,7 @@
     "error"
   ],
   "events": {
-    "lastSync": {},
-    "listenerCacheKeys": {
-      "http1270018081": "willbootskillv2021_08_03"
-    }
+    "lastSync": {}
   },
   "scriptUpdater": {
     "skipped": []
