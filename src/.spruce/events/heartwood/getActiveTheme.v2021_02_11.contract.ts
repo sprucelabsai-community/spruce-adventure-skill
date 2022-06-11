@@ -1,25 +1,24 @@
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
-import generateUrlEmitTargetAndPayloadSchema from '#spruce/schemas/heartwood/v2021_02_11/generateUrlEmitTargetAndPayload.schema'
-import generateUrlResponsePayloadSchema from '#spruce/schemas/heartwood/v2021_02_11/generateUrlResponsePayload.schema'
+import getActiveThemeEmitTargetAndPayloadSchema from '#spruce/schemas/heartwood/v2021_02_11/getActiveThemeEmitTargetAndPayload.schema'
+import getActiveThemeResponsePayloadSchema from '#spruce/schemas/heartwood/v2021_02_11/getActiveThemeResponsePayload.schema'
 
-const generateUrlEventContract = buildEventContract({
+const getActiveThemeEventContract = buildEventContract({
 	eventSignatures: {
-		'heartwood.generate-url::v2021_02_11': {
-			isGlobal: true,
-			emitPayloadSchema: generateUrlEmitTargetAndPayloadSchema,
-			responsePayloadSchema: generateUrlResponsePayloadSchema,
+		'heartwood.get-active-theme::v2021_02_11': {
+			emitPayloadSchema: getActiveThemeEmitTargetAndPayloadSchema,
+			responsePayloadSchema: getActiveThemeResponsePayloadSchema,
 			emitPermissionContract: buildPermissionContract({
-				id: 'generateUrlEmitPermissions',
-				name: 'Generate url',
+				id: 'getActiveThemeEmitPermissions',
+				name: 'Get active theme',
 				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
-						id: 'can-generate-url',
-						name: 'Can generate  url',
+						id: 'can-get-active-theme',
+						name: 'Can get active theme',
 						description: null,
-						requireAllStatuses: null,
+						requireAllStatuses: false,
 						defaults: {
 							skill: true,
 							owner: null,
@@ -49,6 +48,6 @@ const generateUrlEventContract = buildEventContract({
 		},
 	},
 })
-export default generateUrlEventContract
+export default getActiveThemeEventContract
 
-export type GenerateUrlEventContract = typeof generateUrlEventContract
+export type GetActiveThemeEventContract = typeof getActiveThemeEventContract
