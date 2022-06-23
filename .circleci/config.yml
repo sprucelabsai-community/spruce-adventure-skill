@@ -14,11 +14,6 @@ jobs:
       - spruce/check_and_skip_if_npm_publish
       - spruce/create_env_from_base64_env
       - spruce/install_rsync
-      - spruce/install_cli
-      - run:
-          name: "Run CLI Setup Tests for DEMO_NUMBER"
-          command: |
-            ~/.yarn/bin/spruce setup.testing --demoNumber $DEMO_NUMBER --skillSlug adventure
       - spruce/install_deps_build_ci_test
       - run: yarn global add @sprucelabs/heartwood-browser-test
       - run:
@@ -46,6 +41,11 @@ jobs:
                 break
               fi
             done
+      - spruce/install_cli
+      - run:
+          name: "Run CLI Setup Tests for DEMO_NUMBER"
+          command: |
+            ~/.yarn/bin/spruce setup.testing --demoNumber $DEMO_NUMBER --skillSlug adventure
       - run:
           name: "Publish to Sandbox"
           command: |
