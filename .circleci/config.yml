@@ -15,7 +15,6 @@ jobs:
       - spruce/create_env_from_base64_env
       - spruce/install_rsync
       - spruce/install_deps_build_ci_test
-      - run: yarn global add @sprucelabs/heartwood-polish
       - run:
           name: "Booting Adventure and Polish Checking"
           command: |
@@ -28,7 +27,7 @@ jobs:
                 IFS= read boot_output <&"${bootfd[0]}"
                 echo "$boot_output"
                 if [[ $boot_output == *"Skill booted"* ]]; then
-                  DO_ADVENTURE=true DO_HEARTWOOD=false ~/.yarn/bin/heartwood-polish
+                  yarn polish
                   if [[ $? -eq 1 ]]; then
                     echo "Polish check failed"
                     exit 1
