@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.2.74...v1.3.0) (2022-07-01)
+
+
+### Features
+
+* now uses heartwood-polish script ([7f6acbe](https://github.com/sprucelabsai/spruce-adventure-skill/commit/7f6acbe))
+
 ## [1.2.74](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.2.73...v1.2.74) (2022-06-30)
 
 ## [1.2.73](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.2.72...v1.2.73) (2022-06-29)
