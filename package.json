@@ -65,7 +65,7 @@
     "globby": "^11.0.4"
   },
   "devDependencies": {
-    "@sprucelabs/heartwood-polish": "^2.0.59",
+    "@sprucelabs/heartwood-polish": "^2.0.60",
     "@sprucelabs/jest-json-reporter": "^6.0.419",
     "@sprucelabs/resolve-path-aliases": "^1.1.68",
     "@sprucelabs/semantic-release": "^4.0.8",
