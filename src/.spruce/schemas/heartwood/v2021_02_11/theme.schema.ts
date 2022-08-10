@@ -16,6 +16,12 @@ const themeSchema: SpruceSchemas.Heartwood.v2021_02_11.ThemeSchema  = {
 	                options: undefined
 	            },
 	            /** . */
+	            'name': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
 	            'props': {
 	                type: 'schema',
 	                isRequired: true,

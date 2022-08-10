@@ -773,6 +773,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'id': string
 				
+				'name': string
+				
 				'props': SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ThemeProps
 		}
 
@@ -785,6 +787,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'id': {
 			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'name': {
+			                type: 'text',
 			                isRequired: true,
 			                options: undefined
 			            },
