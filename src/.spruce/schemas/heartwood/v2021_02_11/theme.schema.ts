@@ -10,7 +10,7 @@ const themeSchema: SpruceSchemas.Heartwood.v2021_02_11.ThemeSchema  = {
 	name: 'Theme',
 	    fields: {
 	            /** . */
-	            'id': {
+	            'slug': {
 	                type: 'id',
 	                isRequired: true,
 	                options: undefined
