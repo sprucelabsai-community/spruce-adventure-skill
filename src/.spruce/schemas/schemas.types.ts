@@ -771,7 +771,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface Theme {
 			
 				
-				'id': string
+				'slug': string
 				
 				'name': string
 				
@@ -785,7 +785,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			name: 'Theme',
 			    fields: {
 			            /** . */
-			            'id': {
+			            'slug': {
 			                type: 'id',
 			                isRequired: true,
 			                options: undefined
