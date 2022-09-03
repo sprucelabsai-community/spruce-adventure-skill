@@ -6,6 +6,7 @@ import getActiveThemeResponsePayloadSchema from '#spruce/schemas/heartwood/v2021
 const getActiveThemeEventContract = buildEventContract({
 	eventSignatures: {
 		'heartwood.get-active-theme::v2021_02_11': {
+			isGlobal: true,
 			emitPayloadSchema: getActiveThemeEmitTargetAndPayloadSchema,
 			responsePayloadSchema: getActiveThemeResponsePayloadSchema,
 			emitPermissionContract: buildPermissionContract({
