@@ -6,6 +6,7 @@ import upsertThemeResponsePayloadSchema from '#spruce/schemas/heartwood/v2021_02
 const upsertThemeEventContract = buildEventContract({
 	eventSignatures: {
 		'heartwood.upsert-theme::v2021_02_11': {
+			isGlobal: true,
 			emitPayloadSchema: upsertThemeEmitTargetAndPayloadSchema,
 			responsePayloadSchema: upsertThemeResponsePayloadSchema,
 			emitPermissionContract: buildPermissionContract({
