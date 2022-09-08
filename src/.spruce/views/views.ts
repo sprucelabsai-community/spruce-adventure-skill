@@ -1,12 +1,14 @@
 import EquipSkillViewController from '../../root/Equip.svc'
-import ProfileSkillViewController from '../../skillViewControllers/Profile.svc'
-import RootSkillViewController from '../../skillViewControllers/Root.svc'
+import ProfileSkillViewController from '../../root/Profile.svc'
+import RootSkillViewController from '../../root/Root.svc'
 
 const vcs = {
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
 }
+
+type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Record<string, any> ? Args[0]['args'] : Record<never, any>
 
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
@@ -16,15 +18,18 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 	}
 
 	interface SkillViewControllerArgsMap {
-		'adventure.equip': Parameters<EquipSkillViewController['load']>[0]['args']
-		'adventure.profile': Parameters<ProfileSkillViewController['load']>[0]['args']
-		'adventure.root': Parameters<RootSkillViewController['load']>[0]['args']
+		'adventure.equip': LoadOptions<Parameters<EquipSkillViewController['load']>>
+		'adventure.profile': LoadOptions<Parameters<ProfileSkillViewController['load']>>
+		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
 	}
 
 	interface ViewControllerMap {
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
+	}
+
+    interface ViewControllerOptionsMap {
 	}
 }
 
