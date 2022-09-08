@@ -1,7 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
 import { assert, test } from '@sprucelabs/test'
-import EquipSkillViewController from '../../skillViewControllers/Equip.svc'
+import EquipSkillViewController from '../../../root/Equip.svc'
 
 export default class SelectingEquipmentTest extends AbstractViewControllerTest {
 	private static vc: EquipSkillViewController

@@ -7,7 +7,7 @@ import {
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { SpruceSchemas } from '@sprucelabs/mercury-types'
-import { armors, EquipmentItem, gems, weapons } from '../constants'
+import { armors, EquipmentItem, gems, weapons } from './constants'
 import { characters, Epithet } from './Profile.svc'
 
 type Button = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.ButtonBarButton

@@ -1,4 +1,4 @@
-import EquipSkillViewController from '../../skillViewControllers/Equip.svc'
+import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../skillViewControllers/Profile.svc'
 import RootSkillViewController from '../../skillViewControllers/Root.svc'
 
