@@ -1,3 +1,10 @@
+# [2.0.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.3.53...v2.0.0) (2022-09-09)
+
+
+### Breaking Changes
+
+* starting new exprience ([a1a7813](https://github.com/sprucelabsai/spruce-adventure-skill/commit/a1a7813))
+
 ## [1.3.53](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.3.52...v1.3.53) (2022-09-08)
 
 ## [1.3.52](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v1.3.51...v1.3.52) (2022-09-08)
