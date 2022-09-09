@@ -92,9 +92,13 @@ export default class PostCardViewController extends AbstractViewController<Card>
 	}
 
 	public async handleSubmit() {
-		await this.confirm({
+		const accepted = await this.confirm({
 			title: 'You ready to rock!?? 🎸',
 		})
+
+		if (!accepted) {
+			return
+		}
 
 		const values = this.formVc.getValues() as Adventure
 		const client = await this.connectToApi()

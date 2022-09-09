@@ -1,25 +1,27 @@
 import {
 	formAssert,
 	interactor,
-	SpruceSchemas,
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
+import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import PostCardViewController, {
 	Adventure,
 } from '../../../postingAnAdventure/PostCard.vc'
+import EventFaker, { PostTargetAndPayload } from '../../support/EventFaker'
 
 @fake.login()
 export default class PostCardTest extends AbstractSpruceFixtureTest {
 	private static vc: SpyPostCard
+	private static eventFaker: EventFaker
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.views.setController('adventure.post-card', SpyPostCard)
 		this.vc = this.views.Controller('adventure.post-card', {}) as SpyPostCard
+		this.eventFaker = new EventFaker()
 	}
 
 	@test()
@@ -61,47 +63,47 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 
 	@test()
 	protected static async confirmingSubmitPostsAdventure() {
-		let wasHit = false
-		let passedPayload:
-			| SpruceSchemas.Adventure.v2022_09_09.PostAdventureEmitTargetAndPayload['payload']
-			| undefined
+		let passedPayload: PostTargetAndPayload['payload'] | undefined
 
-		await eventFaker.on(
-			'adventure.post-adventure::v2022_09_09',
-			({ payload }) => {
-				passedPayload = payload
-				wasHit = true
-				return {
-					adventure: {
-						id: generateId(),
-						what: generateId(),
-						when: new Date().getTime(),
-						where: this.generateAddressValues(),
-					},
-				}
-			}
-		)
+		await this.eventFaker.fakePostAdventure(({ payload }) => {
+			passedPayload = payload
+		})
 
-		const what = await this.setToRandomValue('what')
-		const when = await this.setToRandomValue('when')
-		const where = await this.setRandomAddress()
+		const { what, when, where } = await this.fillOutForm()
 
-		const confirm = await this.submitAndAssertConfirm()
+		await this.submitAndConfirm()
 
-		await confirm.accept()
-
-		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedPayload?.adventure, { what, when, where })
 	}
 
+	@test()
+	protected static async cancellingSaveDoesNotSave() {
+		let wasHit = false
+
+		await this.eventFaker.fakePostAdventure(() => {
+			wasHit = true
+		})
+
+		await this.fillOutForm()
+		const confirmVc = await this.submitAndAssertConfirm()
+		await confirmVc.decline()
+		assert.isFalse(wasHit)
+	}
+
+	private static async fillOutForm() {
+		const what = await this.setToRandomValue('what')
+		const when = await this.setToRandomValue('when')
+		const where = await this.setRandomAddress()
+		return { what, when, where }
+	}
+
+	private static async submitAndConfirm() {
+		const confirm = await this.submitAndAssertConfirm()
+		await confirm.accept()
+	}
+
 	private static generateAddressValues() {
-		return {
-			city: generateId(),
-			country: generateId(),
-			street1: generateId(),
-			province: generateId(),
-			zip: generateId(),
-		}
+		return this.eventFaker.generateAddressValues()
 	}
 
 	private static async submitAndAssertConfirm() {
