@@ -1,6 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { test } from '@sprucelabs/test'
 import PostCardViewController from '../../../postingAnAdventure/PostCard.vc'
+import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCard.vc'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import FakePostCard from '../../support/FakePostCard'
@@ -46,6 +47,14 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	protected static async submittingPostTriggersRenders() {
 		await this.skipIntroAndPostAdventure()
 		vcAssert.assertTriggerRenderCount(this.vc, 2)
+	}
+
+	@test()
+	protected static async showsCurrentCardAfterSaving() {
+		this.assertDoesNotRenderCard('current')
+		await this.skipIntroAndPostAdventure()
+		const vc = this.assertRendersCard('current')
+		vcAssert.assertRendersAsInstanceOf(vc, CurrentAdventureCardViewController)
 	}
 
 	private static async skipIntroAndPostAdventure() {

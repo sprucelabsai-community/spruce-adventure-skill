@@ -8,6 +8,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { Adventure } from '../adventure.types'
 import PostCardViewController from '../postingAnAdventure/PostCard.vc'
+import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
 	private isAnimating = true
@@ -17,10 +18,12 @@ export default class RootSkillViewController extends AbstractSkillViewController
 	private shouldRenderIntroCard = true
 	protected postCardVc: PostCardViewController
 	private shouldRenderPostCard = true
+	private currentCardVc: CurrentAdventureCardViewController
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 		this.introCardVc = this.IntroCardVc()
+		this.currentCardVc = this.Controller('adventure.current-adventure-card', {})
 		this.postCardVc = this.Controller('adventure.post-card', {
 			onPost: this.handlePostAdventure.bind(this),
 		})
@@ -91,6 +94,8 @@ export default class RootSkillViewController extends AbstractSkillViewController
 			cards.push(this.introCardVc.render())
 		} else if (this.shouldRenderPostCard) {
 			cards.push(this.postCardVc.render())
+		} else {
+			cards.push(this.currentCardVc.render())
 		}
 
 		return {
