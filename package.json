@@ -113,7 +113,8 @@
           "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
           "worksheetId": 1262763347,
           "testMap": {
-            "postFormRendersExpectedFields": "B1"
+            "postFormRendersExpectedFields": "B1",
+            "submittingFormRendersConfirm": "B2"
           }
         }
       ]

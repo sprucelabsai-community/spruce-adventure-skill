@@ -30,6 +30,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			id: 'post',
 			header: {
 				title: 'Post your next adventure!',
+				subtitle: `After this you'll get to invite some friends!`,
 				image:
 					'/storybook-support/adventure/' +
 					randomUtil.rand(['1.png', '2.png', '3.png']),
