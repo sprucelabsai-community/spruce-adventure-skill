@@ -114,7 +114,8 @@
           "worksheetId": 1262763347,
           "testMap": {
             "postFormRendersExpectedFields": "B1",
-            "submittingFormRendersConfirm": "B2"
+            "submittingFormRendersConfirm": "B2",
+            "confirmingSubmitPostsAdventure": "B4"
           }
         }
       ]

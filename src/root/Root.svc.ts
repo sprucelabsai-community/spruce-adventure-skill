@@ -6,7 +6,7 @@ import {
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import PostCardViewController from '../viewControllers/PostCard.vc'
+import PostCardViewController from '../postingAnAdventure/PostCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
 	private isAnimating = true

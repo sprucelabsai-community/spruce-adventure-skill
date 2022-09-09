@@ -7,8 +7,9 @@ import {
 	SpruceSchemas,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import { buildSchema, SchemaValues } from '@sprucelabs/schema'
+import { SchemaValues } from '@sprucelabs/schema'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
+import postAdventureSchema from '#spruce/schemas/adventure/v2022_09_09/postAdventure.schema'
 
 type FormSection =
 	SpruceSchemas.HeartwoodViewControllers.v2021_02_11.FormSection<AdventureSchema>
@@ -49,7 +50,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 		return this.Controller(
 			'form',
 			buildForm({
-				schema: formSchema,
+				schema: postAdventureSchema,
 				shouldShowCancelButton: false,
 				shouldShowSubmitControls: false,
 				onSubmit: this.handleSubmit.bind(this),
@@ -94,6 +95,19 @@ export default class PostCardViewController extends AbstractViewController<Card>
 		await this.confirm({
 			title: 'You ready to rock!?? 🎸',
 		})
+
+		const values = this.formVc.getValues() as Adventure
+		const client = await this.connectToApi()
+		await client.emitAndFlattenResponses(
+			'adventure.post-adventure::v2022_09_09',
+			{
+				payload: {
+					adventure: {
+						...values,
+					},
+				},
+			}
+		)
 	}
 
 	public render() {
@@ -101,27 +115,5 @@ export default class PostCardViewController extends AbstractViewController<Card>
 	}
 }
 
-const formSchema = buildSchema({
-	id: 'postForm',
-	fields: {
-		what: {
-			type: 'text',
-			label: 'What are you gonna do?',
-			hint: 'Heads up, you can only have 1 adventure at a time!',
-			isRequired: true,
-		},
-		when: {
-			type: 'dateTime',
-			label: 'When are you gonna do it?',
-			isRequired: true,
-		},
-		where: {
-			type: 'address',
-			label: 'Where are you going to do it?',
-			isRequired: true,
-		},
-	},
-})
-
-type AdventureSchema = typeof formSchema
+type AdventureSchema = typeof postAdventureSchema
 export type Adventure = SchemaValues<AdventureSchema>

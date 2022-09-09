@@ -1,7 +1,7 @@
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
-import PostCardViewController from '../../viewControllers/PostCard.vc'
+import PostCardViewController from '../../postingAnAdventure/PostCard.vc'
 
 const vcs = {
     EquipSkillViewController,

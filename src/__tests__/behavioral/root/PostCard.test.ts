@@ -1,15 +1,16 @@
 import {
 	formAssert,
 	interactor,
+	SpruceSchemas,
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { fake } from '@sprucelabs/spruce-test-fixtures'
+import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import PostCardViewController, {
 	Adventure,
-} from '../../../viewControllers/PostCard.vc'
+} from '../../../postingAnAdventure/PostCard.vc'
 
 @fake.login()
 export default class PostCardTest extends AbstractSpruceFixtureTest {
@@ -55,7 +56,56 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 
 	@test()
 	protected static async submittingFormRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, () =>
+		await this.submitAndAssertConfirm()
+	}
+
+	@test()
+	protected static async confirmingSubmitPostsAdventure() {
+		let wasHit = false
+		let passedPayload:
+			| SpruceSchemas.Adventure.v2022_09_09.PostAdventureEmitTargetAndPayload['payload']
+			| undefined
+
+		await eventFaker.on(
+			'adventure.post-adventure::v2022_09_09',
+			({ payload }) => {
+				passedPayload = payload
+				wasHit = true
+				return {
+					adventure: {
+						id: generateId(),
+						what: generateId(),
+						when: new Date().getTime(),
+						where: this.generateAddressValues(),
+					},
+				}
+			}
+		)
+
+		const what = await this.setToRandomValue('what')
+		const when = await this.setToRandomValue('when')
+		const where = await this.setRandomAddress()
+
+		const confirm = await this.submitAndAssertConfirm()
+
+		await confirm.accept()
+
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedPayload?.adventure, { what, when, where })
+	}
+
+	private static generateAddressValues() {
+		return {
+			city: generateId(),
+			country: generateId(),
+			street1: generateId(),
+			province: generateId(),
+			zip: generateId(),
+		}
+	}
+
+	private static async submitAndAssertConfirm() {
+		return vcAssert.assertRendersConfirm(this.vc, () =>
 			interactor.submitForm(this.formVc)
 		)
 	}
@@ -65,13 +115,10 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	private static async setRandomAddress() {
-		await this.formVc.setValue('where', {
-			city: generateId(),
-			country: generateId(),
-			province: generateId(),
-			street1: generateId(),
-			zip: generateId(),
-		})
+		const address = this.generateAddressValues()
+		await this.formVc.setValue('where', address)
+
+		return address
 	}
 
 	private static assertDoesNotRenderSubmitControls() {
@@ -97,7 +144,9 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	private static async setToRandomValue(key: 'what' | 'when') {
-		await this.formVc.setValue(key, generateId())
+		const value = key === 'when' ? new Date().getTime() : generateId()
+		await this.formVc.setValue(key, value)
+		return value
 	}
 
 	private static get formVc() {
