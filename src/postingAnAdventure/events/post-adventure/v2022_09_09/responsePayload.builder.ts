@@ -6,6 +6,7 @@ const postAdventureResponsePayloadBuilder = buildSchema({
 	fields: {
 		adventure: {
 			type: 'schema',
+			isRequired: true,
 			options: {
 				schema: adventureBuilder,
 			},

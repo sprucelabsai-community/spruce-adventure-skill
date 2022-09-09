@@ -12,6 +12,7 @@ const postAdventureResponsePayloadSchema: SpruceSchemas.Adventure.v2022_09_09.Po
 	            /** . */
 	            'adventure': {
 	                type: 'schema',
+	                isRequired: true,
 	                options: {schema: adventureSchema_v2022_09_09,}
 	            },
 	    }

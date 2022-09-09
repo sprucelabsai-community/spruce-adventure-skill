@@ -1,27 +1,20 @@
-import {
-	formAssert,
-	interactor,
-	vcAssert,
-} from '@sprucelabs/heartwood-view-controllers'
+import { formAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test'
-import { generateId } from '@sprucelabs/test-utils'
-import PostCardViewController, {
-	Adventure,
-} from '../../../postingAnAdventure/PostCard.vc'
-import EventFaker, { PostTargetAndPayload } from '../../support/EventFaker'
+import { Adventure } from '../../../adventure.types'
+import { PostCardOptions } from '../../../postingAnAdventure/PostCard.vc'
+import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { PostTargetAndPayload } from '../../support/EventFaker'
+import FakePostCard from '../../support/FakePostCard'
 
 @fake.login()
-export default class PostCardTest extends AbstractSpruceFixtureTest {
-	private static vc: SpyPostCard
-	private static eventFaker: EventFaker
+export default class PostCardTest extends AbstractAdventureTest {
+	private static vc: FakePostCard
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.views.setController('adventure.post-card', SpyPostCard)
-		this.vc = this.views.Controller('adventure.post-card', {}) as SpyPostCard
-		this.eventFaker = new EventFaker()
+		this.views.setController('adventure.post-card', FakePostCard)
+		this.vc = this.PostCardVc()
 	}
 
 	@test()
@@ -69,11 +62,33 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 			passedPayload = payload
 		})
 
-		const { what, when, where } = await this.fillOutForm()
-
-		await this.submitAndConfirm()
+		const { what, when, where } = await this.fillOutFormSubmitAndAccept()
 
 		assert.isEqualDeep(passedPayload?.adventure, { what, when, where })
+	}
+
+	@test()
+	protected static async passesBackAdventureToOnPost() {
+		const adventure = this.eventFaker.generateAdventureValues()
+		let passedAdventure: Adventure | undefined
+
+		this.vc = this.PostCardVc({
+			onPost: (adventure) => {
+				passedAdventure = adventure
+			},
+		})
+		await this.eventFaker.fakePostAdventure(() => {
+			return adventure
+		})
+
+		await this.fillOutFormSubmitAndAccept()
+		assert.isEqualDeep(passedAdventure, adventure)
+	}
+
+	private static async fillOutFormSubmitAndAccept() {
+		const adventure = await this.fillOutForm()
+		await this.submitAndConfirm()
+		return adventure
 	}
 
 	@test()
@@ -91,25 +106,15 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	private static async fillOutForm() {
-		const what = await this.setToRandomValue('what')
-		const when = await this.setToRandomValue('when')
-		const where = await this.setRandomAddress()
-		return { what, when, where }
+		return this.vc.fillWithRandomValues()
 	}
 
 	private static async submitAndConfirm() {
-		const confirm = await this.submitAndAssertConfirm()
-		await confirm.accept()
-	}
-
-	private static generateAddressValues() {
-		return this.eventFaker.generateAddressValues()
+		return this.vc.submitAndConfirm()
 	}
 
 	private static async submitAndAssertConfirm() {
-		return vcAssert.assertRendersConfirm(this.vc, () =>
-			interactor.submitForm(this.formVc)
-		)
+		return this.vc.submitAndAssertConfirm()
 	}
 
 	private static assertDoesNotRenderFields(names: AdventureKey[]) {
@@ -117,10 +122,7 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	private static async setRandomAddress() {
-		const address = this.generateAddressValues()
-		await this.formVc.setValue('where', address)
-
-		return address
+		return this.vc.setRandomAddress()
 	}
 
 	private static assertDoesNotRenderSubmitControls() {
@@ -137,6 +139,12 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 		)
 	}
 
+	private static PostCardVc(options?: Partial<PostCardOptions>): FakePostCard {
+		return this.views.Controller('adventure.post-card', {
+			...options,
+		}) as FakePostCard
+	}
+
 	private static assertDoesNotRenderField(name: AdventureKey) {
 		formAssert.formDoesNotRenderField(this.formVc, name)
 	}
@@ -146,19 +154,11 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	private static async setToRandomValue(key: 'what' | 'when') {
-		const value = key === 'when' ? new Date().getTime() : generateId()
-		await this.formVc.setValue(key, value)
-		return value
+		return this.vc.setToRandomValue(key)
 	}
 
 	private static get formVc() {
 		return this.vc.getFormVc()
-	}
-}
-
-class SpyPostCard extends PostCardViewController {
-	public getFormVc() {
-		return this.formVc
 	}
 }
 

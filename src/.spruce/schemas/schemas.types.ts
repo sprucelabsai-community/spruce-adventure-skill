@@ -1046,7 +1046,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		interface PostAdventureResponsePayload {
 			
 				
-				'adventure'?: SpruceSchemas.Adventure.v2022_09_09.Adventure| undefined | null
+				'adventure': SpruceSchemas.Adventure.v2022_09_09.Adventure
 		}
 
 		interface PostAdventureResponsePayloadSchema extends SpruceSchema.Schema {
@@ -1058,6 +1058,7 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            /** . */
 			            'adventure': {
 			                type: 'schema',
+			                isRequired: true,
 			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema,}
 			            },
 			    }

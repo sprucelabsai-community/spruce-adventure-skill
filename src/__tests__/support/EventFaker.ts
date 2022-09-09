@@ -2,7 +2,7 @@ import { SpruceSchemas } from '@sprucelabs/heartwood-view-controllers'
 import { AddressFieldValue } from '@sprucelabs/schema'
 import { eventFaker } from '@sprucelabs/spruce-test-fixtures'
 import { generateId } from '@sprucelabs/test-utils'
-import { Adventure } from '../../postingAnAdventure/PostCard.vc'
+import { Adventure } from '../../adventure.types'
 
 export default class EventFaker {
 	public async fakePostAdventure(
@@ -13,16 +13,20 @@ export default class EventFaker {
 			//@ts-ignore
 			(targetAndPayload) => {
 				return {
-					adventure: cb?.(targetAndPayload) ?? {
-						id: generateId(),
-						what: generateId(),
-						when: new Date().getTime(),
-						where: this.generateAddressValues(),
-					},
+					adventure: cb?.(targetAndPayload) ?? this.generateAdventureValues(),
 				}
 			}
 		)
 	}
+	public generateAdventureValues() {
+		return {
+			id: generateId(),
+			what: generateId(),
+			when: new Date().getTime(),
+			where: this.generateAddressValues(),
+		}
+	}
+
 	public generateAddressValues(): AddressFieldValue {
 		return {
 			city: generateId(),

@@ -6,6 +6,7 @@ import {
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
+import { Adventure } from '../adventure.types'
 import PostCardViewController from '../postingAnAdventure/PostCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
@@ -14,12 +15,15 @@ export default class RootSkillViewController extends AbstractSkillViewController
 	public static id = 'root'
 	protected introCardVc: CardViewController
 	private shouldRenderIntroCard = true
-	private postCardVc: PostCardViewController
+	protected postCardVc: PostCardViewController
+	private shouldRenderPostCard = true
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 		this.introCardVc = this.IntroCardVc()
-		this.postCardVc = this.Controller('adventure.post-card', {})
+		this.postCardVc = this.Controller('adventure.post-card', {
+			onPost: this.handlePostAdventure.bind(this),
+		})
 	}
 
 	private IntroCardVc(): CardViewController {
@@ -69,6 +73,11 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		})
 	}
 
+	private async handlePostAdventure(_adventure: Adventure) {
+		this.shouldRenderPostCard = false
+		this.triggerRender()
+	}
+
 	private handleClickNextFromIntro() {
 		this.shouldRenderIntroCard = false
 		this.triggerRender()
@@ -80,7 +89,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		const cards: Card[] = []
 		if (this.shouldRenderIntroCard) {
 			cards.push(this.introCardVc.render())
-		} else {
+		} else if (this.shouldRenderPostCard) {
 			cards.push(this.postCardVc.render())
 		}
 
