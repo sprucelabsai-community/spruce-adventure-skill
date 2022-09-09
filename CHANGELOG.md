@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.0.2...v2.1.0) (2022-09-09)
+
+
+### Features
+
+* post adventure ([02b46ee](https://github.com/sprucelabsai/spruce-adventure-skill/commit/02b46ee))
+
 ## [2.0.2](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.0.1...v2.0.2) (2022-09-09)
 
 ## [2.0.1](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.0.0...v2.0.1) (2022-09-09)
