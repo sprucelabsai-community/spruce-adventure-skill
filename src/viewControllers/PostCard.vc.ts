@@ -7,6 +7,7 @@ import {
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { buildSchema } from '@sprucelabs/schema'
+import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 
 export default class PostCardViewController extends AbstractViewController<Card> {
 	public static id = 'post-card'
@@ -23,6 +24,12 @@ export default class PostCardViewController extends AbstractViewController<Card>
 	private CardVc(): CardViewController {
 		return this.Controller('card', {
 			id: 'post',
+			header: {
+				title: 'Post your next adventure!',
+				image:
+					'/storybook-support/adventure/' +
+					randomUtil.rand(['1.png', '2.png', '3.png']),
+			},
 			body: {
 				sections: [
 					{
@@ -38,9 +45,10 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			'form',
 			buildForm({
 				schema: formSchema,
+				shouldShowCancelButton: false,
 				sections: [
 					{
-						fields: ['what', 'when', 'where'],
+						fields: [{ name: 'what', renderAs: 'textarea' }, 'when', 'where'],
 					},
 				],
 			})

@@ -1,7 +1,7 @@
 import { formAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test'
 import PostCardViewController from '../../../viewControllers/PostCard.vc'
 
 @fake.login()
@@ -21,7 +21,16 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 
 	@test()
 	protected static async postFormRendersExpectedFields() {
-		formAssert.formRendersFields(this.vc.getFormVc(), ['what', 'when', 'where'])
+		formAssert.formRendersFields(this.formVc, ['what', 'when', 'where'])
+	}
+
+	@test()
+	protected static async doesNotRenderCancelButton() {
+		assert.isFalse(this.formVc.getShouldShowCancelButton())
+	}
+
+	private static get formVc() {
+		return this.vc.getFormVc()
 	}
 }
 
