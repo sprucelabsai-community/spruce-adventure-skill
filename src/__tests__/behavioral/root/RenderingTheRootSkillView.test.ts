@@ -1,8 +1,8 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractViewControllerTest } from '@sprucelabs/spruce-view-plugin'
 import { test } from '@sprucelabs/test'
-import RootSkillViewController from '../../../root/Root.svc'
 import PostCardViewController from '../../../postingAnAdventure/PostCard.vc'
+import RootSkillViewController from '../../../root/Root.svc'
 
 export default class RenderingTheRootSkillViewTest extends AbstractViewControllerTest {
 	private static vc: SpyRootViewController
