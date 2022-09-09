@@ -115,6 +115,7 @@
           "testMap": {
             "postFormRendersExpectedFields": "B1",
             "submittingFormRendersConfirm": "B2",
+            "cancellingSaveDoesNotSave": "B3",
             "confirmingSubmitPostsAdventure": "B4"
           }
         }
