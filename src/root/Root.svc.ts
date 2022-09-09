@@ -1,26 +1,30 @@
 import {
 	AbstractSkillViewController,
-	buildSkillView,
-	Router,
+	Card,
+	CardViewController,
 	SkillView,
-	SkillViewControllerLoadOptions,
+	splitCardsIntoLayouts,
+	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import { SpruceSchemas } from '@sprucelabs/mercury-types'
-
-type Card = SpruceSchemas.HeartwoodViewControllers.v2021_02_11.Card
+import PostCardViewController from '../viewControllers/PostCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
-	private router!: Router
 	private isAnimating = true
 
 	public static id = 'root'
+	protected introCardVc: CardViewController
+	private shouldRenderIntroCard = true
+	private postCardVc: PostCardViewController
 
-	public async load({ router }: SkillViewControllerLoadOptions) {
-		this.router = router
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+		this.introCardVc = this.IntroCardVc()
+		this.postCardVc = this.Controller('adventure.post-card', {})
 	}
 
-	private buildIntroCard(): Card {
-		return {
+	private IntroCardVc(): CardViewController {
+		return this.Controller('card', {
+			id: 'intro',
 			header: {
 				title: `Adventure time! ⚔️🧙`,
 			},
@@ -41,16 +45,6 @@ export default class RootSkillViewController extends AbstractSkillViewController
 									words: `Hello there! My name is Sprucebot.`,
 								},
 								{
-									words: `Tay, one of my creators, built me to test out my capabilities`,
-								},
-								{
-									words:
-										'And to show his people daughters how fun engineering can be!',
-								},
-								{
-									words: `Ok...Are you ready? It's going to be so much fun!`,
-								},
-								{
 									words: `This adventures starts like so many others.`,
 								},
 								{
@@ -67,23 +61,32 @@ export default class RootSkillViewController extends AbstractSkillViewController
 					{
 						label: this.isAnimating ? 'Skip' : `Let's do this! ⚡️`,
 						type: this.isAnimating ? 'secondary' : 'primary',
-						onClick: () => {
-							void this.router.redirect('adventure.profile')
-						},
+						id: 'next',
+						onClick: this.handleClickNextFromIntro.bind(this),
 					},
 				],
 			},
-		}
+		})
 	}
 
+	private handleClickNextFromIntro() {
+		this.shouldRenderIntroCard = false
+		this.triggerRender()
+	}
+
+	public async load() {}
+
 	public render(): SkillView {
-		return buildSkillView({
+		const cards: Card[] = []
+		if (this.shouldRenderIntroCard) {
+			cards.push(this.introCardVc.render())
+		} else {
+			cards.push(this.postCardVc.render())
+		}
+
+		return {
 			shouldCenterVertically: true,
-			layouts: [
-				{
-					cards: [this.buildIntroCard()],
-				},
-			],
-		})
+			layouts: splitCardsIntoLayouts(cards, 2),
+		}
 	}
 }

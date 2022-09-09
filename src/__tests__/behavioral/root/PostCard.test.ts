@@ -1,7 +1,7 @@
-import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import { formAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test'
+import { test } from '@sprucelabs/test'
 import PostCardViewController from '../../../viewControllers/PostCard.vc'
 
 @fake.login()

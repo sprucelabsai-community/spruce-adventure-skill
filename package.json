@@ -104,6 +104,19 @@
       "<rootDir>/node_modules/",
       "<rootDir>/build/__tests__/testDirsAndFiles/"
     ],
+    "reporters": [
+      "default",
+      [
+        "@sprucelabs/jest-sheets-reporter",
+        {
+          "sheetId": "1DoWM7mYgGDa-PJXptLomrZmbIBZiuxS1YiAsRXU2Gm0",
+          "worksheetId": 1262763347,
+          "testMap": {
+            "postFormRendersExpectedFields": "B1"
+          }
+        }
+      ]
+    ],
     "testMatch": [
       "**/__tests__/**/*.test.js?(x)"
     ],

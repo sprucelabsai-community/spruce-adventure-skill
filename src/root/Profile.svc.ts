@@ -61,7 +61,7 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 				onChange: ({ values, isValid }) => {
 					this.name = values.name ?? undefined
 					this.epithet = values.epithet ?? (undefined as any)
-					this.cardVc.setHeaderTitle(this.getHeroName())
+					this.cardVc.setHeaderTitle(this.getCrewName())
 					this.cardVc.setHeaderSubtitle(this.renderEpithet())
 					this.cardVc.setHeaderImage(this.getHeaderImage())
 
@@ -87,7 +87,7 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 
 		this.cardVc = this.Controller('card', {
 			header: {
-				title: this.getHeroName(),
+				title: this.getCrewName(),
 				subtitle: this.renderEpithet(),
 				image: this.getHeaderImage(),
 			},
@@ -113,8 +113,8 @@ export default class ProfileSkillViewController extends AbstractSkillViewControl
 		}
 	}
 
-	private getHeroName() {
-		return this.name ?? 'Name your hero'
+	private getCrewName() {
+		return this.name ?? 'Name your crew'
 	}
 
 	private renderEpithet() {
