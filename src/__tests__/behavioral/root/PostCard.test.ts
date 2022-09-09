@@ -27,7 +27,7 @@ export default class PostCardTest extends AbstractSpruceFixtureTest {
 	}
 
 	@test()
-	protected static async rendersExpectedFields() {
+	protected static async postFormRendersExpectedFields() {
 		this.assertDoesNotRenderSubmitControls()
 
 		this.assertRendersFields(['what'])
