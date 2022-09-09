@@ -117,6 +117,7 @@
             "submittingFormRendersConfirm": "B2",
             "cancellingSaveDoesNotSave": "B3",
             "confirmingSubmitPostsAdventure": "B4",
+            "rendersAlertWhenFailingToSave": "B5",
             "postingAdventureHidesPostCard": "B7"
           }
         }

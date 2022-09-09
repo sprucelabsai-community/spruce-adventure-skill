@@ -1,5 +1,5 @@
-import { formAssert } from '@sprucelabs/heartwood-view-controllers'
-import { fake } from '@sprucelabs/spruce-test-fixtures'
+import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test'
 import { Adventure } from '../../../adventure.types'
 import { PostCardOptions } from '../../../postingAnAdventure/PostCard.vc'
@@ -83,6 +83,14 @@ export default class PostCardTest extends AbstractAdventureTest {
 
 		await this.fillOutFormSubmitAndAccept()
 		assert.isEqualDeep(passedAdventure, adventure)
+	}
+
+	@test()
+	protected static async rendersAlertWhenFailingToSave() {
+		await eventFaker.makeEventThrow('adventure.post-adventure::v2022_09_09')
+		await vcAssert.assertRendersAlert(this.vc, () =>
+			this.fillOutFormSubmitAndAccept()
+		)
 	}
 
 	private static async fillOutFormSubmitAndAccept() {

@@ -101,20 +101,26 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			return
 		}
 
-		const values = this.formVc.getValues() as Adventure
-		const client = await this.connectToApi()
-		const [{ adventure }] = await client.emitAndFlattenResponses(
-			'adventure.post-adventure::v2022_09_09',
-			{
-				payload: {
-					adventure: {
-						...values,
+		try {
+			const values = this.formVc.getValues() as Adventure
+			const client = await this.connectToApi()
+			const [{ adventure }] = await client.emitAndFlattenResponses(
+				'adventure.post-adventure::v2022_09_09',
+				{
+					payload: {
+						adventure: {
+							...values,
+						},
 					},
-				},
-			}
-		)
+				}
+			)
 
-		await this.onPostHandler?.(adventure)
+			await this.onPostHandler?.(adventure)
+		} catch (err: any) {
+			await this.alert({
+				message: err.message,
+			})
+		}
 	}
 
 	public render() {
