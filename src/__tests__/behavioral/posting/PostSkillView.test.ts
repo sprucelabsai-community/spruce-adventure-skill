@@ -25,6 +25,11 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
+	protected static async requiresLogin() {
+		await vcAssert.assertLoginIsRequired(this.vc)
+	}
+
+	@test()
 	protected static async rendersPostCard() {
 		const postVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
 		vcAssert.assertRendersAsInstanceOf(postVc, PostCardViewController)

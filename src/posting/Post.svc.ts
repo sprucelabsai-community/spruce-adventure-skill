@@ -20,6 +20,10 @@ export default class PostSkillViewController extends AbstractSkillViewController
 		})
 	}
 
+	public async getIsLoginRequired() {
+		return true
+	}
+
 	public async load({ router }: SkillViewControllerLoadOptions) {
 		this.router = router
 	}
