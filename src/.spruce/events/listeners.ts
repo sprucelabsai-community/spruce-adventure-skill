@@ -13,6 +13,12 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../posting/listeners/adventure/post.v2022_09_09.listener').default,
     },
+    {
+        eventName: 'list',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../root/listeners/adventure/list.v2022_09_09.listener').default,
+    },
 ]
 
 export default listeners

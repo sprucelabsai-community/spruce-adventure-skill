@@ -99,7 +99,7 @@ export default class AdventuresStore extends AbstractStore<
 
 	public async seed(
 		options: StoreSeedOptions,
-		custom?: { shouldAttachToFakedPerson: true }
+		custom?: { shouldAttachToFakedPerson: boolean }
 	) {
 		const { totalToSeed, TestClass } = options
 		const personId = custom?.shouldAttachToFakedPerson
