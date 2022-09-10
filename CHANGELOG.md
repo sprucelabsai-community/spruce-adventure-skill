@@ -1,3 +1,10 @@
+# [3.0.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.1.3...v3.0.0) (2022-09-10)
+
+
+### Breaking Changes
+
+* login is required to post ([31da983](https://github.com/sprucelabsai/spruce-adventure-skill/commit/31da983))
+
 ## [2.1.3](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.1.2...v2.1.3) (2022-09-10)
 
 ## [2.1.2](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v2.1.1...v2.1.2) (2022-09-09)
