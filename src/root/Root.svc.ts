@@ -19,15 +19,12 @@ export default class RootSkillViewController extends AbstractSkillViewController
 	protected introCardVc: CardViewController
 	private shouldRenderIntroCard = true
 	protected postCardVc!: PostCardViewController
-	private currentCardVc: CurrentAdventureCardViewController
+	protected currentCardVc?: CurrentAdventureCardViewController
 	private router!: Router
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 		this.introCardVc = this.IntroCardVc()
-		this.currentCardVc = this.Controller('adventure.current-adventure-card', {
-			adventure: {},
-		})
 	}
 
 	private IntroCardVc(): CardViewController {
@@ -97,6 +94,9 @@ export default class RootSkillViewController extends AbstractSkillViewController
 
 		if (adventures.length > 0) {
 			this.shouldRenderIntroCard = false
+			this.currentCardVc = this.Controller('adventure.current-adventure-card', {
+				adventure: adventures[0],
+			})
 		}
 
 		this.triggerRender()
@@ -106,7 +106,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		const cards: Card[] = []
 		if (this.shouldRenderIntroCard) {
 			cards.push(this.introCardVc.render())
-		} else {
+		} else if (this.currentCardVc) {
 			cards.push(this.currentCardVc.render())
 		}
 

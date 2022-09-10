@@ -12,6 +12,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	public static id = 'current-adventure-card'
 	private cardVc: CardViewController
 	private mapVc: MapViewController
+	protected adventure: Adventure
 
 	public constructor(
 		options: ViewControllerOptions & CurrentAdventureCardOptions
@@ -20,6 +21,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 
 		const { adventure } = assertOptions(options, ['adventure'])
 
+		this.adventure = adventure
 		this.mapVc = this.Controller('map', {
 			pins: [
 				{

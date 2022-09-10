@@ -123,8 +123,8 @@
             "showsCurrentCardAfterSaving": "B6",
             "postingAdventureHidesPostCard": "B7",
             "assertCurrentCardRendersCancelButton": "B8",
-            "showsCurrentCardIfCurrentAdventure": "B12",
-            "onlyReturnsYoursWithoutFriendsInTheMiddle": "B22"
+            "onlyReturnsYoursWithoutFriendsInTheMiddle": "B22",
+            "currentCardHasProperAdventure": "B12"
           }
         }
       ]

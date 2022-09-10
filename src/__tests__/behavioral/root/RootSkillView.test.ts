@@ -1,6 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test'
+import { Adventure } from '../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCard.vc'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
@@ -11,13 +12,23 @@ import generateAdventureValues from '../../support/generateAdventureValues'
 export default class RootSkillViewTest extends AbstractAdventureTest {
 	private static vc: SpyRootViewController
 
+	private static currentAdventure: Adventure
+
 	protected static async beforeEach() {
 		await super.beforeEach()
 		await this.eventFaker.fakeListAdventures()
 
 		this.views.setController('adventure.root', SpyRootViewController)
+		this.views.setController(
+			'adventure.current-adventure-card',
+			SpyCurrentCard as any
+		)
 
 		await this.reload()
+
+		this.currentAdventure = generateAdventureValues({
+			source: { personId: this.fakedPerson.id },
+		})
 	}
 
 	@test()
@@ -40,10 +51,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async showsCurrentCardIfCurrentAdventure() {
-		await this.eventFaker.fakeListAdventures(() => [
-			generateAdventureValues({ source: { personId: this.fakedPerson.id } }),
-		])
-		await this.reload()
+		await this.fakeWithCurrentAndReload()
 
 		vcAssert.assertTriggerRenderCount(this.vc, 1)
 
@@ -51,6 +59,24 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 
 		const vc = this.assertRendersCard('current')
 		vcAssert.assertRendersAsInstanceOf(vc, CurrentAdventureCardViewController)
+	}
+
+	@test()
+	protected static async currentCardHasProperAdventure() {
+		await this.fakeWithCurrentAndReload()
+		const cardVc = this.vc.getCurrentCardVc()
+		assert.isEqualDeep(cardVc.getAdventure(), this.currentAdventure)
+	}
+
+	private static async fakeWithCurrentAndReload() {
+		await this.fakeListAdventuresWithCurrent()
+		await this.reload()
+	}
+
+	private static async fakeListAdventuresWithCurrent() {
+		await this.eventFaker.fakeListAdventures(() => [
+			RootSkillViewTest.currentAdventure,
+		])
 	}
 
 	private static async reload() {
@@ -84,5 +110,15 @@ class SpyRootViewController extends RootSkillViewController {
 	}
 	public getIntroCard() {
 		return this.introCardVc
+	}
+
+	public getCurrentCardVc() {
+		return this.currentCardVc as SpyCurrentCard
+	}
+}
+
+class SpyCurrentCard extends CurrentAdventureCardViewController {
+	public getAdventure() {
+		return this.adventure
 	}
 }
