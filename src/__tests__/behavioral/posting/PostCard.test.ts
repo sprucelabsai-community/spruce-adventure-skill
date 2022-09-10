@@ -2,7 +2,7 @@ import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test'
 import { Adventure } from '../../../adventure.types'
-import { PostCardOptions } from '../../../postingAnAdventure/PostCard.vc'
+import { PostCardOptions } from '../../../posting/PostCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { PostTargetAndPayload } from '../../support/EventFaker'
 import FakePostCard from '../../support/FakePostCard'
@@ -87,7 +87,7 @@ export default class PostCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async rendersAlertWhenFailingToSave() {
-		await eventFaker.makeEventThrow('adventure.post-adventure::v2022_09_09')
+		await eventFaker.makeEventThrow('adventure.post::v2022_09_09')
 		await vcAssert.assertRendersAlert(this.vc, () =>
 			this.fillOutFormSubmitAndAccept()
 		)

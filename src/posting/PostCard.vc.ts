@@ -105,7 +105,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			const values = this.formVc.getValues() as Adventure
 			const client = await this.connectToApi()
 			const [{ adventure }] = await client.emitAndFlattenResponses(
-				'adventure.post-adventure::v2022_09_09',
+				'adventure.post::v2022_09_09',
 				{
 					payload: {
 						adventure: {

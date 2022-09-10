@@ -1,7 +1,7 @@
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
 
 const postAdventureEmitPermissions = buildPermissionContract({
-	id: 'postAdventureEmitPermissions',
+	id: 'postEmitPermissions',
 	name: 'Post adventure',
 	description: undefined,
 	requireAllPermissions: false,

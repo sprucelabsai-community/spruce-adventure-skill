@@ -1,13 +1,16 @@
 import {
 	AbstractSkillViewController,
+	Button,
 	Card,
 	CardViewController,
+	Router,
 	SkillView,
+	SkillViewControllerLoadOptions,
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { Adventure } from '../adventure.types'
-import PostCardViewController from '../postingAnAdventure/PostCard.vc'
+import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
@@ -17,16 +20,13 @@ export default class RootSkillViewController extends AbstractSkillViewController
 	protected introCardVc: CardViewController
 	private shouldRenderIntroCard = true
 	protected postCardVc: PostCardViewController
-	private shouldRenderPostCard = true
 	private currentCardVc: CurrentAdventureCardViewController
+	private router!: Router
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 		this.introCardVc = this.IntroCardVc()
 		this.currentCardVc = this.Controller('adventure.current-adventure-card', {})
-		this.postCardVc = this.Controller('adventure.post-card', {
-			onPost: this.handlePostAdventure.bind(this),
-		})
 	}
 
 	private IntroCardVc(): CardViewController {
@@ -42,7 +42,9 @@ export default class RootSkillViewController extends AbstractSkillViewController
 							size: 'medium',
 							onComplete: () => {
 								this.isAnimating = false
-								this.triggerRender()
+								this.introCardVc.setFooter({
+									buttons: this.renderIntroButtons(),
+								})
 							},
 							avatar: {
 								stateOfMind: 'chill',
@@ -64,36 +66,45 @@ export default class RootSkillViewController extends AbstractSkillViewController
 			},
 			footer: {
 				shouldRenderBorder: false,
-				buttons: [
-					{
-						label: this.isAnimating ? 'Skip' : `Let's do this! ⚡️`,
-						type: this.isAnimating ? 'secondary' : 'primary',
-						id: 'next',
-						onClick: this.handleClickNextFromIntro.bind(this),
-					},
-				],
+				buttons: this.renderIntroButtons(),
 			},
 		})
 	}
 
-	private async handlePostAdventure(_adventure: Adventure) {
-		this.shouldRenderPostCard = false
-		this.triggerRender()
+	private renderIntroButtons(): Button[] {
+		return [
+			{
+				label: this.isAnimating ? 'Skip' : `Let's do this! ⚡️`,
+				type: this.isAnimating ? 'secondary' : 'primary',
+				id: 'next',
+				onClick: this.handleClickNextFromIntro.bind(this),
+			},
+		]
 	}
 
-	private handleClickNextFromIntro() {
-		this.shouldRenderIntroCard = false
-		this.triggerRender()
+	private async handleClickNextFromIntro() {
+		await this.router.redirect('adventure.post')
 	}
 
-	public async load() {}
+	public async load({ router }: SkillViewControllerLoadOptions) {
+		this.router = router
+		const client = await this.connectToApi()
+
+		const [{ adventures }] = await client.emitAndFlattenResponses(
+			'adventure.list::v2022_09_09'
+		)
+
+		if (adventures.length > 0) {
+			this.shouldRenderIntroCard = false
+		}
+
+		this.triggerRender()
+	}
 
 	public render(): SkillView {
 		const cards: Card[] = []
 		if (this.shouldRenderIntroCard) {
 			cards.push(this.introCardVc.render())
-		} else if (this.shouldRenderPostCard) {
-			cards.push(this.postCardVc.render())
 		} else {
 			cards.push(this.currentCardVc.render())
 		}

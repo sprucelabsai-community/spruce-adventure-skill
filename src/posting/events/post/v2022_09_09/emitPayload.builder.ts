@@ -2,7 +2,7 @@ import { buildSchema, dropFields } from '@sprucelabs/schema'
 import adventureBuilder from '../../../../schemas/v2022_09_09/adventure.builder'
 
 const postAdventureEmitPayloadBuilder = buildSchema({
-	id: 'postAdventureEmitPayload',
+	id: 'postEmitPayload',
 	fields: {
 		adventure: {
 			type: 'schema',
@@ -11,7 +11,7 @@ const postAdventureEmitPayloadBuilder = buildSchema({
 				schema: {
 					id: 'postAdventure',
 					fields: {
-						...dropFields(adventureBuilder.fields, ['id']),
+						...dropFields(adventureBuilder.fields, ['id', 'source']),
 					},
 				},
 			},

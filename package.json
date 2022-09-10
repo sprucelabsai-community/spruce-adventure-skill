@@ -49,6 +49,7 @@
     "update.dependencies": "yarn clean.dependencies && yarn"
   },
   "dependencies": {
+    "@sprucelabs/data-stores": "^18.1.39",
     "@sprucelabs/error": "^5.0.505",
     "@sprucelabs/heartwood-view-controllers": "^90.3.5",
     "@sprucelabs/mercury-client": "^31.0.188",
@@ -60,6 +61,7 @@
     "@sprucelabs/spruce-event-utils": "^27.0.162",
     "@sprucelabs/spruce-skill-booter": "^49.0.21",
     "@sprucelabs/spruce-skill-utils": "^26.4.65",
+    "@sprucelabs/spruce-store-plugin": "^49.0.25",
     "@sprucelabs/spruce-view-plugin": "^34.0.22",
     "dotenv": "^16.0.2",
     "globby": "^11.0.4"

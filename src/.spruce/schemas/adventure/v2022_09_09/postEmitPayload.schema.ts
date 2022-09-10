@@ -3,8 +3,8 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import postAdventureSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/postAdventure.schema'
 
-const postAdventureEmitPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.PostAdventureEmitPayloadSchema  = {
-	id: 'postAdventureEmitPayload',
+const postEmitPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.PostEmitPayloadSchema  = {
+	id: 'postEmitPayload',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
 	name: '',
@@ -18,6 +18,6 @@ const postAdventureEmitPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.PostAd
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(postAdventureEmitPayloadSchema)
+SchemaRegistry.getInstance().trackSchema(postEmitPayloadSchema)
 
-export default postAdventureEmitPayloadSchema
+export default postEmitPayloadSchema

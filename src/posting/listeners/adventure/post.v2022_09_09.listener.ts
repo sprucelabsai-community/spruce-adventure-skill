@@ -14,8 +14,5 @@ export default async (
 	}
 }
 
-type EmitPayload =
-	SpruceSchemas.Adventure.v2022_09_09.PostAdventureEmitTargetAndPayload
-
-type ResponsePayload =
-	SpruceSchemas.Adventure.v2022_09_09.PostAdventureResponsePayload
+type EmitPayload = SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetAndPayload
+type ResponsePayload = SpruceSchemas.Adventure.v2022_09_09.PostResponsePayload

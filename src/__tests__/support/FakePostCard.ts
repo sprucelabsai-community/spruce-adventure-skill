@@ -1,6 +1,6 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { generateId } from '@sprucelabs/test-utils'
-import PostCardViewController from '../../postingAnAdventure/PostCard.vc'
+import PostCardViewController from '../../posting/PostCard.vc'
 import EventFaker from './EventFaker'
 
 export default class FakePostCard extends PostCardViewController {

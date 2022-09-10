@@ -1,7 +1,7 @@
 import { buildSchema } from '@sprucelabs/schema'
 
 const postAdventureEmitTargetBuilder = buildSchema({
-	id: 'postAdventureEmitTarget',
+	id: 'postEmitTarget',
 	fields: {},
 })
 

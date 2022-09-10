@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-
+import adventureSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureSource.schema'
 
 const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
 	id: 'adventure',
@@ -36,6 +36,12 @@ const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
 	                type: 'address',
 	                isRequired: true,
 	                options: undefined
+	            },
+	            /** . */
+	            'source': {
+	                type: 'schema',
+	                isRequired: true,
+	                options: {schema: adventureSourceSchema_v2022_09_09,}
 	            },
 	    }
 }

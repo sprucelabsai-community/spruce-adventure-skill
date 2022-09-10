@@ -6,7 +6,8 @@
     "event",
     "view",
     "error",
-    "polish"
+    "polish",
+    "store"
   ],
   "events": {
     "lastSync": {
@@ -14,9 +15,6 @@
       "schemaTypesLookupDir": "#spruce/schemas",
       "skillEventContractTypesFile": "@sprucelabs/mercury-types/build/types/mercury.types",
       "eventBuilderFile": "@sprucelabs/mercury-types"
-    },
-    "listenerCacheKeys": {
-      "http1270018081": "postadventureadventurev2022_09_09willbootskillv2021_08_03"
     }
   },
   "scriptUpdater": {

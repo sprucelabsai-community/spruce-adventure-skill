@@ -1,0 +1,36 @@
+import {
+	AbstractSkillViewController,
+	Router,
+	SkillView,
+	SkillViewControllerLoadOptions,
+	splitCardsIntoLayouts,
+	ViewControllerOptions,
+} from '@sprucelabs/heartwood-view-controllers'
+import PostCardViewController from './PostCard.vc'
+
+export default class PostSkillViewController extends AbstractSkillViewController {
+	public static id = 'post'
+	protected postCardVc: PostCardViewController
+	private router!: Router
+
+	public constructor(options: ViewControllerOptions) {
+		super(options)
+		this.postCardVc = this.Controller('adventure.post-card', {
+			onPost: this.handlePostAdventure.bind(this),
+		})
+	}
+
+	public async load({ router }: SkillViewControllerLoadOptions) {
+		this.router = router
+	}
+
+	public async handlePostAdventure() {
+		await this.router.redirect('adventure.root')
+	}
+
+	public render(): SkillView {
+		return {
+			layouts: splitCardsIntoLayouts([this.postCardVc.render()], 2),
+		}
+	}
+}

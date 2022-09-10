@@ -1,16 +1,17 @@
 import { SpruceSchemas } from '@sprucelabs/heartwood-view-controllers'
 import { AddressFieldValue } from '@sprucelabs/schema'
 import { eventFaker } from '@sprucelabs/spruce-test-fixtures'
-import { generateId } from '@sprucelabs/test-utils'
 import { Adventure } from '../../adventure.types'
+import generateAddressValues from './generateAddressValues'
+import generateAdventureValues from './generateAdventureValues'
 
 export default class EventFaker {
 	public async fakePostAdventure(
 		cb?: (targetAndPayload: PostTargetAndPayload) => void | Adventure
 	) {
 		await eventFaker.on(
-			'adventure.post-adventure::v2022_09_09',
-			//@ts-ignore
+			'adventure.post::v2022_09_09',
+
 			(targetAndPayload) => {
 				return {
 					adventure: cb?.(targetAndPayload) ?? this.generateAdventureValues(),
@@ -18,24 +19,21 @@ export default class EventFaker {
 			}
 		)
 	}
+
+	public async fakeListAdventures(cb?: () => void | Adventure[]) {
+		await eventFaker.on('adventure.list::v2022_09_09', () => {
+			return {
+				adventures: cb?.() ?? [],
+			}
+		})
+	}
 	public generateAdventureValues() {
-		return {
-			id: generateId(),
-			what: generateId(),
-			when: new Date().getTime(),
-			where: this.generateAddressValues(),
-		}
+		return generateAdventureValues()
 	}
 
 	public generateAddressValues(): AddressFieldValue {
-		return {
-			city: generateId(),
-			country: generateId(),
-			street1: generateId(),
-			province: generateId(),
-			zip: generateId(),
-		}
+		return generateAddressValues()
 	}
 }
 export type PostTargetAndPayload =
-	SpruceSchemas.Adventure.v2022_09_09.PostAdventureEmitTargetAndPayload
+	SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetAndPayload

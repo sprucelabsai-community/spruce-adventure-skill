@@ -24,5 +24,20 @@ export default buildSchema({
 			label: 'Where are you going to do it?',
 			isRequired: true,
 		},
+		source: {
+			type: 'schema',
+			isRequired: true,
+			options: {
+				schema: {
+					id: 'adventureSource',
+					fields: {
+						personId: {
+							type: 'id',
+							isRequired: true,
+						},
+					},
+				},
+			},
+		},
 	},
 })
