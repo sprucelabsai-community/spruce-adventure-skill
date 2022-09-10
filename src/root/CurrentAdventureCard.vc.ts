@@ -22,16 +22,12 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 		const { adventure } = assertOptions(options, ['adventure'])
 
 		this.adventure = adventure
-		this.mapVc = this.Controller('map', {
-			pins: [
-				{
-					subtitle: adventure.what,
-					address: adventure.where,
-				},
-			],
-		})
+		this.mapVc = this.MapVc()
+		this.cardVc = this.CardVc()
+	}
 
-		this.cardVc = this.Controller('card', {
+	private CardVc(): CardViewController {
+		return this.Controller('card', {
 			id: 'current',
 			body: {
 				sections: [
@@ -45,9 +41,25 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 					{
 						id: 'cancel',
 						type: 'destructive',
+						onClick: this.handleClickCancel.bind(this),
 					},
 				],
 			},
+		})
+	}
+
+	private async handleClickCancel() {
+		await this.confirm({ message: 'You sure you want to cancel?' })
+	}
+
+	private MapVc(): MapViewController {
+		return this.Controller('map', {
+			pins: [
+				{
+					subtitle: this.adventure.what,
+					address: this.adventure.where,
+				},
+			],
 		})
 	}
 

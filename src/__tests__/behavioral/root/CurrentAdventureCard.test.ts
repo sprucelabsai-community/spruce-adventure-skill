@@ -1,4 +1,8 @@
-import { mapAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+	interactor,
+	mapAssert,
+	vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
@@ -43,5 +47,12 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 	@test()
 	protected static async assertCurrentCardRendersCancelButton() {
 		vcAssert.assertCardRendersButton(this.vc, 'cancel')
+	}
+
+	@test()
+	protected static async clickingCancelRendersConfirm() {
+		await vcAssert.assertRendersConfirm(this.vc, () =>
+			interactor.clickButton(this.vc, 'cancel')
+		)
 	}
 }

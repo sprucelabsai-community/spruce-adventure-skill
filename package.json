@@ -124,7 +124,8 @@
             "postingAdventureHidesPostCard": "B7",
             "assertCurrentCardRendersCancelButton": "B8",
             "onlyReturnsYoursWithoutFriendsInTheMiddle": "B22",
-            "currentCardHasProperAdventure": "B12"
+            "currentCardHasProperAdventure": "B12",
+            "clickingCancelRendersConfirm": "B9"
           }
         }
       ]
