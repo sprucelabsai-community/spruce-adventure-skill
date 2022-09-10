@@ -125,7 +125,8 @@
             "assertCurrentCardRendersCancelButton": "B8",
             "onlyReturnsYoursWithoutFriendsInTheMiddle": "B22",
             "currentCardHasProperAdventure": "B12",
-            "clickingCancelRendersConfirm": "B9"
+            "clickingCancelRendersConfirm": "B9",
+            "postingAdventureSavesUnderCurrentPerson": "B15"
           }
         }
       ]
