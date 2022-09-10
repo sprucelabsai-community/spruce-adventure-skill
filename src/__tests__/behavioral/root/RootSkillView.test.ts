@@ -5,7 +5,6 @@ import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCa
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import FakePostCard from '../../support/FakePostCard'
-import generateAddressValues from '../../support/generateAddressValues'
 import generateAdventureValues from '../../support/generateAdventureValues'
 
 @fake.login()

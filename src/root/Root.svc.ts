@@ -9,7 +9,6 @@ import {
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import { Adventure } from '../adventure.types'
 import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
@@ -19,14 +18,16 @@ export default class RootSkillViewController extends AbstractSkillViewController
 	public static id = 'root'
 	protected introCardVc: CardViewController
 	private shouldRenderIntroCard = true
-	protected postCardVc: PostCardViewController
+	protected postCardVc!: PostCardViewController
 	private currentCardVc: CurrentAdventureCardViewController
 	private router!: Router
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
 		this.introCardVc = this.IntroCardVc()
-		this.currentCardVc = this.Controller('adventure.current-adventure-card', {})
+		this.currentCardVc = this.Controller('adventure.current-adventure-card', {
+			adventure: {},
+		})
 	}
 
 	private IntroCardVc(): CardViewController {

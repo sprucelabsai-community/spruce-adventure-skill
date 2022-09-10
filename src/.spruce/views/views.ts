@@ -1,15 +1,15 @@
+import PostSkillViewController from '../../posting/Post.svc'
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
-import PostSkillViewController from '../../posting/Post.svc'
 import CurrentAdventureCardViewController from '../../root/CurrentAdventureCard.vc'
 import PostCardViewController from '../../posting/PostCard.vc'
 
 const vcs = {
+    PostSkillViewController,
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
-    PostSkillViewController,
     CurrentAdventureCardViewController,
     PostCardViewController,
 }
@@ -18,26 +18,26 @@ type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Re
 
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
+		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
-		'adventure.post': PostSkillViewController
 	}
 
 	interface SkillViewControllerArgsMap {
+		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
 		'adventure.equip': LoadOptions<Parameters<EquipSkillViewController['load']>>
 		'adventure.profile': LoadOptions<Parameters<ProfileSkillViewController['load']>>
 		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
-		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
 	}
 
 	interface ViewControllerMap {
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
 		'adventure.post-card': PostCardViewController
+		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
-		'adventure.post': PostSkillViewController
 	}
 
     interface ViewControllerOptionsMap {
