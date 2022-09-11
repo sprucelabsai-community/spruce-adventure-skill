@@ -1,7 +1,6 @@
 import {
 	AbstractSkillViewController,
 	Button,
-	Card,
 	CardViewController,
 	Router,
 	SkillView,
@@ -9,22 +8,16 @@ import {
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import PostCardViewController from '../posting/PostCard.vc'
-import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
 export default class RootSkillViewController extends AbstractSkillViewController {
 	private isAnimating = true
 
 	public static id = 'root'
-	protected introCardVc: CardViewController
-	private shouldRenderIntroCard = true
-	protected postCardVc!: PostCardViewController
-	protected currentCardVc?: CurrentAdventureCardViewController
+	protected introCardVc?: CardViewController
 	private router!: Router
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
-		this.introCardVc = this.IntroCardVc()
 	}
 
 	private IntroCardVc(): CardViewController {
@@ -40,7 +33,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 							size: 'medium',
 							onComplete: () => {
 								this.isAnimating = false
-								this.introCardVc.setFooter({
+								this.introCardVc?.setFooter({
 									buttons: this.renderIntroButtons(),
 								})
 							},
@@ -94,35 +87,21 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		await this.router.redirect('adventure.post')
 	}
 
-	public async load({ router }: SkillViewControllerLoadOptions) {
-		this.router = router
-		const client = await this.connectToApi()
-
-		const [{ adventures }] = await client.emitAndFlattenResponses(
-			'adventure.list::v2022_09_09'
-		)
-
-		if (adventures.length > 0) {
-			this.shouldRenderIntroCard = false
-			this.currentCardVc = this.Controller('adventure.current-adventure-card', {
-				adventure: adventures[0],
-			})
+	public async load({ router, authenticator }: SkillViewControllerLoadOptions) {
+		if (authenticator.isLoggedIn()) {
+			await router.redirect('adventure.list')
+			return
 		}
-
-		this.triggerRender()
+		this.introCardVc = this.IntroCardVc()
+		this.router = router
 	}
 
 	public render(): SkillView {
-		const cards: Card[] = []
-		if (this.shouldRenderIntroCard) {
-			cards.push(this.introCardVc.render())
-		} else if (this.currentCardVc) {
-			cards.push(this.currentCardVc.render())
-		}
-
 		return {
 			shouldCenterVertically: true,
-			layouts: splitCardsIntoLayouts(cards, 2),
+			layouts: this.introCardVc
+				? splitCardsIntoLayouts([this.introCardVc.render()], 2)
+				: [],
 		}
 	}
 }

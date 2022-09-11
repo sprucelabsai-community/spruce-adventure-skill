@@ -1,22 +1,23 @@
-import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+	Authenticator,
+	interactor,
+	vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test'
-import { Adventure } from '../../../adventure.types'
-import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCard.vc'
+import { test } from '@sprucelabs/test'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import FakePostCard from '../../support/FakePostCard'
-import generateAdventureValues from '../../support/generateAdventureValues'
+import { SpyCurrentCard } from './SpyCurrentCard'
 
 @fake.login()
 export default class RootSkillViewTest extends AbstractAdventureTest {
 	private static vc: SpyRootViewController
 
-	private static currentAdventure: Adventure
+	private static sessionToken: string
+	private static auth: Authenticator
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		await this.eventFaker.fakeListAdventures()
 
 		this.views.setController('adventure.root', SpyRootViewController)
 		this.views.setController(
@@ -24,11 +25,10 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 			SpyCurrentCard as any
 		)
 
+		this.auth = this.views.getAuthenticator()
+		this.sessionToken = this.auth.getSessionToken()!
+		this.auth.clearSession()
 		await this.reload()
-
-		this.currentAdventure = generateAdventureValues({
-			source: { personId: this.fakedPerson.id },
-		})
 	}
 
 	@test()
@@ -36,6 +36,18 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 		this.assertDoesNotRenderCard('post')
 		const cardVc = this.assertRendersCard('intro')
 		vcAssert.assertCardRendersTalkingSprucebot(cardVc)
+	}
+
+	@test()
+	protected static async redirectToListIfLoggedIn() {
+		this.auth.setSessionToken(this.sessionToken, this.fakedPerson)
+		await vcAssert.assertActionRedirects({
+			action: () => this.reload(),
+			destination: {
+				id: 'adventure.list',
+			},
+			router: this.views.getRouter(),
+		})
 	}
 
 	@test()
@@ -47,36 +59,6 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 				id: 'adventure.post',
 			},
 		})
-	}
-
-	@test()
-	protected static async showsCurrentCardIfCurrentAdventure() {
-		await this.fakeWithCurrentAndReload()
-
-		vcAssert.assertTriggerRenderCount(this.vc, 1)
-
-		this.assertDoesNotRenderCard('intro')
-
-		const vc = this.assertRendersCard('current')
-		vcAssert.assertRendersAsInstanceOf(vc, CurrentAdventureCardViewController)
-	}
-
-	@test()
-	protected static async currentCardHasProperAdventure() {
-		await this.fakeWithCurrentAndReload()
-		const cardVc = this.vc.getCurrentCardVc()
-		assert.isEqualDeep(cardVc.getAdventure(), this.currentAdventure)
-	}
-
-	private static async fakeWithCurrentAndReload() {
-		await this.fakeListAdventuresWithCurrent()
-		await this.reload()
-	}
-
-	private static async fakeListAdventuresWithCurrent() {
-		await this.eventFaker.fakeListAdventures(() => [
-			RootSkillViewTest.currentAdventure,
-		])
 	}
 
 	private static async reload() {
@@ -100,25 +82,12 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	}
 
 	private static async clickNextOnIntro() {
-		await interactor.clickButton(this.vc.getIntroCard(), 'next')
+		await interactor.clickButton(this.vc.getIntroCard()!, 'next')
 	}
 }
 
 class SpyRootViewController extends RootSkillViewController {
-	public getPostCardVc() {
-		return this.postCardVc as FakePostCard
-	}
 	public getIntroCard() {
 		return this.introCardVc
-	}
-
-	public getCurrentCardVc() {
-		return this.currentCardVc as SpyCurrentCard
-	}
-}
-
-class SpyCurrentCard extends CurrentAdventureCardViewController {
-	public getAdventure() {
-		return this.adventure
 	}
 }

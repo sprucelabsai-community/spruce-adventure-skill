@@ -126,7 +126,9 @@
             "onlyReturnsYoursWithoutFriendsInTheMiddle": "B22",
             "currentCardHasProperAdventure": "B12",
             "clickingCancelRendersConfirm": "B9",
-            "postingAdventureSavesUnderCurrentPerson": "B15"
+            "postingAdventureSavesUnderCurrentPerson": "B15",
+            "redirectToListIfLoggedIn": "B37",
+            "listSkillViewRequiresLogin": "B38"
           }
         }
       ]

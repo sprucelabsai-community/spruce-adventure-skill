@@ -32,6 +32,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 			body: {
 				sections: [
 					{
+						shouldBePadded: false,
 						map: this.mapVc.render(),
 					},
 				],
@@ -41,6 +42,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 					{
 						id: 'cancel',
 						type: 'destructive',
+						label: 'Cancel this adventure!',
 						onClick: this.handleClickCancel.bind(this),
 					},
 				],
