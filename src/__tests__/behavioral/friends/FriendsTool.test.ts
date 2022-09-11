@@ -1,15 +1,22 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test'
+import { generateId } from '@sprucelabs/test-utils'
+import { Friend } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {
-	private static vc: FriendsListToolViewController
+	private static vc: SpyListTool
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.vc = this.views.Controller('adventure.friends-list-tool', {})
+		this.views.setController('adventure.friends-list-tool', SpyListTool)
+		this.vc = this.views.Controller(
+			'adventure.friends-list-tool',
+			{}
+		) as SpyListTool
 	}
 	@test()
 	protected static async friendsToolRendersActiveRecordCard() {
@@ -22,5 +29,27 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async rendersRowForEachFriend() {}
+	protected static async rendersRowForEachFriend() {
+		const friends: Friend[] = [
+			{
+				id: generateId(),
+				casualName: generateId(),
+				avatar: {
+					name: generateId(),
+					...generateUploadedImageValues().sizes,
+				},
+			},
+		]
+		await this.eventFaker.fakeListFriends(() => friends)
+		await this.views.load(this.vc)
+		for (const friend of friends) {
+			vcAssert.assertListRendersRow(this.vc.getListVc(), friend.id)
+		}
+	}
+}
+
+class SpyListTool extends FriendsListToolViewController {
+	public getListVc() {
+		return this.activeVc.getListVc()
+	}
 }

@@ -3,21 +3,23 @@ import {
 	ActiveRecordCardViewController,
 	buildActiveRecordCard,
 	Card,
+	ListRow,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
+import { Friend } from '../adventure.types'
 
 export default class FriendsListToolViewController extends AbstractViewController<Card> {
 	public static id = 'friends-list-tool'
-	private cardVc: ActiveRecordCardViewController
+	protected activeVc: ActiveRecordCardViewController
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
-		this.cardVc = this.Controller(
+		this.activeVc = this.Controller(
 			'activeRecordCard',
 			buildActiveRecordCard({
-				eventName: 'list-roles::v2020_12_25',
-				rowTransformer: () => ({} as any),
-				responseKey: 'roles',
+				eventName: 'adventure.list-friends::v2022_09_09',
+				rowTransformer: this.renderRow.bind(this),
+				responseKey: 'friends',
 				footer: {
 					buttons: [
 						{
@@ -31,7 +33,27 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 		)
 	}
 
+	private renderRow(friend: Friend): ListRow {
+		return {
+			id: friend.id,
+			cells: [
+				{
+					avatars: friend.avatar?.mUri ? [friend.avatar.mUri] : [],
+				},
+				{
+					text: {
+						content: friend.casualName,
+					},
+				},
+			],
+		}
+	}
+
+	public async load() {
+		await this.activeVc.load()
+	}
+
 	public render() {
-		return this.cardVc.render()
+		return this.activeVc.render()
 	}
 }
