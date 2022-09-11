@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.0.2...v3.1.0) (2022-09-11)
+
+
+### Features
+
+* friends list with no results ([b99cd67](https://github.com/sprucelabsai/spruce-adventure-skill/commit/b99cd67))
+
 ## [3.0.2](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.0.1...v3.0.2) (2022-09-11)
 
 ## [3.0.1](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.0.0...v3.0.1) (2022-09-11)
