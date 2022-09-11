@@ -16,9 +16,10 @@ export default class FakePostCard extends PostCardViewController {
 	}
 
 	public async submitAndAssertConfirm() {
-		return vcAssert.assertRendersConfirm(this, () =>
-			interactor.submitForm(this.formVc)
-		)
+		return vcAssert.assertRendersConfirm(this, async () => {
+			await this.formVc.jumpToSlide(this.formVc.getTotalSlides() - 1)
+			await interactor.submitBigFormSlide(this.formVc)
+		})
 	}
 
 	public async submitAndConfirm() {

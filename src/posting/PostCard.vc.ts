@@ -1,9 +1,9 @@
 import {
 	AbstractViewController,
-	buildForm,
+	BigFormViewController,
+	buildBigForm,
 	Card,
 	CardViewController,
-	FormViewController,
 	SpruceSchemas,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -14,7 +14,7 @@ import { Adventure } from '../adventure.types'
 export default class PostCardViewController extends AbstractViewController<Card> {
 	public static id = 'post-card'
 	private cardVc: CardViewController
-	protected formVc: FormViewController<PostAdventureSchema>
+	protected formVc: BigFormViewController<PostAdventureSchema>
 	private onPostHandler?: OnPostHandler
 
 	public constructor(options: ViewControllerOptions & PostCardOptions) {
@@ -40,7 +40,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			body: {
 				sections: [
 					{
-						form: this.formVc.render(),
+						bigForm: this.formVc.render(),
 					},
 				],
 			},
@@ -49,47 +49,32 @@ export default class PostCardViewController extends AbstractViewController<Card>
 
 	private FormVc() {
 		return this.Controller(
-			'form',
-			buildForm({
+			'bigForm',
+			buildBigForm({
 				schema: postAdventureSchema,
-				shouldShowCancelButton: false,
-				shouldShowSubmitControls: false,
 				onSubmit: this.handleSubmit.bind(this),
-				onChange: this.handleChange.bind(this),
-				sections: [this.renderSections()],
+				sections: this.renderSections(),
 			})
 		)
 	}
 
-	private renderSections(): FormSection {
-		const fields: FormSection['fields'] = [
-			{ name: 'what', renderAs: 'textarea' },
+	private renderSections(): FormSection[] {
+		const sections: FormSection[] = [
+			{
+				title: 'What are you gonna do?',
+				fields: [{ name: 'what', renderAs: 'textarea' }],
+			},
+			{
+				title: 'When are you gonna do it?',
+				fields: ['when'],
+			},
+			{
+				title: 'Where are you gonna to do it?',
+				fields: ['where'],
+			},
 		]
 
-		if (this.formVc) {
-			if (this.hasWhatValue()) {
-				fields.push('when')
-			}
-			if (this.formVc.getValue('when')) {
-				fields.push('where')
-			}
-
-			if (this.formVc.getValue('where')) {
-				this.formVc.showSubmitControls()
-			}
-		}
-
-		return {
-			fields,
-		}
-	}
-
-	private hasWhatValue() {
-		return !!this.formVc.getValue('what')
-	}
-
-	private async handleChange() {
-		this.formVc.setSection(0, this.renderSections())
+		return sections
 	}
 
 	public async handleSubmit() {

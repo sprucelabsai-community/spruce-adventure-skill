@@ -14,7 +14,7 @@ import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 export default class ListSkillViewController extends AbstractSkillViewController {
 	public static id = 'list'
 	protected currentCardVc?: CurrentAdventureCardViewController
-	private friendsToolVc: FriendsListToolViewController
+	protected friendsToolVc: FriendsListToolViewController
 	private toolBeltVc: ToolBeltViewController
 
 	public constructor(options: ViewControllerOptions) {
@@ -65,6 +65,8 @@ export default class ListSkillViewController extends AbstractSkillViewController
 		})
 
 		this.triggerRender()
+
+		await this.friendsToolVc.load()
 	}
 
 	public render(): SkillView {

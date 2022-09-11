@@ -20,6 +20,19 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 				eventName: 'adventure.list-friends::v2022_09_09',
 				rowTransformer: this.renderRow.bind(this),
 				responseKey: 'friends',
+				header: {
+					title: 'Friends list',
+				},
+				noResultsRow: {
+					height: 'content',
+					cells: [
+						{
+							text: {
+								content: `I have not met any of your friends! Lets invite some now! 👇`,
+							},
+						},
+					],
+				},
 				footer: {
 					buttons: [
 						{

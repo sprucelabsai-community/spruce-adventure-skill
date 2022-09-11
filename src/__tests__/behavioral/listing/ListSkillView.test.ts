@@ -26,6 +26,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		await this.fakeListAdventuresWithCurrent()
 
 		this.views.setController('adventure.list', SpyListViewController)
+		this.views.setController('adventure.friends-list-tool', MockFriendsTool)
 		this.views.setController(
 			'adventure.current-adventure-card',
 			SpyCurrentCard as any
@@ -71,6 +72,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
+	protected static async loadsTool() {
+		const tool = this.vc.getFriendsTool()
+		tool.assertIsLoaded()
+	}
+
+	@test()
 	protected static async currentCardHasProperAdventure() {
 		const cardVc = this.vc.getCurrentCardVc()!
 		assert.isEqualDeep(cardVc.getAdventure(), this.currentAdventure)
@@ -97,5 +104,20 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 class SpyListViewController extends ListSkillViewController {
 	public getCurrentCardVc() {
 		return this.currentCardVc as SpyCurrentCard
+	}
+
+	public getFriendsTool() {
+		return this.friendsToolVc as MockFriendsTool
+	}
+}
+
+class MockFriendsTool extends FriendsListToolViewController {
+	private isLoaded = false
+	public async load() {
+		this.isLoaded = true
+	}
+
+	public assertIsLoaded() {
+		assert.isTrue(this.isLoaded, `Your friends tool is not loaded`)
 	}
 }

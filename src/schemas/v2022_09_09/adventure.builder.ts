@@ -11,7 +11,7 @@ export default buildSchema({
 		what: {
 			type: 'text',
 			label: 'What are you gonna do?',
-			hint: 'Heads up, you can only have 1 adventure at a time!',
+			hint: `Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time!`,
 			isRequired: true,
 		},
 		when: {
@@ -21,7 +21,7 @@ export default buildSchema({
 		},
 		where: {
 			type: 'address',
-			label: 'Where are you going to do it?',
+			label: 'Where are you gonna to do it?',
 			isRequired: true,
 		},
 		source: {

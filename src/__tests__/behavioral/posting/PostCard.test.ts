@@ -24,29 +24,7 @@ export default class PostCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async postFormRendersExpectedFields() {
-		this.assertDoesNotRenderSubmitControls()
-
-		this.assertRendersFields(['what'])
-		this.assertDoesNotRenderFields(['when', 'where'])
-
-		await this.setToRandomValue('what')
-
-		this.assertRendersFields(['what', 'when'])
-		this.assertDoesNotRenderField('where')
-
-		await this.setToRandomValue('when')
-
-		this.assertRendersFields(['where'])
-		this.assertDoesNotRenderSubmitControls()
-
-		await this.setRandomAddress()
-
-		this.assertRendersSubmitControls()
-	}
-
-	@test()
-	protected static async doesNotRenderCancelButton() {
-		assert.isFalse(this.formVc.getShouldShowCancelButton())
+		this.assertRendersFields(['what', 'when', 'where'])
 	}
 
 	@test()
@@ -93,12 +71,6 @@ export default class PostCardTest extends AbstractAdventureTest {
 		)
 	}
 
-	private static async fillOutFormSubmitAndAccept() {
-		const adventure = await this.fillOutForm()
-		await this.submitAndConfirm()
-		return adventure
-	}
-
 	@test()
 	protected static async cancellingSaveDoesNotSave() {
 		let wasHit = false
@@ -113,6 +85,12 @@ export default class PostCardTest extends AbstractAdventureTest {
 		assert.isFalse(wasHit)
 	}
 
+	private static async fillOutFormSubmitAndAccept() {
+		const adventure = await this.fillOutForm()
+		await this.submitAndConfirm()
+		return adventure
+	}
+
 	private static async fillOutForm() {
 		return this.vc.fillWithRandomValues()
 	}
@@ -125,44 +103,14 @@ export default class PostCardTest extends AbstractAdventureTest {
 		return this.vc.submitAndAssertConfirm()
 	}
 
-	private static assertDoesNotRenderFields(names: AdventureKey[]) {
-		names.forEach((i) => this.assertDoesNotRenderField(i))
-	}
-
-	private static async setRandomAddress() {
-		return this.vc.setRandomAddress()
-	}
-
-	private static assertDoesNotRenderSubmitControls() {
-		assert.isFalse(
-			this.formVc.getShouldShowSubmitControls(),
-			'should not render submit countrols'
-		)
-	}
-
-	private static assertRendersSubmitControls() {
-		assert.isTrue(
-			this.formVc.getShouldShowSubmitControls(),
-			'should render submit countrols'
-		)
-	}
-
 	private static PostCardVc(options?: Partial<PostCardOptions>): FakePostCard {
 		return this.views.Controller('adventure.post-card', {
 			...options,
 		}) as FakePostCard
 	}
 
-	private static assertDoesNotRenderField(name: AdventureKey) {
-		formAssert.formDoesNotRenderField(this.formVc, name)
-	}
-
 	private static assertRendersFields(expected: AdventureKey[]) {
 		formAssert.formRendersFields(this.formVc, expected)
-	}
-
-	private static async setToRandomValue(key: 'what' | 'when') {
-		return this.vc.setToRandomValue(key)
 	}
 
 	private static get formVc() {
