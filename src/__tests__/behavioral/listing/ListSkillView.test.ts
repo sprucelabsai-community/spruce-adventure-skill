@@ -1,12 +1,16 @@
-import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+	toolBeltAssert,
+	vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test'
 import { Adventure } from '../../../adventure.types'
-import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCard.vc'
-import ListSkillViewController from '../../../skillViewControllers/List.svc'
+import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
+import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
+import ListSkillViewController from '../../../listing/List.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureValues from '../../support/generateAdventureValues'
-import { SpyCurrentCard } from '../root/SpyCurrentCard'
+import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()
 export default class ListSkillViewTest extends AbstractAdventureTest {
@@ -48,9 +52,22 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async showsCurrentCardIfCurrentAdventure() {
-		const vc = this.assertRendersCard('current')
-		vcAssert.assertRendersAsInstanceOf(vc, CurrentAdventureCardViewController)
+	protected static async showsExpectedCardsWithAdventure() {
+		const currentVc = this.assertRendersCard('current')
+		vcAssert.assertRendersAsInstanceOf(
+			currentVc,
+			CurrentAdventureCardViewController
+		)
+	}
+
+	@test()
+	protected static async rendersToolBeltWithFriendsTool() {
+		toolBeltAssert.rendersToolBelt(this.vc)
+		toolBeltAssert.toolInstanceOf(
+			this.vc,
+			'friends',
+			FriendsListToolViewController
+		)
 	}
 
 	@test()

@@ -7,7 +7,7 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { SpyCurrentCard } from './SpyCurrentCard'
+import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()
 export default class RootSkillViewTest extends AbstractAdventureTest {

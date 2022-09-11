@@ -1,7 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/heartwood-view-controllers'
 import { AddressFieldValue } from '@sprucelabs/schema'
 import { eventFaker } from '@sprucelabs/spruce-test-fixtures'
-import { Adventure } from '../../adventure.types'
+import { Adventure, Friend } from '../../adventure.types'
 import generateAddressValues from './generateAddressValues'
 import generateAdventureValues from './generateAdventureValues'
 
@@ -27,6 +27,15 @@ export default class EventFaker {
 			}
 		})
 	}
+
+	public async fakeListFriends(cb?: () => Friend[]) {
+		await eventFaker.on('adventure.list-friends::v2022_09_09', () => {
+			return {
+				friends: cb?.() ?? [],
+			}
+		})
+	}
+
 	public generateAdventureValues() {
 		return generateAdventureValues()
 	}

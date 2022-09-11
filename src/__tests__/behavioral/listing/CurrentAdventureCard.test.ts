@@ -7,7 +7,7 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { Adventure } from '../../../adventure.types'
-import CurrentAdventureCardViewController from '../../../root/CurrentAdventureCard.vc'
+import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureValues from '../../support/generateAdventureValues'
 

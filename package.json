@@ -128,7 +128,8 @@
             "clickingCancelRendersConfirm": "B9",
             "postingAdventureSavesUnderCurrentPerson": "B15",
             "redirectToListIfLoggedIn": "B37",
-            "listSkillViewRequiresLogin": "B38"
+            "listSkillViewRequiresLogin": "B38",
+            "rendersInviteButton": "B42"
           }
         }
       ]

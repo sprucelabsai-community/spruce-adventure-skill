@@ -2,6 +2,9 @@ import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 import adventureListEventContract_v2022_09_09, {
 	ListEventContract as AdventureListEventContract_v2022_09_09,
 } from '#spruce/events/adventure/list.v2022_09_09.contract'
+import adventureListFriendsEventContract_v2022_09_09, {
+	ListFriendsEventContract as AdventureListFriendsEventContract_v2022_09_09,
+} from '#spruce/events/adventure/listFriends.v2022_09_09.contract'
 import adventurePostEventContract_v2022_09_09, {
 	PostEventContract as AdventurePostEventContract_v2022_09_09,
 } from '#spruce/events/adventure/post.v2022_09_09.contract'
@@ -36,6 +39,7 @@ export default [
 	heartwoodGetActiveThemeEventContract_v2021_02_11,
 	heartwoodGetSkillViewsEventContract_v2021_02_11,
 	adventureListEventContract_v2022_09_09,
+	adventureListFriendsEventContract_v2022_09_09,
 	heartwoodListViewsEventContract_v2021_02_11,
 	adventurePostEventContract_v2022_09_09,
 	heartwoodRegisterDashboardCardsEventContract_v2021_02_11,
@@ -55,6 +59,8 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11']
 
 		'adventure.list::v2022_09_09': AdventureListEventContract_v2022_09_09['eventSignatures']['adventure.list::v2022_09_09']
+
+		'adventure.list-friends::v2022_09_09': AdventureListFriendsEventContract_v2022_09_09['eventSignatures']['adventure.list-friends::v2022_09_09']
 
 		'heartwood.list-views::v2021_02_11': HeartwoodListViewsEventContract_v2021_02_11['eventSignatures']['heartwood.list-views::v2021_02_11']
 
