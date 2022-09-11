@@ -1,7 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import adventureSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventure.schema'
+import adventureWithPersonSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureWithPerson.schema'
 
 const listResponsePayloadSchema: SpruceSchemas.Adventure.v2022_09_09.ListResponsePayloadSchema  = {
 	id: 'listResponsePayload',
@@ -15,7 +15,7 @@ const listResponsePayloadSchema: SpruceSchemas.Adventure.v2022_09_09.ListRespons
 	                isRequired: true,
 	                isArray: true,
 	                minArrayLength: 0,
-	                options: {schema: adventureSchema_v2022_09_09,}
+	                options: {schema: adventureWithPersonSchema_v2022_09_09,}
 	            },
 	    }
 }

@@ -4,22 +4,22 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test'
-import { Adventure } from '../../../adventure.types'
+import { AdventureWithPerson } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../listing/List.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import generateAdventureValues from '../../support/generateAdventureValues'
+import { generateAdventureWithPersonValues } from '../../support/generateAdventureValues'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()
 export default class ListSkillViewTest extends AbstractAdventureTest {
 	private static vc: SpyListViewController
-	private static currentAdventure: Adventure
+	private static currentAdventure: AdventureWithPerson
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.currentAdventure = generateAdventureValues({
+		this.currentAdventure = generateAdventureWithPersonValues({
 			source: { personId: this.fakedPerson.id },
 		})
 

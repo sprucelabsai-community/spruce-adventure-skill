@@ -1,3 +1,4 @@
+import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
 	SpruceEvent,
 	SpruceEventResponse,
@@ -5,9 +6,9 @@ import {
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export default async (
-	event: SpruceEvent
+	event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { stores, source } = event
+	const { stores, source, client } = event
 	const adventures = await stores.getStore('adventures')
 	const records = await adventures.find(
 		{
@@ -16,8 +17,17 @@ export default async (
 		},
 		{ limit: 1 }
 	)
+
+	const [{ auth }] = await client.emitAndFlattenResponses('whoami::v2020_12_25')
+
+	const { casualName = '**missing**', avatar } = auth.person ?? {}
+
 	return {
-		adventures: records,
+		adventures: records.map((r) => ({
+			...r,
+			personCasualName: casualName,
+			personAvatar: avatar,
+		})),
 	}
 }
 

@@ -10,7 +10,19 @@ const listResponsePayloadBuilder = buildSchema({
 			isArray: true,
 			minArrayLength: 0,
 			options: {
-				schema: adventureBuilder,
+				schema: {
+					id: 'adventureWithPerson',
+					fields: {
+						...adventureBuilder.fields,
+						personCasualName: {
+							type: 'text',
+							isRequired: true,
+						},
+						personAvatar: {
+							type: 'image',
+						},
+					},
+				},
 			},
 		},
 	},

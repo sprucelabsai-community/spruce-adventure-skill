@@ -29,8 +29,32 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	private CardVc(): CardViewController {
 		return this.Controller('card', {
 			id: 'current',
+
 			body: {
 				sections: [
+					{
+						shouldBePadded: false,
+						list: {
+							rows: [
+								{
+									id: 'one',
+									height: 'content',
+									cells: [
+										{
+											avatars: [
+												'https://s3.us-east-2.amazonaws.com/files.spruce.bot/a5908140-3665-461e-9dad-aacffba7c8e7.jpg',
+											],
+										},
+										{
+											text: {
+												html: `"<em>${this.adventure.what}</em>" - Tay`,
+											},
+										},
+									],
+								},
+							],
+						},
+					},
 					{
 						shouldBePadded: false,
 						map: this.mapVc.render(),

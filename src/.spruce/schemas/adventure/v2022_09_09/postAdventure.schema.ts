@@ -9,12 +9,12 @@ const postAdventureSchema: SpruceSchemas.Adventure.v2022_09_09.PostAdventureSche
 	namespace: 'Adventure',
 	name: '',
 	    fields: {
-	            /** What are you gonna do?. Heads up, you can only have 1 adventure at a time! */
+	            /** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
 	            'what': {
 	                label: 'What are you gonna do?',
 	                type: 'text',
 	                isRequired: true,
-	                hint: 'Heads up, you can only have 1 adventure at a time!',
+	                hint: 'Describe the adventure! This is what I\'ll message to your friends! Heads up, you can only have 1 adventure at a time!',
 	                options: undefined
 	            },
 	            /** When are you gonna do it?. */
@@ -24,9 +24,9 @@ const postAdventureSchema: SpruceSchemas.Adventure.v2022_09_09.PostAdventureSche
 	                isRequired: true,
 	                options: undefined
 	            },
-	            /** Where are you going to do it?. */
+	            /** Where are you gonna to do it?. */
 	            'where': {
-	                label: 'Where are you going to do it?',
+	                label: 'Where are you gonna to do it?',
 	                type: 'address',
 	                isRequired: true,
 	                options: undefined

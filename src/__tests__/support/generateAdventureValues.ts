@@ -1,5 +1,6 @@
+import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { generateId } from '@sprucelabs/test-utils'
-import { Adventure } from '../../adventure.types'
+import { Adventure, AdventureWithPerson } from '../../adventure.types'
 import generateAddressValues from './generateAddressValues'
 
 export default function generateAdventureValues(
@@ -15,5 +16,21 @@ export default function generateAdventureValues(
 			personId: generateId(),
 			...values?.source,
 		},
+	}
+}
+
+export function generateAdventureWithPersonValues(
+	values?: Partial<AdventureWithPerson>
+): AdventureWithPerson {
+	return {
+		...generateAdventureValues(values),
+		personCasualName: generateId(),
+		personAvatar: generateAvatarValues(),
+	}
+}
+export function generateAvatarValues() {
+	return {
+		name: generateId(),
+		...generateUploadedImageValues().sizes,
 	}
 }

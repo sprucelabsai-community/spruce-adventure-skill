@@ -1,11 +1,11 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
-import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test'
 import { generateId } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { generateAvatarValues } from '../../support/generateAdventureValues'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {
@@ -34,10 +34,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 			{
 				id: generateId(),
 				casualName: generateId(),
-				avatar: {
-					name: generateId(),
-					...generateUploadedImageValues().sizes,
-				},
+				avatar: generateAvatarValues(),
 			},
 		]
 		await this.eventFaker.fakeListFriends(() => friends)

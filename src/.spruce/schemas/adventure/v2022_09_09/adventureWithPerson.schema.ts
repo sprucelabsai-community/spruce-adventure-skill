@@ -3,11 +3,11 @@ import { SpruceSchemas } from '../../schemas.types'
 
 import adventureSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureSource.schema'
 
-const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
-	id: 'adventure',
+const adventureWithPersonSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema  = {
+	id: 'adventureWithPerson',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
-	name: 'Adventure',
+	name: '',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -43,9 +43,20 @@ const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
 	                isRequired: true,
 	                options: {schema: adventureSourceSchema_v2022_09_09,}
 	            },
+	            /** . */
+	            'personCasualName': {
+	                type: 'text',
+	                isRequired: true,
+	                options: undefined
+	            },
+	            /** . */
+	            'personAvatar': {
+	                type: 'image',
+	                options: undefined
+	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(adventureSchema)
+SchemaRegistry.getInstance().trackSchema(adventureWithPersonSchema)
 
-export default adventureSchema
+export default adventureWithPersonSchema
