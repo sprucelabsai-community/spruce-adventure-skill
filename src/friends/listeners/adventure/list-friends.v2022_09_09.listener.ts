@@ -44,6 +44,9 @@ export default async (
 			id: p.id,
 			casualName: p.casualName,
 			avatar: p.avatar,
+			inviteSender: matches.find((m) => m.source.personId === p.id)
+				? 'them'
+				: 'me',
 		}))
 	}
 

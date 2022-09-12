@@ -140,7 +140,8 @@
             "decliningCancelDoesNotEmit": "B10",
             "clickInviteRedirectsToInvite": "B43",
             "hasConnectSkillView": "B44",
-            "listFriendsHonorsSourceEmitting": "B46"
+            "listFriendsHonorsSourceEmitting": "B46",
+            "rendersExpectedButtonsForWhomeverSent": "B47"
           }
         }
       ]

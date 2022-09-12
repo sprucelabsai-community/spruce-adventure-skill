@@ -43,12 +43,17 @@ export default class EventFaker {
 		})
 	}
 
-	public async fakeListFriends(cb?: () => Friend[]) {
-		await eventFaker.on('adventure.list-friends::v2022_09_09', () => {
-			return {
-				friends: cb?.() ?? [],
+	public async fakeListFriends(
+		cb?: (targetAndPayload: ListFriendsTargetAndPayload) => Friend[] | void
+	) {
+		await eventFaker.on(
+			'adventure.list-friends::v2022_09_09',
+			(targetAndPayload) => {
+				return {
+					friends: cb?.(targetAndPayload) ?? [],
+				}
 			}
-		})
+		)
 	}
 
 	public async fakeCancelAdventure(cb?: () => void) {
@@ -73,3 +78,6 @@ export type PostTargetAndPayload =
 
 export type ListPeopleTargetAndPayload =
 	SpruceSchemas.Mercury.v2020_12_25.ListPeopleEmitTargetAndPayload
+
+export type ListFriendsTargetAndPayload =
+	SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayload

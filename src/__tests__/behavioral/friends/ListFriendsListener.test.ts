@@ -1,10 +1,10 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, SpruceSchemas } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { Friend } from '../../../adventure.types'
+import { Friend, Person } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { ListPeopleTargetAndPayload } from '../../support/EventFaker'
-import { generateAvatarValues } from '../../support/generateAdventureValues'
+import generateFriendValues from '../../support/generateFriendValues'
 
 @fake.login()
 export default class ListFriendsListenerTest extends AbstractAdventureTest {
@@ -30,14 +30,12 @@ export default class ListFriendsListenerTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async returnsConfirmedFriendsByDefault() {
-		const receiver = this.generateFriendValues()
+		const friends = [this.generateFriendValues()]
 
-		await this.eventFaker.fakeListPeople(() => {
-			return [{ ...receiver, dateCreated: 0 }]
-		})
+		await this.fakeListPeople(friends)
 
-		await this.createConnection(this.fakedPerson.id, receiver.id)
-		await this.emitAndAssertFriends([receiver])
+		await this.createConnection(this.fakedPerson.id, friends[0].id)
+		await this.emitAndAssertFriends(friends)
 	}
 
 	@test()
@@ -96,6 +94,36 @@ export default class ListFriendsListenerTest extends AbstractAdventureTest {
 		assert.isTrue(wasHit)
 	}
 
+	@test()
+	protected static async canTellProperWhoInvitedWhom() {
+		const me = this.fakedPerson
+		const friend1 = generateFriendValues('me')
+		const friend2 = generateFriendValues('them')
+
+		await this.createConnection(me.id, friend1.id)
+		await this.createConnection(friend2.id, me.id)
+
+		const friends = [friend1, friend2]
+		await this.fakeListPeople(friends)
+		await this.emitAndAssertFriends(friends)
+	}
+
+	private static async fakeListPeople(friends: Friend[]) {
+		await this.eventFaker.fakeListPeople(() => {
+			const people: Person[] = friends.map((f) => {
+				const friend = { ...f }
+				//@ts-ignore
+				delete friend.inviteSender
+				return {
+					...friend,
+					dateCreated: new Date().getTime(),
+				}
+			})
+
+			return people
+		})
+	}
+
 	private static async createNewConnectionAndEmit() {
 		const person1Id = await this.createConnectionWithNewPerson()
 		await this.emit()
@@ -133,11 +161,7 @@ export default class ListFriendsListenerTest extends AbstractAdventureTest {
 	}
 
 	private static generateFriendValues(): Friend {
-		return {
-			id: generateId(),
-			casualName: generateId(),
-			avatar: generateAvatarValues(),
-		}
+		return generateFriendValues()
 	}
 
 	private static async createConnection(

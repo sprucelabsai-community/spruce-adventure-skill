@@ -7,7 +7,7 @@ const friendSchema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema  = {
 	id: 'friend',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
-	name: '',
+	name: 'Friend',
 	    fields: {
 	            /** Casual name. The name you can use when talking to this person. */
 	            'casualName': {
@@ -29,6 +29,12 @@ const friendSchema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema  = {
 	                type: 'id',
 	                isRequired: true,
 	                options: undefined
+	            },
+	            /** . */
+	            'inviteSender': {
+	                type: 'select',
+	                isRequired: true,
+	                options: {choices: [{"value":"me","label":"Me"},{"value":"them","label":"Them"}],}
 	            },
 	    }
 }

@@ -40,6 +40,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 				id: generateId(),
 				casualName: generateId(),
 				avatar: generateAvatarValues(),
+				inviteSender: 'me',
 			},
 		]
 		await this.eventFaker.fakeListFriends(() => friends)
