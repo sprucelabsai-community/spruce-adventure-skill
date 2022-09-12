@@ -1,3 +1,10 @@
+# [3.2.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.1.1...v3.2.0) (2022-09-12)
+
+
+### Features
+
+* persons avatar and name! ([57265c3](https://github.com/sprucelabsai/spruce-adventure-skill/commit/57265c3))
+
 ## [3.1.1](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.1.0...v3.1.1) (2022-09-11)
 
 # [3.1.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.0.2...v3.1.0) (2022-09-11)
