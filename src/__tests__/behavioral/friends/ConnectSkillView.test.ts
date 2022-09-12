@@ -1,6 +1,6 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test'
-import ConnectSkillViewController from '../../../skillViewControllers/Connect.svc'
+import { test } from '@sprucelabs/test-utils'
+import ConnectSkillViewController from '../../../friends/Connect.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()

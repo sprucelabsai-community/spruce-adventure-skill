@@ -139,7 +139,8 @@
             "doesNotDeleteOtherPeoples": "B23",
             "decliningCancelDoesNotEmit": "B10",
             "clickInviteRedirectsToInvite": "B43",
-            "hasConnectSkillView": "B44"
+            "hasConnectSkillView": "B44",
+            "listFriendsHonorsSourceEmitting": "B46"
           }
         }
       ]
