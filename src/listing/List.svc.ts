@@ -70,7 +70,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 		this.triggerRender()
 
-		await this.friendsToolVc.load()
+		await this.friendsToolVc.load({ router })
 	}
 
 	private async onDidCancelCurrentAdventure() {

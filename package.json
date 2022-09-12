@@ -60,6 +60,7 @@
     "@sprucelabs/spruce-event-plugin": "^49.0.33",
     "@sprucelabs/spruce-event-utils": "^27.0.170",
     "@sprucelabs/spruce-image-utils": "^5.0.3",
+    "@sprucelabs/spruce-invite-utils": "^5.0.47",
     "@sprucelabs/spruce-skill-booter": "^49.0.33",
     "@sprucelabs/spruce-skill-utils": "^26.4.75",
     "@sprucelabs/spruce-store-plugin": "^49.0.33",
@@ -136,7 +137,8 @@
             "dropsInAvatar": "B51",
             "confirmingCancelEmitsCancelEvent": "B11",
             "doesNotDeleteOtherPeoples": "B23",
-            "decliningCancelDoesNotEmit": "B10"
+            "decliningCancelDoesNotEmit": "B10",
+            "clickInviteRedirectsToInvite": "B43"
           }
         }
       ]
