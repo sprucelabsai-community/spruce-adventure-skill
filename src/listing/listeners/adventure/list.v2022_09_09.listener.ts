@@ -9,6 +9,7 @@ export default async (
 	event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
 	const { stores, source, client } = event
+
 	const adventures = await stores.getStore('adventures')
 	const records = await adventures.find(
 		{

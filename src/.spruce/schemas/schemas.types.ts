@@ -9,8 +9,8 @@ import { default as SchemaEntity } from '@sprucelabs/schema'
 
 import * as SpruceSchema from '@sprucelabs/schema'
 
-import { SkillViewControllerId } from '@sprucelabs/heartwood-view-controllers'
 import '@sprucelabs/spruce-event-utils'
+import { SkillViewControllerId } from '@sprucelabs/heartwood-view-controllers'
 
 declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schemas.types' {
 
@@ -77,6 +77,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface DidRegisterSkillViewsEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target': SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTarget
+				
+				'payload': SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitPayload
+		}
+
+		interface DidRegisterSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'didRegisterSkillViewsEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface DidRegisterSkillViewsEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface GenerateUrlEmitTarget {
 			
 				/** Skill View Id. */
@@ -136,6 +181,49 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface GenerateUrlEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTarget| undefined | null
+				
+				'payload'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayload| undefined | null
+		}
+
+		interface GenerateUrlEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'generateUrlEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface GenerateUrlEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface GenerateUrlResponsePayload {
 			
 				/** Url. */
@@ -188,43 +276,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface GetActiveThemeEmitTargetEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTargetSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GetActiveThemeEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target': SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTarget
-		}
-
-		interface GetActiveThemeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'getActiveThemeEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		interface GetActiveThemeEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -635,6 +686,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
+		interface UpsertThemeEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
+				
+				'target': SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTarget
+				
+				'payload': SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitPayload
+		}
+
+		interface UpsertThemeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'upsertThemeEmitTargetAndPayload',
+			version: 'v2021_02_11',
+			namespace: 'Heartwood',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface UpsertThemeEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Heartwood.v2021_02_11 {
+
+		
 		interface Theme {
 			
 				
@@ -767,79 +863,27 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface AdventureWithPerson {
+		interface ListFriendsEmitPayload {
 			
 				
-				'id': string
-				/** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
-				'what': string
-				/** When are you gonna do it?. */
-				'when': SpruceSchema.DateTimeFieldValue
-				/** Where are you gonna to do it?. */
-				'where': SpruceSchema.AddressFieldValue
-				
-				'source': SpruceSchemas.Adventure.v2022_09_09.AdventureSource
-				
-				'personCasualName': string
-				
-				'personAvatar'?: SpruceSchema.ImageFieldValue| undefined | null
+				'filter'?: ("confirmed" | "pending")| undefined | null
 		}
 
-		interface AdventureWithPersonSchema extends SpruceSchema.Schema {
-			id: 'adventureWithPerson',
+		interface ListFriendsEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsEmitPayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'id': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
-			            'what': {
-			                label: 'What are you gonna do?',
-			                type: 'text',
-			                isRequired: true,
-			                hint: 'Describe the adventure! This is what I\'ll message to your friends! Heads up, you can only have 1 adventure at a time!',
-			                options: undefined
-			            },
-			            /** When are you gonna do it?. */
-			            'when': {
-			                label: 'When are you gonna do it?',
-			                type: 'dateTime',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Where are you gonna to do it?. */
-			            'where': {
-			                label: 'Where are you gonna to do it?',
-			                type: 'address',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'source': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AdventureSourceSchema,}
-			            },
-			            /** . */
-			            'personCasualName': {
-			                type: 'text',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** . */
-			            'personAvatar': {
-			                type: 'image',
-			                options: undefined
+			            'filter': {
+			                type: 'select',
+			                options: {choices: [{"value":"confirmed","label":"Confirmed"},{"value":"pending","label":"Pending"}],}
 			            },
 			    }
 		}
 
-		interface AdventureWithPersonEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema> {}
+		interface ListFriendsEmitPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema> {}
 
 	}
 
@@ -847,30 +891,114 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListResponsePayload {
+		interface ListFriendsEmitTargetAndPayload {
 			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'adventures': SpruceSchemas.Adventure.v2022_09_09.AdventureWithPerson[]
+				'payload'?: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayload| undefined | null
 		}
 
-		interface ListResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listResponsePayload',
+		interface ListFriendsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface ListFriendsEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface Friend {
+			
+				/** Casual name. The name you can use when talking to this person. */
+				'casualName': string
+				/** Avatar src. */
+				'avatar'?: SpruceSchema.ImageFieldValue| undefined | null
+				/** Id. */
+				'id': string
+		}
+
+		interface FriendSchema extends SpruceSchema.Schema {
+			id: 'friend',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Casual name. The name you can use when talking to this person. */
+			            'casualName': {
+			                label: 'Casual name',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'The name you can use when talking to this person.',
+			                options: undefined
+			            },
+			            /** Avatar src. */
+			            'avatar': {
+			                label: 'Avatar src',
+			                type: 'image',
+			                options: {requiredSizes: ["*"],}
+			            },
+			            /** Id. */
+			            'id': {
+			                label: 'Id',
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface FriendEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.FriendSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface ListFriendsResponsePayload {
+			
+				
+				'friends': SpruceSchemas.Adventure.v2022_09_09.Friend[]
+		}
+
+		interface ListFriendsResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsResponsePayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'adventures': {
+			            'friends': {
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
 			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema,}
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema,}
 			            },
 			    }
 		}
 
-		interface ListResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListResponsePayloadSchema> {}
+		interface ListFriendsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsResponsePayloadSchema> {}
 
 	}
 
@@ -878,18 +1006,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Heartwood.v2021_02_11 {
 
 		
-		interface DidRegisterSkillViewsEmitTargetAndPayload {
+		interface GetActiveThemeEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
 				
-				'target': SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTarget
-				
-				'payload': SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitPayload
+				'target': SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTarget
 		}
 
-		interface DidRegisterSkillViewsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'didRegisterSkillViewsEmitTargetAndPayload',
+		interface GetActiveThemeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'getActiveThemeEmitTargetAndPayload',
 			version: 'v2021_02_11',
 			namespace: 'Heartwood',
 			name: '',
@@ -904,106 +1030,12 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			            'target': {
 			                type: 'schema',
 			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitPayloadSchema,}
+			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTargetSchema,}
 			            },
 			    }
 		}
 
-		interface DidRegisterSkillViewsEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.DidRegisterSkillViewsEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface GenerateUrlEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTarget| undefined | null
-				
-				'payload'?: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayload| undefined | null
-		}
-
-		interface GenerateUrlEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'generateUrlEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		interface GenerateUrlEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Heartwood.v2021_02_11 {
-
-		
-		interface UpsertThemeEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource| undefined | null
-				
-				'target': SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTarget
-				
-				'payload': SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitPayload
-		}
-
-		interface UpsertThemeEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'upsertThemeEmitTargetAndPayload',
-			version: 'v2021_02_11',
-			namespace: 'Heartwood',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		interface UpsertThemeEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.UpsertThemeEmitTargetAndPayloadSchema> {}
+		interface GetActiveThemeEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Heartwood.v2021_02_11.GetActiveThemeEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -1155,47 +1187,79 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface Friend {
+		interface AdventureWithPerson {
 			
-				/** Casual name. The name you can use when talking to this person. */
-				'casualName': string
-				/** Avatar src. */
-				'avatar'?: SpruceSchema.ImageFieldValue| undefined | null
-				/** Id. */
+				
 				'id': string
+				/** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
+				'what': string
+				/** When are you gonna do it?. */
+				'when': SpruceSchema.DateTimeFieldValue
+				/** Where are you gonna to do it?. */
+				'where': SpruceSchema.AddressFieldValue
+				
+				'source': SpruceSchemas.Adventure.v2022_09_09.AdventureSource
+				
+				'personCasualName': string
+				
+				'personAvatar'?: SpruceSchema.ImageFieldValue| undefined | null
 		}
 
-		interface FriendSchema extends SpruceSchema.Schema {
-			id: 'friend',
+		interface AdventureWithPersonSchema extends SpruceSchema.Schema {
+			id: 'adventureWithPerson',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
-			            /** Casual name. The name you can use when talking to this person. */
-			            'casualName': {
-			                label: 'Casual name',
-			                type: 'text',
-			                isRequired: true,
-			                hint: 'The name you can use when talking to this person.',
-			                options: undefined
-			            },
-			            /** Avatar src. */
-			            'avatar': {
-			                label: 'Avatar src',
-			                type: 'image',
-			                options: {requiredSizes: ["*"],}
-			            },
-			            /** Id. */
+			            /** . */
 			            'id': {
-			                label: 'Id',
 			                type: 'id',
 			                isRequired: true,
+			                options: undefined
+			            },
+			            /** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
+			            'what': {
+			                label: 'What are you gonna do?',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'Describe the adventure! This is what I\'ll message to your friends! Heads up, you can only have 1 adventure at a time!',
+			                options: undefined
+			            },
+			            /** When are you gonna do it?. */
+			            'when': {
+			                label: 'When are you gonna do it?',
+			                type: 'dateTime',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Where are you gonna to do it?. */
+			            'where': {
+			                label: 'Where are you gonna to do it?',
+			                type: 'address',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'source': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AdventureSourceSchema,}
+			            },
+			            /** . */
+			            'personCasualName': {
+			                type: 'text',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** . */
+			            'personAvatar': {
+			                type: 'image',
 			                options: undefined
 			            },
 			    }
 		}
 
-		interface FriendEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.FriendSchema> {}
+		interface AdventureWithPersonEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema> {}
 
 	}
 
@@ -1203,30 +1267,30 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListFriendsResponsePayload {
+		interface ListResponsePayload {
 			
 				
-				'friends': SpruceSchemas.Adventure.v2022_09_09.Friend[]
+				'adventures': SpruceSchemas.Adventure.v2022_09_09.AdventureWithPerson[]
 		}
 
-		interface ListFriendsResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listFriendsResponsePayload',
+		interface ListResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listResponsePayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'friends': {
+			            'adventures': {
 			                type: 'schema',
 			                isRequired: true,
 			                isArray: true,
 			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema,}
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema,}
 			            },
 			    }
 		}
 
-		interface ListFriendsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsResponsePayloadSchema> {}
+		interface ListResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListResponsePayloadSchema> {}
 
 	}
 

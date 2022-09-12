@@ -7,12 +7,15 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 import { Friend } from '../../../adventure.types'
 
 export default async (
-	event: SpruceEvent<SkillEventContract>
+	event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { stores, client, source } = event
+	const { stores, client, source, payload } = event
+	const { filter = 'confirmed' } = payload ?? {}
 
 	const connections = await stores.getStore('connections')
 	const matches = await connections.find({
+		isConfirmed: filter === 'confirmed',
+
 		//@ts-ignore
 		$or: [
 			{ 'source.personId': source.personId },
@@ -51,3 +54,5 @@ export default async (
 
 type ResponsePayload =
 	SpruceSchemas.Adventure.v2022_09_09.ListFriendsResponsePayload
+type EmitPayload =
+	SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayload
