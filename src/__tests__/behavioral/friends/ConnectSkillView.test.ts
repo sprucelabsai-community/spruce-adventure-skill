@@ -1,10 +1,15 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
-import ConnectSkillViewController from '../../../friends/Connect.svc'
+import ConnectSkillViewController, {
+	ConnectSkillViewArgs,
+} from '../../../friends/Connect.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { ListFriendsTargetAndPayload } from '../../support/EventFaker'
+import {
+	AcceptConnectionTargetAndPayload,
+	ListFriendsTargetAndPayload,
+} from '../../support/EventFaker'
 import generateFriendValues from '../../support/generateFriendValues'
 
 @fake.login()
@@ -83,6 +88,20 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
 		}
 	}
 
+	@test()
+	protected static async acceptsConnectionIfPassedThroughArgs() {
+		let wasHit = false
+		const connectionId = generateId()
+		let passedTarget: AcceptConnectionTargetAndPayload['target'] | undefined
+		await this.eventFaker.fakeAcceptConnection(({ target }) => {
+			passedTarget = target
+			wasHit = true
+		})
+		await this.load({ connection: connectionId })
+		assert.isTrue(wasHit)
+		assert.isEqualDeep(passedTarget, { connectionId })
+	}
+
 	private static async setFriendsAndLoad(friends: Friend[]) {
 		this.setFriends(friends)
 		await this.load()
@@ -92,8 +111,8 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
 		this.friends = friends
 	}
 
-	private static async load() {
-		await this.views.load(this.vc)
+	private static async load(args?: ConnectSkillViewArgs) {
+		await this.views.load(this.vc, args)
 	}
 
 	private static get friendsListVc() {

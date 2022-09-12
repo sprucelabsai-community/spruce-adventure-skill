@@ -30,7 +30,6 @@ export default buildSchema({
 		},
 		target: {
 			type: 'schema',
-			isRequired: true,
 			options: {
 				schema: targetSource,
 			},

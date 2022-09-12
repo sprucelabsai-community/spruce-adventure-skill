@@ -27,9 +27,9 @@ export default async (
 
 	if (matches.length > 0) {
 		const personIds = [
-			...matches.map((m) => m.target.personId),
+			...matches.map((m) => m.target?.personId),
 			...matches.map((m) => m.source.personId),
-		].filter((id) => id !== source.personId)
+		].filter((id) => id && id !== source.personId) as string[]
 
 		const [{ people }] = await client.emitAndFlattenResponses(
 			'list-people::v2020_12_25',

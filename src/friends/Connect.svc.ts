@@ -4,6 +4,7 @@ import {
 	ListCell,
 	ListRow,
 	SkillView,
+	SkillViewControllerLoadOptions,
 	splitCardsIntoLayouts,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -78,8 +79,25 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
 		}
 	}
 
-	public async load() {
+	public async load({
+		args,
+	}: SkillViewControllerLoadOptions<ConnectSkillViewArgs>) {
+		if (args.connection) {
+			await this.acceptConnection(args.connection)
+		}
 		await this.cardVc.load()
+	}
+
+	private async acceptConnection(id: string) {
+		const client = await this.connectToApi()
+		await client.emitAndFlattenResponses(
+			'adventure.accept-connection::v2022_09_09',
+			{
+				target: {
+					connectionId: id,
+				},
+			}
+		)
 	}
 
 	public render(): SkillView {
@@ -87,4 +105,8 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
 			layouts: splitCardsIntoLayouts([this.cardVc.render()], 3),
 		}
 	}
+}
+
+export type ConnectSkillViewArgs = {
+	connection?: string
 }

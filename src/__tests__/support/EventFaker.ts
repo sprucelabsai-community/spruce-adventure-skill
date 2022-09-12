@@ -75,6 +75,20 @@ export default class EventFaker {
 		)
 	}
 
+	public async fakeAcceptConnection(
+		cb?: (targetAndPayload: AcceptConnectionTargetAndPayload) => void
+	) {
+		await eventFaker.on(
+			'adventure.accept-connection::v2022_09_09',
+			(targetAndPayload) => {
+				cb?.(targetAndPayload)
+				return {
+					success: true,
+				}
+			}
+		)
+	}
+
 	public async fakeCancelAdventure(cb?: () => void) {
 		await eventFaker.on('adventure.cancel::v2022_09_09', () => {
 			cb?.()
@@ -100,3 +114,6 @@ export type ListPeopleTargetAndPayload =
 
 export type ListFriendsTargetAndPayload =
 	SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayload
+
+export type AcceptConnectionTargetAndPayload =
+	SpruceSchemas.Adventure.v2022_09_09.AcceptConnectionEmitTargetAndPayload

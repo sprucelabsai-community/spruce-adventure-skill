@@ -141,7 +141,9 @@
             "clickInviteRedirectsToInvite": "B43",
             "hasConnectSkillView": "B44",
             "listFriendsHonorsSourceEmitting": "B46",
-            "rendersExpectedButtonsForWhomeverSent": "B47"
+            "rendersExpectedButtonsForWhomeverSent": "B47",
+            "acceptsConnectionIfPassedThroughArgs": "B58",
+            "setsPersonToSourceBasedOnId": "B59"
           }
         }
       ]

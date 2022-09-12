@@ -29,7 +29,6 @@ const connectionSchema: SpruceSchemas.Adventure.v2022_09_09.ConnectionSchema  = 
 	            /** . */
 	            'target': {
 	                type: 'schema',
-	                isRequired: true,
 	                options: {schema: connectionTargetSourceSchema_v2022_09_09,}
 	            },
 	    }

@@ -2,12 +2,12 @@ import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, SpruceSchemas } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { Friend, Person } from '../../../adventure.types'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import AbstractFriendsTest from '../../support/AbstractFriendsTest'
 import { ListPeopleTargetAndPayload } from '../../support/EventFaker'
 import generateFriendValues from '../../support/generateFriendValues'
 
 @fake.login()
-export default class ListFriendsListenerTest extends AbstractAdventureTest {
+export default class ListFriendsListenerTest extends AbstractFriendsTest {
 	private static passedTargetAndPayload: ListPeopleTargetAndPayload | undefined
 	private static client: MercuryClient
 	protected static async beforeEach() {
@@ -162,18 +162,6 @@ export default class ListFriendsListenerTest extends AbstractAdventureTest {
 
 	private static generateFriendValues(): Friend {
 		return generateFriendValues()
-	}
-
-	private static async createConnection(
-		sourceId: string,
-		targetId: string,
-		isConfirmed = true
-	) {
-		await this.connections.createOne({
-			source: { personId: sourceId },
-			target: { personId: targetId },
-			isConfirmed,
-		})
 	}
 
 	private static async emit(payload?: ListFriendsPayload) {

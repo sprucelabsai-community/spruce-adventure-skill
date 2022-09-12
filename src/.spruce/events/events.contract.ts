@@ -1,4 +1,7 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
+import adventureAcceptConnectionEventContract_v2022_09_09, {
+	AcceptConnectionEventContract as AdventureAcceptConnectionEventContract_v2022_09_09,
+} from '#spruce/events/adventure/acceptConnection.v2022_09_09.contract'
 import adventureCancelEventContract_v2022_09_09, {
 	CancelEventContract as AdventureCancelEventContract_v2022_09_09,
 } from '#spruce/events/adventure/cancel.v2022_09_09.contract'
@@ -40,6 +43,7 @@ import heartwoodUpsertThemeEventContract_v2021_02_11, {
 } from '#spruce/events/heartwood/upsertTheme.v2021_02_11.contract'
 
 export default [
+	adventureAcceptConnectionEventContract_v2022_09_09,
 	adventureCancelEventContract_v2022_09_09,
 	adventureCreateConnectionEventContract_v2022_09_09,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
@@ -58,6 +62,8 @@ export default [
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'adventure.accept-connection::v2022_09_09': AdventureAcceptConnectionEventContract_v2022_09_09['eventSignatures']['adventure.accept-connection::v2022_09_09']
+
 		'adventure.cancel::v2022_09_09': AdventureCancelEventContract_v2022_09_09['eventSignatures']['adventure.cancel::v2022_09_09']
 
 		'adventure.create-connection::v2022_09_09': AdventureCreateConnectionEventContract_v2022_09_09['eventSignatures']['adventure.create-connection::v2022_09_09']
