@@ -131,7 +131,9 @@
             "redirectToListIfLoggedIn": "B37",
             "listSkillViewRequiresLogin": "B38",
             "rendersInviteButton": "B42",
-            "rendersRowForEachFriend": "B45"
+            "rendersRowForEachFriend": "B45",
+            "onlyReturnsYoursWithoutFriends": "B52",
+            "dropsInAvatar": "B51"
           }
         }
       ]
