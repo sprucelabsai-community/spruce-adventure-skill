@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.3.3...v3.4.0) (2022-09-12)
+
+
+### Features
+
+* list friends can filter confirmed/not-confirmed ([0949260](https://github.com/sprucelabsai/spruce-adventure-skill/commit/0949260))
+
 ## [3.3.3](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.3.2...v3.3.3) (2022-09-12)
 
 ## [3.3.2](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.3.1...v3.3.2) (2022-09-12)
