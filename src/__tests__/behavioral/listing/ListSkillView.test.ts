@@ -1,4 +1,5 @@
 import {
+	interactor,
 	toolBeltAssert,
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -79,13 +80,28 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async currentCardHasProperAdventure() {
-		const cardVc = this.vc.getCurrentCardVc()!
-		assert.isEqualDeep(cardVc.getAdventure(), this.currentAdventure)
+		assert.isEqualDeep(this.currentCardVc.getAdventure(), this.currentAdventure)
 	}
 
 	@test()
 	protected static async listSkillViewRequiresLogin() {
 		await vcAssert.assertLoginIsRequired(this.vc)
+	}
+
+	@test()
+	protected static async cancellingCurrentRedirectsToAdd() {
+		await this.eventFaker.fakeCancelAdventure()
+		const confirm = await vcAssert.assertRendersConfirm(
+			this.currentCardVc,
+			() => interactor.clickButton(this.currentCardVc, 'cancel')
+		)
+		await vcAssert.assertActionRedirects({
+			action: async () => confirm.accept(),
+			destination: {
+				id: 'adventure.post',
+			},
+			router: this.views.getRouter(),
+		})
 	}
 
 	private static async load() {
@@ -98,6 +114,10 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	private static assertRendersCard(id: string) {
 		return vcAssert.assertSkillViewRendersCard(this.vc, id)
+	}
+
+	private static get currentCardVc() {
+		return this.vc.getCurrentCardVc()!
 	}
 }
 

@@ -134,7 +134,9 @@
             "rendersRowForEachFriend": "B45",
             "onlyReturnsYoursWithoutFriends": "B52",
             "dropsInAvatar": "B51",
-            "confirmingCancelEmitsCancelEvent": "B11"
+            "confirmingCancelEmitsCancelEvent": "B11",
+            "doesNotDeleteOtherPeoples": "B23",
+            "decliningCancelDoesNotEmit": "B10"
           }
         }
       ]

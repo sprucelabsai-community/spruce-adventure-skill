@@ -1,6 +1,7 @@
 import {
 	AbstractSkillViewController,
 	Card,
+	Router,
 	SkillView,
 	SkillViewControllerLoadOptions,
 	splitCardsIntoLayouts,
@@ -16,6 +17,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	protected currentCardVc?: CurrentAdventureCardViewController
 	protected friendsToolVc: FriendsListToolViewController
 	private toolBeltVc: ToolBeltViewController
+	private router!: Router
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
@@ -49,6 +51,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	}
 
 	public async load({ router }: SkillViewControllerLoadOptions) {
+		this.router = router
 		const client = await this.connectToApi()
 
 		const [{ adventures }] = await client.emitAndFlattenResponses(
@@ -62,11 +65,16 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 		this.currentCardVc = this.Controller('adventure.current-adventure-card', {
 			adventure: adventures[0],
+			onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
 		})
 
 		this.triggerRender()
 
 		await this.friendsToolVc.load()
+	}
+
+	private async onDidCancelCurrentAdventure() {
+		await this.router.redirect('adventure.post')
 	}
 
 	public render(): SkillView {

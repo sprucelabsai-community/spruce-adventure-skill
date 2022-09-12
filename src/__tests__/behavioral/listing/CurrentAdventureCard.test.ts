@@ -15,12 +15,17 @@ import generateAdventureValues from '../../support/generateAdventureValues'
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 	private static vc: CurrentAdventureCardViewController
 	private static adventure: Adventure
+	private static didCancelHandlerInvoked: boolean
 
 	protected static async beforeEach() {
 		await super.beforeEach()
 		this.adventure = generateAdventureValues()
+		this.didCancelHandlerInvoked = false
 		this.vc = this.views.Controller('adventure.current-adventure-card', {
 			adventure: this.adventure,
+			onDidCancel: () => {
+				this.didCancelHandlerInvoked = true
+			},
 		})
 	}
 
@@ -32,7 +37,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 		)
 
 		errorAssert.assertError(err, 'MISSING_PARAMETERS', {
-			parameters: ['adventure'],
+			parameters: ['adventure', 'onDidCancel'],
 		})
 	}
 
@@ -77,6 +82,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 		await confirm.decline()
 
 		assert.isFalse(wasHit)
+		assert.isFalse(this.didCancelHandlerInvoked)
 	}
 
 	private static async clickCancelAndAssertConfirm() {

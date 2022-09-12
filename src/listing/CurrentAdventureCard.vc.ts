@@ -13,17 +13,22 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	private cardVc: CardViewController
 	private mapVc: MapViewController
 	protected adventure: Adventure
+	private didCancelHandler: ClickCancelHandler
 
 	public constructor(
 		options: ViewControllerOptions & CurrentAdventureCardOptions
 	) {
 		super(options)
 
-		const { adventure } = assertOptions(options, ['adventure'])
+		const { adventure, onDidCancel } = assertOptions(options, [
+			'adventure',
+			'onDidCancel',
+		])
 
 		this.adventure = adventure
 		this.mapVc = this.MapVc()
 		this.cardVc = this.CardVc()
+		this.didCancelHandler = onDidCancel
 	}
 
 	private CardVc(): CardViewController {
@@ -86,6 +91,8 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 
 		const client = await this.connectToApi()
 		await client.emitAndFlattenResponses('adventure.cancel::v2022_09_09')
+
+		await this.didCancelHandler?.()
 	}
 
 	private MapVc(): MapViewController {
@@ -105,6 +112,9 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	}
 }
 
+type ClickCancelHandler = () => void
+
 export interface CurrentAdventureCardOptions {
 	adventure: Adventure
+	onDidCancel: ClickCancelHandler
 }
