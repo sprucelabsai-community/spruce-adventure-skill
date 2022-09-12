@@ -94,6 +94,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 		}
 		this.introCardVc = this.IntroCardVc()
 		this.router = router
+		this.triggerRender()
 	}
 
 	public render(): SkillView {

@@ -39,6 +39,13 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
+	protected static async loadTriggersRender() {
+		this.vc = this.Vc()
+		await this.loadVc()
+		vcAssert.assertTriggerRenderCount(this.vc, 1)
+	}
+
+	@test()
 	protected static async redirectToListIfLoggedIn() {
 		this.auth.setSessionToken(this.sessionToken, this.fakedPerson)
 		await vcAssert.assertActionRedirects({
@@ -62,11 +69,12 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	}
 
 	private static async reload() {
-		this.vc = this.views.Controller(
-			'adventure.root',
-			{}
-		) as SpyRootViewController
+		this.vc = this.Vc()
 		await this.loadVc()
+	}
+
+	private static Vc(): SpyRootViewController {
+		return this.views.Controller('adventure.root', {}) as SpyRootViewController
 	}
 
 	private static async loadVc() {
