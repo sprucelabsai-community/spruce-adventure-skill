@@ -138,7 +138,8 @@
             "confirmingCancelEmitsCancelEvent": "B11",
             "doesNotDeleteOtherPeoples": "B23",
             "decliningCancelDoesNotEmit": "B10",
-            "clickInviteRedirectsToInvite": "B43"
+            "clickInviteRedirectsToInvite": "B43",
+            "hasConnectSkillView": "B44"
           }
         }
       ]
