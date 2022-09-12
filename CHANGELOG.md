@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.4.0...v3.5.0) (2022-09-12)
+
+
+### Features
+
+* create connection listener ([cd86c63](https://github.com/sprucelabsai/spruce-adventure-skill/commit/cd86c63))
+
 # [3.4.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.3.3...v3.4.0) (2022-09-12)
 
 
