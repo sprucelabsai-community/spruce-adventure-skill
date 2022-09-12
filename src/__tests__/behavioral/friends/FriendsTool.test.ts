@@ -1,8 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test'
-import { generateId } from '@sprucelabs/test-utils'
+import { generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
@@ -51,13 +50,22 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async clickInviteRedirectsToInvite() {
+	protected static async clickInviteCreatesPartialConnectionAndRedirectsToInvite() {
+		const connection = this.eventFaker.generatePendingConnectionValues()
+
+		await this.eventFaker.fakeCreateConnection(() => {
+			return connection.id
+		})
+
 		const [id, args] = buildRouteToCreateInvite({
 			destinationAfterCreate: {
 				id: 'adventure.root',
 			},
 			destinationAfterAccept: {
 				id: 'adventure.connect',
+				args: {
+					connection: connection.id,
+				},
 			},
 		})
 

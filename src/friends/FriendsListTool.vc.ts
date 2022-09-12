@@ -56,12 +56,19 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 	}
 
 	private async handleClickInvite() {
+		const client = await this.connectToApi()
+		const [{ connectionId }] = await client.emitAndFlattenResponses(
+			'adventure.create-connection::v2022_09_09'
+		)
 		const [id, args] = buildRouteToCreateInvite({
 			destinationAfterCreate: {
 				id: 'adventure.root',
 			},
 			destinationAfterAccept: {
 				id: 'adventure.connect',
+				args: {
+					connection: connectionId,
+				},
 			},
 		})
 		await this.router.redirect(id as any, args)

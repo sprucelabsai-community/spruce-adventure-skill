@@ -1,6 +1,7 @@
 import { SpruceSchemas } from '@sprucelabs/heartwood-view-controllers'
 import { AddressFieldValue } from '@sprucelabs/schema'
 import { eventFaker } from '@sprucelabs/spruce-test-fixtures'
+import { generateId } from '@sprucelabs/test-utils'
 import {
 	Adventure,
 	AdventureWithPerson,
@@ -41,6 +42,24 @@ export default class EventFaker {
 				people: cb?.(targetAndPayload) ?? [],
 			}
 		})
+	}
+
+	public async fakeCreateConnection(cb?: () => void | string) {
+		await eventFaker.on('adventure.create-connection::v2022_09_09', () => {
+			return {
+				connectionId: cb?.() ?? generateId(),
+			}
+		})
+	}
+
+	public generatePendingConnectionValues() {
+		return {
+			id: generateId(),
+			source: {
+				personId: generateId(),
+			},
+			target: {},
+		}
 	}
 
 	public async fakeListFriends(
