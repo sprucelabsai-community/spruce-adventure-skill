@@ -20,6 +20,12 @@ const listeners: EventFeatureListener[] = [
         callback: require('../../friends/listeners/adventure/accept-connection.v2022_09_09.listener').default,
     },
     {
+        eventName: 'create-connection',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/create-connection.v2022_09_09.listener').default,
+    },
+    {
         eventName: 'list-friends',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',

@@ -143,7 +143,8 @@
             "listFriendsHonorsSourceEmitting": "B46",
             "rendersExpectedButtonsForWhomeverSent": "B47",
             "acceptsConnectionIfPassedThroughArgs": "B58",
-            "setsPersonToSourceBasedOnId": "B59"
+            "setsPersonToSourceBasedOnId": "B59",
+            "hasCReateConnectionListener": "B60"
           }
         }
       ]
