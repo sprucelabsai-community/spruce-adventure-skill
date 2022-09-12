@@ -6,13 +6,13 @@ import {
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
-import { Adventure } from '../adventure.types'
+import { AdventureWithPerson } from '../adventure.types'
 
 export default class CurrentAdventureCardViewController extends AbstractViewController<Card> {
 	public static id = 'current-adventure-card'
 	private cardVc: CardViewController
 	private mapVc: MapViewController
-	protected adventure: Adventure
+	protected adventure: AdventureWithPerson
 	private didCancelHandler: ClickCancelHandler
 
 	public constructor(
@@ -34,7 +34,6 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	private CardVc(): CardViewController {
 		return this.Controller('card', {
 			id: 'current',
-
 			body: {
 				sections: [
 					{
@@ -46,13 +45,13 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 									height: 'content',
 									cells: [
 										{
-											avatars: [
-												'https://s3.us-east-2.amazonaws.com/files.spruce.bot/a5908140-3665-461e-9dad-aacffba7c8e7.jpg',
-											],
+											avatars: this.adventure.personAvatar
+												? [this.adventure.personAvatar.mUri]
+												: null,
 										},
 										{
 											text: {
-												html: `"<em>${this.adventure.what}</em>" - Tay`,
+												html: `"<em>${this.adventure.what}</em>" - ${this.adventure.personCasualName}`,
 											},
 										},
 									],
@@ -92,7 +91,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 		const client = await this.connectToApi()
 		await client.emitAndFlattenResponses('adventure.cancel::v2022_09_09')
 
-		await this.didCancelHandler?.()
+		this.didCancelHandler?.()
 	}
 
 	private MapVc(): MapViewController {
@@ -115,6 +114,6 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 type ClickCancelHandler = () => void
 
 export interface CurrentAdventureCardOptions {
-	adventure: Adventure
+	adventure: AdventureWithPerson
 	onDidCancel: ClickCancelHandler
 }

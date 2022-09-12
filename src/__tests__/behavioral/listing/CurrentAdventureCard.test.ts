@@ -6,20 +6,20 @@ import {
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { Adventure } from '../../../adventure.types'
+import { AdventureWithPerson } from '../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import generateAdventureValues from '../../support/generateAdventureValues'
+import { generateAdventureWithPersonValues } from '../../support/generateAdventureValues'
 
 @fake.login()
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 	private static vc: CurrentAdventureCardViewController
-	private static adventure: Adventure
+	private static adventure: AdventureWithPerson
 	private static didCancelHandlerInvoked: boolean
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.adventure = generateAdventureValues()
+		this.adventure = generateAdventureWithPersonValues()
 		this.didCancelHandlerInvoked = false
 		this.vc = this.views.Controller('adventure.current-adventure-card', {
 			adventure: this.adventure,
