@@ -51,7 +51,36 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async clickingCancelRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, () =>
+		await this.clickCancelAndAssertConfirm()
+	}
+
+	@test()
+	protected static async confirmingCancelEmitsCancelEvent() {
+		let wasHit = false
+		await this.eventFaker.fakeCancelAdventure(() => {
+			wasHit = true
+		})
+
+		const confirm = await this.clickCancelAndAssertConfirm()
+		await confirm.accept()
+		assert.isTrue(wasHit)
+	}
+
+	@test()
+	protected static async decliningCancelDoesNotEmit() {
+		let wasHit = false
+		await this.eventFaker.fakeCancelAdventure(() => {
+			wasHit = true
+		})
+
+		const confirm = await this.clickCancelAndAssertConfirm()
+		await confirm.decline()
+
+		assert.isFalse(wasHit)
+	}
+
+	private static async clickCancelAndAssertConfirm() {
+		return vcAssert.assertRendersConfirm(this.vc, () =>
 			interactor.clickButton(this.vc, 'cancel')
 		)
 	}

@@ -75,10 +75,17 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	}
 
 	private async handleClickCancel() {
-		await this.confirm({
-			message: 'You sure you want to cancel?',
+		const confirm = await this.confirm({
+			message: 'You sure you wanna cancel?',
 			isDestructive: true,
 		})
+
+		if (!confirm) {
+			return
+		}
+
+		const client = await this.connectToApi()
+		await client.emitAndFlattenResponses('adventure.cancel::v2022_09_09')
 	}
 
 	private MapVc(): MapViewController {

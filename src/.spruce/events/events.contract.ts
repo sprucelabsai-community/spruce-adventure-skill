@@ -1,4 +1,7 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
+import adventureCancelEventContract_v2022_09_09, {
+	CancelEventContract as AdventureCancelEventContract_v2022_09_09,
+} from '#spruce/events/adventure/cancel.v2022_09_09.contract'
 import adventureListEventContract_v2022_09_09, {
 	ListEventContract as AdventureListEventContract_v2022_09_09,
 } from '#spruce/events/adventure/list.v2022_09_09.contract'
@@ -34,6 +37,7 @@ import heartwoodUpsertThemeEventContract_v2021_02_11, {
 } from '#spruce/events/heartwood/upsertTheme.v2021_02_11.contract'
 
 export default [
+	adventureCancelEventContract_v2022_09_09,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
 	heartwoodGenerateUrlEventContract_v2021_02_11,
 	heartwoodGetActiveThemeEventContract_v2021_02_11,
@@ -50,6 +54,8 @@ export default [
 
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
+		'adventure.cancel::v2022_09_09': AdventureCancelEventContract_v2022_09_09['eventSignatures']['adventure.cancel::v2022_09_09']
+
 		'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11']
 
 		'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11']

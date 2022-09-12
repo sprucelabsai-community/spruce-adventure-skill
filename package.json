@@ -133,7 +133,8 @@
             "rendersInviteButton": "B42",
             "rendersRowForEachFriend": "B45",
             "onlyReturnsYoursWithoutFriends": "B52",
-            "dropsInAvatar": "B51"
+            "dropsInAvatar": "B51",
+            "confirmingCancelEmitsCancelEvent": "B11"
           }
         }
       ]

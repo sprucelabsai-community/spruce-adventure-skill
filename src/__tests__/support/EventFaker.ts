@@ -36,6 +36,15 @@ export default class EventFaker {
 		})
 	}
 
+	public async fakeCancelAdventure(cb?: () => void) {
+		await eventFaker.on('adventure.cancel::v2022_09_09', () => {
+			cb?.()
+			return {
+				totalCancelled: 1,
+			}
+		})
+	}
+
 	public generateAdventureValues() {
 		return generateAdventureValues()
 	}
