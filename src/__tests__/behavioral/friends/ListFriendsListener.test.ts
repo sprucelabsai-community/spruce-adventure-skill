@@ -10,16 +10,20 @@ import generateFriendValues from '../../support/generateFriendValues'
 export default class ListFriendsListenerTest extends AbstractFriendsTest {
 	private static passedTargetAndPayload: ListPeopleTargetAndPayload | undefined
 	private static client: MercuryClient
+	private static skillId: string
+
 	protected static async beforeEach() {
 		await super.beforeEach()
 		await this.bootSkill()
+		const { skill } = await this.skills.loginAsCurrentSkill()
+		this.skillId = skill.id
 
 		this.passedTargetAndPayload = undefined
 		this.client = this.fakedClient
 
 		await this.eventFaker.fakeListPeople((targetAndPayload) => {
 			this.passedTargetAndPayload = targetAndPayload
-			delete this.passedTargetAndPayload?.source
+			delete this.passedTargetAndPayload.source?.proxyToken
 		})
 	}
 
@@ -134,6 +138,9 @@ export default class ListFriendsListenerTest extends AbstractFriendsTest {
 		expectedPersonsIds: string[]
 	) {
 		assert.isEqualDeep(this.passedTargetAndPayload, {
+			source: {
+				skillId: this.skillId,
+			},
 			payload: {
 				personIds: expectedPersonsIds,
 			},

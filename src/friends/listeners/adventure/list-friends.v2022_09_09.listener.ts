@@ -9,9 +9,10 @@ import { Friend } from '../../../adventure.types'
 export default async (
 	event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { stores, client, source, payload } = event
+	const { stores, source, payload, connectToApiAsSkill } = event
 	const { filter = 'confirmed' } = payload ?? {}
 
+	const client = await connectToApiAsSkill()
 	const connections = await stores.getStore('connections')
 	const matches = await connections.find({
 		isConfirmed: filter === 'confirmed',
