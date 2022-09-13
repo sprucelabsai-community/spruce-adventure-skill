@@ -97,9 +97,32 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
 			passedTarget = target
 			wasHit = true
 		})
-		await this.load({ connection: connectionId })
+
+		await this.loadAndAssertRedirect(connectionId)
 		assert.isTrue(wasHit)
 		assert.isEqualDeep(passedTarget, { connectionId })
+	}
+
+	@test()
+	protected static async doesNotLoadIfAcceptingConnection() {
+		await this.eventFaker.fakeAcceptConnection()
+		let wasHit = false
+		await this.eventFaker.fakeListFriends(() => {
+			wasHit = true
+		})
+
+		await this.loadAndAssertRedirect(generateId())
+		assert.isFalse(wasHit)
+	}
+
+	private static async loadAndAssertRedirect(connectionId: string) {
+		await vcAssert.assertActionRedirects({
+			action: () => this.load({ connection: connectionId }),
+			destination: {
+				id: 'adventure.root',
+			},
+			router: this.views.getRouter(),
+		})
 	}
 
 	private static async setFriendsAndLoad(friends: Friend[]) {

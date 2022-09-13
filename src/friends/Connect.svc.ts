@@ -80,10 +80,13 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
 	}
 
 	public async load({
+		router,
 		args,
 	}: SkillViewControllerLoadOptions<ConnectSkillViewArgs>) {
 		if (args.connection) {
 			await this.acceptConnection(args.connection)
+			await router.redirect('adventure.root')
+			return
 		}
 		await this.cardVc.load()
 	}
