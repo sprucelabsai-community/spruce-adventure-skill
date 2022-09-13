@@ -1,7 +1,9 @@
+import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
 	AbstractViewController,
 	Card,
 	CardViewController,
+	List,
 	MapViewController,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -25,6 +27,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 			'onDidCancel',
 		])
 
+		durationUtil.dates = this.dates
 		this.adventure = adventure
 		this.mapVc = this.MapVc()
 		this.cardVc = this.CardVc()
@@ -38,26 +41,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 				sections: [
 					{
 						shouldBePadded: false,
-						list: {
-							rows: [
-								{
-									id: 'one',
-									height: 'content',
-									cells: [
-										{
-											avatars: this.adventure.personAvatar
-												? [this.adventure.personAvatar.mUri]
-												: null,
-										},
-										{
-											text: {
-												html: `"<em>${this.adventure.what}</em>" - ${this.adventure.personCasualName}`,
-											},
-										},
-									],
-								},
-							],
-						},
+						list: this.renderList(),
 					},
 					{
 						shouldBePadded: false,
@@ -76,6 +60,38 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 				],
 			},
 		})
+	}
+
+	private renderList(): List {
+		return {
+			rows: [
+				{
+					id: 'one',
+					height: 'content',
+					cells: [
+						{
+							avatars: this.adventure.personAvatar
+								? [this.adventure.personAvatar.mUri]
+								: null,
+						},
+						{
+							text: {
+								html: `"<em>${this.adventure.what}</em>" - ${this.adventure.personCasualName}`,
+							},
+							subText: {
+								content: durationUtil.renderDateTimeUntil(
+									this.adventure.when,
+									this.dates.date(),
+									{
+										shouldCapitalize: true,
+									}
+								),
+							},
+						},
+					],
+				},
+			],
+		}
 	}
 
 	private async handleClickCancel() {
