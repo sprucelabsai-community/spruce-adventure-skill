@@ -5,7 +5,7 @@ import { generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { generateAvatarValues } from "../../support/generateAvatarValues"
+import { generateAvatarValues } from '../../support/generateAvatarValues'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {
