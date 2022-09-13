@@ -16,7 +16,7 @@ export default async (
 	const connections = await stores.getStore('connections')
 	const total = await connections.update(
 		{ id: connectionId },
-		{ target: { personId: source.personId! } }
+		{ target: { personId: source.personId! }, isConfirmed: true }
 	)
 	if (total === 0) {
 		throw new SpruceError({

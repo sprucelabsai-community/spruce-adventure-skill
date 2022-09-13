@@ -13,7 +13,7 @@ export default class AcceptConnectionListenerTest extends AbstractFriendsTest {
 	protected static async setsPersonToSourceBasedOnId() {
 		const p1 = this.fakedPerson.id
 		const p2 = generateId()
-		const id = await this.createConnection(p2)
+		const id = await this.createConnection(p2, undefined, false)
 		await this.emit(id)
 		const match = await this.connections.findOne({})
 		assert.isEqual(match?.target?.personId, p1)
