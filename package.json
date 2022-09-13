@@ -144,7 +144,8 @@
             "rendersExpectedButtonsForWhomeverSent": "B47",
             "acceptsConnectionIfPassedThroughArgs": "B58",
             "setsPersonToSourceBasedOnId": "B59",
-            "hasCReateConnectionListener": "B60"
+            "hasCReateConnectionListener": "B60",
+            "redirectsToListEvenIfOwnAdventureIsNotFirst": "B19"
           }
         }
       ]

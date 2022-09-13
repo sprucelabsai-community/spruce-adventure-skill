@@ -10,7 +10,7 @@ import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../listing/List.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { generateAdventureWithPersonValues } from '../../support/generateAdventureValues'
+import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()

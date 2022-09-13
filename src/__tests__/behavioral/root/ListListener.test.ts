@@ -2,7 +2,7 @@ import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { generateAvatarValues } from '../../support/generateAdventureValues'
+import { generateAvatarValues } from '../../support/generateAvatarValues'
 
 @fake.login()
 export default class ListListenerTest extends AbstractAdventureTest {

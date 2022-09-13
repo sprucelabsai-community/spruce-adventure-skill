@@ -9,7 +9,7 @@ import { errorAssert } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { generateAdventureWithPersonValues } from '../../support/generateAdventureValues'
+import generateAdventureWithPersonValues from "../../support/generateAdventureWithPersonValues"
 
 @fake.login()
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {

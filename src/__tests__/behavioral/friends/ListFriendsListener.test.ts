@@ -15,6 +15,7 @@ export default class ListFriendsListenerTest extends AbstractFriendsTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		await this.bootSkill()
+
 		const { skill } = await this.skills.loginAsCurrentSkill()
 		this.skillId = skill.id
 
