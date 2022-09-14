@@ -66,6 +66,7 @@
     "@sprucelabs/spruce-skill-utils": "^26.4.78",
     "@sprucelabs/spruce-store-plugin": "^49.0.38",
     "@sprucelabs/spruce-view-plugin": "^34.0.48",
+    "@sprucelabs/test": "^7.7.360",
     "dotenv": "^16.0.2",
     "globby": "^11.0.4"
   },
@@ -76,7 +77,6 @@
     "@sprucelabs/resolve-path-aliases": "^1.1.99",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/spruce-test-fixtures": "^49.0.38",
-    "@sprucelabs/test": "^7.7.360",
     "@sprucelabs/test-utils": "^3.2.2",
     "@types/node": "^18.7.17",
     "chokidar-cli": "^3.0.0",

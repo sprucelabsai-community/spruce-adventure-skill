@@ -16,6 +16,10 @@ jobs:
       - spruce/install_rsync
       - spruce/install_deps_build_ci_test
       - run:
+          name: "Check Health"
+          command: |
+            yarn health
+      - run:
           name: "Booting Adventure and Polish Checking"
           command: |
             echo SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot
