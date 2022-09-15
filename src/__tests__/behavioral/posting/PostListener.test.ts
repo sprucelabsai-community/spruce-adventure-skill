@@ -1,5 +1,5 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureValues from '../../support/generateAdventureValues'
 

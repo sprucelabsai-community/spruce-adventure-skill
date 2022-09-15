@@ -1,6 +1,6 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test'
+import { test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import PostSkillViewController from '../../../posting/Post.svc'
 import PostCardViewController from '../../../posting/PostCard.vc'

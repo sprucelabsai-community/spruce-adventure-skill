@@ -1,6 +1,6 @@
 import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import { Adventure } from '../../../adventure.types'
 import { PostCardOptions } from '../../../posting/PostCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'

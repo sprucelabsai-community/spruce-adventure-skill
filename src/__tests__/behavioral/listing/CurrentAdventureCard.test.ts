@@ -4,7 +4,7 @@ import {
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test'
+import { test, assert } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'

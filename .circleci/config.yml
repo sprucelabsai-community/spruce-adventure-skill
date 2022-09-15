@@ -16,10 +16,6 @@ jobs:
       - spruce/install_rsync
       - spruce/install_deps_build_ci_test
       - run:
-          name: "Check Health"
-          command: |
-            yarn health
-      - run:
           name: "Booting Adventure and Polish Checking"
           command: |
             echo SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot
@@ -45,10 +41,10 @@ jobs:
               fi
             done
       - spruce/install_cli
-      - run:
-          name: "Run CLI Setup Tests for DEMO_NUMBER"
-          command: |
-            ~/.yarn/bin/spruce setup.testing --demoNumber $DEMO_NUMBER --skillSlug adventure
+      - spruce/setup_testing:
+          demoNumber: $DEMO_NUMBER
+          skillSlug: adventure
+      - spruce/check_skill_boot_with_prod_dependencies
       - run:
           name: "Publish to Sandbox"
           command: |

@@ -1,5 +1,5 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test'
+import { assert, test } from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()

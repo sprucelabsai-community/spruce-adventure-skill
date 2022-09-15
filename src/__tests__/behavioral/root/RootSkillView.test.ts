@@ -4,7 +4,7 @@ import {
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test'
+import { test } from '@sprucelabs/test-utils'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
