@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.6.0...v3.7.0) (2022-09-21)
+
+
+### Features
+
+* remembers rsvp status ([54eee21](https://github.com/sprucelabsai/spruce-adventure-skill/commit/54eee21))
+
 # [3.6.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.5.21...v3.6.0) (2022-09-21)
 
 
