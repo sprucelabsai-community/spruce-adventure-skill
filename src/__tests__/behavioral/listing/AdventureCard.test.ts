@@ -1,4 +1,4 @@
-import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
 import AdventureCardViewController from '../../../listing/AdventureCard.vc'
@@ -26,5 +26,19 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 	@test()
 	protected static async adventureCardRendersInOutButtons() {
 		vcAssert.assertCardRendersButtons(this.vc, ['in', 'out'])
+	}
+
+	@test()
+	protected static async clickingImInRendersConfirm() {
+		await vcAssert.assertRendersConfirm(this.vc, () => {
+			interactor.clickButton(this.vc, 'in')
+		})
+	}
+
+	@test()
+	protected static async clickingImOutRendersConfirm() {
+		await vcAssert.assertRendersConfirm(this.vc, () => {
+			interactor.clickButton(this.vc, 'out')
+		})
 	}
 }

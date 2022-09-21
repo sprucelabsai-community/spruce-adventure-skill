@@ -23,14 +23,20 @@ export default class AdventureCardViewController extends AbstractViewController<
 					id: 'in',
 					label: "I'm in!",
 					type: 'primary',
+					onClick: this.handleClickButton.bind(this),
 				},
 				{
 					id: 'out',
 					label: "Can't make it!",
 					type: 'destructive',
+					onClick: this.handleClickButton.bind(this),
 				},
 			],
 		})
+	}
+
+	private async handleClickButton() {
+		await this.confirm({ message: 'You sure?' })
 	}
 
 	public render() {
