@@ -10,21 +10,33 @@ export default async (
 ): SpruceEventResponse<ResponsePayload> => {
 	const { stores, source, client } = event
 
-	const adventures = await stores.getStore('adventures')
-	const records = await adventures.find(
-		{
-			//@ts-ignore
-			'source.personId': source.personId!,
-		},
-		{ limit: 1 }
-	)
+	const connectionsStore = await stores.getStore('connections')
+	const personId = source.personId!
+	const connections = await connectionsStore.find({
+		//@ts-ignore
+		$or: [{ 'source.personId': personId }, { 'target.personId': personId }],
+	})
+	const peopleIds: string[] = [personId]
+
+	for (const connection of connections) {
+		peopleIds.push(connection.source.personId)
+		if (connection?.target?.personId) {
+			peopleIds.push(connection.target.personId)
+		}
+	}
+
+	const adventuresStore = await stores.getStore('adventures')
+	const adventures = await adventuresStore.find({
+		//@ts-ignore
+		'source.personId': { $in: peopleIds },
+	})
 
 	const [{ auth }] = await client.emitAndFlattenResponses('whoami::v2020_12_25')
 
 	const { casualName = '**missing**', avatar } = auth.person ?? {}
 
 	return {
-		adventures: records.map((r) => ({
+		adventures: adventures.map((r) => ({
 			...r,
 			personCasualName: casualName,
 			personAvatar: avatar,

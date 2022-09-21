@@ -1,3 +1,4 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { generateId } from '@sprucelabs/test-utils'
 import { Adventure } from '../../adventure.types'
 import generateAddressValues from './generateAddressValues'
@@ -8,7 +9,7 @@ export default function generateAdventureValues(
 	return {
 		id: generateId(),
 		what: generateId(),
-		when: new Date().getTime(),
+		when: dateUtil.addDays(new Date().getTime(), 1),
 		where: generateAddressValues(),
 		whosIn: [],
 		whosOut: [],

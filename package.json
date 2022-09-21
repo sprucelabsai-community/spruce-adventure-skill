@@ -150,7 +150,8 @@
             "loadsManyAdventuresAndKeepsOwnFirst": "B14",
             "adventureCardRendersInOutButtons": "B50",
             "clickingImOutRendersConfirm": "B53",
-            "canMatchOutWhenNotFirst": "B56"
+            "canMatchOutWhenNotFirst": "B56",
+            "ignoresOtherPeoplesConnections": "B16"
           }
         }
       ]

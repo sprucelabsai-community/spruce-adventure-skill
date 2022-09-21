@@ -2,7 +2,7 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
 import { PostAdventure } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import generateAdventureValues from '../../support/generateAdventureValues'
+import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()
 export default class PostListenerTest extends AbstractAdventureTest {
@@ -30,12 +30,6 @@ export default class PostListenerTest extends AbstractAdventureTest {
 	}
 
 	private static generatePostAdventureValues(): PostAdventure {
-		const adventure = generateAdventureValues()
-
-		return {
-			what: adventure.what,
-			when: adventure.when,
-			where: adventure.where,
-		}
+		return generatePostAdventureValues()
 	}
 }

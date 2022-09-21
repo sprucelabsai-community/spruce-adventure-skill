@@ -1,8 +1,9 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../support/generateAvatarValues'
+import { generatePostAdventureValues } from '../posting/generatePostAdventureValues'
 
 @fake.login()
 export default class ListListenerTest extends AbstractAdventureTest {
@@ -44,6 +45,68 @@ export default class ListListenerTest extends AbstractAdventureTest {
 			...generateAvatarValues(),
 		}
 		await this.assertOnlyLoggedInPersonsAdventure()
+	}
+
+	@test()
+	protected static async returnsAdventuresFromConnections() {
+		const toId = await this.createFriendAdventure()
+		await this.createConnection(this.fakedPerson.id, toId)
+		await this.assertReturnsOneAdventure()
+	}
+
+	@test()
+	protected static async canReturnAdventureFromReverseConnection() {
+		const fromId = await this.createFriendAdventure()
+		await this.createConnection(fromId, this.fakedPerson.id)
+		await this.assertReturnsOneAdventure()
+	}
+
+	@test()
+	protected static async canCheckMultipleConnections() {
+		const friend1 = await this.createFriendAdventure()
+		const friend2 = await this.createFriendAdventure()
+		await this.createConnection(friend1, this.fakedPerson.id)
+		await this.createConnection(this.fakedPerson.id, friend2)
+		await this.assertTotalAdventures(2)
+	}
+
+	@test()
+	protected static async ignoresOtherPeoplesConnections() {
+		const friend1 = await this.createFriendAdventure()
+		await this.createConnection(friend1, generateId())
+		await this.assertTotalAdventures(0)
+	}
+
+	private static async assertReturnsOneAdventure() {
+		const expected = 1
+		await this.assertTotalAdventures(expected)
+	}
+
+	private static async assertTotalAdventures(expected: number) {
+		const adventures = await this.emit()
+		assert.isLength(adventures, expected)
+	}
+
+	private static async createConnection(fromId: string, toId: string) {
+		await this.connections.createOne({
+			isConfirmed: true,
+			source: {
+				personId: fromId,
+			},
+			target: {
+				personId: toId,
+			},
+		})
+	}
+
+	private static async createFriendAdventure() {
+		const personId = generateId()
+		const adventure = {
+			...generatePostAdventureValues(),
+			source: { personId },
+		}
+		await this.adventures.createOne(adventure)
+		return personId
 	}
 
 	private static async assertOnlyLoggedInPersonsAdventure() {
