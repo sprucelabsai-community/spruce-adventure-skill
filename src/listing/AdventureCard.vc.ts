@@ -1,5 +1,6 @@
 import {
 	AbstractViewController,
+	ButtonGroupViewController,
 	Card,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -11,6 +12,8 @@ export default class AdventureCardViewController extends AbstractViewController<
 	public static id = 'adventure-card'
 	private cardVc: BaseAdventureCardViewController
 	private loggedInPersonId: string
+	private adventure: AdventureWithPerson
+	private buttonGroupVc: ButtonGroupViewController
 
 	public constructor(options: ViewControllerOptions & AdventureCardOptions) {
 		super(options)
@@ -20,15 +23,27 @@ export default class AdventureCardViewController extends AbstractViewController<
 			'loggedInPersonId',
 		])
 
+		this.adventure = adventure
 		this.loggedInPersonId = loggedInPersonId
-		this.cardVc = this.CardVc(adventure)
+		this.buttonGroupVc = this.ButtonGroupVc()
+		this.cardVc = this.CardVc()
 	}
 
-	private CardVc(
-		adventure: AdventureWithPerson
-	): BaseAdventureCardViewController {
-		const isIn = !!adventure.whosIn.find((i) => i === this.loggedInPersonId)
-		const isOut = !!adventure.whosOut.find((i) => i === this.loggedInPersonId)
+	private CardVc(): BaseAdventureCardViewController {
+		return this.Controller('adventure.base-adventure-card', {
+			adventure: this.adventure,
+			id: this.adventure.id,
+			buttons: this.buttonGroupVc.render(),
+		})
+	}
+
+	private ButtonGroupVc() {
+		const isIn = !!this.adventure.whosIn.find(
+			(i) => i === this.loggedInPersonId
+		)
+		const isOut = !!this.adventure.whosOut.find(
+			(i) => i === this.loggedInPersonId
+		)
 
 		const selected: string[] = []
 
@@ -38,7 +53,7 @@ export default class AdventureCardViewController extends AbstractViewController<
 			selected.push('out')
 		}
 
-		const groupVc = this.Controller('buttonGroup', {
+		const buttonGroupVc = this.Controller('buttonGroup', {
 			selected,
 			onSelectionChange: this.handleClickButton.bind(this),
 			buttons: [
@@ -56,15 +71,22 @@ export default class AdventureCardViewController extends AbstractViewController<
 				},
 			],
 		})
-		return this.Controller('adventure.base-adventure-card', {
-			adventure,
-			id: adventure.id,
-			buttons: groupVc.render(),
-		})
+		return buttonGroupVc
 	}
 
 	private async handleClickButton() {
 		await this.confirm({ message: 'You sure?' })
+
+		const client = await this.connectToApi()
+		await client.emitAndFlattenResponses('adventure.rsvp::v2022_09_09', {
+			target: {
+				adventureId: this.adventure.id,
+			},
+			payload: {
+				canIMakeIt:
+					this.buttonGroupVc.getSelectedButtons()[0] === 'in' ? true : false,
+			},
+		})
 	}
 
 	public render() {

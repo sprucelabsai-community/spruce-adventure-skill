@@ -89,6 +89,15 @@ export default class EventFaker {
 		)
 	}
 
+	public async fakeRsvp(cb?: (targetAndPayload: RsvpTargetAndPayload) => void) {
+		await eventFaker.on('adventure.rsvp::v2022_09_09', (targetAndPayload) => {
+			cb?.(targetAndPayload)
+			return {
+				success: true,
+			}
+		})
+	}
+
 	public async fakeCancelAdventure(cb?: () => void) {
 		await eventFaker.on('adventure.cancel::v2022_09_09', () => {
 			cb?.()
@@ -117,3 +126,6 @@ export type ListFriendsTargetAndPayload =
 
 export type AcceptConnectionTargetAndPayload =
 	SpruceSchemas.Adventure.v2022_09_09.AcceptConnectionEmitTargetAndPayload
+
+export type RsvpTargetAndPayload =
+	SpruceSchemas.Adventure.v2022_09_09.RsvpEmitTargetAndPayload

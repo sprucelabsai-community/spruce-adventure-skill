@@ -5,15 +5,23 @@ import { AdventureWithPerson } from '../../../adventure.types'
 import AdventureCardViewController from '../../../listing/AdventureCard.vc'
 import BaseAdventureCardViewController from '../../../listing/BaseAdventureCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { RsvpTargetAndPayload } from '../../support/EventFaker'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
 
 @fake.login()
 export default class AdventureCardTest extends AbstractAdventureTest {
 	private static vc: AdventureCardViewController
+	private static adventure: AdventureWithPerson
+	private static lastPassedTargetAndPayload: RsvpTargetAndPayload | undefined
 
 	protected static async beforeEach() {
 		await super.beforeEach()
-		this.setupVcWithAdventure(generateAdventureWithPersonValues())
+		this.adventure = generateAdventureWithPersonValues()
+		this.setupVcWithAdventure(this.adventure)
+		this.lastPassedTargetAndPayload = undefined
+		await this.eventFaker.fakeRsvp((targetAndPayload) => {
+			this.lastPassedTargetAndPayload = targetAndPayload
+		})
 	}
 
 	@test()
@@ -40,16 +48,12 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async clickingImInRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, async () => {
-			await interactor.clickButton(this.vc, 'in')
-		})
+		await this.assertClickingImInRendersConfirm()
 	}
 
 	@test()
 	protected static async clickingImOutRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, async () => {
-			await interactor.clickButton(this.vc, 'out')
-		})
+		await this.assertClickingImOutRendersConfirm()
 	}
 
 	@test()
@@ -88,6 +92,32 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 		this.assertImOutButtonSelected()
 	}
 
+	@test()
+	protected static async passesExpectedTargetToRsvpListener() {
+		const confirmVc = await this.assertClickingImInRendersConfirm()
+		await confirmVc.accept()
+		this.assertLastCanIMakeItInPayloadEquals(true)
+	}
+
+	@test()
+	protected static async passesExpectedTargetToRsvpListenerWhenOut() {
+		const confirmVc = await this.assertClickingImOutRendersConfirm()
+		await confirmVc.accept()
+		this.assertLastCanIMakeItInPayloadEquals(false)
+	}
+
+	private static assertLastCanIMakeItInPayloadEquals(canIMakeIt: boolean) {
+		delete this.lastPassedTargetAndPayload?.source
+		assert.isEqualDeep(this.lastPassedTargetAndPayload, {
+			target: {
+				adventureId: this.adventure.id,
+			},
+			payload: {
+				canIMakeIt,
+			},
+		})
+	}
+
 	private static setupVcWithWhosIn(whosIn: string[]) {
 		const adventure = generateAdventureWithPersonValues()
 		adventure.whosIn = whosIn
@@ -118,8 +148,20 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 		assert.isFalsy(this.views.render(outVc).isSelected)
 	}
 
+	private static async assertClickingImInRendersConfirm() {
+		return vcAssert.assertRendersConfirm(this.vc, async () => {
+			await interactor.clickButton(this.vc, 'in')
+		})
+	}
+
 	private static getRsvpButtons() {
 		return vcAssert.assertCardRendersButtons(this.vc, ['in', 'out'])
+	}
+
+	private static async assertClickingImOutRendersConfirm() {
+		return vcAssert.assertRendersConfirm(this.vc, async () => {
+			await interactor.clickButton(this.vc, 'out')
+		})
 	}
 
 	private static setupVcWithAdventure(adventure: AdventureWithPerson) {
