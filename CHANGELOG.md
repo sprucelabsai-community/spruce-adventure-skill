@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.5.21...v3.6.0) (2022-09-21)
+
+
+### Features
+
+* rsvp listener saves whos is in and out on the adventure ([59bf123](https://github.com/sprucelabsai/spruce-adventure-skill/commit/59bf123))
+
 ## [3.5.21](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.5.20...v3.5.21) (2022-09-21)
 
 ## [3.5.20](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.5.19...v3.5.20) (2022-09-21)
