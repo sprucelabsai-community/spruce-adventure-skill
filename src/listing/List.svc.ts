@@ -19,7 +19,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	protected friendsToolVc: FriendsListToolViewController
 	private toolBeltVc: ToolBeltViewController
 	private router!: Router
-	private cards: ViewController<Card>[] = []
+	protected cards: ViewController<Card>[] = []
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
@@ -55,7 +55,6 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	public async load({ router, authenticator }: SkillViewControllerLoadOptions) {
 		this.router = router
 		const person = authenticator.getPerson()!
-
 		const client = await this.connectToApi()
 
 		const [{ adventures }] = await client.emitAndFlattenResponses(
@@ -67,20 +66,23 @@ export default class ListSkillViewController extends AbstractSkillViewController
 			return
 		}
 
-		const adventure = adventures[0]
-
-		if (adventure.source.personId === person.id) {
-			this.currentCardVc = this.Controller('adventure.current-adventure-card', {
-				adventure,
-				onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
-			})
-			this.cards.push(this.currentCardVc)
-		} else {
-			this.cards.push(
-				this.Controller('adventure.adventure-card', {
-					adventure,
-				})
-			)
+		for (const adventure of adventures) {
+			if (adventure.source.personId === person.id) {
+				this.currentCardVc = this.Controller(
+					'adventure.current-adventure-card',
+					{
+						adventure,
+						onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
+					}
+				)
+			} else {
+				this.cards.push(
+					this.Controller('adventure.adventure-card', {
+						adventure,
+						loggedInPersonId: person.id,
+					})
+				)
+			}
 		}
 
 		this.triggerRender()
@@ -93,9 +95,13 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	}
 
 	public render(): SkillView {
+		const cards = this.cards
+		if (this.currentCardVc) {
+			cards.unshift(this.currentCardVc)
+		}
 		return {
 			layouts: splitCardsIntoLayouts(
-				this.cards.map((c) => c.render()),
+				cards.map((c) => c.render()),
 				3
 			),
 		}

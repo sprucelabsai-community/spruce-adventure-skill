@@ -34,6 +34,10 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 			SpyCurrentCard as any
 		)
 
+		await this.reload()
+	}
+
+	private static async reload() {
 		this.vc = this.views.Controller(
 			'adventure.list',
 			{}
@@ -127,11 +131,24 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 			return [adventure, this.currentAdventure]
 		})
 
-		await this.load()
+		await this.reload()
 
 		const cards = vcAssert.assertSkillViewRendersCards(this.vc)
 		assert.isEqual(this.views.render(cards[0]).id, 'current')
 		assert.isEqual(this.views.render(cards[1]).id, adventure.id)
+	}
+
+	@test()
+	protected static async passesProperLoggedInPersonIdToAdventureCard() {
+		const adventure = generateAdventureWithPersonValues()
+		await this.eventFaker.fakeListAdventures(() => {
+			return [adventure]
+		})
+
+		await this.reload()
+		const [vc] = this.vc.getCards()
+		//@ts-ignore
+		assert.isEqual(vc.loggedInPersonId, this.fakedPerson.id)
 	}
 
 	private static async load() {
@@ -158,6 +175,9 @@ class SpyListViewController extends ListSkillViewController {
 
 	public getFriendsTool() {
 		return this.friendsToolVc as MockFriendsTool
+	}
+	public getCards() {
+		return this.cards
 	}
 }
 
