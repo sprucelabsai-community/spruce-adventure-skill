@@ -1,3 +1,10 @@
+# [3.8.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.7.0...v3.8.0) (2022-09-21)
+
+
+### Features
+
+* adventure list shows from friends ([fb23474](https://github.com/sprucelabsai/spruce-adventure-skill/commit/fb23474))
+
 # [3.7.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.6.0...v3.7.0) (2022-09-21)
 
 
