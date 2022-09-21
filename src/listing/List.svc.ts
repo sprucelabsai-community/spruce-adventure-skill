@@ -7,6 +7,7 @@ import {
 	splitCardsIntoLayouts,
 	ToolBelt,
 	ToolBeltViewController,
+	ViewController,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController from '../friends/FriendsListTool.vc'
@@ -18,6 +19,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	protected friendsToolVc: FriendsListToolViewController
 	private toolBeltVc: ToolBeltViewController
 	private router!: Router
+	private cards: ViewController<Card>[] = []
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
@@ -50,8 +52,10 @@ export default class ListSkillViewController extends AbstractSkillViewController
 		return this.toolBeltVc.render()
 	}
 
-	public async load({ router }: SkillViewControllerLoadOptions) {
+	public async load({ router, authenticator }: SkillViewControllerLoadOptions) {
 		this.router = router
+		const person = authenticator.getPerson()!
+
 		const client = await this.connectToApi()
 
 		const [{ adventures }] = await client.emitAndFlattenResponses(
@@ -63,10 +67,21 @@ export default class ListSkillViewController extends AbstractSkillViewController
 			return
 		}
 
-		this.currentCardVc = this.Controller('adventure.current-adventure-card', {
-			adventure: adventures[0],
-			onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
-		})
+		const adventure = adventures[0]
+
+		if (adventure.source.personId === person.id) {
+			this.currentCardVc = this.Controller('adventure.current-adventure-card', {
+				adventure,
+				onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
+			})
+			this.cards.push(this.currentCardVc)
+		} else {
+			this.cards.push(
+				this.Controller('adventure.adventure-card', {
+					adventure,
+				})
+			)
+		}
 
 		this.triggerRender()
 
@@ -78,12 +93,11 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	}
 
 	public render(): SkillView {
-		const cards: Card[] = []
-		if (this.currentCardVc) {
-			cards.push(this.currentCardVc?.render())
-		}
 		return {
-			layouts: splitCardsIntoLayouts(cards, 3),
+			layouts: splitCardsIntoLayouts(
+				this.cards.map((c) => c.render()),
+				3
+			),
 		}
 	}
 }

@@ -7,6 +7,7 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
+import AdventureCardViewController from '../../../listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../listing/List.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
@@ -102,6 +103,35 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 			},
 			router: this.views.getRouter(),
 		})
+	}
+
+	@test()
+	protected static async loadsAdventuresFromConnections() {
+		const adventure = generateAdventureWithPersonValues()
+
+		await this.eventFaker.fakeListAdventures(() => {
+			return [adventure]
+		})
+
+		await this.load()
+
+		const vc = vcAssert.assertSkillViewRendersCard(this.vc, adventure.id)
+		vcAssert.assertRendersAsInstanceOf(vc, AdventureCardViewController)
+	}
+
+	@test()
+	protected static async loadsManyAdventuresAndKeepsOwnFirst() {
+		const adventure = generateAdventureWithPersonValues()
+
+		await this.eventFaker.fakeListAdventures(() => {
+			return [adventure, this.currentAdventure]
+		})
+
+		await this.load()
+
+		const cards = vcAssert.assertSkillViewRendersCards(this.vc)
+		assert.isEqual(this.views.render(cards[0]).id, 'current')
+		assert.isEqual(this.views.render(cards[1]).id, adventure.id)
 	}
 
 	private static async load() {

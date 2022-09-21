@@ -146,7 +146,8 @@
             "acceptsConnectionIfPassedThroughArgs": "B58",
             "setsPersonToSourceBasedOnId": "B59",
             "hasCReateConnectionListener": "B60",
-            "redirectsToListEvenIfOwnAdventureIsNotFirst": "B19"
+            "redirectsToListEvenIfOwnAdventureIsNotFirst": "B19",
+            "loadsManyAdventuresAndKeepsOwnFirst": "B14"
           }
         }
       ]
