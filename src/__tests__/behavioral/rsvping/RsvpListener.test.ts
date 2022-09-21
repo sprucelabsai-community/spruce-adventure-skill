@@ -25,9 +25,9 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async addsRspToAdventure() {
+	protected static async addsRsvpToAdventure() {
 		await this.rsvpFirstAdventure()
-		await this.assertWhoseIn([this.fakedPerson.id])
+		await this.assertFakedPersonIsIn()
 	}
 
 	@test()
@@ -41,13 +41,48 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 		await this.assertWhoseIn([this.fakedPerson.id, person.id])
 	}
 
+	@test()
+	protected static async addsRsvpIfCantAttending() {
+		await this.rsvpImOut()
+		await this.assertWhoseIn([])
+		await this.assertWhoseOut([this.fakedPerson.id])
+	}
+
+	@test()
+	protected static async canUpdateRsvp() {
+		await this.rsvpImOut()
+		await this.rsvpFirstAdventure()
+		await this.assertFakedPersonIsIn()
+		await this.assertWhoseOut([])
+		await this.rsvpImOut()
+		await this.assertWhoseIn([])
+	}
+
+	private static async rsvpImOut() {
+		await this.rsvpFirstAdventure({ canIMakeIt: false })
+	}
+
+	private static async assertFakedPersonIsIn() {
+		await this.assertWhoseIn([this.fakedPerson.id])
+	}
+
 	private static async assertWhoseIn(expected: string[]) {
 		const adventure = await this.getFirstAdventure()
-		assert.isEqualDeep(adventure.whosIn, expected)
+		assert.isEqualDeep(adventure.whosIn, expected, 'Who is in does not match!')
+	}
+
+	private static async assertWhoseOut(expected: string[]) {
+		const adventure = await this.getFirstAdventure()
+		assert.isEqualDeep(
+			adventure.whosOut,
+			expected,
+			'Who is out does not match!'
+		)
 	}
 
 	private static async rsvpFirstAdventure(options?: {
 		client?: MercuryClient
+		canIMakeIt?: boolean
 	}) {
 		const adventure = await this.getFirstAdventure()
 		const success = await this.emitRsvp({ id: adventure.id, ...options })
@@ -63,8 +98,9 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 	private static async emitRsvp(options: {
 		id: string
 		client?: MercuryClient
+		canIMakeIt?: boolean
 	}): Promise<boolean> {
-		const { id, client } = options
+		const { id, client, canIMakeIt = true } = options
 
 		const [{ success }] = await (
 			client ?? this.fakedClient
@@ -73,7 +109,7 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 				adventureId: id,
 			},
 			payload: {
-				canIMakeIt: true,
+				canIMakeIt,
 			},
 		})
 

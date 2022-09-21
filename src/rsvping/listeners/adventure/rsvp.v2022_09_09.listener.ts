@@ -9,27 +9,34 @@ import SpruceError from '../../../errors/SpruceError'
 export default async (
 	event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { stores, target, source } = event
+	const { stores, target, source, payload } = event
+	const { canIMakeIt } = payload
 	const { adventureId } = target
-	const { personId } = source
+	const { personId: personSource } = source
+	const personId = personSource!
 
 	const adventures = await stores.getStore('adventures')
+	const key = canIMakeIt ? 'whosIn' : 'whosOut'
+	const match = await adventures.findOne({
+		id: adventureId,
+	})
 
-	const total = await adventures.update(
-		{
-			id: adventureId,
-		},
-		{
-			$push: { whosIn: personId },
-		}
-	)
-
-	if (total === 0) {
+	if (!match) {
 		throw new SpruceError({
 			code: 'NOT_FOUND',
 			friendlyMessage: `Oh no!! I couldn't find that reservation!`,
 		})
 	}
+
+	match.whosOut = match.whosOut.filter((i) => i !== personId)
+	match.whosIn = match.whosIn.filter((i) => i !== personId)
+
+	match[key].push(personId)
+
+	await adventures.updateOne(
+		{},
+		{ whosIn: match.whosIn, whosOut: match.whosOut }
+	)
 
 	return {
 		success: true,
