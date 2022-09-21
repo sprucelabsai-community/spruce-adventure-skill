@@ -24,6 +24,20 @@ export default buildSchema({
 			label: 'Where are you gonna to do it?',
 			isRequired: true,
 		},
+		whosIn: {
+			type: 'id',
+			isArray: true,
+			label: 'Who is in?',
+			minArrayLength: 0,
+			isRequired: true,
+		},
+		whosOut: {
+			type: 'id',
+			isArray: true,
+			label: 'Who is out?',
+			minArrayLength: 0,
+			isRequired: true,
+		},
 		source: {
 			type: 'schema',
 			isRequired: true,

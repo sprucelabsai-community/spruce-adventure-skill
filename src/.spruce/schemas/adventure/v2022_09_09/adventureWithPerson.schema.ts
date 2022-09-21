@@ -37,6 +37,24 @@ const adventureWithPersonSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureWi
 	                isRequired: true,
 	                options: undefined
 	            },
+	            /** Who is in?. */
+	            'whosIn': {
+	                label: 'Who is in?',
+	                type: 'id',
+	                isRequired: true,
+	                isArray: true,
+	                minArrayLength: 0,
+	                options: undefined
+	            },
+	            /** Who is out?. */
+	            'whosOut': {
+	                label: 'Who is out?',
+	                type: 'id',
+	                isRequired: true,
+	                isArray: true,
+	                minArrayLength: 0,
+	                options: undefined
+	            },
 	            /** . */
 	            'source': {
 	                type: 'schema',

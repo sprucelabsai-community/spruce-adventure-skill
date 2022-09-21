@@ -32,10 +32,19 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async rendersIntroCardWithTalkingSprucebotToStart() {
+	protected static async rendersLoadinGIntroCardToStart() {
+		this.vc = this.Vc()
+		const cardVc = this.assertRendersCard('intro')
+		vcAssert.assertCardIsBusy(cardVc)
+		vcAssert.assertCardDoesNotRenderTalkingSprucebot(cardVc)
+	}
+
+	@test()
+	protected static async rendersIntroCardWithTalkingSprucebotAfterLoad() {
 		this.assertDoesNotRenderCard('post')
 		const cardVc = this.assertRendersCard('intro')
 		vcAssert.assertCardRendersTalkingSprucebot(cardVc)
+		vcAssert.assertCardIsNotBusy(cardVc)
 	}
 
 	@test()

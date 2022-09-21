@@ -1,6 +1,7 @@
 import {
 	AbstractSkillViewController,
 	Button,
+	CardSection,
 	CardViewController,
 	Router,
 	SkillView,
@@ -18,6 +19,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
+		this.introCardVc = this.IntroCardVc()
 	}
 
 	private IntroCardVc(): CardViewController {
@@ -27,49 +29,60 @@ export default class RootSkillViewController extends AbstractSkillViewController
 				title: `Adventure time! ⚔️🧙`,
 			},
 			body: {
-				sections: [
-					{
-						talkingSprucebot: {
-							size: 'medium',
-							onComplete: () => {
-								this.isAnimating = false
-								this.introCardVc?.setFooter({
-									buttons: this.renderIntroButtons(),
-								})
-							},
-							avatar: {
-								stateOfMind: 'chill',
-							},
-							sentences: [
-								{
-									words: `Hello there! My name is Sprucebot!`,
-								},
-								{
-									words: `The gang back at HQ built this adventure to demonstrate some of my capabilities.`,
-								},
-								{
-									words:
-										"Next you'll get the chance to post your next adventure!!",
-								},
-								{
-									words: `Then, you'll be able to invite some friends!`,
-								},
-								{
-									words: `Lastly, they'll be able to RSVP to your adventure and I'll let you know!`,
-								},
-								{
-									words: 'You ready?',
-								},
-							],
-						},
-					},
-				],
+				isBusy: true,
 			},
 			footer: {
 				shouldRenderBorder: false,
 				buttons: this.renderIntroButtons(),
 			},
 		})
+	}
+
+	private renderTalkingSection(): CardSection {
+		return {
+			talkingSprucebot: {
+				size: 'medium',
+				onComplete: () => {
+					this.isAnimating = false
+					this.introCardVc?.setFooter({
+						buttons: this.renderIntroButtons(),
+					})
+				},
+				avatar: {
+					stateOfMind: 'chill',
+				},
+				sentences: [
+					{
+						words: `Hello there! My name is Sprucebot!`,
+					},
+					{
+						words: `Tay, one of my creators, built this Adventure Skill to help him schedule last minute play dates for his people daughters.`,
+					},
+					{
+						words: "Here's how it works...",
+					},
+					{
+						words: `You, or your friends (who you can invite later) can post an "Adventure".`,
+					},
+					{
+						words: `An Adventure is comprised of a what, when, and where...`,
+					},
+					{
+						words:
+							"After you post an Adventure, I'll message all your friends who can RSVP.",
+					},
+					{
+						words: "There's one catch, however...",
+					},
+					{
+						words: 'You can only have one Adventure at a time!',
+					},
+					{
+						words: 'You ready?',
+					},
+				],
+			},
+		}
 	}
 
 	private renderIntroButtons(): Button[] {
@@ -92,7 +105,9 @@ export default class RootSkillViewController extends AbstractSkillViewController
 			await router.redirect('adventure.list')
 			return
 		}
-		this.introCardVc = this.IntroCardVc()
+
+		this.introCardVc?.addSection(this.renderTalkingSection())
+		this.introCardVc?.setIsBusy(false)
 		this.router = router
 		this.triggerRender()
 	}

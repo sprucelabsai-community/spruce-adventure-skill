@@ -10,6 +10,8 @@ export default function generateAdventureValues(
 		what: generateId(),
 		when: new Date().getTime(),
 		where: generateAddressValues(),
+		whosIn: [],
+		whosOut: [],
 		...values,
 		source: {
 			personId: generateId(),

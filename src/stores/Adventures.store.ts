@@ -22,7 +22,7 @@ const fullSchema = adventureSchema
 const createSchema = buildSchema({
 	id: 'createAdventure',
 	fields: {
-		...dropFields(fullSchema.fields, ['id']),
+		...dropFields(fullSchema.fields, ['id', 'whosIn', 'whosOut']),
 	},
 })
 
@@ -80,7 +80,7 @@ export default class AdventuresStore extends AbstractStore<
 	protected async willCreate(
 		values: CreateAdventure
 	): Promise<Omit<DatabaseAdventure, 'id'>> {
-		return values
+		return { ...values, whosIn: [], whosOut: [] }
 	}
 
 	protected async willUpdate(values: UpdateAdventure) {
@@ -109,8 +109,14 @@ export default class AdventuresStore extends AbstractStore<
 		await Promise.all(
 			new Array(totalToSeed).fill(0).map(async () => {
 				const values = generateAdventureValues()
+
 				//@ts-ignore
 				delete values.id
+				//@ts-ignore
+				delete values.whosIn
+				//@ts-ignore
+				delete values.whosOut
+
 				if (personId) {
 					values.source.personId = personId
 				}

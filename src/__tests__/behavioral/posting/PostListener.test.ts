@@ -1,5 +1,6 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
+import { PostAdventure } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureValues from '../../support/generateAdventureValues'
 
@@ -28,12 +29,13 @@ export default class PostListenerTest extends AbstractAdventureTest {
 		assert.isEqualDeep(created, saved)
 	}
 
-	private static generatePostAdventureValues() {
+	private static generatePostAdventureValues(): PostAdventure {
 		const adventure = generateAdventureValues()
-		//@ts-ignore
-		delete adventure.id
-		//@ts-ignore
-		delete adventure.source
-		return adventure
+
+		return {
+			what: adventure.what,
+			when: adventure.when,
+			where: adventure.where,
+		}
 	}
 }

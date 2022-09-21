@@ -1,4 +1,4 @@
-import { buildSchema, dropFields } from '@sprucelabs/schema'
+import { buildSchema, pickFields } from '@sprucelabs/schema'
 import adventureBuilder from '../../../../schemas/v2022_09_09/adventure.builder'
 
 const postAdventureEmitPayloadBuilder = buildSchema({
@@ -11,7 +11,7 @@ const postAdventureEmitPayloadBuilder = buildSchema({
 				schema: {
 					id: 'postAdventure',
 					fields: {
-						...dropFields(adventureBuilder.fields, ['id', 'source']),
+						...pickFields(adventureBuilder.fields, ['what', 'when', 'where']),
 					},
 				},
 			},
