@@ -1,5 +1,3 @@
-import { lunch, tomorrowLunch } from '@sprucelabs/calendar-utils'
-import { Skill } from '@sprucelabs/spruce-skill-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
