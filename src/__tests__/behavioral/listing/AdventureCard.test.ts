@@ -30,15 +30,15 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async clickingImInRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, () => {
-			interactor.clickButton(this.vc, 'in')
+		await vcAssert.assertRendersConfirm(this.vc, async () => {
+			await interactor.clickButton(this.vc, 'in')
 		})
 	}
 
 	@test()
 	protected static async clickingImOutRendersConfirm() {
-		await vcAssert.assertRendersConfirm(this.vc, () => {
-			interactor.clickButton(this.vc, 'out')
+		await vcAssert.assertRendersConfirm(this.vc, async () => {
+			await interactor.clickButton(this.vc, 'out')
 		})
 	}
 }
