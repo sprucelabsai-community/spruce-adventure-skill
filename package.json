@@ -147,7 +147,8 @@
             "setsPersonToSourceBasedOnId": "B59",
             "hasCReateConnectionListener": "B60",
             "redirectsToListEvenIfOwnAdventureIsNotFirst": "B19",
-            "loadsManyAdventuresAndKeepsOwnFirst": "B14"
+            "loadsManyAdventuresAndKeepsOwnFirst": "B14",
+            "adventureCardRendersInOutButtons": "B50"
           }
         }
       ]

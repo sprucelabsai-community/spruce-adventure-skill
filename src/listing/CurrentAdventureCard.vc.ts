@@ -1,20 +1,15 @@
-import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
 	AbstractViewController,
 	Card,
-	CardViewController,
-	List,
-	MapViewController,
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
 import { AdventureWithPerson } from '../adventure.types'
+import BaseAdventureCardViewController from './BaseAdventureCard.vc'
 
 export default class CurrentAdventureCardViewController extends AbstractViewController<Card> {
 	public static id = 'current-adventure-card'
-	private cardVc: CardViewController
-	private mapVc: MapViewController
-	protected adventure: AdventureWithPerson
+	protected baseAdventureCardVc: BaseAdventureCardViewController
 	private didCancelHandler: ClickCancelHandler
 
 	public constructor(
@@ -27,28 +22,15 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 			'onDidCancel',
 		])
 
-		durationUtil.dates = this.dates
-		this.adventure = adventure
-		this.mapVc = this.MapVc()
-		this.cardVc = this.CardVc()
+		this.baseAdventureCardVc = this.CardVc(adventure)
 		this.didCancelHandler = onDidCancel
 	}
 
-	private CardVc(): CardViewController {
-		return this.Controller('card', {
-			id: 'current',
-			body: {
-				sections: [
-					{
-						shouldBePadded: false,
-						list: this.renderList(),
-					},
-					{
-						shouldBePadded: false,
-						map: this.mapVc.render(),
-					},
-				],
-			},
+	private CardVc(
+		adventure: AdventureWithPerson
+	): BaseAdventureCardViewController {
+		return this.Controller('adventure.base-adventure-card', {
+			adventure,
 			footer: {
 				buttons: [
 					{
@@ -60,38 +42,6 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 				],
 			},
 		})
-	}
-
-	private renderList(): List {
-		return {
-			rows: [
-				{
-					id: 'one',
-					height: 'content',
-					cells: [
-						{
-							avatars: this.adventure.personAvatar
-								? [this.adventure.personAvatar.mUri]
-								: null,
-						},
-						{
-							text: {
-								html: `"<em>${this.adventure.what}</em>" - ${this.adventure.personCasualName}`,
-							},
-							subText: {
-								content: durationUtil.renderDateTimeUntil(
-									this.adventure.when,
-									this.dates.date(),
-									{
-										shouldCapitalize: true,
-									}
-								),
-							},
-						},
-					],
-				},
-			],
-		}
 	}
 
 	private async handleClickCancel() {
@@ -110,20 +60,8 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 		this.didCancelHandler?.()
 	}
 
-	private MapVc(): MapViewController {
-		return this.Controller('map', {
-			zoom: 'block',
-			pins: [
-				{
-					subtitle: this.adventure.what,
-					address: this.adventure.where,
-				},
-			],
-		})
-	}
-
 	public render() {
-		return this.cardVc.render()
+		return this.baseAdventureCardVc.render()
 	}
 }
 
