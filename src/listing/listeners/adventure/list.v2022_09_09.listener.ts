@@ -26,10 +26,20 @@ export default async (
 	}
 
 	const adventuresStore = await stores.getStore('adventures')
-	const adventures = await adventuresStore.find({
-		//@ts-ignore
-		'source.personId': { $in: peopleIds },
-	})
+	const adventures = await adventuresStore.find(
+		{
+			//@ts-ignore
+			'source.personId': { $in: peopleIds },
+		},
+		{
+			sort: [
+				{
+					field: 'when',
+					direction: 'asc',
+				},
+			],
+		}
+	)
 
 	const [{ auth }] = await client.emitAndFlattenResponses('whoami::v2020_12_25')
 

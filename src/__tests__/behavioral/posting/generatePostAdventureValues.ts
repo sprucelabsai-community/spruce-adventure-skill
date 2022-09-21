@@ -1,12 +1,14 @@
 import { PostAdventure } from '../../../adventure.types'
 import generateAdventureValues from '../../support/generateAdventureValues'
 
-export function generatePostAdventureValues(): PostAdventure {
+export function generatePostAdventureValues(
+	values?: Partial<PostAdventure>
+): PostAdventure {
 	const adventure = generateAdventureValues()
 
 	return {
 		what: adventure.what,
-		when: adventure.when,
+		when: values?.when ?? adventure.when,
 		where: adventure.where,
 	}
 }

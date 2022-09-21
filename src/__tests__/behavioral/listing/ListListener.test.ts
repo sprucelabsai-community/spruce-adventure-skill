@@ -1,3 +1,5 @@
+import { lunch, tomorrowLunch } from '@sprucelabs/calendar-utils'
+import { Skill } from '@sprucelabs/spruce-skill-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
@@ -77,6 +79,28 @@ export default class ListListenerTest extends AbstractAdventureTest {
 		await this.assertTotalAdventures(0)
 	}
 
+	@test()
+	protected static async sortsDateTimeAsc() {
+		const adventures = await this.stores.getStore('adventures')
+		let passedOptions: Record<string, any> | undefined
+
+		adventures.find = async (_, options) => {
+			passedOptions = options
+			return []
+		}
+
+		await this.emit()
+
+		assert.isEqualDeep(passedOptions, {
+			sort: [
+				{
+					field: 'when',
+					direction: 'asc',
+				},
+			],
+		})
+	}
+
 	private static async assertReturnsOneAdventure() {
 		const expected = 1
 		await this.assertTotalAdventures(expected)
@@ -99,10 +123,12 @@ export default class ListListenerTest extends AbstractAdventureTest {
 		})
 	}
 
-	private static async createFriendAdventure() {
+	private static async createFriendAdventure(when?: number) {
 		const personId = generateId()
 		const adventure = {
-			...generatePostAdventureValues(),
+			...generatePostAdventureValues({
+				when,
+			}),
 			source: { personId },
 		}
 		await this.adventures.createOne(adventure)

@@ -151,7 +151,8 @@
             "adventureCardRendersInOutButtons": "B50",
             "clickingImOutRendersConfirm": "B53",
             "canMatchOutWhenNotFirst": "B56",
-            "ignoresOtherPeoplesConnections": "B16"
+            "ignoresOtherPeoplesConnections": "B16",
+            "sortsDateTimeAsc": "B17"
           }
         }
       ]
