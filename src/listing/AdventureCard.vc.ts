@@ -75,7 +75,10 @@ export default class AdventureCardViewController extends AbstractViewController<
 	}
 
 	private async handleClickButton() {
-		await this.confirm({ message: 'You sure?' })
+		const confirm = await this.confirm({ message: 'You sure?' })
+		if (!confirm) {
+			return
+		}
 
 		const client = await this.connectToApi()
 		await client.emitAndFlattenResponses('adventure.rsvp::v2022_09_09', {

@@ -153,16 +153,16 @@
             "canMatchOutWhenNotFirst": "B56",
             "ignoresOtherPeoplesConnections": "B16",
             "sortsDateTimeAsc": "B17",
-            "passesExpectedTargetToRsvpListenerWhenOut": "B64"
+            "passesExpectedTargetToRsvpListenerWhenOut": "B64",
+            "doesNotRsvpOnDecline": "B65"
           }
-        }
-      ]
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.test.js?(x)"
-    ],
-    "moduleNameMapper": {
-      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+        ]
+      ],
+      "testMatch": [
+        "**/__tests__/**/*.test.js?(x)"
+      ],
+      "moduleNameMapper": {
+        "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
+      }
     }
   }
-}

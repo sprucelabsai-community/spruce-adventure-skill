@@ -106,6 +106,13 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 		this.assertLastCanIMakeItInPayloadEquals(false)
 	}
 
+	@test()
+	protected static async doesNotRsvpOnDecline() {
+		const confirmVc = await this.assertClickingImOutRendersConfirm()
+		await confirmVc.decline()
+		assert.isUndefined(this.lastPassedTargetAndPayload)
+	}
+
 	private static assertLastCanIMakeItInPayloadEquals(canIMakeIt: boolean) {
 		delete this.lastPassedTargetAndPayload?.source
 		assert.isEqualDeep(this.lastPassedTargetAndPayload, {
