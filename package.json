@@ -1,7 +1,7 @@
 {
   "name": "adventure",
   "description": "An adventure looking for a hero!",
-  "version": "3.8.2",
+  "version": "3.8.1",
   "skill": {
     "namespace": "adventure",
     "upgradeIgnoreList": [
@@ -156,14 +156,14 @@
             "passesExpectedTargetToRsvpListenerWhenOut": "B64",
             "doesNotRsvpOnDecline": "B65"
           }
-        ]
-      ],
-      "testMatch": [
-        "**/__tests__/**/*.test.js?(x)"
-      ],
-      "moduleNameMapper": {
-        "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
-      }
+        }
+      ]
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
+    ],
+    "moduleNameMapper": {
+      "^#spruce/(.*)$": "<rootDir>/build/.spruce/$1"
     }
   }
 }
