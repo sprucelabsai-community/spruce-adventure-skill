@@ -87,7 +87,10 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 		this.triggerRender()
 
-		await this.friendsToolVc.load({ router })
+		await this.friendsToolVc.load({
+			router,
+			onNoFriends: () => this.toolBeltVc.focusTool('friends'),
+		})
 	}
 
 	private async onDidCancelCurrentAdventure() {

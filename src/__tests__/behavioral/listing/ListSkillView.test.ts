@@ -12,6 +12,7 @@ import CurrentAdventureCardViewController from '../../../listing/CurrentAdventur
 import ListSkillViewController from '../../../listing/List.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
+import generateFriendValues from '../../support/generateFriendValues'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()
@@ -26,6 +27,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		})
 
 		await this.fakeListAdventuresWithCurrent()
+		await this.eventFaker.fakeListFriends(() => [])
 
 		this.views.setController('adventure.list', SpyListViewController)
 		this.views.setController('adventure.friends-list-tool', MockFriendsTool)
@@ -35,15 +37,6 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		)
 
 		await this.reload()
-	}
-
-	private static async reload() {
-		this.vc = this.views.Controller(
-			'adventure.list',
-			{}
-		) as SpyListViewController
-
-		await this.load()
 	}
 
 	@test()
@@ -117,7 +110,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 			return [adventure]
 		})
 
-		await this.load()
+		await this.reload()
 
 		const vc = vcAssert.assertSkillViewRendersCard(this.vc, adventure.id)
 		vcAssert.assertRendersAsInstanceOf(vc, AdventureCardViewController)
@@ -151,6 +144,23 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		assert.isEqual(vc.loggedInPersonId, this.fakedPerson.id)
 	}
 
+	@test()
+	protected static async toolIsFocusedIfHaveCurrentAdventureButNoFriends() {
+		this.vc = this.Vc()
+		await toolBeltAssert.actionFocusesTool(this.vc, 'friends', () =>
+			this.load()
+		)
+	}
+
+	@test()
+	protected static async doesNotFocuseToolIfHasConnections() {
+		this.vc = this.Vc()
+		await this.eventFaker.fakeListFriends(() => [generateFriendValues()])
+		await assert.doesThrowAsync(() =>
+			toolBeltAssert.actionFocusesTool(this.vc, 'friends', () => this.load())
+		)
+	}
+
 	private static async load() {
 		await this.views.load(this.vc)
 	}
@@ -165,6 +175,16 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	private static get currentCardVc() {
 		return this.vc.getCurrentCardVc()!
+	}
+
+	private static async reload() {
+		this.vc = this.Vc()
+
+		await this.load()
+	}
+
+	private static Vc(): SpyListViewController {
+		return this.views.Controller('adventure.list', {}) as SpyListViewController
 	}
 }
 
@@ -183,8 +203,9 @@ class SpyListViewController extends ListSkillViewController {
 
 class MockFriendsTool extends FriendsListToolViewController {
 	private isLoaded = false
-	public async load() {
+	public async load(options: any) {
 		this.isLoaded = true
+		return super.load(options)
 	}
 
 	public assertIsLoaded() {

@@ -92,9 +92,15 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
 	public async load({
 		router,
-	}: Pick<SkillViewControllerLoadOptions, 'router'>) {
+		onNoFriends,
+	}: Pick<SkillViewControllerLoadOptions, 'router'> & {
+		onNoFriends?: () => void
+	}) {
 		await this.activeVc.load()
 		this.router = router
+		if (this.activeVc.getRecords().length === 0) {
+			onNoFriends?.()
+		}
 	}
 
 	public render() {

@@ -154,7 +154,8 @@
             "ignoresOtherPeoplesConnections": "B16",
             "sortsDateTimeAsc": "B17",
             "passesExpectedTargetToRsvpListenerWhenOut": "B64",
-            "doesNotRsvpOnDecline": "B65"
+            "doesNotRsvpOnDecline": "B65",
+            "doesNotFocuseToolIfHasConnections": "B57"
           }
         }
       ]
