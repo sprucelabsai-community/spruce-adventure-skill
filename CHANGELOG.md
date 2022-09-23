@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.8.5...v3.9.0) (2022-09-23)
+
+
+### Features
+
+* shows friends list if not friends to invite! ([aa2b5f3](https://github.com/sprucelabsai/spruce-adventure-skill/commit/aa2b5f3))
+
 ## [3.8.5](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.8.4...v3.8.5) (2022-09-23)
 
 ## [3.8.4](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.8.3...v3.8.4) (2022-09-23)
