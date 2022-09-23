@@ -7,10 +7,6 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
 		let message
 
 		switch (options?.code) {
-			case 'ADVENTURE_SKILL_ERROR':
-				message = 'A adventure skill error just happened!'
-				break
-
 			case 'NOT_FOUND':
 				message = `I could not find that!`
 				break
