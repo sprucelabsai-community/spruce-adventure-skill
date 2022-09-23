@@ -32,7 +32,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
-	protected static async rendersLoadinGIntroCardToStart() {
+	protected static async rendersLoadingIntroCardToStart() {
 		this.vc = this.Vc()
 		const cardVc = this.assertRendersCard('intro')
 		vcAssert.assertCardIsBusy(cardVc)
