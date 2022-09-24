@@ -2,6 +2,12 @@ import { EventFeatureListener } from '@sprucelabs/spruce-event-utils'
 
 const listeners: EventFeatureListener[] = [
     {
+        eventName: 'did-boot',
+        eventNamespace: 'skill',
+        version: 'v2022_09_24',
+        callback: require('../../listeners/skill/did-boot.v2022_09_24.listener').default,
+    },
+    {
         eventName: 'will-boot',
         eventNamespace: 'skill',
         version: 'v2021_08_03',
@@ -12,24 +18,6 @@ const listeners: EventFeatureListener[] = [
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'accept-connection',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/accept-connection.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'create-connection',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/create-connection.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'list-friends',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').default,
     },
     {
         eventName: 'post',
@@ -48,6 +36,24 @@ const listeners: EventFeatureListener[] = [
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'accept-connection',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/accept-connection.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'create-connection',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/create-connection.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'list-friends',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').default,
     },
 ]
 
