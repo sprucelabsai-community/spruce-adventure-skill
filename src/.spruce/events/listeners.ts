@@ -14,6 +14,24 @@ const listeners: EventFeatureListener[] = [
         callback: require('../../listeners/skill/will-boot.v2021_08_03.listener').default,
     },
     {
+        eventName: 'accept-connection',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/accept-connection.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'create-connection',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/create-connection.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'list-friends',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').default,
+    },
+    {
         eventName: 'cancel',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -36,24 +54,6 @@ const listeners: EventFeatureListener[] = [
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'accept-connection',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/accept-connection.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'create-connection',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/create-connection.v2022_09_09.listener').default,
-    },
-    {
-        eventName: 'list-friends',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').default,
     },
 ]
 
