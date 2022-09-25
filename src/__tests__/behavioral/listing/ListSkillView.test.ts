@@ -10,6 +10,7 @@ import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AdventureCardViewController from '../../../listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../listing/List.svc'
+import PostCardViewController from '../../../posting/PostCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
 import generateFriendValues from '../../support/generateFriendValues'
@@ -19,6 +20,7 @@ import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 export default class ListSkillViewTest extends AbstractAdventureTest {
 	private static vc: SpyListViewController
 	private static currentAdventure: AdventureWithPerson
+	private static adventureRecords: AdventureWithPerson[]
 
 	protected static async beforeEach() {
 		await super.beforeEach()
@@ -28,6 +30,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 		await this.fakeListAdventuresWithCurrent()
 		await this.eventFaker.fakeListFriends(() => [])
+		await this.eventFaker.fakeListAdventures(() => {
+			return this.adventureRecords
+		})
+
+		this.resetAdventureRecords()
+		this.seedCurrentAdventure()
 
 		this.views.setController('adventure.list', SpyListViewController)
 		this.views.setController('adventure.friends-list-tool', MockFriendsTool)
@@ -104,11 +112,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async loadsAdventuresFromConnections() {
-		const adventure = generateAdventureWithPersonValues()
-
-		await this.eventFaker.fakeListAdventures(() => {
-			return [adventure]
-		})
+		const adventure = this.seedAdventure()
 
 		await this.reload()
 
@@ -118,11 +122,9 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async loadsManyAdventuresAndKeepsOwnFirst() {
-		const adventure = generateAdventureWithPersonValues()
-
-		await this.eventFaker.fakeListAdventures(() => {
-			return [adventure, this.currentAdventure]
-		})
+		this.resetAdventureRecords()
+		const adventure = this.seedAdventure()
+		this.seedCurrentAdventure()
 
 		await this.reload()
 
@@ -133,10 +135,8 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async passesProperLoggedInPersonIdToAdventureCard() {
-		const adventure = generateAdventureWithPersonValues()
-		await this.eventFaker.fakeListAdventures(() => {
-			return [adventure]
-		})
+		this.resetAdventureRecords()
+		this.seedAdventure()
 
 		await this.reload()
 		const [vc] = this.vc.getCards()
@@ -159,6 +159,24 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		await assert.doesThrowAsync(() =>
 			toolBeltAssert.actionFocusesTool(this.vc, 'friends', () => this.load())
 		)
+	}
+
+	@test()
+	protected static async showsPostCardIfThereAreAdventures() {
+		this.resetAdventureRecords()
+		this.seedAdventure()
+		await this.reload()
+		const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
+		vcAssert.assertRendersAsInstanceOf(cardVc, PostCardViewController)
+	}
+
+	@test()
+	protected static noPostCardIfHasCurrent() {
+		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
+	}
+
+	private static resetAdventureRecords() {
+		this.adventureRecords = []
 	}
 
 	private static async load() {
@@ -185,6 +203,16 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	private static Vc(): SpyListViewController {
 		return this.views.Controller('adventure.list', {}) as SpyListViewController
+	}
+
+	private static seedCurrentAdventure() {
+		this.adventureRecords.push(this.currentAdventure)
+	}
+
+	private static seedAdventure() {
+		const adventure = generateAdventureWithPersonValues()
+		this.adventureRecords.push(adventure)
+		return adventure
 	}
 }
 

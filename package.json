@@ -156,7 +156,8 @@
             "passesExpectedTargetToRsvpListenerWhenOut": "B64",
             "doesNotRsvpOnDecline": "B65",
             "doesNotFocuseToolIfHasConnections": "B57",
-            "finderReturnsNameOfPoster": "B66"
+            "finderReturnsNameOfPoster": "B66",
+            "noPostCardIfHasCurrent": "B67"
           }
         }
       ]

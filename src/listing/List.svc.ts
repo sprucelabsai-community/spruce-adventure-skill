@@ -11,11 +11,13 @@ import {
 	ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController from '../friends/FriendsListTool.vc'
+import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
 export default class ListSkillViewController extends AbstractSkillViewController {
 	public static id = 'list'
 	protected currentCardVc?: CurrentAdventureCardViewController
+	protected postCardVc: PostCardViewController
 	protected friendsToolVc: FriendsListToolViewController
 	private toolBeltVc: ToolBeltViewController
 	private router!: Router
@@ -26,6 +28,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 		this.friendsToolVc = this.FriendsToolVc()
 		this.toolBeltVc = this.ToolBeltVc()
+		this.postCardVc = this.Controller('adventure.post-card', {})
 	}
 
 	private ToolBeltVc(): ToolBeltViewController {
@@ -83,6 +86,10 @@ export default class ListSkillViewController extends AbstractSkillViewController
 					})
 				)
 			}
+		}
+
+		if (!this.currentCardVc) {
+			this.cards.push(this.postCardVc)
 		}
 
 		this.triggerRender()
