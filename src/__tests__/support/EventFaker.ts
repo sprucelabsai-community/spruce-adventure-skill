@@ -1,6 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/heartwood-view-controllers'
 import { AddressFieldValue } from '@sprucelabs/schema'
-import { eventFaker } from '@sprucelabs/spruce-test-fixtures'
+import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { generateId } from '@sprucelabs/test-utils'
 import {
 	Adventure,
@@ -12,6 +12,15 @@ import generateAddressValues from './generateAddressValues'
 import generateAdventureValues from './generateAdventureValues'
 
 export default class EventFaker {
+	public async fakeGetPerson(
+		cb?: () => SpruceSchemas.Spruce.v2020_07_22.Person
+	) {
+		await eventFaker.on('get-person::v2020_12_25', () => {
+			return {
+				person: cb?.() ?? fake.getPerson(),
+			}
+		})
+	}
 	public async fakePostAdventure(
 		cb?: (targetAndPayload: PostTargetAndPayload) => void | Adventure
 	) {

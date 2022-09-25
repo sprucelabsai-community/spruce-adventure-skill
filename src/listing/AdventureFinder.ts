@@ -1,5 +1,6 @@
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
+import { Adventure } from '../adventure.types'
 import AdventuresStore from '../stores/Adventures.store'
 import ConnectionsStore from '../stores/Connections.store'
 
@@ -32,19 +33,13 @@ export default class AdventureFinder {
 	}
 
 	public async findForPerson(personId: string) {
-		const connections = await this.connections.find({
-			//@ts-ignore
-			$or: [{ 'source.personId': personId }, { 'target.personId': personId }],
-		})
-		const peopleIds: string[] = [personId]
+		const peopleIds = await this.loadFriends(personId)
+		const withPerson = await this.loadAdventuresForPeople(peopleIds)
 
-		for (const connection of connections) {
-			peopleIds.push(connection.source.personId)
-			if (connection?.target?.personId) {
-				peopleIds.push(connection.target.personId)
-			}
-		}
+		return withPerson
+	}
 
+	private async loadAdventuresForPeople(peopleIds: string[]) {
 		const adventures = await this.adventures.find(
 			{
 				//@ts-ignore
@@ -60,21 +55,45 @@ export default class AdventureFinder {
 			}
 		)
 
+		const withPerson = await Promise.all(
+			adventures.map(async (adventure) => {
+				const { casualName, avatar } = await this.loadPoster(adventure)
+
+				return {
+					...adventure,
+					personCasualName: casualName,
+					personAvatar: avatar,
+				}
+			})
+		)
+		return withPerson
+	}
+
+	private async loadPoster(adventure: Adventure) {
 		const [{ person }] = await this.client.emitAndFlattenResponses(
 			'get-person::v2020_12_25',
 			{
 				target: {
-					personId,
+					personId: adventure.source.personId,
 				},
 			}
 		)
+		return person
+	}
 
-		const { casualName = '**missing**', avatar } = person ?? {}
+	private async loadFriends(personId: string) {
+		const connections = await this.connections.find({
+			//@ts-ignore
+			$or: [{ 'source.personId': personId }, { 'target.personId': personId }],
+		})
+		const peopleIds: string[] = [personId]
 
-		return adventures.map((r) => ({
-			...r,
-			personCasualName: casualName,
-			personAvatar: avatar,
-		}))
+		for (const connection of connections) {
+			peopleIds.push(connection.source.personId)
+			if (connection?.target?.personId) {
+				peopleIds.push(connection.target.personId)
+			}
+		}
+		return peopleIds
 	}
 }

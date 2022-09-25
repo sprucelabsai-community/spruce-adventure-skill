@@ -10,6 +10,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		await this.bootSkill()
+		await this.eventFaker.fakeGetPerson(() => this.fakedPerson)
 	}
 
 	@test()
