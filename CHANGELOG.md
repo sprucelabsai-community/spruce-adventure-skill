@@ -1,3 +1,10 @@
+# [3.10.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.9.5...v3.10.0) (2022-09-25)
+
+
+### Features
+
+* message connections when posting ([774dd1b](https://github.com/sprucelabsai/spruce-adventure-skill/commit/774dd1b))
+
 ## [3.9.5](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.9.4...v3.9.5) (2022-09-25)
 
 ## [3.9.4](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.9.3...v3.9.4) (2022-09-25)
