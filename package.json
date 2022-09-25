@@ -158,7 +158,8 @@
             "doesNotFocuseToolIfHasConnections": "B57",
             "finderReturnsNameOfPoster": "B66",
             "noPostCardIfHasCurrent": "B67",
-            "postingFromListPageReloadsPage": "B70"
+            "postingFromListPageReloadsPage": "B70",
+            "decliningDoesNotSelectAButton": "B71"
           }
         }
       ]

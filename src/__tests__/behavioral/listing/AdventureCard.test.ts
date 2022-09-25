@@ -1,3 +1,4 @@
+import { runInThisContext } from 'vm'
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
@@ -108,9 +109,19 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async doesNotRsvpOnDecline() {
+		await this.clickImOutAndDecline()
+		assert.isUndefined(this.lastPassedTargetAndPayload)
+	}
+
+	@test()
+	protected static async decliningDoesNotSelectAButton() {
+		await this.clickImOutAndDecline()
+		this.assertNoButtonSelected()
+	}
+
+	private static async clickImOutAndDecline() {
 		const confirmVc = await this.assertClickingImOutRendersConfirm()
 		await confirmVc.decline()
-		assert.isUndefined(this.lastPassedTargetAndPayload)
 	}
 
 	private static assertLastCanIMakeItInPayloadEquals(canIMakeIt: boolean) {
@@ -151,8 +162,14 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 
 	private static assertNoButtonSelected() {
 		const [inVc, outVc] = this.getRsvpButtons()
-		assert.isFalsy(this.views.render(inVc).isSelected)
-		assert.isFalsy(this.views.render(outVc).isSelected)
+		assert.isFalsy(
+			this.views.render(inVc).isSelected,
+			"did not expect i'm in to be selected, but it was"
+		)
+		assert.isFalsy(
+			this.views.render(outVc).isSelected,
+			"did not expect i'm out to be selected, but it was"
+		)
 	}
 
 	private static async assertClickingImInRendersConfirm() {

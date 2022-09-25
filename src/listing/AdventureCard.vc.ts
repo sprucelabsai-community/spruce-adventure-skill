@@ -55,7 +55,8 @@ export default class AdventureCardViewController extends AbstractViewController<
 
 		const buttonGroupVc = this.Controller('buttonGroup', {
 			selected,
-			onSelectionChange: this.handleClickButton.bind(this),
+			onWillChangeSelection: this.handleWillRsvp.bind(this),
+			onSelectionChange: this.handleClickRsvp.bind(this),
 			buttons: [
 				{
 					id: 'in',
@@ -74,12 +75,7 @@ export default class AdventureCardViewController extends AbstractViewController<
 		return buttonGroupVc
 	}
 
-	private async handleClickButton() {
-		const confirm = await this.confirm({ message: 'You sure?' })
-		if (!confirm) {
-			return
-		}
-
+	private async handleClickRsvp() {
 		const client = await this.connectToApi()
 		await client.emitAndFlattenResponses('adventure.rsvp::v2022_09_09', {
 			target: {
@@ -90,6 +86,10 @@ export default class AdventureCardViewController extends AbstractViewController<
 					this.buttonGroupVc.getSelectedButtons()[0] === 'in' ? true : false,
 			},
 		})
+	}
+
+	private async handleWillRsvp() {
+		return this.confirm({ message: 'You sure?' })
 	}
 
 	public render() {
