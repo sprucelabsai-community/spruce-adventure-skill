@@ -4,7 +4,7 @@ import {
 	SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import SpruceError from '../../../errors/SpruceError'
+import Rsvper from '../../Rsvper'
 
 export default async (
 	event: SpruceEvent<SkillEventContract, EmitPayload>
@@ -15,28 +15,15 @@ export default async (
 	const { personId: personSource } = source
 	const personId = personSource!
 
-	const adventures = await stores.getStore('adventures')
-	const key = canIMakeIt ? 'whosIn' : 'whosOut'
-	const match = await adventures.findOne({
-		id: adventureId,
+	const rsvp = await Rsvper.Rsvper({
+		stores,
 	})
 
-	if (!match) {
-		throw new SpruceError({
-			code: 'NOT_FOUND',
-			friendlyMessage: `Oh no!! I couldn't find that reservation!`,
-		})
-	}
-
-	match.whosOut = match.whosOut.filter((i) => i !== personId)
-	match.whosIn = match.whosIn.filter((i) => i !== personId)
-
-	match[key].push(personId)
-
-	await adventures.updateOne(
-		{},
-		{ whosIn: match.whosIn, whosOut: match.whosOut }
-	)
+	await rsvp.rsvp({
+		adventureId,
+		canIMakeIt,
+		personId,
+	})
 
 	return {
 		success: true,
