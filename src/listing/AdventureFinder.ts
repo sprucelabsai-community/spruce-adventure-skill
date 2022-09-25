@@ -2,15 +2,15 @@ import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Adventure } from '../adventure.types'
 import AdventuresStore from '../stores/Adventures.store'
-import ConnectionsStore from '../stores/Connections.store'
+import ConnectionManager from './ConnectionManager'
 
 export default class AdventureFinder {
-	private connections: ConnectionsStore
+	private connections: ConnectionManager
 	private adventures: AdventuresStore
 	private client: MercuryClient
 
 	protected constructor(options: {
-		connections: ConnectionsStore
+		connections: ConnectionManager
 		adventures: AdventuresStore
 		client: MercuryClient
 	}) {
@@ -24,9 +24,9 @@ export default class AdventureFinder {
 	public static async Finder(options: {
 		stores: Pick<StoreFactory, 'getStore'>
 		client: MercuryClient
+		connections: ConnectionManager
 	}) {
-		const { stores, client } = options
-		const connections = await stores.getStore('connections')
+		const { stores, client, connections } = options
 		const adventures = await stores.getStore('adventures')
 
 		return new this({ connections, adventures, client })
@@ -34,7 +34,10 @@ export default class AdventureFinder {
 
 	public async findForPerson(personId: string) {
 		const peopleIds = await this.loadFriends(personId)
-		const withPerson = await this.loadAdventuresForPeople(peopleIds)
+		const withPerson = await this.loadAdventuresForPeople([
+			personId,
+			...peopleIds,
+		])
 
 		return withPerson
 	}
@@ -82,18 +85,6 @@ export default class AdventureFinder {
 	}
 
 	private async loadFriends(personId: string) {
-		const connections = await this.connections.find({
-			//@ts-ignore
-			$or: [{ 'source.personId': personId }, { 'target.personId': personId }],
-		})
-		const peopleIds: string[] = [personId]
-
-		for (const connection of connections) {
-			peopleIds.push(connection.source.personId)
-			if (connection?.target?.personId) {
-				peopleIds.push(connection.target.personId)
-			}
-		}
-		return peopleIds
+		return this.connections.loadConnectionsForPerson(personId)
 	}
 }

@@ -1,5 +1,6 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
 import AdventureFinder from './listing/AdventureFinder'
+import AdventurePoster from './posting/AdventurePoster'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
 export type AdventureWithPerson =
@@ -11,5 +12,6 @@ export type PostAdventure = SpruceSchemas.Adventure.v2022_09_09.PostAdventure
 declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
 	interface SkillContext {
 		finder: AdventureFinder
+		poster: AdventurePoster
 	}
 }

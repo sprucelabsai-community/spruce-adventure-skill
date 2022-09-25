@@ -159,7 +159,8 @@
             "finderReturnsNameOfPoster": "B66",
             "noPostCardIfHasCurrent": "B67",
             "postingFromListPageReloadsPage": "B70",
-            "decliningDoesNotSelectAButton": "B71"
+            "decliningDoesNotSelectAButton": "B71",
+            "passesGenerateUrlToListView": "B20"
           }
         }
       ]

@@ -8,16 +8,13 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 export default async (
 	event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { payload, source, stores } = event
+	const { payload, source, poster } = event
 	const { adventure } = payload
 	const { personId } = source
 
-	const adventures = await stores.getStore('adventures')
-	const created = await adventures.createOne({
+	const created = await poster.create({
 		...adventure,
-		source: {
-			personId: personId!,
-		},
+		personId: personId!,
 	})
 
 	return {

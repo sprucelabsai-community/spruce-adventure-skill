@@ -12,6 +12,40 @@ import generateAddressValues from './generateAddressValues'
 import generateAdventureValues from './generateAdventureValues'
 
 export default class EventFaker {
+	public async fakeSendMessage(
+		cb?: (targetAndPayload: SendMessageTargetAndPayload) => void
+	) {
+		await eventFaker.on('send-message::v2020_12_25', (targetAndPayload) => {
+			cb?.(targetAndPayload)
+
+			return {
+				message: {
+					body: generateId(),
+					classification: 'transactional' as const,
+					id: generateId(),
+					dateCreated: new Date().getTime(),
+					source: {},
+					target: {
+						personId: generateId(),
+					},
+				},
+			}
+		})
+	}
+
+	public async fakeGenerateUrl(
+		cb?: (targetAndPayload: GenerateUrlTargetAndPayload) => string | void
+	) {
+		await eventFaker.on(
+			'heartwood.generate-url::v2021_02_11',
+			(targetAndPayload) => {
+				return {
+					url: cb?.(targetAndPayload) ?? generateId(),
+				}
+			}
+		)
+	}
+
 	public async fakeGetPerson(
 		cb?: () => SpruceSchemas.Spruce.v2020_07_22.Person
 	) {
@@ -21,6 +55,7 @@ export default class EventFaker {
 			}
 		})
 	}
+
 	public async fakePostAdventure(
 		cb?: (targetAndPayload: PostTargetAndPayload) => void | Adventure
 	) {
@@ -138,3 +173,9 @@ export type AcceptConnectionTargetAndPayload =
 
 export type RsvpTargetAndPayload =
 	SpruceSchemas.Adventure.v2022_09_09.RsvpEmitTargetAndPayload
+
+export type SendMessageTargetAndPayload =
+	SpruceSchemas.Mercury.v2020_12_25.SendMessageEmitTargetAndPayload
+
+export type GenerateUrlTargetAndPayload =
+	SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayload

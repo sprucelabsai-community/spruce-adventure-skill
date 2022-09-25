@@ -9,6 +9,9 @@ export default class PostListenerTest extends AbstractAdventureTest {
 	@test()
 	protected static async postingAdventureSavesUnderCurrentPerson() {
 		await this.bootSkill()
+		await this.eventFaker.fakeSendMessage()
+		await this.eventFaker.fakeGenerateUrl()
+
 		const adventure = this.generatePostAdventureValues()
 
 		const [{ adventure: created }] =

@@ -14,4 +14,12 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
 
 		return id
 	}
+
+	protected static teammateId(idx: number) {
+		return this.fakedTeammates[idx].id
+	}
+
+	protected static get myId() {
+		return this.fakedPerson.id
+	}
 }

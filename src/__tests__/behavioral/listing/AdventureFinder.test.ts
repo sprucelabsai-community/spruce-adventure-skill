@@ -34,6 +34,7 @@ export default class AdventureFinderTest extends AbstractAdventureTest {
 		const finder = await AdventureFinder.Finder({
 			stores: this.stores,
 			client: this.fakedClient,
+			connections: await this.ConnectionManager(),
 		})
 
 		const adventures = await finder.findForPerson(this.fakedPerson.id)
