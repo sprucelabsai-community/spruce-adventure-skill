@@ -12,6 +12,7 @@ import CurrentAdventureCardViewController from '../../../listing/CurrentAdventur
 import ListSkillViewController from '../../../listing/List.svc'
 import PostCardViewController from '../../../posting/PostCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import FakePostCard from '../../support/FakePostCard'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
 import generateFriendValues from '../../support/generateFriendValues'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
@@ -39,6 +40,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 		this.views.setController('adventure.list', SpyListViewController)
 		this.views.setController('adventure.friends-list-tool', MockFriendsTool)
+		this.views.setController('adventure.post-card', FakePostCard)
 		this.views.setController(
 			'adventure.current-adventure-card',
 			SpyCurrentCard as any
@@ -135,8 +137,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async passesProperLoggedInPersonIdToAdventureCard() {
-		this.resetAdventureRecords()
-		this.seedAdventure()
+		this.resetAdventuresAndSeedOne()
 
 		await this.reload()
 		const [vc] = this.vc.getCards()
@@ -163,8 +164,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async showsPostCardIfThereAreAdventures() {
-		this.resetAdventureRecords()
-		this.seedAdventure()
+		this.resetAdventuresAndSeedOne()
 		await this.reload()
 		const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
 		vcAssert.assertRendersAsInstanceOf(cardVc, PostCardViewController)
@@ -173,6 +173,22 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	@test()
 	protected static noPostCardIfHasCurrent() {
 		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
+	}
+
+	@test()
+	protected static async postingFromListPageReloadsPage() {
+		this.resetAdventuresAndSeedOne()
+		await this.eventFaker.fakePostAdventure()
+
+		const postCardVc = this.vc.getPostCardVc()
+		await postCardVc.fillWithRandomValues()
+		await vcAssert.assertActionRedirects({
+			action: () => postCardVc.submitAndConfirm(),
+			destination: {
+				id: 'adventure.list',
+			},
+			router: this.views.getRouter(),
+		})
 	}
 
 	private static resetAdventureRecords() {
@@ -214,9 +230,17 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		this.adventureRecords.push(adventure)
 		return adventure
 	}
+
+	private static resetAdventuresAndSeedOne() {
+		this.resetAdventureRecords()
+		this.seedAdventure()
+	}
 }
 
 class SpyListViewController extends ListSkillViewController {
+	public getPostCardVc() {
+		return this.postCardVc as FakePostCard
+	}
 	public getCurrentCardVc() {
 		return this.currentCardVc as SpyCurrentCard
 	}

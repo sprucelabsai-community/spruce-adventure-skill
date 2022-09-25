@@ -28,7 +28,13 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 		this.friendsToolVc = this.FriendsToolVc()
 		this.toolBeltVc = this.ToolBeltVc()
-		this.postCardVc = this.Controller('adventure.post-card', {})
+		this.postCardVc = this.PostCardVc()
+	}
+
+	private PostCardVc(): PostCardViewController {
+		return this.Controller('adventure.post-card', {
+			onPost: this.handleDidPostAdventure.bind(this),
+		})
 	}
 
 	private ToolBeltVc(): ToolBeltViewController {
@@ -53,6 +59,9 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
 	public renderToolBelt(): ToolBelt {
 		return this.toolBeltVc.render()
+	}
+	private async handleDidPostAdventure() {
+		await this.router.redirect('adventure.list')
 	}
 
 	public async load({ router, authenticator }: SkillViewControllerLoadOptions) {

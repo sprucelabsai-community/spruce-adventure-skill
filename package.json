@@ -157,7 +157,8 @@
             "doesNotRsvpOnDecline": "B65",
             "doesNotFocuseToolIfHasConnections": "B57",
             "finderReturnsNameOfPoster": "B66",
-            "noPostCardIfHasCurrent": "B67"
+            "noPostCardIfHasCurrent": "B67",
+            "postingFromListPageReloadsPage": "B70"
           }
         }
       ]
