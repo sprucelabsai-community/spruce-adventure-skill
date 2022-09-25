@@ -7,6 +7,7 @@ import {
 import AdventureFinder from '../../listing/AdventureFinder'
 import ConnectionManager from '../../listing/ConnectionManager'
 import AdventurePoster from '../../posting/AdventurePoster'
+import Rsvper from '../../rsvping/Rsvper'
 
 export default async (
 	event: SpruceEvent<SkillEventContract>
@@ -26,6 +27,11 @@ export default async (
 		client: client as MercuryClient,
 	})
 
+	const rsvp = await Rsvper.Rsvper({
+		stores,
+	})
+
 	skill.updateContext('finder', finder)
 	skill.updateContext('poster', poster)
+	skill.updateContext('rsvper', rsvp)
 }
