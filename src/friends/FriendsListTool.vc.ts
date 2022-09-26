@@ -2,6 +2,7 @@ import {
 	AbstractViewController,
 	ActiveRecordCardViewController,
 	buildActiveRecordCard,
+	Button,
 	Card,
 	ListRow,
 	Router,
@@ -16,12 +17,15 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 	protected activeVc: ActiveRecordCardViewController
 	private router!: Router
 
-	public constructor(options: ViewControllerOptions) {
+	public constructor(options: ViewControllerOptions & FriendsListOptions) {
 		super(options)
-		this.activeVc = this.ActiveRecordVc()
+		const { buttons } = options
+		this.activeVc = this.ActiveRecordVc({ buttons })
 	}
 
-	private ActiveRecordVc(): ActiveRecordCardViewController {
+	private ActiveRecordVc(options: {
+		buttons?: Button[]
+	}): ActiveRecordCardViewController {
 		return this.Controller(
 			'activeRecordCard',
 			buildActiveRecordCard({
@@ -45,6 +49,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 				},
 				footer: {
 					buttons: [
+						...(options?.buttons ?? []),
 						{
 							id: 'invite',
 							label: 'Invite a friend!',
@@ -108,4 +113,8 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 	public render() {
 		return this.activeVc.render()
 	}
+}
+
+interface FriendsListOptions {
+	buttons?: Button[]
 }

@@ -2,7 +2,7 @@ import { SpruceEventResponse } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export default async (): SpruceEventResponse<ResponsePayload> => {
-	return { vcIds: ['adventure.friends-list-tool'] }
+	return { vcIds: ['adventure.friends-dashboard-card'] }
 }
 
 type ResponsePayload =
