@@ -162,7 +162,7 @@
             "decliningDoesNotSelectAButton": "B71",
             "passesGenerateUrlToListView": "B20",
             "sendsToEveryConnection": "B54",
-            "": ""
+            "dontMessageTeammatesIfDeclining": "B55"
           }
         }
       ]
