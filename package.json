@@ -165,7 +165,8 @@
             "dontMessageTeammatesIfDeclining": "B55",
             "showsAdventures2HoursPast": "B18",
             "showsPostAdventureCardWithBusyToStart": "B73",
-            "noPostCardWithAdventures": "B13"
+            "noPostCardWithAdventures": "B13",
+            "registersPeopleDashbardCards": "B74"
           }
         }
       ]
