@@ -114,7 +114,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async loadsAdventuresFromConnections() {
-		const adventure = this.seedAdventure()
+		const adventure = this.seedAdventureWithPerson()
 
 		await this.reload()
 
@@ -125,7 +125,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	@test()
 	protected static async loadsManyAdventuresAndKeepsOwnFirst() {
 		this.resetAdventureRecords()
-		const adventure = this.seedAdventure()
+		const adventure = this.seedAdventureWithPerson()
 		this.seedCurrentAdventure()
 
 		await this.reload()
@@ -225,7 +225,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		this.adventureRecords.push(this.currentAdventure)
 	}
 
-	private static seedAdventure() {
+	private static seedAdventureWithPerson() {
 		const adventure = generateAdventureWithPersonValues()
 		this.adventureRecords.push(adventure)
 		return adventure
@@ -233,7 +233,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	private static resetAdventuresAndSeedOne() {
 		this.resetAdventureRecords()
-		this.seedAdventure()
+		this.seedAdventureWithPerson()
 	}
 }
 

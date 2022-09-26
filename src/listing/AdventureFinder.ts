@@ -1,3 +1,4 @@
+import { dateUtil } from '@sprucelabs/calendar-utils'
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Adventure } from '../adventure.types'
@@ -33,7 +34,7 @@ export default class AdventureFinder {
 	}
 
 	public async findForPerson(personId: string) {
-		const peopleIds = await this.loadFriends(personId)
+		const peopleIds = await this.loadConnections(personId)
 		const withPerson = await this.loadAdventuresForPeople([
 			personId,
 			...peopleIds,
@@ -47,6 +48,9 @@ export default class AdventureFinder {
 			{
 				//@ts-ignore
 				'source.personId': { $in: peopleIds },
+				when: {
+					$gt: dateUtil.addMinutes(new Date().getTime(), 60 * -3),
+				},
 			},
 			{
 				sort: [
@@ -84,7 +88,7 @@ export default class AdventureFinder {
 		return person
 	}
 
-	private async loadFriends(personId: string) {
+	private async loadConnections(personId: string) {
 		return this.connections.loadConnectionsForPerson(personId)
 	}
 }

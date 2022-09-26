@@ -3,7 +3,6 @@ import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../support/generateAvatarValues'
-import { generatePostAdventureValues } from '../posting/generatePostAdventureValues'
 
 @fake.login()
 export default class ListListenerTest extends AbstractAdventureTest {
@@ -124,13 +123,8 @@ export default class ListListenerTest extends AbstractAdventureTest {
 
 	private static async createFriendAdventure(when?: number) {
 		const personId = generateId()
-		const adventure = {
-			...generatePostAdventureValues({
-				when,
-			}),
-			source: { personId },
-		}
-		await this.adventures.createOne(adventure)
+		const adventure = await this.seedAdventure(personId)
+		adventure.when = when ?? adventure.when
 		return personId
 	}
 

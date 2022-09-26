@@ -47,12 +47,13 @@ export default class Rsvper {
 			adventureId,
 			personId
 		)
-		const posterId = updated.source.personId
 
 		const [person, url] = await Promise.all([
 			getPerson(this.client, personId),
 			generateUrl(this.client),
 		])
+
+		const posterId = updated.source.personId
 
 		await Promise.all([
 			(async () => {
