@@ -75,12 +75,6 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 		})
 	}
 
-	private static async connect(idx: number) {
-		const id = this.teammateId(idx)
-		await this.createConnection(this.myId, id)
-		return id
-	}
-
 	private static async post() {
 		await this.poster.create({
 			personId: this.myId,

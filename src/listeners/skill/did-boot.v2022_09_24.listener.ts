@@ -29,6 +29,8 @@ export default async (
 
 	const rsvp = await Rsvper.Rsvper({
 		stores,
+		client: client as MercuryClient,
+		connections,
 	})
 
 	skill.updateContext('finder', finder)

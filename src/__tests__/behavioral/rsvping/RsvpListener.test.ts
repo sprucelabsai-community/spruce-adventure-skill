@@ -9,6 +9,8 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 	protected static async beforeEach() {
 		await super.beforeEach()
 		await this.bootSkill()
+		await this.eventFaker.fakeSendMessage()
+		await this.eventFaker.fakeGenerateUrl()
 	}
 
 	@test()

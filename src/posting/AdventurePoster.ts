@@ -3,6 +3,9 @@ import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Adventure, Person, PostAdventure } from '../adventure.types'
 import ConnectionManager from '../listing/ConnectionManager'
 import AdventuresStore from '../stores/Adventures.store'
+import generateUrl from '../utilities/generateUrl'
+import getPerson from '../utilities/getPerson'
+import { sendMessage } from '../utilities/sendMessage'
 
 export default class AdventurePoster {
 	private adventures: AdventuresStore
@@ -49,7 +52,7 @@ export default class AdventurePoster {
 
 		await Promise.all(
 			connections.map((connection) =>
-				this.messageConnection({ connection, from, created, url })
+				this.messageConnection({ toId: connection, from, created, url })
 			)
 		)
 
@@ -57,56 +60,24 @@ export default class AdventurePoster {
 	}
 
 	private async generateUrl() {
-		const [{ url }] = await this.client.emitAndFlattenResponses(
-			'heartwood.generate-url::v2021_02_11',
-			{
-				target: {
-					skillViewId: 'adventure.list',
-				},
-			}
-		)
-
+		const url = await generateUrl(this.client)
 		return url
 	}
 
 	private async messageConnection(options: {
-		connection: string
+		toId: string
 		from: Person
 		created: Adventure
 		url: string
 	}) {
-		const { connection, from, created, url } = options
-
-		const to = await this.getPerson(connection)
-		await this.client.emitAndFlattenResponses('send-message::v2020_12_25', {
-			target: {
-				personId: connection,
-			},
-			payload: {
-				message: {
-					body: `Hey ${to.casualName}! ${from.casualName} posted a new adventure!\n\n"${created.what}"`,
-					classification: 'transactional',
-					links: [
-						{
-							label: 'RSVP Now',
-							uri: url,
-						},
-					],
-				},
-			},
-		})
+		const { toId: toId, from, created, url } = options
+		const to = await this.getPerson(toId)
+		const message = `Hey ${to.casualName}! ${from.casualName} posted a new adventure!\n\n"${created.what}"`
+		await sendMessage({ ...options, client: this.client, message, url })
 	}
 
 	private async getPerson(personId: string) {
-		const [{ person }] = await this.client.emitAndFlattenResponses(
-			'get-person::v2020_12_25',
-			{
-				target: {
-					personId,
-				},
-			}
-		)
-
+		const person = await getPerson(this.client, personId)
 		return person
 	}
 }

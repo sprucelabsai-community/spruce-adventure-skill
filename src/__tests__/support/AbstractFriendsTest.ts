@@ -22,4 +22,10 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
 	protected static get myId() {
 		return this.fakedPerson.id
 	}
+
+	protected static async connect(teammateIdx: number) {
+		const id = this.teammateId(teammateIdx)
+		await this.createConnection(this.myId, id)
+		return id
+	}
 }

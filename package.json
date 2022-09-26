@@ -160,7 +160,9 @@
             "noPostCardIfHasCurrent": "B67",
             "postingFromListPageReloadsPage": "B70",
             "decliningDoesNotSelectAButton": "B71",
-            "passesGenerateUrlToListView": "B20"
+            "passesGenerateUrlToListView": "B20",
+            "sendsToEveryConnection": "B54",
+            "": ""
           }
         }
       ]
