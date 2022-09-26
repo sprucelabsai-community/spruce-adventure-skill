@@ -53,13 +53,13 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 				},
 				footer: {
 					buttons: [
-						...(buttons ?? []),
 						{
 							id: 'invite',
 							label: 'Invite a friend!',
 							type: 'primary',
 							onClick: this.handleClickInvite.bind(this),
 						},
+						...(buttons ?? []),
 					],
 				},
 			})

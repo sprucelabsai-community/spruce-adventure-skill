@@ -27,7 +27,6 @@ export default class FriendsDashboardCardViewController extends AbstractViewCont
 				{
 					id: 'adventures',
 					label: 'Adventures',
-					type: 'primary',
 					onClick: this.handleClickAdventures.bind(this),
 				},
 			],
