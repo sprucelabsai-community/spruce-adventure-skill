@@ -10,7 +10,10 @@
     "store"
   ],
   "events": {
-    "lastSync": {}
+    "lastSync": {},
+    "listenerCacheKeys": {
+      "http1270018081": "acceptconnectionadventurev2022_09_09canceladventurev2022_09_09createconnectionadventurev2022_09_09didbootskillv2022_09_24listadventurev2022_09_09listfriendsadventurev2022_09_09postadventurev2022_09_09rsvpadventurev2022_09_09willbootskillv2021_08_03"
+    }
   },
   "scriptUpdater": {
     "skipped": []

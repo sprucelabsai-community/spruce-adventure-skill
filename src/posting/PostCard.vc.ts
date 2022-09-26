@@ -20,14 +20,18 @@ export default class PostCardViewController extends AbstractViewController<Card>
 	public constructor(options: ViewControllerOptions & PostCardOptions) {
 		super(options)
 
-		const { onPost } = options
+		const { onPost, isBusy } = options
 
 		this.formVc = this.FormVc()
-		this.cardVc = this.CardVc()
+		this.cardVc = this.CardVc(isBusy)
 		this.onPostHandler = onPost
 	}
 
-	private CardVc(): CardViewController {
+	public setIsBusy(isBusy: boolean) {
+		this.cardVc.setIsBusy(isBusy)
+	}
+
+	private CardVc(isBusy = false): CardViewController {
 		return this.Controller('card', {
 			id: 'post',
 			header: {
@@ -38,6 +42,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 					randomUtil.rand(['1.png', '2.png', '3.png']),
 			},
 			body: {
+				isBusy,
 				sections: [
 					{
 						bigForm: this.formVc.render(),
@@ -123,4 +128,5 @@ export type OnPostHandler = (adventure: Adventure) => void | Promise<void>
 
 export interface PostCardOptions {
 	onPost?: OnPostHandler
+	isBusy?: boolean
 }

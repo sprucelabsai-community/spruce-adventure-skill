@@ -163,7 +163,8 @@
             "passesGenerateUrlToListView": "B20",
             "sendsToEveryConnection": "B54",
             "dontMessageTeammatesIfDeclining": "B55",
-            "showsAdventures2HoursPast": "B18"
+            "showsAdventures2HoursPast": "B18",
+            "showsPostAdventureCardWithBusyToStart": "B73"
           }
         }
       ]

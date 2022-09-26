@@ -34,6 +34,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	private PostCardVc(): PostCardViewController {
 		return this.Controller('adventure.post-card', {
 			onPost: this.handleDidPostAdventure.bind(this),
+			isBusy: true,
 		})
 	}
 
@@ -101,6 +102,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 			this.cards.push(this.postCardVc)
 		}
 
+		this.postCardVc.setIsBusy(false)
 		this.triggerRender()
 
 		await this.friendsToolVc.load({
@@ -118,6 +120,11 @@ export default class ListSkillViewController extends AbstractSkillViewController
 		if (this.currentCardVc) {
 			cards.unshift(this.currentCardVc)
 		}
+
+		if (cards.length === 0) {
+			cards.push(this.postCardVc)
+		}
+
 		return {
 			layouts: splitCardsIntoLayouts(
 				cards.map((c) => c.render()),

@@ -23,6 +23,11 @@ export default class PostCardTest extends AbstractAdventureTest {
 	}
 
 	@test()
+	protected static async isNotBusy() {
+		vcAssert.assertCardIsNotBusy(this.vc)
+	}
+
+	@test()
 	protected static async postFormRendersExpectedFields() {
 		this.assertRendersFields(['what', 'when', 'where'])
 	}

@@ -81,6 +81,16 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	}
 
 	@test()
+	protected static async showsPostAdventureCardWithBusyToStart() {
+		this.vc = this.Vc()
+		vcAssert.assertSkillViewRendersCard(this.vc, 'post')
+		vcAssert.assertCardIsBusy(this.vc.getPostCardVc())
+		this.seedAdventureWithPerson()
+		await this.load()
+		vcAssert.assertCardIsNotBusy(this.vc.getPostCardVc())
+	}
+
+	@test()
 	protected static async loadsTool() {
 		const tool = this.vc.getFriendsTool()
 		tool.assertIsLoaded()
@@ -213,7 +223,6 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
 	private static async reload() {
 		this.vc = this.Vc()
-
 		await this.load()
 	}
 
