@@ -11,6 +11,7 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 		await this.bootSkill()
 		await this.eventFaker.fakeSendMessage()
 		await this.eventFaker.fakeGenerateUrl()
+		await this.eventFaker.fakeGetPerson(() => this.fakedPerson)
 	}
 
 	@test()
