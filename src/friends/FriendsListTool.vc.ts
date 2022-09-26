@@ -29,7 +29,9 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 				rowTransformer: this.renderRow.bind(this),
 				responseKey: 'friends',
 				header: {
-					title: 'Friends list',
+					title: 'Adventure friends!!',
+					subtitle:
+						'These are the friends that get messaged everytime you post an adventure! ⚔️',
 				},
 				noResultsRow: {
 					height: 'content',

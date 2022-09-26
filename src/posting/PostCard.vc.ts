@@ -85,6 +85,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 	public async handleSubmit() {
 		const accepted = await this.confirm({
 			title: 'You ready to rock!?? 🎸',
+			message: `I'm going to message all your friends about this Adventure (or have you invite them)!`,
 		})
 
 		if (!accepted) {
