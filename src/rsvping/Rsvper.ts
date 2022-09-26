@@ -107,7 +107,7 @@ export default class Rsvper {
 			client: this.client,
 			message: `Heads up!! ${person.casualName} said they ${
 				canIMakeIt ? 'can' : `can't`
-			} make it out for the adventure!`,
+			} make it out for your adventure!`,
 			toId: posterId,
 			linkLabel: 'Adventures',
 			url,
