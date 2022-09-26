@@ -83,12 +83,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 	@test()
 	protected static async showsPostAdventureCardWithBusyToStart() {
 		this.vc = this.Vc()
-		vcAssert.assertSkillViewRendersCard(this.vc, 'post')
-		vcAssert.assertCardIsBusy(this.vc.getPostCardVc())
+		vcAssert.assertSkillViewRendersCard(this.vc, 'loading')
+		vcAssert.assertCardIsBusy(this.vc.getLoadingCardVc())
 		this.resetAdventureRecords()
 		this.seedAdventureWithPerson()
 		await this.load()
-		vcAssert.assertCardIsNotBusy(this.vc.getPostCardVc())
+		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'loading')
 	}
 
 	@test()
@@ -98,7 +98,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		this.views.render(this.vc)
 		await this.load()
 		this.views.render(this.vc)
-		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
+		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'loading')
 	}
 
 	@test()
@@ -258,6 +258,9 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 }
 
 class SpyListViewController extends ListSkillViewController {
+	public getLoadingCardVc() {
+		return this.loadingCardVc
+	}
 	public getPostCardVc() {
 		return this.postCardVc as FakePostCard
 	}

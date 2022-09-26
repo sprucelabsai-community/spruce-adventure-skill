@@ -22,6 +22,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	private toolBeltVc: ToolBeltViewController
 	private router!: Router
 	protected cards: ViewController<Card>[] = []
+	protected loadingCardVc: ViewController<Card>
 
 	public constructor(options: ViewControllerOptions) {
 		super(options)
@@ -29,12 +30,17 @@ export default class ListSkillViewController extends AbstractSkillViewController
 		this.friendsToolVc = this.FriendsToolVc()
 		this.toolBeltVc = this.ToolBeltVc()
 		this.postCardVc = this.PostCardVc()
+		this.loadingCardVc = this.Controller('card', {
+			id: 'loading',
+			body: {
+				isBusy: true,
+			},
+		})
 	}
 
 	private PostCardVc(): PostCardViewController {
 		return this.Controller('adventure.post-card', {
 			onPost: this.handleDidPostAdventure.bind(this),
-			isBusy: true,
 		})
 	}
 
@@ -102,7 +108,6 @@ export default class ListSkillViewController extends AbstractSkillViewController
 			this.cards.push(this.postCardVc)
 		}
 
-		this.postCardVc.setIsBusy(false)
 		this.triggerRender()
 
 		await this.friendsToolVc.load({
@@ -122,7 +127,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 		}
 
 		if (cards.length === 0) {
-			cards.push(this.postCardVc)
+			cards.push(this.loadingCardVc)
 		}
 
 		return {
