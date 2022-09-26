@@ -85,9 +85,25 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		this.vc = this.Vc()
 		vcAssert.assertSkillViewRendersCard(this.vc, 'post')
 		vcAssert.assertCardIsBusy(this.vc.getPostCardVc())
+		this.resetAdventureRecords()
 		this.seedAdventureWithPerson()
 		await this.load()
 		vcAssert.assertCardIsNotBusy(this.vc.getPostCardVc())
+	}
+
+	@test()
+	protected static async noPostCardWithAdventures() {
+		this.vc = this.Vc()
+		this.seedAdventureWithPerson()
+		this.views.render(this.vc)
+		await this.load()
+		this.views.render(this.vc)
+		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
+	}
+
+	@test()
+	protected static async noPostCardIfHasCurrent() {
+		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
 	}
 
 	@test()
@@ -178,11 +194,6 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		await this.reload()
 		const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
 		vcAssert.assertRendersAsInstanceOf(cardVc, PostCardViewController)
-	}
-
-	@test()
-	protected static noPostCardIfHasCurrent() {
-		vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
 	}
 
 	@test()

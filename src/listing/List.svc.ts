@@ -116,7 +116,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	}
 
 	public render(): SkillView {
-		const cards = this.cards
+		const cards = [...this.cards]
 		if (this.currentCardVc) {
 			cards.unshift(this.currentCardVc)
 		}
