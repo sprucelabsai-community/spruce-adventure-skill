@@ -70,7 +70,7 @@ export default class Rsvper {
 		person: Person,
 		url: string
 	) {
-		const poster = await getPerson(this.client, person.id)
+		const poster = await getPerson(this.client, posterId)
 		const connections = await this.connections.loadConnectionsForPerson(
 			posterId
 		)
