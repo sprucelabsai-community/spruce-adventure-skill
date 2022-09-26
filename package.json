@@ -164,7 +164,8 @@
             "sendsToEveryConnection": "B54",
             "dontMessageTeammatesIfDeclining": "B55",
             "showsAdventures2HoursPast": "B18",
-            "showsPostAdventureCardWithBusyToStart": "B73"
+            "showsPostAdventureCardWithBusyToStart": "B73",
+            "noPostCardWithAdventures": "B13"
           }
         }
       ]
