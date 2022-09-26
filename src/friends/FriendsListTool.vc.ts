@@ -4,6 +4,7 @@ import {
 	buildActiveRecordCard,
 	Button,
 	Card,
+	CardHeader,
 	ListRow,
 	Router,
 	SkillViewControllerLoadOptions,
@@ -19,21 +20,24 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
 	public constructor(options: ViewControllerOptions & FriendsListOptions) {
 		super(options)
-		const { buttons } = options
-		this.activeVc = this.ActiveRecordVc({ buttons })
+		const { buttons, header } = options
+		this.activeVc = this.ActiveRecordVc({ buttons, header })
 	}
 
 	private ActiveRecordVc(options: {
 		buttons?: Button[]
+		header?: CardHeader
 	}): ActiveRecordCardViewController {
+		const { buttons, header } = options
+
 		return this.Controller(
 			'activeRecordCard',
 			buildActiveRecordCard({
 				eventName: 'adventure.list-friends::v2022_09_09',
 				rowTransformer: this.renderRow.bind(this),
 				responseKey: 'friends',
-				header: {
-					title: 'Adventure friends!!',
+				header: header ?? {
+					title: 'Adventure Friends!!',
 					subtitle:
 						'These are the friends that get messaged everytime you post an adventure! ⚔️',
 				},
@@ -49,7 +53,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 				},
 				footer: {
 					buttons: [
-						...(options?.buttons ?? []),
+						...(buttons ?? []),
 						{
 							id: 'invite',
 							label: 'Invite a friend!',
@@ -117,4 +121,5 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
 interface FriendsListOptions {
 	buttons?: Button[]
+	header?: CardHeader
 }

@@ -19,6 +19,10 @@ export default class FriendsDashboardCardViewController extends AbstractViewCont
 
 	private FriendsListCardVc(): FriendsListToolViewController {
 		return this.Controller('adventure.friends-list-tool', {
+			header: {
+				title: 'Adventure Friends! ⚔️',
+				subtitle: `Wanna plan a last minute adventures with friends? I got your back! Below are the friends you've connected with!`,
+			},
 			buttons: [
 				{
 					id: 'adventures',
