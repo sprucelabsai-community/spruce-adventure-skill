@@ -132,7 +132,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 		await vcAssert.assertActionRedirects({
 			action: async () => confirm.accept(),
 			destination: {
-				id: 'adventure.post',
+				id: 'adventure.list',
 			},
 			router: this.views.getRouter(),
 		})

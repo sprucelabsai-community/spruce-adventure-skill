@@ -112,7 +112,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
 	}
 
 	private async onDidCancelCurrentAdventure() {
-		await this.router.redirect('adventure.post')
+		await this.router.redirect('adventure.list')
 	}
 
 	public render(): SkillView {
