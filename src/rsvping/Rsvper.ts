@@ -128,7 +128,9 @@ export default class Rsvper {
 		match[key].push(personId)
 
 		const updated = await this.adventures.updateOne(
-			{},
+			{
+				id: adventureId,
+			},
 			{ whosIn: match.whosIn, whosOut: match.whosOut }
 		)
 		return updated

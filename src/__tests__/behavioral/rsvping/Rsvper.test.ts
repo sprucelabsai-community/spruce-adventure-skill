@@ -97,6 +97,21 @@ export default class RsvperTest extends AbstractFriendsTest {
 		}
 	}
 
+	@test()
+	@seed('adventures', 1, { shouldAttachToFakedPerson: true })
+	protected static async updatesCurrentAdventure() {
+		await this.connect(0)
+		const [a1, a2] = await this.adventures.find({})
+		await this.rsvpAs(0, true, a2.id)
+
+		const match = await this.adventures.findOne({
+			id: a1.id,
+		})
+
+		assert.isTruthy(match)
+		assert.isEqualDeep(match.whosIn, [])
+	}
+
 	private static assertMessageSentToPerson(personId: string) {
 		assert.isTruthy(
 			this.messageTargetAndPayloads.find(
@@ -115,17 +130,23 @@ export default class RsvperTest extends AbstractFriendsTest {
 		)
 	}
 
-	private static async rsvpAs(idx: number, canIMakeIt = true) {
-		const adventure = await this.getFirstMessage()
+	private static async rsvpAs(
+		idx: number,
+		canIMakeIt = true,
+		adventureId?: string
+	) {
+		const adventure = await this.getFirstAdventure()
 		const id = adventure.id
 		await this.rsvper.rsvp({
-			adventureId: id,
+			adventureId: adventureId ?? id,
 			canIMakeIt,
 			personId: this.teammateId(idx),
 		})
+
+		return id
 	}
 
-	private static async getFirstMessage() {
+	private static async getFirstAdventure() {
 		const adventure = await this.adventures.findOne({})
 		assert.isTruthy(adventure)
 		return adventure
