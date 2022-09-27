@@ -49,10 +49,10 @@
     "update.dependencies": "yarn clean.dependencies && yarn"
   },
   "dependencies": {
-    "@sprucelabs/calendar-utils": "^27.1.25",
+    "@sprucelabs/calendar-utils": "^27.1.26",
     "@sprucelabs/data-stores": "^18.1.69",
     "@sprucelabs/error": "^5.0.515",
-    "@sprucelabs/heartwood-view-controllers": "^90.12.0",
+    "@sprucelabs/heartwood-view-controllers": "^90.14.1",
     "@sprucelabs/mercury-client": "^31.0.218",
     "@sprucelabs/mercury-core-events": "^12.2.34",
     "@sprucelabs/mercury-types": "^35.0.163",
@@ -60,12 +60,12 @@
     "@sprucelabs/spruce-core-schemas": "^34.2.121",
     "@sprucelabs/spruce-event-plugin": "^49.0.59",
     "@sprucelabs/spruce-event-utils": "^27.0.194",
-    "@sprucelabs/spruce-image-utils": "^5.0.16",
-    "@sprucelabs/spruce-invite-utils": "^5.0.64",
+    "@sprucelabs/spruce-image-utils": "^5.0.17",
+    "@sprucelabs/spruce-invite-utils": "^5.0.66",
     "@sprucelabs/spruce-skill-booter": "^49.0.59",
     "@sprucelabs/spruce-skill-utils": "^26.4.99",
     "@sprucelabs/spruce-store-plugin": "^49.0.59",
-    "@sprucelabs/spruce-view-plugin": "^34.0.79",
+    "@sprucelabs/spruce-view-plugin": "^34.0.80",
     "dotenv": "^16.0.2",
     "globby": "^11.0.4"
   },

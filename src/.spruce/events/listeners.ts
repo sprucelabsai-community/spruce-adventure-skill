@@ -20,12 +20,6 @@ const listeners: EventFeatureListener[] = [
         callback: require('../../cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
     },
     {
-        eventName: 'list',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../listing/listeners/adventure/list.v2022_09_09.listener').default,
-    },
-    {
         eventName: 'accept-connection',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -42,6 +36,12 @@ const listeners: EventFeatureListener[] = [
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'list',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../listing/listeners/adventure/list.v2022_09_09.listener').default,
     },
     {
         eventName: 'register-dashboard-cards',
