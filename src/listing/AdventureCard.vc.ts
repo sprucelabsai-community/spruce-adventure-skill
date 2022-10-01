@@ -86,10 +86,15 @@ export default class AdventureCardViewController extends AbstractViewController<
 					this.buttonGroupVc.getSelectedButtons()[0] === 'in' ? true : false,
 			},
 		})
+
+		await this.alert({ message: 'Good to go!', style: 'success' })
 	}
 
 	private async handleWillRsvp() {
-		return this.confirm({ message: 'You sure?' })
+		return this.confirm({
+			title: 'You sure?',
+			message: `Heads up, I will message ${this.adventure.personCasualName} and let them know, so make sure it's not late at night!`,
+		})
 	}
 
 	public render() {

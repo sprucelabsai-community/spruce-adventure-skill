@@ -118,6 +118,9 @@ export default class AdventureCardTest extends AbstractAdventureTest {
 		this.assertNoButtonSelected()
 	}
 
+	@test()
+	protected static async rendersButtonForNavOnPin() {}
+
 	private static async clickImOutAndDecline() {
 		const confirmVc = await this.assertClickingImOutRendersConfirm()
 		await confirmVc.decline()
