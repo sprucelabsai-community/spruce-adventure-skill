@@ -31,6 +31,20 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 	): BaseAdventureCardViewController {
 		return this.Controller('adventure.base-adventure-card', {
 			adventure,
+			section: {
+				stats: this.Controller('stats', {
+					stats: [
+						{
+							label: 'Total in',
+							value: adventure.whosIn.length,
+						},
+						{
+							label: 'Total out',
+							value: adventure.whosOut.length,
+						},
+					],
+				}).render(),
+			},
 			footer: {
 				buttons: [
 					{

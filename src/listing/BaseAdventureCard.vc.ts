@@ -23,21 +23,22 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
 	) {
 		super(options)
 
-		const { adventure, footer, id, buttons } = options
+		const { adventure, footer, id, buttons, section } = options
 
 		durationUtil.dates = this.dates
 
 		this.adventure = adventure
 		this.mapVc = this.MapVc()
-		this.cardVc = this.CardVc({ footer, id, buttons })
+		this.cardVc = this.CardVc({ footer, id, buttons, section })
 	}
 
 	private CardVc(options: {
 		footer?: CardFooter
 		id?: string
 		buttons?: Button[]
+		section?: CardSection
 	}): CardViewController {
-		const { id, footer, buttons } = options
+		const { id, footer, buttons, section } = options
 
 		const sections: CardSection[] = [
 			{
@@ -49,6 +50,10 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
 				map: this.mapVc.render(),
 			},
 		]
+
+		if (section) {
+			sections.push(section)
+		}
 
 		if (buttons) {
 			sections.push({ buttons })
@@ -131,4 +136,5 @@ export interface BaseAdventureCardOptions {
 	footer?: CardFooter
 	buttons?: Button[]
 	id?: string
+	section?: CardSection
 }
