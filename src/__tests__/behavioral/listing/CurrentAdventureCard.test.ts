@@ -1,6 +1,7 @@
 import {
 	interactor,
 	mapAssert,
+	mapInteractor,
 	vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
@@ -43,9 +44,23 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async rendersMapWithExpectedPin() {
-		const mapVc = mapAssert.assertCardRendersMap(this.vc)
+		const mapVc = this.mapVc
 		mapAssert.assertMapHasPin(mapVc, {
 			address: this.adventure.where,
+			buttons: [
+				{
+					id: 'navigation',
+				},
+			],
+		})
+	}
+
+	@test()
+	protected static async clickingNavButtonOnPinOpensNavigation() {
+		await mapInteractor.clickButtonOnPin(this.mapVc, 0, 'navigation')
+		const maps = this.views.getMaps()
+		assert.isEqualDeep(maps.lastOpenNavigationOptions, {
+			to: this.mapVc.getPins()![0].address,
 		})
 	}
 
@@ -83,6 +98,10 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
 		assert.isFalse(wasHit)
 		assert.isFalse(this.didCancelHandlerInvoked)
+	}
+
+	private static get mapVc() {
+		return mapAssert.assertCardRendersMap(this.vc)
 	}
 
 	private static async clickCancelAndAssertConfirm() {

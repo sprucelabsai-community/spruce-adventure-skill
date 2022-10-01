@@ -102,8 +102,22 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
 				{
 					subtitle: this.adventure.what,
 					address: this.adventure.where,
+					buttons: [
+						{
+							id: 'navigation',
+							label: 'Open navigation',
+							type: 'primary',
+							onClick: this.handleClickNavigation.bind(this),
+						},
+					],
 				},
 			],
+		})
+	}
+
+	public async handleClickNavigation() {
+		this.maps.openNavigation({
+			to: this.adventure.where,
 		})
 	}
 
