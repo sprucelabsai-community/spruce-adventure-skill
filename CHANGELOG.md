@@ -1,3 +1,12 @@
+## [3.12.1](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.12.0...v3.12.1) (2022-10-01)
+
+# [3.12.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.11.13...v3.12.0) (2022-10-01)
+
+
+### Features
+
+* can click pin and get nav ([e8528f9](https://github.com/sprucelabsai/spruce-adventure-skill/commit/e8528f9))
+
 ## [3.11.13](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.11.12...v3.11.13) (2022-10-01)
 
 ## [3.11.12](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v3.11.11...v3.11.12) (2022-09-30)
