@@ -1,3 +1,4 @@
+import { durationUtil } from '@sprucelabs/calendar-utils'
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Adventure, Person, PostAdventure } from '../adventure.types'
@@ -72,7 +73,17 @@ export default class AdventurePoster {
 	}) {
 		const { toId: toId, from, created, url } = options
 		const to = await this.getPerson(toId)
-		const message = `Hey ${to.casualName}! ${from.casualName} posted a new adventure!\n\n"${created.what}"`
+		const message = `Hey ${to.casualName}! ${
+			from.casualName
+		} posted a new adventure!\n\n"${
+			created.what
+		}"\n\n${durationUtil.renderDateTimeUntil(
+			created.when,
+			new Date().getTime(),
+			{
+				shouldCapitalize: true,
+			}
+		)}`
 		await sendMessage({ ...options, client: this.client, message, url })
 	}
 
