@@ -1,4 +1,4 @@
-import { durationUtil } from '@sprucelabs/calendar-utils'
+import { durationUtil, LocaleImpl } from '@sprucelabs/calendar-utils'
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Adventure, Person, PostAdventure } from '../adventure.types'
@@ -71,19 +71,23 @@ export default class AdventurePoster {
 		created: Adventure
 		url: string
 	}) {
+		const locale = new LocaleImpl()
+		locale.setZoneName('America/Denver')
+
 		const { toId: toId, from, created, url } = options
 		const to = await this.getPerson(toId)
+		const offsetMs = locale.getTimezoneOffsetMinutes() * 60 * 1000
 		const message = `Hey ${to.casualName}! ${
 			from.casualName
 		} posted a new adventure!\n\n"${
 			created.what
 		}"\n\n${durationUtil.renderDateTimeUntil(
-			created.when,
+			created.when + offsetMs,
 			new Date().getTime(),
 			{
 				shouldCapitalize: true,
 			}
-		)}`
+		)} Mountain Time`
 		await sendMessage({ ...options, client: this.client, message, url })
 	}
 
