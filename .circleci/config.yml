@@ -61,6 +61,8 @@ jobs:
               echo HOST="https://demo.mercury.spruce.ai" > .env
               echo SKILL_ID=$DEMO_SKILL_ID >> .env
               echo SKILL_API_KEY=$DEMO_SKILL_API_KEY >> .env
+              echo DB_NAME=memory >> .env
+              echo DB_CONNECTION_STRING=memory:// >> .env
               ~/.yarn/bin/spruce boot || true
               mv .env .env.demo
               mv .env.temp .env
@@ -73,6 +75,8 @@ jobs:
               echo HOST="https://mercury.spruce.ai" > .env
               echo SKILL_ID=$PROD_SKILL_ID >> .env
               echo SKILL_API_KEY=$PROD_SKILL_API_KEY >> .env
+              echo DB_NAME=memory >> .env
+              echo DB_CONNECTION_STRING=memory:// >> .env
               ~/.yarn/bin/spruce boot || true
               mv .env .env.prod
               mv .env.temp .env

@@ -72,7 +72,7 @@ export default class AdventurePoster {
 		url: string
 	}) {
 		const locale = new LocaleImpl()
-		locale.setZoneName('America/Denver')
+		await locale.setZoneName('America/Denver')
 
 		const { toId: toId, from, created, url } = options
 		const to = await this.getPerson(toId)
