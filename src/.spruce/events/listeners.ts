@@ -50,16 +50,16 @@ const listeners: EventFeatureListener[] = [
         callback: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').default,
     },
     {
-        eventName: 'post',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../posting/listeners/adventure/post.v2022_09_09.listener').default,
-    },
-    {
         eventName: 'rsvp',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
+    },
+    {
+        eventName: 'post',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../posting/listeners/adventure/post.v2022_09_09.listener').default,
     },
 ]
 
