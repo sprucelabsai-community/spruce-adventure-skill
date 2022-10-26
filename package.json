@@ -52,7 +52,7 @@
     "@sprucelabs/calendar-utils": "^30.0.25",
     "@sprucelabs/data-stores": "^19.0.23",
     "@sprucelabs/error": "^5.0.530",
-    "@sprucelabs/heartwood-view-controllers": "^97.1.14",
+    "@sprucelabs/heartwood-view-controllers": "^97.2.0",
     "@sprucelabs/mercury-client": "^34.0.26",
     "@sprucelabs/mercury-core-events": "^15.0.36",
     "@sprucelabs/mercury-types": "^37.0.26",
@@ -60,8 +60,8 @@
     "@sprucelabs/spruce-core-schemas": "^35.1.25",
     "@sprucelabs/spruce-event-plugin": "^51.0.7",
     "@sprucelabs/spruce-event-utils": "^29.1.23",
-    "@sprucelabs/spruce-image-utils": "^6.0.7",
-    "@sprucelabs/spruce-invite-utils": "^6.0.9",
+    "@sprucelabs/spruce-image-utils": "^6.0.8",
+    "@sprucelabs/spruce-invite-utils": "^6.0.10",
     "@sprucelabs/spruce-skill-booter": "^51.0.7",
     "@sprucelabs/spruce-skill-utils": "^28.0.25",
     "@sprucelabs/spruce-store-plugin": "^51.0.7",
@@ -70,7 +70,7 @@
     "globby": "^11.0.4"
   },
   "devDependencies": {
-    "@sprucelabs/heartwood-polish": "^2.1.256",
+    "@sprucelabs/heartwood-polish": "^2.1.258",
     "@sprucelabs/jest-json-reporter": "^6.0.505",
     "@sprucelabs/jest-sheets-reporter": "^2.0.13",
     "@sprucelabs/resolve-path-aliases": "^1.1.117",
