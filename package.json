@@ -61,7 +61,7 @@
     "@sprucelabs/spruce-event-plugin": "^51.0.10",
     "@sprucelabs/spruce-event-utils": "^29.1.27",
     "@sprucelabs/spruce-image-utils": "^6.0.9",
-    "@sprucelabs/spruce-invite-utils": "^6.0.12",
+    "@sprucelabs/spruce-invite-utils": "^6.0.13",
     "@sprucelabs/spruce-skill-booter": "^51.0.10",
     "@sprucelabs/spruce-skill-utils": "^28.0.28",
     "@sprucelabs/spruce-store-plugin": "^51.0.10",
