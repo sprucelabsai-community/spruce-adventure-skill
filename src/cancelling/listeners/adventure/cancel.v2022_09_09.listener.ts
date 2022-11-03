@@ -8,13 +8,9 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 export default async (
 	event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { stores, source } = event
+	const { source, canceller } = event
 
-	const adventures = await stores.getStore('adventures')
-	const count = await adventures.deleteOne({
-		//@ts-ignore
-		'source.personId': source.personId,
-	})
+	const count = await canceller.cancel(source.personId!)
 
 	return {
 		totalCancelled: count,

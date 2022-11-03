@@ -4,6 +4,7 @@ import {
 	SpruceEvent,
 	SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
+import AdventureCanceller from '../../cancelling/AdventureCanceller'
 import AdventureFinder from '../../listing/AdventureFinder'
 import ConnectionManager from '../../listing/ConnectionManager'
 import AdventurePoster from '../../posting/AdventurePoster'
@@ -33,6 +34,9 @@ export default async (
 		connections,
 	})
 
+	const canceller = await AdventureCanceller.Canceller({ stores })
+
+	skill.updateContext('canceller', canceller)
 	skill.updateContext('finder', finder)
 	skill.updateContext('poster', poster)
 	skill.updateContext('rsvper', rsvp)

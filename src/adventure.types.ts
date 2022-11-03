@@ -1,4 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
+import AdventureCanceller from './cancelling/AdventureCanceller'
 import AdventureFinder from './listing/AdventureFinder'
 import AdventurePoster from './posting/AdventurePoster'
 import Rsvper from './rsvping/Rsvper'
@@ -15,5 +16,6 @@ declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
 		finder: AdventureFinder
 		poster: AdventurePoster
 		rsvper: Rsvper
+		canceller: AdventureCanceller
 	}
 }
