@@ -4,7 +4,7 @@ orbs:
 jobs:
   test:
     docker:
-      - image: cimg/node:16.14-browsers
+      - image: cimg/node:lts-browsers
     working_directory: /mnt/ramdisk
     steps:
       - add_ssh_keys:
@@ -85,7 +85,7 @@ jobs:
       - spruce/merge_auto_upgrade
   release:
     docker:
-      - image: cimg/node:16.14
+      - image: cimg/node:lts
     working_directory: /mnt/ramdisk
     steps:
       - add_ssh_keys:
@@ -97,7 +97,7 @@ jobs:
       - spruce/install_deps_build_dist_release
   upgrade:
     docker:
-      - image: cimg/node:16.14
+      - image: cimg/node:lts
     working_directory: /mnt/ramdisk
     resource_class: large
     steps:
