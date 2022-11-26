@@ -12,31 +12,18 @@ const upsertThemeEventContract = buildEventContract({
 			emitPermissionContract: buildPermissionContract({
 				id: 'upsertThemeEmitPermissions',
 				name: 'upsert theme',
-				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
 						id: 'can-manage-organization-themes',
 						name: 'Can manage org themes',
-						description: null,
-						requireAllStatuses: false,
 						defaults: {
-							skill: true,
 							owner: {
 								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
 							},
-							groupManager: null,
-							manager: null,
-							teammate: null,
-							anonymous: null,
-							loggedIn: null,
-							guest: null,
+							skill: true,
 						},
-						can: null,
+						requireAllStatuses: false,
 					},
 				],
 			}),

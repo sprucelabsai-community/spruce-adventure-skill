@@ -12,37 +12,21 @@ const getActiveThemeEventContract = buildEventContract({
 			emitPermissionContract: buildPermissionContract({
 				id: 'getActiveThemeEmitPermissions',
 				name: 'Get active theme',
-				description: null,
 				requireAllPermissions: false,
 				permissions: [
 					{
 						id: 'can-get-active-theme',
 						name: 'Can get active theme',
-						description: null,
-						requireAllStatuses: false,
 						defaults: {
-							skill: true,
-							owner: null,
-							groupManager: null,
-							manager: null,
-							teammate: null,
-							anonymous: {
-								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
-							},
 							loggedIn: {
 								default: true,
-								clockedIn: null,
-								clockedOut: null,
-								onPrem: null,
-								offPrem: null,
 							},
-							guest: null,
+							anonymous: {
+								default: true,
+							},
+							skill: true,
 						},
-						can: null,
+						requireAllStatuses: false,
 					},
 				],
 			}),
