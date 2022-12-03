@@ -1,3 +1,4 @@
+import '#spruce/permissions/permissions.types'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
 import createConnectionResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/createConnectionResponsePayload.schema'

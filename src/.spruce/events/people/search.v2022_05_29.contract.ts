@@ -1,3 +1,4 @@
+import '#spruce/permissions/permissions.types'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
 import searchEmitTargetAndPayloadSchema from '#spruce/schemas/people/v2022_05_29/searchEmitTargetAndPayload.schema'
@@ -7,6 +8,7 @@ const searchEventContract = buildEventContract({
 	eventSignatures: {
 		'people.search::v2022_05_29': {
 			isGlobal: true,
+
 			emitPayloadSchema: searchEmitTargetAndPayloadSchema,
 			responsePayloadSchema: searchResponsePayloadSchema,
 			emitPermissionContract: buildPermissionContract({

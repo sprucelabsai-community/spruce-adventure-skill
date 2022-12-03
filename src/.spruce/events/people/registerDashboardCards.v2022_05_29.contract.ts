@@ -1,3 +1,4 @@
+import '#spruce/permissions/permissions.types'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
 import registerDashboardCardsResponsePayloadSchema from '#spruce/schemas/people/v2022_05_29/registerDashboardCardsResponsePayload.schema'

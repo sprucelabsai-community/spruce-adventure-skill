@@ -7,7 +7,8 @@
     "view",
     "error",
     "polish",
-    "store"
+    "store",
+    "permission"
   ],
   "events": {
     "lastSync": {}

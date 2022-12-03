@@ -1,3 +1,4 @@
+import '#spruce/permissions/permissions.types'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
 import postEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_09/postEmitTargetAndPayload.schema'
@@ -7,6 +8,7 @@ const postEventContract = buildEventContract({
 	eventSignatures: {
 		'adventure.post::v2022_09_09': {
 			isGlobal: true,
+
 			emitPayloadSchema: postEmitTargetAndPayloadSchema,
 			responsePayloadSchema: postResponsePayloadSchema,
 			emitPermissionContract: buildPermissionContract({
