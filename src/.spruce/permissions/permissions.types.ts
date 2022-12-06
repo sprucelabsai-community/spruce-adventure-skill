@@ -6,17 +6,17 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'people.getListenPermissions': [
 			'can-high-five',
 		]
-		'people.registerDashboardCardsListenPermissions': [
-			'can-register-dashboard-cards',
+		'people.getEmitPermissions': [
+			'can-get-person',
 		]
-		'people.registerDashboardCardsEmitPermissions': [
+		'people.registerDashboardCardsListenPermissions': [
 			'can-register-dashboard-cards',
 		]
 		'people.searchEmitPermissions': [
 			'can-search-people',
 		]
-		'people.getEmitPermissions': [
-			'can-get-person',
+		'people.registerDashboardCardsEmitPermissions': [
+			'can-register-dashboard-cards',
 		]
 	}
 }
