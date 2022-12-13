@@ -3,20 +3,14 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 		'heartwood.skill-views': [
 			'can-get-skill-views','can-register-skill-views','can-listen-to-did-register-skill-views','can-generate-url','can-get-skill-views','can-list-skill-views','can-get-dashboard-cards','can-get-active-theme','can-manage-organization-themes',
 		]
-		'people.getEmitPermissions': [
-			'can-get-person',
-		]
-		'people.registerDashboardCardsListenPermissions': [
-			'can-register-dashboard-cards',
+		'people.people-contract': [
+			'can-get-person','can-search-people','can-search-people-globally',
 		]
 		'people.registerDashboardCardsEmitPermissions': [
 			'can-register-dashboard-cards',
 		]
-		'people.searchEmitPermissions': [
-			'can-search-people',
-		]
-		'people.getListenPermissions': [
-			'can-high-five',
+		'people.registerDashboardCardsListenPermissions': [
+			'can-register-dashboard-cards',
 		]
 	}
 }
