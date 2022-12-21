@@ -20,7 +20,6 @@ const searchEmitTargetAndPayloadSchema: SpruceSchemas.People.v2022_05_29.SearchE
 	            /** . */
 	            'target': {
 	                type: 'schema',
-	                isRequired: true,
 	                options: {schema: searchEmitTargetSchema_v2022_05_29,}
 	            },
 	            /** . */
