@@ -12,7 +12,6 @@ const getEmitTargetSchema: SpruceSchemas.People.v2022_05_29.GetEmitTargetSchema 
 	            /** . */
 	            'organizationId': {
 	                type: 'id',
-	                isRequired: true,
 	                options: undefined
 	            },
 	            /** . */
