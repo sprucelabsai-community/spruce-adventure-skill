@@ -67,6 +67,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 	}
 
 	private async handleClickInvite() {
+		this.activeVc.setIsBusy(true)
 		const client = await this.connectToApi()
 		const [{ connectionId }] = await client.emitAndFlattenResponses(
 			'adventure.create-connection::v2022_09_09'
@@ -83,6 +84,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 			},
 		})
 		await this.router.redirect(id as any, args)
+		this.activeVc.setIsBusy(false)
 	}
 
 	private renderRow(friend: Friend): ListRow {
