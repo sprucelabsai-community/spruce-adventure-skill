@@ -79,7 +79,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 			destinationAfterAccept: {
 				id: 'adventure.connect',
 				args: {
-					connection: connectionId,
+					connection: connectionId,t
 				},
 			},
 		})
