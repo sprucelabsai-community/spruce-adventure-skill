@@ -60,8 +60,8 @@
     "@sprucelabs/spruce-core-schemas": "^35.1.145",
     "@sprucelabs/spruce-event-plugin": "^52.5.60",
     "@sprucelabs/spruce-event-utils": "^30.0.93",
-    "@sprucelabs/spruce-image-utils": "^6.0.74",
-    "@sprucelabs/spruce-invite-utils": "^6.1.25",
+    "@sprucelabs/spruce-image-utils": "^6.0.75",
+    "@sprucelabs/spruce-invite-utils": "^6.1.26",
     "@sprucelabs/spruce-permission-plugin": "^22.0.119",
     "@sprucelabs/spruce-skill-booter": "^52.5.60",
     "@sprucelabs/spruce-skill-utils": "^28.1.62",
@@ -71,7 +71,7 @@
     "globby": "^11.0.4"
   },
   "devDependencies": {
-    "@sprucelabs/heartwood-polish": "^4.0.12",
+    "@sprucelabs/heartwood-polish": "^4.0.13",
     "@sprucelabs/jest-json-reporter": "^6.0.554",
     "@sprucelabs/jest-sheets-reporter": "^2.0.21",
     "@sprucelabs/resolve-path-aliases": "^1.1.165",
