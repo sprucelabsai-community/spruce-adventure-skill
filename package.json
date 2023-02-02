@@ -52,7 +52,7 @@
     "@sprucelabs/calendar-utils": "^31.4.3",
     "@sprucelabs/data-stores": "^19.1.53",
     "@sprucelabs/error": "^5.0.574",
-    "@sprucelabs/heartwood-view-controllers": "^99.3.3",
+    "@sprucelabs/heartwood-view-controllers": "^100.0.0",
     "@sprucelabs/mercury-client": "^35.0.124",
     "@sprucelabs/mercury-core-events": "^15.0.238",
     "@sprucelabs/mercury-types": "^38.0.91",
@@ -60,7 +60,7 @@
     "@sprucelabs/spruce-core-schemas": "^35.1.154",
     "@sprucelabs/spruce-event-plugin": "^52.5.73",
     "@sprucelabs/spruce-event-utils": "^30.0.104",
-    "@sprucelabs/spruce-image-utils": "^6.0.82",
+    "@sprucelabs/spruce-image-utils": "^6.0.83",
     "@sprucelabs/spruce-invite-utils": "^6.1.33",
     "@sprucelabs/spruce-permission-plugin": "^22.0.140",
     "@sprucelabs/spruce-skill-booter": "^52.5.73",
@@ -91,7 +91,7 @@
     "ts-watch": "^1.0.8",
     "tsc-watch": "^6.0.0",
     "tsconfig-paths": "^4.1.2",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.5"
   },
   "resolutions": {
     "**/terser-webpack-plugin": "5.1.4"
