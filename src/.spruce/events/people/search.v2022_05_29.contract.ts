@@ -9,7 +9,7 @@ const searchEventContract = buildEventContract({
 			isGlobal: true,
 			emitPermissions: {
 				contractId: 'people.people-contract',
-				permissionIdsAny: ['can-search-people', 'can-search-people-globally'],
+				permissionIdsAny: ['can-search-people'],
 			},
 
 			emitPayloadSchema: searchEmitTargetAndPayloadSchema,
