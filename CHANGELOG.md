@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v4.2.4...v4.3.0) (2023-02-18)
+
+
+### Features
+
+* upgrade ([0e1d22b](https://github.com/sprucelabsai/spruce-adventure-skill/commit/0e1d22b))
+
 ## [4.2.4](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v4.2.3...v4.2.4) (2023-02-16)
 
 ## [4.2.3](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v4.2.2...v4.2.3) (2023-02-15)
