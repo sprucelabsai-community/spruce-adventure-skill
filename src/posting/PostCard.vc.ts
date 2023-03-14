@@ -92,6 +92,8 @@ export default class PostCardViewController extends AbstractViewController<Card>
 			return
 		}
 
+		this.formVc.setIsBusy(true)
+
 		try {
 			const values = this.formVc.getValues() as Adventure
 			const client = await this.connectToApi()
@@ -108,6 +110,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 
 			await this.onPostHandler?.(adventure)
 		} catch (err: any) {
+			this.formVc.setIsBusy(false)
 			await this.alert({
 				message: err.message,
 			})
