@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v5.0.8...v5.1.0) (2023-03-30)
+
+
+### Features
+
+* upgrade ([64f956c](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/64f956c))
+
 ## [5.0.8](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v5.0.7...v5.0.8) (2023-03-02)
 
 ## [5.0.7](https://github.com/sprucelabsai/spruce-adventure-skill/compare/v5.0.6...v5.0.7) (2023-03-01)
