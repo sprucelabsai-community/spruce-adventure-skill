@@ -58,7 +58,7 @@
     "@sprucelabs/schema": "^28.6.5",
     "@sprucelabs/spruce-core-schemas": "^38.0.11",
     "@sprucelabs/spruce-event-plugin": "^57.0.17",
-    "@sprucelabs/spruce-event-utils": "^36.0.11",
+    "@sprucelabs/spruce-event-utils": "^36.0.12",
     "@sprucelabs/spruce-image-utils": "^7.1.18",
     "@sprucelabs/spruce-invite-utils": "^7.1.23",
     "@sprucelabs/spruce-permission-plugin": "^28.0.10",
@@ -69,9 +69,9 @@
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
-    "@sprucelabs/heartwood-polish": "^5.0.91",
+    "@sprucelabs/heartwood-polish": "^5.0.92",
     "@sprucelabs/jest-json-reporter": "^7.0.22",
-    "@sprucelabs/jest-sheets-reporter": "^3.0.3",
+    "@sprucelabs/jest-sheets-reporter": "^3.0.4",
     "@sprucelabs/resolve-path-aliases": "^1.1.207",
     "@sprucelabs/semantic-release": "^4.0.8",
     "@sprucelabs/spruce-test-fixtures": "^57.0.17",
@@ -80,7 +80,7 @@
     "@types/node": "^18.15.11",
     "chokidar-cli": "^3.0.0",
     "concurrently": "^8.0.1",
-    "eslint": "^8.37.0",
+    "eslint": "^8.38.0",
     "eslint-config-spruce": "^10.12.0",
     "jest": "^29.5.0",
     "jest-circus": "^29.5.0",
@@ -89,7 +89,7 @@
     "ts-watch": "^1.0.8",
     "tsc-watch": "^6.0.0",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.4"
   },
   "resolutions": {
     "**/terser-webpack-plugin": "5.1.4"
