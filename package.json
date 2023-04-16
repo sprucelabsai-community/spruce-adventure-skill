@@ -60,7 +60,7 @@
     "@sprucelabs/spruce-event-plugin": "^57.0.23",
     "@sprucelabs/spruce-event-utils": "^36.0.19",
     "@sprucelabs/spruce-image-utils": "^7.1.21",
-    "@sprucelabs/spruce-invite-utils": "^7.1.29",
+    "@sprucelabs/spruce-invite-utils": "^7.1.30",
     "@sprucelabs/spruce-permission-plugin": "^28.0.17",
     "@sprucelabs/spruce-skill-booter": "^57.0.23",
     "@sprucelabs/spruce-skill-utils": "^28.1.125",
