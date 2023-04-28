@@ -1,7 +1,7 @@
 {
   "name": "adventure",
   "description": "An adventure looking for a hero!",
-  "version": "5.1.19",
+  "version": "5.1.20",
   "skill": {
     "namespace": "adventure",
     "upgradeIgnoreList": []
