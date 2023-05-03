@@ -15,6 +15,11 @@ const getEmitTargetSchema: SpruceSchemas.People.v2022_05_29.GetEmitTargetSchema 
 	                options: undefined
 	            },
 	            /** . */
+	            'locationId': {
+	                type: 'id',
+	                options: undefined
+	            },
+	            /** . */
 	            'searchPersonId': {
 	                type: 'id',
 	                isRequired: true,

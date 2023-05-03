@@ -876,6 +876,8 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 				
 				'organizationId'?: string| undefined | null
 				
+				'locationId'?: string| undefined | null
+				
 				'searchPersonId': string
 		}
 
@@ -887,6 +889,11 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			    fields: {
 			            /** . */
 			            'organizationId': {
+			                type: 'id',
+			                options: undefined
+			            },
+			            /** . */
+			            'locationId': {
 			                type: 'id',
 			                options: undefined
 			            },
