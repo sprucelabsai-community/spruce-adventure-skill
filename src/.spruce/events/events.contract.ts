@@ -17,45 +17,33 @@ import adventureListFriendsEventContract_v2022_09_09, {
 import adventurePostEventContract_v2022_09_09, {
 	PostEventContract as AdventurePostEventContract_v2022_09_09,
 } from '#spruce/events/adventure/post.v2022_09_09.contract'
-import adventureRsvpEventContract_v2022_09_09, {
-	RsvpEventContract as AdventureRsvpEventContract_v2022_09_09,
-} from '#spruce/events/adventure/rsvp.v2022_09_09.contract'
-import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, {
-	DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
-import heartwoodGenerateUrlEventContract_v2021_02_11, {
-	GenerateUrlEventContract as HeartwoodGenerateUrlEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/generateUrl.v2021_02_11.contract'
-import heartwoodGetActiveThemeEventContract_v2021_02_11, {
-	GetActiveThemeEventContract as HeartwoodGetActiveThemeEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/getActiveTheme.v2021_02_11.contract'
-import heartwoodGetSkillViewsEventContract_v2021_02_11, {
-	GetSkillViewsEventContract as HeartwoodGetSkillViewsEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/getSkillViews.v2021_02_11.contract'
-import heartwoodListViewsEventContract_v2021_02_11, {
-	ListViewsEventContract as HeartwoodListViewsEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/listViews.v2021_02_11.contract'
-import heartwoodRegisterDashboardCardsEventContract_v2021_02_11, {
-	RegisterDashboardCardsEventContract as HeartwoodRegisterDashboardCardsEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/registerDashboardCards.v2021_02_11.contract'
-import heartwoodRegisterSkillViewsEventContract_v2021_02_11, {
-	RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11,
-} from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import adventureRsvpEventContract_v2022_09_09, { RsvpEventContract as AdventureRsvpEventContract_v2022_09_09  } from '#spruce/events/adventure/rsvp.v2022_09_09.contract'
+import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, { DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
+import heartwoodGenerateUrlEventContract_v2021_02_11, { GenerateUrlEventContract as HeartwoodGenerateUrlEventContract_v2021_02_11  } from '#spruce/events/heartwood/generateUrl.v2021_02_11.contract'
+import heartwoodGetActiveThemeEventContract_v2021_02_11, { GetActiveThemeEventContract as HeartwoodGetActiveThemeEventContract_v2021_02_11  } from '#spruce/events/heartwood/getActiveTheme.v2021_02_11.contract'
+import heartwoodGetSkillViewsEventContract_v2021_02_11, { GetSkillViewsEventContract as HeartwoodGetSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/getSkillViews.v2021_02_11.contract'
+import heartwoodListViewsEventContract_v2021_02_11, { ListViewsEventContract as HeartwoodListViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/listViews.v2021_02_11.contract'
+import heartwoodRegisterDashboardCardsEventContract_v2021_02_11, { RegisterDashboardCardsEventContract as HeartwoodRegisterDashboardCardsEventContract_v2021_02_11  } from '#spruce/events/heartwood/registerDashboardCards.v2021_02_11.contract'
+import heartwoodRegisterSkillViewsEventContract_v2021_02_11, { RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
+import peopleSearchEventContract_v2022_05_29, {
+	SearchEventContract as PeopleSearchEventContract_v2022_05_29,
+} from '#spruce/events/people/search.v2022_05_29.contract'
 import heartwoodUpsertThemeEventContract_v2021_02_11, {
 	UpsertThemeEventContract as HeartwoodUpsertThemeEventContract_v2021_02_11,
 } from '#spruce/events/heartwood/upsertTheme.v2021_02_11.contract'
+import peopleBroadcastTeamMessageEventContract_v2022_05_29, {
+	BroadcastTeamMessageEventContract as PeopleBroadcastTeamMessageEventContract_v2022_05_29,
+} from '#spruce/events/people/broadcastTeamMessage.v2022_05_29.contract'
 import peopleGetEventContract_v2022_05_29, {
 	GetEventContract as PeopleGetEventContract_v2022_05_29,
 } from '#spruce/events/people/get.v2022_05_29.contract'
 import peopleRegisterDashboardCardsEventContract_v2022_05_29, {
 	RegisterDashboardCardsEventContract as PeopleRegisterDashboardCardsEventContract_v2022_05_29,
 } from '#spruce/events/people/registerDashboardCards.v2022_05_29.contract'
-import peopleSearchEventContract_v2022_05_29, {
-	SearchEventContract as PeopleSearchEventContract_v2022_05_29,
-} from '#spruce/events/people/search.v2022_05_29.contract'
 
 export default [
 	adventureAcceptConnectionEventContract_v2022_09_09,
+	peopleBroadcastTeamMessageEventContract_v2022_05_29,
 	adventureCancelEventContract_v2022_09_09,
 	adventureCreateConnectionEventContract_v2022_09_09,
 	heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
@@ -79,6 +67,8 @@ export default [
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
 	interface SkillEventSignatures {
 		'adventure.accept-connection::v2022_09_09': AdventureAcceptConnectionEventContract_v2022_09_09['eventSignatures']['adventure.accept-connection::v2022_09_09']
+
+		'people.broadcast-team-message::v2022_05_29': PeopleBroadcastTeamMessageEventContract_v2022_05_29['eventSignatures']['people.broadcast-team-message::v2022_05_29']
 
 		'adventure.cancel::v2022_09_09': AdventureCancelEventContract_v2022_09_09['eventSignatures']['adventure.cancel::v2022_09_09']
 
