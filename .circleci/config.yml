@@ -68,7 +68,7 @@ jobs:
               mv .env.temp .env
             fi
       - run:
-          name: "Publish to Prod"
+          name: "Publish to Prod (disabled)"
           command: |
             if [[ ${CIRCLE_BRANCH} != "upgrade-"* ]]; then
               mv .env .env.temp
@@ -77,7 +77,7 @@ jobs:
               echo SKILL_API_KEY=$PROD_SKILL_API_KEY >> .env
               echo DB_NAME=memory >> .env
               echo DB_CONNECTION_STRING=memory:// >> .env
-              ~/.yarn/bin/spruce boot || true
+              # ~/.yarn/bin/spruce boot || true
               mv .env .env.prod
               mv .env.temp .env
             fi
