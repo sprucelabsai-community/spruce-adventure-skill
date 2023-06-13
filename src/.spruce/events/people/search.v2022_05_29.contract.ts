@@ -7,6 +7,10 @@ const searchEventContract = buildEventContract({
 	eventSignatures: {
 		'people.search::v2022_05_29': {
 			isGlobal: true,
+			emitPermissions: {
+				contractId: 'people.people-contract',
+				permissionIdsAny: ['can-search-people'],
+			},
 
 			emitPayloadSchema: searchEmitTargetAndPayloadSchema,
 			responsePayloadSchema: searchResponsePayloadSchema,
