@@ -1,3 +1,5 @@
+## [6.0.2](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v6.0.1...v6.0.2) (2023-06-16)
+
 ## [6.0.1](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v6.0.0...v6.0.1) (2023-06-15)
 
 # [6.0.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v5.1.59...v6.0.0) (2023-06-15)
