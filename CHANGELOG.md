@@ -1,3 +1,10 @@
+# [7.0.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v6.0.9...v7.0.0) (2023-07-08)
+
+
+### Breaking Changes
+
+* upgrade ([3dfe744](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/3dfe744))
+
 ## [6.0.9](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v6.0.8...v6.0.9) (2023-06-22)
 
 ## [6.0.8](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v6.0.7...v6.0.8) (2023-06-22)
