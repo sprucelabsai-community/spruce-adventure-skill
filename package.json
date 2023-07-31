@@ -59,7 +59,7 @@
     "@sprucelabs/spruce-core-schemas": "^39.0.24",
     "@sprucelabs/spruce-event-plugin": "^60.0.41",
     "@sprucelabs/spruce-event-utils": "^38.0.22",
-    "@sprucelabs/spruce-image-utils": "^9.0.16",
+    "@sprucelabs/spruce-image-utils": "^9.0.17",
     "@sprucelabs/spruce-invite-utils": "^9.0.21",
     "@sprucelabs/spruce-permission-plugin": "^30.0.47",
     "@sprucelabs/spruce-skill-booter": "^60.0.41",
