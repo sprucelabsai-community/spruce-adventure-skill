@@ -71,9 +71,8 @@ export default class Rsvper {
 		url: string
 	) {
 		const poster = await getPerson(this.client, posterId)
-		const connections = await this.connections.loadConnectionsForPerson(
-			posterId
-		)
+		const connections =
+			await this.connections.loadConnectionsForPerson(posterId)
 		await Promise.all(
 			connections.map(async (connection) => {
 				if (connection !== person.id) {

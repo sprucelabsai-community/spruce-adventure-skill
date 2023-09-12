@@ -36,9 +36,8 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
 	@test()
 	protected static async canAddManyRsvps() {
 		await this.rsvpFirstAdventure()
-		const { client, person } = await this.people.loginAsDemoPerson(
-			'555-555-1234'
-		)
+		const { client, person } =
+			await this.people.loginAsDemoPerson('555-555-1234')
 
 		await this.rsvpFirstAdventure({ client })
 		await this.assertWhoseIn([this.fakedPerson.id, person.id])

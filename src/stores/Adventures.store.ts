@@ -89,7 +89,7 @@ export default class AdventuresStore extends AbstractStore<
 
 	protected async prepareRecord<
 		IncludePrivateFields extends boolean,
-		F extends SchemaFieldNames<FullSchema> = SchemaFieldNames<FullSchema>
+		F extends SchemaFieldNames<FullSchema> = SchemaFieldNames<FullSchema>,
 	>(
 		record: DatabaseAdventure,
 		_options?: PrepareOptions<IncludePrivateFields, FullSchema, F>
