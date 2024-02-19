@@ -34,6 +34,7 @@ export default class PostCardTest extends AbstractAdventureTest {
 
 	@test()
 	protected static async submittingFormRendersConfirm() {
+		await this.fillOutForm()
 		await this.submitAndAssertConfirm()
 	}
 
