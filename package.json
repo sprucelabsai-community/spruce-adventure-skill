@@ -51,7 +51,7 @@
     "@sprucelabs/data-stores": "^26.4.58",
     "@sprucelabs/error": "^5.1.82",
     "@sprucelabs/globby": "^1.0.21",
-    "@sprucelabs/heartwood-view-controllers": "^109.7.0",
+    "@sprucelabs/heartwood-view-controllers": "^109.7.1",
     "@sprucelabs/mercury-client": "^41.0.351",
     "@sprucelabs/mercury-core-events": "^22.2.54",
     "@sprucelabs/mercury-types": "^46.0.269",
@@ -60,12 +60,12 @@
     "@sprucelabs/spruce-event-plugin": "^61.0.0",
     "@sprucelabs/spruce-event-utils": "^38.1.10",
     "@sprucelabs/spruce-image-utils": "^9.0.164",
-    "@sprucelabs/spruce-invite-utils": "^9.0.147",
+    "@sprucelabs/spruce-invite-utils": "^9.0.149",
     "@sprucelabs/spruce-permission-plugin": "^30.0.632",
     "@sprucelabs/spruce-skill-booter": "^61.0.0",
     "@sprucelabs/spruce-skill-utils": "^30.3.27",
     "@sprucelabs/spruce-store-plugin": "^61.0.0",
-    "@sprucelabs/spruce-view-plugin": "^46.0.454",
+    "@sprucelabs/spruce-view-plugin": "^46.0.455",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
