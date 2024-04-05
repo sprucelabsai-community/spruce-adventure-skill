@@ -51,13 +51,6 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'register-dashboard-cards',
-        eventNamespace: 'people',
-        version: 'v2022_05_29',
-        callback: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').default,
-        isGlobal: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').isGlobal,
-    },
-    {
         eventName: 'post',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -70,6 +63,13 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
         isGlobal: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'register-dashboard-cards',
+        eventNamespace: 'people',
+        version: 'v2022_05_29',
+        callback: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').default,
+        isGlobal: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').isGlobal,
     },
 ]
 
