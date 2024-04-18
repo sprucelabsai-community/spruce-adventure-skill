@@ -1,140 +1,144 @@
 import {
-	AbstractSkillViewController,
-	Card,
-	Router,
-	SkillView,
-	SkillViewControllerLoadOptions,
-	splitCardsIntoLayouts,
-	ToolBelt,
-	ToolBeltViewController,
-	ViewController,
-	ViewControllerOptions,
+    AbstractSkillViewController,
+    Card,
+    Router,
+    SkillView,
+    SkillViewControllerLoadOptions,
+    splitCardsIntoLayouts,
+    ToolBelt,
+    ToolBeltViewController,
+    ViewController,
+    ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController from '../friends/FriendsListTool.vc'
 import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
 export default class ListSkillViewController extends AbstractSkillViewController {
-	public static id = 'list'
-	protected currentCardVc?: CurrentAdventureCardViewController
-	protected postCardVc: PostCardViewController
-	protected friendsToolVc: FriendsListToolViewController
-	private toolBeltVc: ToolBeltViewController
-	private router!: Router
-	protected cards: ViewController<Card>[] = []
-	protected loadingCardVc: ViewController<Card>
+    public static id = 'list'
+    protected currentCardVc?: CurrentAdventureCardViewController
+    protected postCardVc: PostCardViewController
+    protected friendsToolVc: FriendsListToolViewController
+    private toolBeltVc: ToolBeltViewController
+    private router!: Router
+    protected cards: ViewController<Card>[] = []
+    protected loadingCardVc: ViewController<Card>
 
-	public constructor(options: ViewControllerOptions) {
-		super(options)
+    public constructor(options: ViewControllerOptions) {
+        super(options)
 
-		this.friendsToolVc = this.FriendsToolVc()
-		this.toolBeltVc = this.ToolBeltVc()
-		this.postCardVc = this.PostCardVc()
-		this.loadingCardVc = this.Controller('card', {
-			id: 'loading',
-			body: {
-				isBusy: true,
-			},
-		})
-	}
+        this.friendsToolVc = this.FriendsToolVc()
+        this.toolBeltVc = this.ToolBeltVc()
+        this.postCardVc = this.PostCardVc()
+        this.loadingCardVc = this.Controller('card', {
+            id: 'loading',
+            body: {
+                isBusy: true,
+            },
+        })
+    }
 
-	private PostCardVc(): PostCardViewController {
-		return this.Controller('adventure.post-card', {
-			onPost: this.handleDidPostAdventure.bind(this),
-		})
-	}
+    private PostCardVc(): PostCardViewController {
+        return this.Controller('adventure.post-card', {
+            onPost: this.handleDidPostAdventure.bind(this),
+        })
+    }
 
-	private ToolBeltVc(): ToolBeltViewController {
-		return this.Controller('toolBelt', {
-			tools: [
-				{
-					id: 'friends',
-					card: this.friendsToolVc.render(),
-					lineIcon: 'users',
-				},
-			],
-		})
-	}
+    private ToolBeltVc(): ToolBeltViewController {
+        return this.Controller('toolBelt', {
+            tools: [
+                {
+                    id: 'friends',
+                    card: this.friendsToolVc.render(),
+                    lineIcon: 'users',
+                },
+            ],
+        })
+    }
 
-	private FriendsToolVc(): FriendsListToolViewController {
-		return this.Controller('adventure.friends-list-tool', {})
-	}
+    private FriendsToolVc(): FriendsListToolViewController {
+        return this.Controller('adventure.friends-list-tool', {})
+    }
 
-	public async getIsLoginRequired() {
-		return true
-	}
+    public async getIsLoginRequired() {
+        return true
+    }
 
-	public renderToolBelt(): ToolBelt {
-		return this.toolBeltVc.render()
-	}
-	private async handleDidPostAdventure() {
-		await this.router.redirect('adventure.list')
-	}
+    public renderToolBelt(): ToolBelt {
+        return this.toolBeltVc.render()
+    }
+    private async handleDidPostAdventure() {
+        await this.router.redirect('adventure.list')
+    }
 
-	public async load({ router, authenticator }: SkillViewControllerLoadOptions) {
-		this.router = router
-		const person = authenticator.getPerson()!
-		const client = await this.connectToApi()
+    public async load({
+        router,
+        authenticator,
+    }: SkillViewControllerLoadOptions) {
+        this.router = router
+        const person = authenticator.getPerson()!
+        const client = await this.connectToApi()
 
-		const [{ adventures }] = await client.emitAndFlattenResponses(
-			'adventure.list::v2022_09_09'
-		)
+        const [{ adventures }] = await client.emitAndFlattenResponses(
+            'adventure.list::v2022_09_09'
+        )
 
-		if (adventures.length === 0) {
-			await router.redirect('adventure.post')
-			return
-		}
+        if (adventures.length === 0) {
+            await router.redirect('adventure.post')
+            return
+        }
 
-		for (const adventure of adventures) {
-			if (adventure.source.personId === person.id) {
-				this.currentCardVc = this.Controller(
-					'adventure.current-adventure-card',
-					{
-						adventure,
-						onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
-					}
-				)
-			} else {
-				this.cards.push(
-					this.Controller('adventure.adventure-card', {
-						adventure,
-						loggedInPersonId: person.id,
-					})
-				)
-			}
-		}
+        for (const adventure of adventures) {
+            if (adventure.source.personId === person.id) {
+                this.currentCardVc = this.Controller(
+                    'adventure.current-adventure-card',
+                    {
+                        adventure,
+                        onDidCancel:
+                            this.onDidCancelCurrentAdventure.bind(this),
+                    }
+                )
+            } else {
+                this.cards.push(
+                    this.Controller('adventure.adventure-card', {
+                        adventure,
+                        loggedInPersonId: person.id,
+                    })
+                )
+            }
+        }
 
-		if (!this.currentCardVc) {
-			this.cards.push(this.postCardVc)
-		}
+        if (!this.currentCardVc) {
+            this.cards.push(this.postCardVc)
+        }
 
-		this.triggerRender()
+        this.triggerRender()
 
-		await this.friendsToolVc.load({
-			router,
-			onNoFriends: () => this.toolBeltVc.focusTool('friends'),
-		})
-	}
+        await this.friendsToolVc.load({
+            router,
+            onNoFriends: () => this.toolBeltVc.focusTool('friends'),
+        })
+    }
 
-	private async onDidCancelCurrentAdventure() {
-		await this.router.redirect('adventure.list')
-	}
+    private async onDidCancelCurrentAdventure() {
+        await this.router.redirect('adventure.list')
+    }
 
-	public render(): SkillView {
-		const cards = [...this.cards]
-		if (this.currentCardVc) {
-			cards.unshift(this.currentCardVc)
-		}
+    public render(): SkillView {
+        const cards = [...this.cards]
+        if (this.currentCardVc) {
+            cards.unshift(this.currentCardVc)
+        }
 
-		if (cards.length === 0) {
-			cards.push(this.loadingCardVc)
-		}
+        if (cards.length === 0) {
+            cards.push(this.loadingCardVc)
+        }
 
-		return {
-			layouts: splitCardsIntoLayouts(
-				cards.map((c) => c.render()),
-				3
-			),
-		}
-	}
+        return {
+            layouts: splitCardsIntoLayouts(
+                cards.map((c) => c.render()),
+                3
+            ),
+        }
+    }
 }

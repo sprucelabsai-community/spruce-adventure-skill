@@ -1,20 +1,20 @@
 import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
-	SpruceEvent,
-	SpruceEventResponse,
+    SpruceEvent,
+    SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export default async (
-	event: SpruceEvent<SkillEventContract>
+    event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { source, finder } = event
-	const personId = source.personId!
-	const adventures = await finder.findForPerson(personId)
+    const { source, finder } = event
+    const personId = source.personId!
+    const adventures = await finder.findForPerson(personId)
 
-	return {
-		adventures,
-	}
+    return {
+        adventures,
+    }
 }
 
 type ResponsePayload = SpruceSchemas.Adventure.v2022_09_09.ListResponsePayload

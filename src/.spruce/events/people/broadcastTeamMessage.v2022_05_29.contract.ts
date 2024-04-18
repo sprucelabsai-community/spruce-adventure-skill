@@ -4,19 +4,19 @@ import broadcastTeamMessageEmitTargetAndPayloadSchema from '#spruce/schemas/peop
 import broadcastTeamMessageResponsePayloadSchema from '#spruce/schemas/people/v2022_05_29/broadcastTeamMessageResponsePayload.schema'
 
 const broadcastTeamMessageEventContract = buildEventContract({
-	eventSignatures: {
-		'people.broadcast-team-message::v2022_05_29': {
-			emitPermissions: {
-				contractId: 'people.people-contract',
-				permissionIdsAny: ['can-message-team'],
-			},
+    eventSignatures: {
+        'people.broadcast-team-message::v2022_05_29': {
+            emitPermissions: {
+                contractId: 'people.people-contract',
+                permissionIdsAny: ['can-message-team'],
+            },
 
-			emitPayloadSchema: broadcastTeamMessageEmitTargetAndPayloadSchema,
-			responsePayloadSchema: broadcastTeamMessageResponsePayloadSchema,
-		},
-	},
+            emitPayloadSchema: broadcastTeamMessageEmitTargetAndPayloadSchema,
+            responsePayloadSchema: broadcastTeamMessageResponsePayloadSchema,
+        },
+    },
 })
 export default broadcastTeamMessageEventContract
 
 export type BroadcastTeamMessageEventContract =
-	typeof broadcastTeamMessageEventContract
+    typeof broadcastTeamMessageEventContract

@@ -5,31 +5,31 @@ import postEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_0
 import postResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/postResponsePayload.schema'
 
 const postEventContract = buildEventContract({
-	eventSignatures: {
-		'adventure.post::v2022_09_09': {
-			isGlobal: true,
+    eventSignatures: {
+        'adventure.post::v2022_09_09': {
+            isGlobal: true,
 
-			emitPayloadSchema: postEmitTargetAndPayloadSchema,
-			responsePayloadSchema: postResponsePayloadSchema,
-			emitPermissionContract: buildPermissionContract({
-				id: 'postEmitPermissions',
-				name: 'Post adventure',
-				requireAllPermissions: false,
-				permissions: [
-					{
-						id: 'can-post-adventure',
-						name: 'Can post adventure',
-						defaults: {
-							loggedIn: {
-								default: true,
-							},
-						},
-						requireAllStatuses: false,
-					},
-				],
-			}),
-		},
-	},
+            emitPayloadSchema: postEmitTargetAndPayloadSchema,
+            responsePayloadSchema: postResponsePayloadSchema,
+            emitPermissionContract: buildPermissionContract({
+                id: 'postEmitPermissions',
+                name: 'Post adventure',
+                requireAllPermissions: false,
+                permissions: [
+                    {
+                        id: 'can-post-adventure',
+                        name: 'Can post adventure',
+                        defaults: {
+                            loggedIn: {
+                                default: true,
+                            },
+                        },
+                        requireAllStatuses: false,
+                    },
+                ],
+            }),
+        },
+    },
 })
 export default postEventContract
 

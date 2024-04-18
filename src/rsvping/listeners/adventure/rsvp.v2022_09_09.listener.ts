@@ -1,28 +1,28 @@
 import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
-	SpruceEvent,
-	SpruceEventResponse,
+    SpruceEvent,
+    SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export default async (
-	event: SpruceEvent<SkillEventContract, EmitPayload>
+    event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { rsvper, target, source, payload } = event
-	const { canIMakeIt } = payload
-	const { adventureId } = target
-	const { personId: personSource } = source
-	const personId = personSource!
+    const { rsvper, target, source, payload } = event
+    const { canIMakeIt } = payload
+    const { adventureId } = target
+    const { personId: personSource } = source
+    const personId = personSource!
 
-	await rsvper.rsvp({
-		adventureId,
-		canIMakeIt,
-		personId,
-	})
+    await rsvper.rsvp({
+        adventureId,
+        canIMakeIt,
+        personId,
+    })
 
-	return {
-		success: true,
-	}
+    return {
+        success: true,
+    }
 }
 
 type EmitPayload = SpruceSchemas.Adventure.v2022_09_09.RsvpEmitTargetAndPayload

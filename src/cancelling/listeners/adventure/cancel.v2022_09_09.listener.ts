@@ -1,20 +1,20 @@
 import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
-	SpruceEvent,
-	SpruceEventResponse,
+    SpruceEvent,
+    SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 
 export default async (
-	event: SpruceEvent<SkillEventContract>
+    event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
-	const { source, canceller } = event
+    const { source, canceller } = event
 
-	const count = await canceller.cancel(source.personId!)
+    const count = await canceller.cancel(source.personId!)
 
-	return {
-		totalCancelled: count,
-	}
+    return {
+        totalCancelled: count,
+    }
 }
 
 type ResponsePayload = SpruceSchemas.Adventure.v2022_09_09.CancelResponsePayload

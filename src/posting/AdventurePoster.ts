@@ -9,90 +9,90 @@ import getPerson from '../utilities/getPerson'
 import { sendMessage } from '../utilities/sendMessage'
 
 export default class AdventurePoster {
-	private adventures: AdventuresStore
-	private connections: ConnectionManager
-	private client: MercuryClient
+    private adventures: AdventuresStore
+    private connections: ConnectionManager
+    private client: MercuryClient
 
-	protected constructor(options: {
-		adventures: AdventuresStore
-		connections: ConnectionManager
-		client: MercuryClient
-	}) {
-		const { adventures, connections, client } = options
-		this.adventures = adventures
-		this.connections = connections
-		this.client = client
-	}
+    protected constructor(options: {
+        adventures: AdventuresStore
+        connections: ConnectionManager
+        client: MercuryClient
+    }) {
+        const { adventures, connections, client } = options
+        this.adventures = adventures
+        this.connections = connections
+        this.client = client
+    }
 
-	public static async Poster(options: {
-		stores: Pick<StoreFactory, 'getStore'>
-		connections: ConnectionManager
-		client: MercuryClient
-	}) {
-		const { stores, connections, client } = options
-		const adventures = await stores.getStore('adventures')
-		return new this({ adventures, connections, client })
-	}
+    public static async Poster(options: {
+        stores: Pick<StoreFactory, 'getStore'>
+        connections: ConnectionManager
+        client: MercuryClient
+    }) {
+        const { stores, connections, client } = options
+        const adventures = await stores.getStore('adventures')
+        return new this({ adventures, connections, client })
+    }
 
-	public async create(values: PostAdventure & { personId: string }) {
-		const { personId, ...adventure } = values
+    public async create(values: PostAdventure & { personId: string }) {
+        const { personId, ...adventure } = values
 
-		const created = await this.adventures.createOne({
-			...adventure,
-			source: {
-				personId: personId!,
-			},
-		})
+        const created = await this.adventures.createOne({
+            ...adventure,
+            source: {
+                personId: personId!,
+            },
+        })
 
-		const connections = await this.connections.loadConnectionsForPerson(
-			personId!
-		)
+        const connections = await this.connections.loadConnectionsForPerson(
+            personId!
+        )
 
-		const url = await this.generateUrl()
-		const from = await this.getPerson(personId)
+        const url = await this.generateUrl()
+        const from = await this.getPerson(personId)
 
-		await Promise.all(
-			connections.map((connection) =>
-				this.messageConnection({ toId: connection, from, created, url })
-			)
-		)
+        await Promise.all(
+            connections.map((connection) =>
+                this.messageConnection({ toId: connection, from, created, url })
+            )
+        )
 
-		return created
-	}
+        return created
+    }
 
-	private async generateUrl() {
-		const url = await generateUrl(this.client)
-		return url
-	}
+    private async generateUrl() {
+        const url = await generateUrl(this.client)
+        return url
+    }
 
-	private async messageConnection(options: {
-		toId: string
-		from: Person
-		created: Adventure
-		url: string
-	}) {
-		const locale = new LocaleImpl()
-		await locale.setZoneName('America/Denver')
+    private async messageConnection(options: {
+        toId: string
+        from: Person
+        created: Adventure
+        url: string
+    }) {
+        const locale = new LocaleImpl()
+        await locale.setZoneName('America/Denver')
 
-		const { toId: toId, from, created, url } = options
-		const to = await this.getPerson(toId)
-		const offsetMs = locale.getTimezoneOffsetMinutes() * 60 * 1000
-		const message = `Hey ${to.casualName}! ${
-			from.casualName
-		} posted a new adventure!\n\n"${
-			created.what
-		}"\n\n${durationUtil.renderDateTimeUntil(
-			created.when + offsetMs,
-			new Date().getTime(),
-			{
-				shouldCapitalize: true,
-			}
-		)} Mountain Time`
-		await sendMessage({ ...options, client: this.client, message, url })
-	}
+        const { toId: toId, from, created, url } = options
+        const to = await this.getPerson(toId)
+        const offsetMs = locale.getTimezoneOffsetMinutes() * 60 * 1000
+        const message = `Hey ${to.casualName}! ${
+            from.casualName
+        } posted a new adventure!\n\n"${
+            created.what
+        }"\n\n${durationUtil.renderDateTimeUntil(
+            created.when + offsetMs,
+            new Date().getTime(),
+            {
+                shouldCapitalize: true,
+            }
+        )} Mountain Time`
+        await sendMessage({ ...options, client: this.client, message, url })
+    }
 
-	private async getPerson(personId: string) {
-		const person = await getPerson(this.client, personId)
-		return person
-	}
+    private async getPerson(personId: string) {
+        const person = await getPerson(this.client, personId)
+        return person
+    }
 }

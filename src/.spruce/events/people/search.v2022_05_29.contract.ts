@@ -4,18 +4,18 @@ import searchEmitTargetAndPayloadSchema from '#spruce/schemas/people/v2022_05_29
 import searchResponsePayloadSchema from '#spruce/schemas/people/v2022_05_29/searchResponsePayload.schema'
 
 const searchEventContract = buildEventContract({
-	eventSignatures: {
-		'people.search::v2022_05_29': {
-			isGlobal: true,
-			emitPermissions: {
-				contractId: 'people.people-contract',
-				permissionIdsAny: ['can-search-people'],
-			},
+    eventSignatures: {
+        'people.search::v2022_05_29': {
+            isGlobal: true,
+            emitPermissions: {
+                contractId: 'people.people-contract',
+                permissionIdsAny: ['can-search-people'],
+            },
 
-			emitPayloadSchema: searchEmitTargetAndPayloadSchema,
-			responsePayloadSchema: searchResponsePayloadSchema,
-		},
-	},
+            emitPayloadSchema: searchEmitTargetAndPayloadSchema,
+            responsePayloadSchema: searchResponsePayloadSchema,
+        },
+    },
 })
 export default searchEventContract
 

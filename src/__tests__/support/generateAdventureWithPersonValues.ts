@@ -4,11 +4,11 @@ import generateAdventureValues from './generateAdventureValues'
 import { generateAvatarValues } from './generateAvatarValues'
 
 export default function generateAdventureWithPersonValues(
-	values?: Partial<AdventureWithPerson>
+    values?: Partial<AdventureWithPerson>
 ): AdventureWithPerson {
-	return {
-		...generateAdventureValues(values),
-		personCasualName: generateId(),
-		personAvatar: generateAvatarValues(),
-	}
+    return {
+        ...generateAdventureValues(values),
+        personCasualName: generateId(),
+        personAvatar: generateAvatarValues(),
+    }
 }

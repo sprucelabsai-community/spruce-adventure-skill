@@ -1,8 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
 
 const acceptConnectionEmitPayloadBuilder = buildSchema({
-	id: 'acceptConnectionEmitPayload',
-	fields: {},
+    id: 'acceptConnectionEmitPayload',
+    fields: {},
 })
 
 export default acceptConnectionEmitPayloadBuilder

@@ -1,8 +1,8 @@
 import { buildSchema } from '@sprucelabs/schema'
 
 const cancelEmitTargetBuilder = buildSchema({
-	id: 'cancelEmitTarget',
-	fields: {},
+    id: 'cancelEmitTarget',
+    fields: {},
 })
 
 export default cancelEmitTargetBuilder

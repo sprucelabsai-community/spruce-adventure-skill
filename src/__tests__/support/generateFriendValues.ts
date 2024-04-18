@@ -3,12 +3,12 @@ import { Friend } from '../../adventure.types'
 import { generateAvatarValues } from './generateAvatarValues'
 
 export default function generateFriendValues(
-	inviteSender: Friend['inviteSender'] = 'me'
+    inviteSender: Friend['inviteSender'] = 'me'
 ): Friend {
-	return {
-		id: generateId(),
-		casualName: generateId(),
-		avatar: generateAvatarValues(),
-		inviteSender,
-	}
+    return {
+        id: generateId(),
+        casualName: generateId(),
+        avatar: generateAvatarValues(),
+        inviteSender,
+    }
 }

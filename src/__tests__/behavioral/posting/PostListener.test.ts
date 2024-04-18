@@ -6,33 +6,33 @@ import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()
 export default class PostListenerTest extends AbstractAdventureTest {
-	@test()
-	protected static async postingAdventureSavesUnderCurrentPerson() {
-		await this.bootSkill()
-		await this.eventFaker.fakeSendMessage()
-		await this.eventFaker.fakeGenerateUrl()
+    @test()
+    protected static async postingAdventureSavesUnderCurrentPerson() {
+        await this.bootSkill()
+        await this.eventFaker.fakeSendMessage()
+        await this.eventFaker.fakeGenerateUrl()
 
-		const adventure = this.generatePostAdventureValues()
+        const adventure = this.generatePostAdventureValues()
 
-		const [{ adventure: created }] =
-			await this.fakedClient.emitAndFlattenResponses(
-				'adventure.post::v2022_09_09',
-				{
-					payload: {
-						adventure,
-					},
-				}
-			)
+        const [{ adventure: created }] =
+            await this.fakedClient.emitAndFlattenResponses(
+                'adventure.post::v2022_09_09',
+                {
+                    payload: {
+                        adventure,
+                    },
+                }
+            )
 
-		const saved = await this.adventures.findOne({})
-		assert.doesInclude(saved, {
-			...adventure,
-			source: { personId: this.fakedPerson.id },
-		})
-		assert.isEqualDeep(created, saved)
-	}
+        const saved = await this.adventures.findOne({})
+        assert.doesInclude(saved, {
+            ...adventure,
+            source: { personId: this.fakedPerson.id },
+        })
+        assert.isEqualDeep(created, saved)
+    }
 
-	private static generatePostAdventureValues(): PostAdventure {
-		return generatePostAdventureValues()
-	}
+    private static generatePostAdventureValues(): PostAdventure {
+        return generatePostAdventureValues()
+    }
 }

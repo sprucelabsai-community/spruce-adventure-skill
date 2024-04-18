@@ -1,8 +1,8 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
-	SpruceEvent,
-	SpruceEventResponse,
+    SpruceEvent,
+    SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import AdventureCanceller from '../../cancelling/AdventureCanceller'
 import AdventureFinder from '../../listing/AdventureFinder'
@@ -11,33 +11,33 @@ import AdventurePoster from '../../posting/AdventurePoster'
 import Rsvper from '../../rsvping/Rsvper'
 
 export default async (
-	event: SpruceEvent<SkillEventContract>
+    event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse => {
-	const { client, stores, skill } = event
+    const { client, stores, skill } = event
 
-	const connections = await ConnectionManager.Manager({ stores })
-	const finder = await AdventureFinder.Finder({
-		client: client as MercuryClient,
-		stores,
-		connections,
-	})
+    const connections = await ConnectionManager.Manager({ stores })
+    const finder = await AdventureFinder.Finder({
+        client: client as MercuryClient,
+        stores,
+        connections,
+    })
 
-	const poster = await AdventurePoster.Poster({
-		stores,
-		connections,
-		client: client as MercuryClient,
-	})
+    const poster = await AdventurePoster.Poster({
+        stores,
+        connections,
+        client: client as MercuryClient,
+    })
 
-	const rsvp = await Rsvper.Rsvper({
-		stores,
-		client: client as MercuryClient,
-		connections,
-	})
+    const rsvp = await Rsvper.Rsvper({
+        stores,
+        client: client as MercuryClient,
+        connections,
+    })
 
-	const canceller = await AdventureCanceller.Canceller({ stores })
+    const canceller = await AdventureCanceller.Canceller({ stores })
 
-	skill.updateContext('canceller', canceller)
-	skill.updateContext('finder', finder)
-	skill.updateContext('poster', poster)
-	skill.updateContext('rsvper', rsvp)
+    skill.updateContext('canceller', canceller)
+    skill.updateContext('finder', finder)
+    skill.updateContext('poster', poster)
+    skill.updateContext('rsvper', rsvp)
 }

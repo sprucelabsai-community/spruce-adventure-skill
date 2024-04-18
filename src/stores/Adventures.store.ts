@@ -1,15 +1,15 @@
 import {
-	AbstractStore,
-	UniversalStoreOptions,
-	PrepareOptions,
-	PrepareResults,
+    AbstractStore,
+    UniversalStoreOptions,
+    PrepareOptions,
+    PrepareResults,
 } from '@sprucelabs/data-stores'
 import {
-	buildSchema,
-	dropFields,
-	makeFieldsOptional,
-	SchemaValues,
-	SchemaFieldNames,
+    buildSchema,
+    dropFields,
+    makeFieldsOptional,
+    SchemaValues,
+    SchemaFieldNames,
 } from '@sprucelabs/schema'
 import { StoreSeedOptions } from '@sprucelabs/spruce-test-fixtures'
 import adventureSchema from '#spruce/schemas/adventure/v2022_09_09/adventure.schema'
@@ -20,30 +20,30 @@ const fullSchema = adventureSchema
 
 // The values you will accept when creating a record
 const createSchema = buildSchema({
-	id: 'createAdventure',
-	fields: {
-		...dropFields(fullSchema.fields, ['id', 'whosIn', 'whosOut']),
-	},
+    id: 'createAdventure',
+    fields: {
+        ...dropFields(fullSchema.fields, ['id', 'whosIn', 'whosOut']),
+    },
 })
 
 // The values you will accept when updating a record
 const updateSchema = buildSchema({
-	id: 'updateAdventure',
-	fields: {
-		...makeFieldsOptional(dropFields(fullSchema.fields, ['id'])),
-	},
+    id: 'updateAdventure',
+    fields: {
+        ...makeFieldsOptional(dropFields(fullSchema.fields, ['id'])),
+    },
 })
 
 // The values you will actually save to the databases (in this case, makes id required)
 const databaseSchema = buildSchema({
-	id: 'databaseAdventure',
-	fields: {
-		...fullSchema.fields,
-		id: {
-			type: 'id',
-			isRequired: true,
-		},
-	},
+    id: 'databaseAdventure',
+    fields: {
+        ...fullSchema.fields,
+        id: {
+            type: 'id',
+            isRequired: true,
+        },
+    },
 })
 
 type FullSchema = typeof fullSchema
@@ -60,68 +60,70 @@ export type QueryAdventure = Partial<Adventure>
 type AdventureStoreOptions = UniversalStoreOptions
 
 export default class AdventuresStore extends AbstractStore<
-	FullSchema,
-	CreateSchema,
-	UpdateSchema,
-	DatabaseSchema
+    FullSchema,
+    CreateSchema,
+    UpdateSchema,
+    DatabaseSchema
 > {
-	public name = 'Adventures'
-	protected collectionName = 'adventures'
+    public name = 'Adventures'
+    protected collectionName = 'adventures'
 
-	protected createSchema = createSchema
-	protected updateSchema = updateSchema
-	protected fullSchema = fullSchema
-	protected databaseSchema = databaseSchema
+    protected createSchema = createSchema
+    protected updateSchema = updateSchema
+    protected fullSchema = fullSchema
+    protected databaseSchema = databaseSchema
 
-	public static Store(options: AdventureStoreOptions & UniversalStoreOptions) {
-		return new this(options.db)
-	}
+    public static Store(
+        options: AdventureStoreOptions & UniversalStoreOptions
+    ) {
+        return new this(options.db)
+    }
 
-	protected async willCreate(
-		values: CreateAdventure
-	): Promise<Omit<DatabaseAdventure, 'id'>> {
-		return { ...values, whosIn: [], whosOut: [] }
-	}
+    protected async willCreate(
+        values: CreateAdventure
+    ): Promise<Omit<DatabaseAdventure, 'id'>> {
+        return { ...values, whosIn: [], whosOut: [] }
+    }
 
-	protected async willUpdate(values: UpdateAdventure) {
-		return values as Partial<DatabaseAdventure>
-	}
+    protected async willUpdate(values: UpdateAdventure) {
+        return values as Partial<DatabaseAdventure>
+    }
 
-	protected async prepareRecord<
-		IncludePrivateFields extends boolean,
-		F extends SchemaFieldNames<FullSchema> = SchemaFieldNames<FullSchema>,
-	>(
-		record: DatabaseAdventure,
-		_options?: PrepareOptions<IncludePrivateFields, FullSchema, F>
-	) {
-		return record as PrepareResults<FullSchema, IncludePrivateFields>
-	}
+    protected async prepareRecord<
+        IncludePrivateFields extends boolean,
+        F extends SchemaFieldNames<FullSchema> = SchemaFieldNames<FullSchema>,
+    >(
+        record: DatabaseAdventure,
+        _options?: PrepareOptions<IncludePrivateFields, FullSchema, F>
+    ) {
+        return record as PrepareResults<FullSchema, IncludePrivateFields>
+    }
 
-	public async seed(
-		options: StoreSeedOptions,
-		custom?: { shouldAttachToFakedPerson: boolean }
-	) {
-		const { totalToSeed, TestClass } = options
-		const personId = custom?.shouldAttachToFakedPerson
-			? TestClass.fakedPerson?.id
-			: null
+    public async seed(
+        options: StoreSeedOptions,
+        custom?: { shouldAttachToFakedPerson: boolean }
+    ) {
+        const { totalToSeed, TestClass } = options
+        const personId = custom?.shouldAttachToFakedPerson
+            ? TestClass.fakedPerson?.id
+            : null
 
-		await Promise.all(
-			new Array(totalToSeed).fill(0).map(async () => {
-				const values = generateAdventureValues()
+        await Promise.all(
+            new Array(totalToSeed).fill(0).map(async () => {
+                const values = generateAdventureValues()
 
-				//@ts-ignore
-				delete values.id
-				//@ts-ignore
-				delete values.whosIn
-				//@ts-ignore
-				delete values.whosOut
+                //@ts-ignore
+                delete values.id
+                //@ts-ignore
+                delete values.whosIn
+                //@ts-ignore
+                delete values.whosOut
 
-				if (personId) {
-					values.source.personId = personId
-				}
-				await this.createOne(values)
-			})
-		)
-	}
+                if (personId) {
+                    values.source.personId = personId
+                }
+                await this.createOne(values)
+            })
+        )
+    }
 }

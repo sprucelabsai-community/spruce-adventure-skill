@@ -5,31 +5,31 @@ import acceptConnectionEmitTargetAndPayloadSchema from '#spruce/schemas/adventur
 import acceptConnectionResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/acceptConnectionResponsePayload.schema'
 
 const acceptConnectionEventContract = buildEventContract({
-	eventSignatures: {
-		'adventure.accept-connection::v2022_09_09': {
-			isGlobal: true,
+    eventSignatures: {
+        'adventure.accept-connection::v2022_09_09': {
+            isGlobal: true,
 
-			emitPayloadSchema: acceptConnectionEmitTargetAndPayloadSchema,
-			responsePayloadSchema: acceptConnectionResponsePayloadSchema,
-			emitPermissionContract: buildPermissionContract({
-				id: 'acceptConnectionEmitPermissions',
-				name: 'Accept connection',
-				requireAllPermissions: false,
-				permissions: [
-					{
-						id: 'can-accept-connection',
-						name: 'Can accept connection',
-						defaults: {
-							loggedIn: {
-								default: true,
-							},
-						},
-						requireAllStatuses: false,
-					},
-				],
-			}),
-		},
-	},
+            emitPayloadSchema: acceptConnectionEmitTargetAndPayloadSchema,
+            responsePayloadSchema: acceptConnectionResponsePayloadSchema,
+            emitPermissionContract: buildPermissionContract({
+                id: 'acceptConnectionEmitPermissions',
+                name: 'Accept connection',
+                requireAllPermissions: false,
+                permissions: [
+                    {
+                        id: 'can-accept-connection',
+                        name: 'Can accept connection',
+                        defaults: {
+                            loggedIn: {
+                                default: true,
+                            },
+                        },
+                        requireAllStatuses: false,
+                    },
+                ],
+            }),
+        },
+    },
 })
 export default acceptConnectionEventContract
 

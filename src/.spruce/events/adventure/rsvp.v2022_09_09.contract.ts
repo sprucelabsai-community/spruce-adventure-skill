@@ -5,31 +5,31 @@ import rsvpEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_0
 import rsvpResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/rsvpResponsePayload.schema'
 
 const rsvpEventContract = buildEventContract({
-	eventSignatures: {
-		'adventure.rsvp::v2022_09_09': {
-			isGlobal: true,
+    eventSignatures: {
+        'adventure.rsvp::v2022_09_09': {
+            isGlobal: true,
 
-			emitPayloadSchema: rsvpEmitTargetAndPayloadSchema,
-			responsePayloadSchema: rsvpResponsePayloadSchema,
-			emitPermissionContract: buildPermissionContract({
-				id: 'rsvpEmitPermissions',
-				name: 'Rsvp',
-				requireAllPermissions: false,
-				permissions: [
-					{
-						id: 'can-rsvp',
-						name: 'Can rsvp',
-						defaults: {
-							loggedIn: {
-								default: true,
-							},
-						},
-						requireAllStatuses: false,
-					},
-				],
-			}),
-		},
-	},
+            emitPayloadSchema: rsvpEmitTargetAndPayloadSchema,
+            responsePayloadSchema: rsvpResponsePayloadSchema,
+            emitPermissionContract: buildPermissionContract({
+                id: 'rsvpEmitPermissions',
+                name: 'Rsvp',
+                requireAllPermissions: false,
+                permissions: [
+                    {
+                        id: 'can-rsvp',
+                        name: 'Can rsvp',
+                        defaults: {
+                            loggedIn: {
+                                default: true,
+                            },
+                        },
+                        requireAllStatuses: false,
+                    },
+                ],
+            }),
+        },
+    },
 })
 export default rsvpEventContract
 

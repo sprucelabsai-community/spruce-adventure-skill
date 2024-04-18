@@ -4,13 +4,13 @@ import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class RegisterDashboardCardsListenerTest extends AbstractAdventureTest {
-	@test()
-	protected static async registersPeopleDashbardCards() {
-		await this.bootSkill()
-		const [{ vcIds }] = await this.fakedClient.emitAndFlattenResponses(
-			'people.register-dashboard-cards::v2022_05_29'
-		)
+    @test()
+    protected static async registersPeopleDashbardCards() {
+        await this.bootSkill()
+        const [{ vcIds }] = await this.fakedClient.emitAndFlattenResponses(
+            'people.register-dashboard-cards::v2022_05_29'
+        )
 
-		assert.isEqualDeep(vcIds, ['adventure.friends-dashboard-card'])
-	}
+        assert.isEqualDeep(vcIds, ['adventure.friends-dashboard-card'])
+    }
 }
