@@ -77,14 +77,14 @@ const listeners: EventFeatureListener[] = [
                 .isGlobal,
     },
     {
-        eventName: 'post',
+        eventName: 'rsvp',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback:
-            require('../../posting/listeners/adventure/post.v2022_09_09.listener')
+            require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener')
                 .default,
         isGlobal:
-            require('../../posting/listeners/adventure/post.v2022_09_09.listener')
+            require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener')
                 .isGlobal,
     },
     {
@@ -99,14 +99,14 @@ const listeners: EventFeatureListener[] = [
                 .isGlobal,
     },
     {
-        eventName: 'rsvp',
+        eventName: 'post',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback:
-            require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener')
+            require('../../posting/listeners/adventure/post.v2022_09_09.listener')
                 .default,
         isGlobal:
-            require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener')
+            require('../../posting/listeners/adventure/post.v2022_09_09.listener')
                 .isGlobal,
     },
 ]
