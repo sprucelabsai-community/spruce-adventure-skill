@@ -11,6 +11,8 @@ import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
 
+import '@sprucelabs/heartwood-view-controllers'
+
 const vcs = {
     ConnectSkillViewController,
     ListSkillViewController,
@@ -19,12 +21,14 @@ const vcs = {
     ProfileSkillViewController,
     RootSkillViewController,
     FriendsListToolViewController,
+    FriendsDashboardCardViewController,
     AdventureCardViewController,
     BaseAdventureCardViewController,
     CurrentAdventureCardViewController,
     PostCardViewController,
-    FriendsDashboardCardViewController,
 }
+
+export const pluginsByName = {}
 
 type LoadOptions<Args extends Record<string, any>[]> =
     Args[0]['args'] extends Record<string, any>
@@ -64,11 +68,11 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 
     interface ViewControllerMap {
         'adventure.friends-list-tool': FriendsListToolViewController
+        'adventure.friends-dashboard-card': FriendsDashboardCardViewController
         'adventure.adventure-card': AdventureCardViewController
         'adventure.base-adventure-card': BaseAdventureCardViewController
         'adventure.current-adventure-card': CurrentAdventureCardViewController
         'adventure.post-card': PostCardViewController
-        'adventure.friends-dashboard-card': FriendsDashboardCardViewController
         'adventure.connect': ConnectSkillViewController
         'adventure.list': ListSkillViewController
         'adventure.post': PostSkillViewController
@@ -80,6 +84,9 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
     interface ViewControllerOptionsMap {
         'adventure.friends-list-tool': ConstructorParameters<
             typeof FriendsListToolViewController
+        >[0]
+        'adventure.friends-dashboard-card': ConstructorParameters<
+            typeof FriendsDashboardCardViewController
         >[0]
         'adventure.adventure-card': ConstructorParameters<
             typeof AdventureCardViewController
@@ -93,16 +100,15 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
         'adventure.post-card': ConstructorParameters<
             typeof PostCardViewController
         >[0]
-        'adventure.friends-dashboard-card': ConstructorParameters<
-            typeof FriendsDashboardCardViewController
-        >[0]
     }
+
+    interface ViewControllerPlugins {}
 }
 
 //@ts-ignore
 if (typeof heartwood === 'function') {
     //@ts-ignore
-    heartwood(vcs)
+    heartwood(vcs, pluginsByName)
 }
 
 export default vcs
