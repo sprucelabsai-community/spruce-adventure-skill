@@ -15,17 +15,17 @@ import '@sprucelabs/heartwood-view-controllers'
 
 const vcs = {
     ConnectSkillViewController,
-    ListSkillViewController,
     PostSkillViewController,
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
+    ListSkillViewController,
     FriendsListToolViewController,
-    FriendsDashboardCardViewController,
     AdventureCardViewController,
     BaseAdventureCardViewController,
     CurrentAdventureCardViewController,
     PostCardViewController,
+    FriendsDashboardCardViewController,
 }
 
 export const pluginsByName = {}
@@ -38,19 +38,16 @@ type LoadOptions<Args extends Record<string, any>[]> =
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
     interface SkillViewControllerMap {
         'adventure.connect': ConnectSkillViewController
-        'adventure.list': ListSkillViewController
         'adventure.post': PostSkillViewController
         'adventure.equip': EquipSkillViewController
         'adventure.profile': ProfileSkillViewController
         'adventure.root': RootSkillViewController
+        'adventure.list': ListSkillViewController
     }
 
     interface SkillViewControllerArgsMap {
         'adventure.connect': LoadOptions<
             Parameters<ConnectSkillViewController['load']>
-        >
-        'adventure.list': LoadOptions<
-            Parameters<ListSkillViewController['load']>
         >
         'adventure.post': LoadOptions<
             Parameters<PostSkillViewController['load']>
@@ -64,29 +61,29 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
         'adventure.root': LoadOptions<
             Parameters<RootSkillViewController['load']>
         >
+        'adventure.list': LoadOptions<
+            Parameters<ListSkillViewController['load']>
+        >
     }
 
     interface ViewControllerMap {
         'adventure.friends-list-tool': FriendsListToolViewController
-        'adventure.friends-dashboard-card': FriendsDashboardCardViewController
         'adventure.adventure-card': AdventureCardViewController
         'adventure.base-adventure-card': BaseAdventureCardViewController
         'adventure.current-adventure-card': CurrentAdventureCardViewController
         'adventure.post-card': PostCardViewController
+        'adventure.friends-dashboard-card': FriendsDashboardCardViewController
         'adventure.connect': ConnectSkillViewController
-        'adventure.list': ListSkillViewController
         'adventure.post': PostSkillViewController
         'adventure.equip': EquipSkillViewController
         'adventure.profile': ProfileSkillViewController
         'adventure.root': RootSkillViewController
+        'adventure.list': ListSkillViewController
     }
 
     interface ViewControllerOptionsMap {
         'adventure.friends-list-tool': ConstructorParameters<
             typeof FriendsListToolViewController
-        >[0]
-        'adventure.friends-dashboard-card': ConstructorParameters<
-            typeof FriendsDashboardCardViewController
         >[0]
         'adventure.adventure-card': ConstructorParameters<
             typeof AdventureCardViewController
@@ -99,6 +96,9 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
         >[0]
         'adventure.post-card': ConstructorParameters<
             typeof PostCardViewController
+        >[0]
+        'adventure.friends-dashboard-card': ConstructorParameters<
+            typeof FriendsDashboardCardViewController
         >[0]
     }
 
