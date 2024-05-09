@@ -1,6 +1,6 @@
-import PostSkillViewController from '../../posting/Post.svc'
-import ListSkillViewController from '../../listing/List.svc'
 import ConnectSkillViewController from '../../friends/Connect.svc'
+import ListSkillViewController from '../../listing/List.svc'
+import PostSkillViewController from '../../posting/Post.svc'
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
@@ -14,9 +14,9 @@ import PostCardViewController from '../../posting/PostCard.vc'
 import '@sprucelabs/heartwood-view-controllers'
 
 const vcs = {
-    PostSkillViewController,
-    ListSkillViewController,
     ConnectSkillViewController,
+    ListSkillViewController,
+    PostSkillViewController,
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
@@ -35,18 +35,18 @@ type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Re
 
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
-		'adventure.post': PostSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
+		'adventure.list': ListSkillViewController
+		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
 	}
 
 	interface SkillViewControllerArgsMap {
-		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
-		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.connect': LoadOptions<Parameters<ConnectSkillViewController['load']>>
+		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
+		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
 		'adventure.equip': LoadOptions<Parameters<EquipSkillViewController['load']>>
 		'adventure.profile': LoadOptions<Parameters<ProfileSkillViewController['load']>>
 		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
@@ -59,9 +59,9 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.base-adventure-card': BaseAdventureCardViewController
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
 		'adventure.post-card': PostCardViewController
-		'adventure.post': PostSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
+		'adventure.list': ListSkillViewController
+		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
