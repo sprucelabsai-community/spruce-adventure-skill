@@ -16,6 +16,8 @@ import FakePostCard from '../../support/FakePostCard'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
 import generateFriendValues from '../../support/generateFriendValues'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
+import { assertActionRendersConfirmCancelDialog } from './assertActionRendersConfirmCancelDialog'
+import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 
 @fake.login()
 export default class ListSkillViewTest extends AbstractAdventureTest {
@@ -38,6 +40,10 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         this.resetAdventureRecords()
         this.seedCurrentAdventure()
 
+        this.views.setController(
+            'adventure.confirm-cancel-card',
+            ControlledConfirmCancelCard
+        )
         this.views.setController('adventure.list', SpyListViewController)
         this.views.setController('adventure.friends-list-tool', MockFriendsTool)
         this.views.setController('adventure.post-card', FakePostCard)
@@ -128,10 +134,11 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async cancellingCurrentRedirectsToAdd() {
         await this.eventFaker.fakeCancelAdventure()
-        const confirm = await vcAssert.assertRendersConfirm(
-            this.currentCardVc,
-            () => interactor.clickButton(this.currentCardVc, 'cancel')
-        )
+        const { confirmCancelVc: confirm } =
+            await assertActionRendersConfirmCancelDialog(
+                this.currentCardVc,
+                () => interactor.clickButton(this.currentCardVc, 'cancel')
+            )
         await vcAssert.assertActionRedirects({
             action: async () => confirm.accept(),
             destination: {

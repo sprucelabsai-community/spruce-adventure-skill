@@ -5,12 +5,14 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import generateAdventureWithPersonValues from '../../support/generateAdventureWithPersonValues'
+import { assertActionRendersConfirmCancelDialog } from './assertActionRendersConfirmCancelDialog'
+import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 
 @fake.login()
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {
@@ -20,8 +22,15 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
     protected static async beforeEach() {
         await super.beforeEach()
+
         this.adventure = generateAdventureWithPersonValues()
         this.didCancelHandlerInvoked = false
+
+        this.views.setController(
+            'adventure.confirm-cancel-card',
+            ControlledConfirmCancelCard
+        )
+
         this.vc = this.views.Controller('adventure.current-adventure-card', {
             adventure: this.adventure,
             onDidCancel: () => {
@@ -76,14 +85,19 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async confirmingCancelEmitsCancelEvent() {
-        let wasHit = false
-        await this.eventFaker.fakeCancelAdventure(() => {
-            wasHit = true
+        let passedMessage: string | undefined | null
+        const message = generateId()
+
+        await this.eventFaker.fakeCancelAdventure((payload) => {
+            passedMessage = payload?.message
         })
 
-        const confirm = await this.clickCancelAndAssertConfirm()
-        await confirm.accept()
-        assert.isTrue(wasHit)
+        const { confirmCancelVc: confirm } =
+            await this.clickCancelAndAssertConfirm()
+
+        await confirm.accept(message)
+
+        assert.isEqual(passedMessage, message)
     }
 
     @test()
@@ -93,8 +107,12 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
             wasHit = true
         })
 
-        const confirm = await this.clickCancelAndAssertConfirm()
+        const { confirmCancelVc: confirm, dlgVc } =
+            await this.clickCancelAndAssertConfirm()
+
         await confirm.decline()
+
+        vcAssert.assertDialogWasClosed(dlgVc)
 
         assert.isFalse(wasHit)
         assert.isFalse(this.didCancelHandlerInvoked)
@@ -105,8 +123,12 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     private static async clickCancelAndAssertConfirm() {
-        return vcAssert.assertRendersConfirm(this.vc, () =>
-            interactor.clickButton(this.vc, 'cancel')
-        )
+        const action = () => interactor.clickButton(this.vc, 'cancel')
+        const vc = this.vc
+
+        const { confirmCancelVc, dlgVc } =
+            await assertActionRendersConfirmCancelDialog(vc, action)
+
+        return { confirmCancelVc, dlgVc }
     }
 }

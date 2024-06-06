@@ -1,5 +1,5 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import AdventureCanceller from './cancelling/AdventureCanceller'
+import { AdventureCanceller } from './cancelling/AdventureCanceller'
 import AdventureFinder from './listing/AdventureFinder'
 import AdventurePoster from './posting/AdventurePoster'
 import Rsvper from './rsvping/Rsvper'

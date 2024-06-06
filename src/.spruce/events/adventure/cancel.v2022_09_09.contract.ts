@@ -1,4 +1,5 @@
 import '#spruce/permissions/permissions.types'
+import cancelEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_09/cancelEmitTargetAndPayload.schema'
 import cancelResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/cancelResponsePayload.schema'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 import { buildPermissionContract } from '@sprucelabs/mercury-types'
@@ -10,7 +11,7 @@ const cancelEventContract = buildEventContract({
             isGlobal: true,
             
             
-            
+            emitPayloadSchema: cancelEmitTargetAndPayloadSchema,
             responsePayloadSchema: cancelResponsePayloadSchema,
             emitPermissionContract: buildPermissionContract({
   "id": "cancelEmitPermissions",

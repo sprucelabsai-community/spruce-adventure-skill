@@ -22,8 +22,8 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
             'onDidCancel',
         ])
 
-        this.baseAdventureCardVc = this.CardVc(adventure)
         this.didCancelHandler = onDidCancel
+        this.baseAdventureCardVc = this.CardVc(adventure)
     }
 
     private CardVc(
@@ -59,17 +59,25 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
     }
 
     private async handleClickCancel() {
-        const confirm = await this.confirm({
-            message: 'You sure you wanna cancel?',
-            isDestructive: true,
+        const vc = this.Controller('adventure.confirm-cancel-card', {
+            onCancel: async () => {
+                await dlgVc.hide()
+            },
+            onConfirm: async (message) => {
+                await this.emitCancelAdventure(message)
+            },
         })
 
-        if (!confirm) {
-            return
-        }
+        const dlgVc = this.renderInDialog(vc.render())
+    }
 
+    private async emitCancelAdventure(message: string | undefined | null) {
         const client = await this.connectToApi()
-        await client.emitAndFlattenResponses('adventure.cancel::v2022_09_09')
+        await client.emitAndFlattenResponses('adventure.cancel::v2022_09_09', {
+            payload: {
+                message,
+            },
+        })
 
         this.didCancelHandler?.()
     }

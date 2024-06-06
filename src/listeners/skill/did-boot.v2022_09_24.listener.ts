@@ -4,9 +4,10 @@ import {
     SpruceEvent,
     SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
-import AdventureCanceller from '../../cancelling/AdventureCanceller'
+import AdventureCancellerImpl from '../../cancelling/AdventureCanceller'
 import AdventureFinder from '../../listing/AdventureFinder'
 import ConnectionManager from '../../listing/ConnectionManager'
+import MessageSenderImpl from '../../messaging/MessageSender'
 import AdventurePoster from '../../posting/AdventurePoster'
 import Rsvper from '../../rsvping/Rsvper'
 
@@ -22,10 +23,14 @@ export default async (
         connections,
     })
 
+    const sender = MessageSenderImpl.Sender({
+        client: client as MercuryClient,
+        connections,
+    })
+
     const poster = await AdventurePoster.Poster({
         stores,
-        connections,
-        client: client as MercuryClient,
+        messageSender: sender,
     })
 
     const rsvp = await Rsvper.Rsvper({
@@ -34,7 +39,10 @@ export default async (
         connections,
     })
 
-    const canceller = await AdventureCanceller.Canceller({ stores })
+    const canceller = await AdventureCancellerImpl.Canceller({
+        stores,
+        messageSender: sender,
+    })
 
     skill.updateContext('canceller', canceller)
     skill.updateContext('finder', finder)

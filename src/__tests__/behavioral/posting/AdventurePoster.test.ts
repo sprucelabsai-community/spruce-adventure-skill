@@ -1,5 +1,6 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
+import MessageSenderImpl from '../../../messaging/MessageSender'
 import AdventurePoster from '../../../posting/AdventurePoster'
 import AbstractFriendsTest from '../../support/AbstractFriendsTest'
 import {
@@ -23,10 +24,13 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
         await this.eventFaker.fakeGenerateUrl()
 
+        const connections = await this.ConnectionManager()
         this.poster = await AdventurePoster.Poster({
             stores: this.stores,
-            connections: await this.ConnectionManager(),
-            client: this.fakedClient,
+            messageSender: MessageSenderImpl.Sender({
+                client: this.fakedClient,
+                connections,
+            }),
         })
 
         await this.eventFaker.fakeSendMessage((targetAndPayload) => {

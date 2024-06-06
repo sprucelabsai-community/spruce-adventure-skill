@@ -1,13 +1,19 @@
 import { tomorrowLunch, tomorrowStartOfDay } from '@sprucelabs/calendar-utils'
+import { Skill } from '@sprucelabs/spruce-skill-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { AdventureCanceller } from '../../../cancelling/AdventureCanceller'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class CancelListenerTest extends AbstractAdventureTest {
+    private static skill: Skill
+
     protected static async beforeEach() {
         await super.beforeEach()
-        await this.bootSkill()
+        await this.eventFaker.fakeGenerateUrl()
+        const { skill } = await this.bootSkill()
+        this.skill = skill
     }
 
     @test()
@@ -43,6 +49,18 @@ export default class CancelListenerTest extends AbstractAdventureTest {
         await this.assertAdventureDoesNotExist(a1.id)
     }
 
+    @test()
+    @seed('adventures', 1)
+    protected static async canOptionallyPassCancelMessageToSendOutToConnections() {
+        const canceller = new SpyCanceller()
+        this.skill.updateContext('canceller', canceller)
+
+        const message = generateId()
+        await this.emitCancel(message)
+
+        assert.isEqual(canceller.lastMessage, message)
+    }
+
     private static async assertAdventureDoesNotExist(id: string) {
         const match2 = await this.findById(id)
         assert.isFalsy(match2)
@@ -66,12 +84,29 @@ export default class CancelListenerTest extends AbstractAdventureTest {
         assert.isEqual(totalCancelled, total)
     }
 
-    private static async emitCancel() {
+    private static async emitCancel(message?: string) {
         const [{ totalCancelled }] =
             await this.fakedClient.emitAndFlattenResponses(
-                'adventure.cancel::v2022_09_09'
+                'adventure.cancel::v2022_09_09',
+                {
+                    payload: { message },
+                }
             )
 
         return totalCancelled
+    }
+}
+
+class SpyCanceller implements AdventureCanceller {
+    public lastPosterId: string | undefined
+    public lastMessage: string | undefined
+
+    public async cancel(
+        posterId: string,
+        message?: string | undefined
+    ): Promise<number> {
+        this.lastPosterId = posterId
+        this.lastMessage = message
+        return 0
     }
 }

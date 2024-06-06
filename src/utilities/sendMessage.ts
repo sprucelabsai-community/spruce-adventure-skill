@@ -11,12 +11,14 @@ export async function sendMessage(options: MessageOptions) {
             message: {
                 body: message,
                 classification: 'transactional',
-                links: [
-                    {
-                        label: linkLabel ?? 'RSVP Now',
-                        uri: url,
-                    },
-                ],
+                links: url
+                    ? [
+                          {
+                              label: linkLabel ?? 'RSVP Now',
+                              uri: url,
+                          },
+                      ]
+                    : undefined,
             },
         },
     })
@@ -24,7 +26,7 @@ export async function sendMessage(options: MessageOptions) {
 interface MessageOptions {
     toId: string
     message: string
-    url: string
+    url?: string
     client: MercuryClient
     linkLabel?: string
 }

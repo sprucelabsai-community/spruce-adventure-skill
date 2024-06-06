@@ -149,9 +149,11 @@ export default class EventFaker {
         )
     }
 
-    public async fakeCancelAdventure(cb?: () => void) {
-        await eventFaker.on('adventure.cancel::v2022_09_09', () => {
-            cb?.()
+    public async fakeCancelAdventure(
+        cb?: (payload?: CancelPayload | null) => void
+    ) {
+        await eventFaker.on('adventure.cancel::v2022_09_09', ({ payload }) => {
+            cb?.(payload)
             return {
                 totalCancelled: 1,
             }
@@ -186,3 +188,6 @@ export type SendMessageTargetAndPayload =
 
 export type GenerateUrlTargetAndPayload =
     SpruceSchemas.Heartwood.v2021_02_11.GenerateUrlEmitTargetAndPayload
+
+export type CancelPayload =
+    SpruceSchemas.Adventure.v2022_09_09.CancelEmitPayload
