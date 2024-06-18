@@ -87,7 +87,7 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
                             subText: {
                                 content: durationUtil.renderDateTimeUntil(
                                     this.adventure.when,
-                                    this.dates.date(),
+                                    Date.now(),
                                     {
                                         shouldCapitalize: true,
                                     }

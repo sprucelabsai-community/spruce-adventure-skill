@@ -40,11 +40,12 @@ export default class AdventurePoster {
         await locale.setZoneName('America/Denver')
 
         const offsetMs = locale.getTimezoneOffsetMinutes() * 60 * 1000
+        const when = created.when + offsetMs
         const message = `Hey {{to}}! {{from}} posted a new adventure!\n\n"${
             created.what
         }"\n\n${durationUtil.renderDateTimeUntil(
-            created.when + offsetMs,
-            new Date().getTime(),
+            when,
+            new Date().getTime() + offsetMs,
             {
                 shouldCapitalize: true,
             }
