@@ -13,5 +13,6 @@ export async function assertActionRendersConfirmCancelDialog(
         dlgVc,
         ConfirmCancelCardViewController
     ) as ControlledConfirmCancelCard
+
     return { confirmCancelVc, dlgVc }
 }
