@@ -109,9 +109,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
         assert.isEqual(passedEnd, post.when)
 
-        //TOOD: move to isBetween()
-        assert.isBelow(passedBeginning, after)
-        assert.isAbove(passedBeginning, before)
+        assert.isBetweenInclusive(passedBeginning!, before, after)
     }
 
     @test()
