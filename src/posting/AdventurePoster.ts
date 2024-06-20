@@ -2,6 +2,7 @@ import {
     dateUtil,
     DateUtilDecorator,
     durationUtil,
+    DurationUtilBuilder,
     LocaleImpl,
 } from '@sprucelabs/calendar-utils'
 import { StoreFactory } from '@sprucelabs/data-stores'
@@ -41,17 +42,17 @@ export default class AdventurePoster {
             },
         })
 
-        const locale = new LocaleImpl()
-        await locale.setZoneName('America/Denver')
-        durationUtil.dates = new DateUtilDecorator(locale).makeLocaleAware(
-            dateUtil
+        const durationUtil =
+            await DurationUtilBuilder.getForTimezone('Africa/Abidjan')
+
+        const timeUntil = durationUtil.renderDateTimeUntil(
+            Date.now(),
+            created.when
         )
-        const when = created.when
+
         const message = `Hey {{to}}! {{from}} posted a new adventure!\n\n"${
             created.what
-        }"\n\n${durationUtil.renderDateTimeUntil(when, new Date().getTime(), {
-            shouldCapitalize: true,
-        })} Mountain Time`
+        }" in ${timeUntil} Mountain Time`
 
         await this.messageSender.sendMessage(personId!, message)
 

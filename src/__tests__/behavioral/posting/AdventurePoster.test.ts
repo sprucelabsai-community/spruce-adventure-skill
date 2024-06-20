@@ -1,3 +1,4 @@
+import { DurationUtilBuilder, dateAssert } from '@sprucelabs/calendar-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import MessageSenderImpl from '../../../messaging/MessageSender'
@@ -80,8 +81,52 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         })
     }
 
+    @test()
+    protected static async passesRelativeTimeToMessage() {
+        const expected = generateId()
+        let passedBeginning: number | undefined
+        let passedEnd: number | undefined
+
+        DurationUtilBuilder.durationUtil.renderDateTimeUntil = (
+            beginning,
+            end
+        ) => {
+            passedBeginning = beginning
+            passedEnd = end
+            return expected
+        }
+
+        await this.connect(0)
+
+        const before = Date.now()
+        const post = await this.post()
+        const after = Date.now()
+
+        assert.doesInclude(
+            this.sendMessageTargetAndPayloads[0].payload.message.body,
+            expected
+        )
+
+        assert.isEqual(passedEnd, post.when)
+
+        //TOOD: move to isBetween()
+        assert.isBelow(passedBeginning, after)
+        assert.isAbove(passedBeginning, before)
+    }
+
+    @test()
+    protected static async durationUtilShouldDefaultToDenver() {
+        await this.connect(0)
+        await this.post()
+
+        dateAssert.currentTimezoneEquals(
+            DurationUtilBuilder.lastBuiltDurationUtil,
+            'America/Denver'
+        )
+    }
+
     private static async post() {
-        await this.poster.create({
+        return await this.poster.create({
             personId: this.myId,
             ...generatePostAdventureValues(),
         })
