@@ -43,7 +43,7 @@ export default class AdventurePoster {
         })
 
         const durationUtil =
-            await DurationUtilBuilder.getForTimezone('Africa/Abidjan')
+            await DurationUtilBuilder.getForTimezone('America/Denver')
 
         const timeUntil = durationUtil.renderDateTimeUntil(
             Date.now(),
