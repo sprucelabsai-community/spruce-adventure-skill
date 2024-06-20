@@ -120,7 +120,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         await this.post()
 
         dateAssert.currentTimezoneEquals(
-            DurationUtilBuilder.lastBuiltDurationUtil,
+            DurationUtilBuilder.lastBuiltDurationUtil!,
             'America/Denver'
         )
     }
