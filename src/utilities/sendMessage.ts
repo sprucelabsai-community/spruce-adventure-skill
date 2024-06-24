@@ -1,7 +1,7 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 
 export async function sendMessage(options: MessageOptions) {
-    const { toId, message, url, client, linkLabel } = options
+    const { toId, message, url, client, linkLabel, context } = options
 
     await client.emitAndFlattenResponses('send-message::v2020_12_25', {
         target: {
@@ -11,6 +11,7 @@ export async function sendMessage(options: MessageOptions) {
             message: {
                 body: message,
                 classification: 'transactional',
+                context,
                 links: url
                     ? [
                           {
@@ -29,4 +30,5 @@ interface MessageOptions {
     url?: string
     client: MercuryClient
     linkLabel?: string
+    context?: Record<string, any>
 }

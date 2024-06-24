@@ -25,8 +25,6 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
 
         const { adventure, footer, id, buttons, section } = options
 
-        durationUtil.dates = this.dates
-
         this.adventure = adventure
         this.mapVc = this.MapVc()
         this.cardVc = this.CardVc({ footer, id, buttons, section })
@@ -87,7 +85,6 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
                             subText: {
                                 content: durationUtil.renderDateTimeUntil(
                                     this.adventure.when,
-                                    Date.now(),
                                     {
                                         shouldCapitalize: true,
                                     }

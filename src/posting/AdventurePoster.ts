@@ -1,4 +1,3 @@
-import { DurationUtilBuilder } from '@sprucelabs/calendar-utils'
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { PostAdventure } from '../adventure.types'
 import { MessageSender } from '../messaging/MessageSender'
@@ -36,19 +35,13 @@ export default class AdventurePoster {
             },
         })
 
-        const durationUtil =
-            await DurationUtilBuilder.getForTimezone('America/Denver')
-
-        const timeUntil = durationUtil.renderDateTimeUntil(
-            Date.now(),
-            created.when
-        )
-
         const message = `Hey {{to}}! {{from}} posted a new adventure!\n\n"${
             created.what
-        }" in ${timeUntil} Mountain Time`
+        }" in {{formatDateTimeUntil when}} Mountain Time`
 
-        await this.messageSender.sendMessage(personId!, message)
+        await this.messageSender.sendMessage(personId!, message, {
+            when: created.when,
+        })
 
         return created
     }

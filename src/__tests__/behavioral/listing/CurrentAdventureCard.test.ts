@@ -3,6 +3,7 @@ import {
     mapAssert,
     mapInteractor,
     vcAssert,
+    vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
@@ -116,6 +117,11 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
 
         assert.isFalse(wasHit)
         assert.isFalse(this.didCancelHandlerInvoked)
+    }
+
+    @test()
+    protected static async durationUtilSetupCorrectly() {
+        vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
     }
 
     private static get mapVc() {

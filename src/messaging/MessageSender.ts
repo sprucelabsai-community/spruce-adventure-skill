@@ -25,7 +25,11 @@ export default class MessageSenderImpl {
         return url
     }
 
-    public async sendMessage(fromPersonId: string, message: string) {
+    public async sendMessage(
+        fromPersonId: string,
+        message: string,
+        context?: Record<string, any>
+    ) {
         const url = await this.generateUrl()
 
         const connections =
@@ -35,7 +39,13 @@ export default class MessageSenderImpl {
 
         await Promise.all(
             connections.map((connection) =>
-                this.messageConnection({ toId: connection, from, message, url })
+                this.messageConnection({
+                    toId: connection,
+                    from,
+                    message,
+                    url,
+                    context,
+                })
             )
         )
     }
@@ -45,8 +55,9 @@ export default class MessageSenderImpl {
         from: Person
         message: string
         url: string
+        context?: Record<string, any>
     }) {
-        const { toId, from, message } = options
+        const { toId, from, message, context } = options
 
         const to = await this.getPerson(toId)
 
@@ -58,6 +69,7 @@ export default class MessageSenderImpl {
             ...options,
             message: updatedMessage,
             client: this.client,
+            context,
         })
     }
 
@@ -72,5 +84,9 @@ interface MessageSenderOptions {
 }
 
 export interface MessageSender {
-    sendMessage(fromPersonId: string, message: string): Promise<void>
+    sendMessage(
+        fromPersonId: string,
+        message: string,
+        context?: Record<string, any>
+    ): Promise<void>
 }

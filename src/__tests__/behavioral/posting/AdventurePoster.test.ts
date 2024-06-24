@@ -1,4 +1,3 @@
-import { DurationUtilBuilder, dateAssert } from '@sprucelabs/calendar-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import MessageSenderImpl from '../../../messaging/MessageSender'
@@ -82,43 +81,19 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async passesRelativeTimeToMessage() {
-        const expected = generateId()
-        let passedBeginning: number | undefined
-        let passedEnd: number | undefined
-
-        DurationUtilBuilder.durationUtil.renderDateTimeUntil = (
-            beginning,
-            end
-        ) => {
-            passedBeginning = beginning
-            passedEnd = end
-            return expected
-        }
-
+    protected static async passesExpectedTemplateAndCentext() {
         await this.connect(0)
 
-        const before = Date.now()
         const post = await this.post()
-        const after = Date.now()
 
         assert.doesInclude(
             this.sendMessageTargetAndPayloads[0].payload.message.body,
-            expected
+            '{{formatDateTimeUntil when}}'
         )
 
-        assert.isEqual(passedEnd, post.when)
-        assert.isBetweenInclusive(passedBeginning!, before, after)
-    }
-
-    @test()
-    protected static async durationUtilShouldDefaultToDenver() {
-        await this.connect(0)
-        await this.post()
-
-        dateAssert.currentTimezoneEquals(
-            DurationUtilBuilder.lastBuiltDurationUtil!,
-            'America/Denver'
+        assert.isEqual(
+            this.sendMessageTargetAndPayloads[0].payload.message.context?.when,
+            post.when
         )
     }
 
