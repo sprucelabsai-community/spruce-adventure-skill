@@ -1,3 +1,4 @@
+import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractViewController,
     Card,
@@ -16,6 +17,8 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
         options: ViewControllerOptions & CurrentAdventureCardOptions
     ) {
         super(options)
+
+        durationUtil.dates = this.dates
 
         const { adventure, onDidCancel } = assertOptions(options, [
             'adventure',
