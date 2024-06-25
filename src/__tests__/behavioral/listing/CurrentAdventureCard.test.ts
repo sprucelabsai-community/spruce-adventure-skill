@@ -24,6 +24,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     protected static async beforeEach() {
         await super.beforeEach()
 
+        vcDurationAssert.beforeEach(this.views)
         this.adventure = generateAdventureWithPersonValues()
         this.didCancelHandlerInvoked = false
 
