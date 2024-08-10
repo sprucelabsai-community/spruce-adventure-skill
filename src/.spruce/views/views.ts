@@ -1,5 +1,5 @@
-import ListSkillViewController from '../../listing/List.svc'
 import ConnectSkillViewController from '../../friends/Connect.svc'
+import ListSkillViewController from '../../listing/List.svc'
 import PostSkillViewController from '../../posting/Post.svc'
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
@@ -15,8 +15,8 @@ import PostCardViewController from '../../posting/PostCard.vc'
 import '@sprucelabs/heartwood-view-controllers'
 
 const vcs = {
-    ListSkillViewController,
     ConnectSkillViewController,
+    ListSkillViewController,
     PostSkillViewController,
     EquipSkillViewController,
     ProfileSkillViewController,
@@ -37,8 +37,8 @@ type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Re
 
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
-		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
@@ -46,8 +46,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 	}
 
 	interface SkillViewControllerArgsMap {
-		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.connect': LoadOptions<Parameters<ConnectSkillViewController['load']>>
+		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
 		'adventure.equip': LoadOptions<Parameters<EquipSkillViewController['load']>>
 		'adventure.profile': LoadOptions<Parameters<ProfileSkillViewController['load']>>
@@ -62,8 +62,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
 		'adventure.friends-dashboard-card': FriendsDashboardCardViewController
 		'adventure.post-card': PostCardViewController
-		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
