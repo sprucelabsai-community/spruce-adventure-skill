@@ -1,3 +1,4 @@
+import { MockActiveRecordCard } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { generateId } from '@sprucelabs/test-utils'
 import { Adventure } from '../../adventure.types'
@@ -14,6 +15,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
 
     protected static async beforeEach() {
         await super.beforeEach()
+        this.views.setController('active-record-card', MockActiveRecordCard)
         this.eventFaker = new EventFaker()
         this.adventures = await this.stores.getStore('adventures')
         this.connections = await this.stores.getStore('connections')

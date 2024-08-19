@@ -1,5 +1,6 @@
 import {
     AbstractSkillViewController,
+    ActiveRecordCardViewController,
     buildActiveRecordCard,
     ListCell,
     ListRow,
@@ -12,13 +13,13 @@ import { Friend } from '../adventure.types'
 
 export default class ConnectSkillViewController extends AbstractSkillViewController {
     public static id = 'connect'
-    protected cardVc: any
+    protected cardVc: ActiveRecordCardViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
 
         this.cardVc = this.Controller(
-            'activeRecordCard',
+            'active-record-card',
             buildActiveRecordCard({
                 id: 'pending',
                 eventName: 'adventure.list-friends::v2022_09_09',

@@ -1,4 +1,8 @@
-import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    interactor,
+    MockActiveRecordCard,
+    vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
@@ -88,6 +92,6 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 
 class SpyListTool extends FriendsListToolViewController {
     public getListVc() {
-        return this.activeVc.getListVc()
+        return (this.activeCardVc as MockActiveRecordCard).getListVc()
     }
 }

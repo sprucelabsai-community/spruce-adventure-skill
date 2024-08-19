@@ -1,4 +1,7 @@
-import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    MockActiveRecordCard,
+    vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
@@ -157,7 +160,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
 
 class SpyConnectSkillView extends ConnectSkillViewController {
     public getListVc() {
-        return this.cardVc.getListVc()
+        return (this.cardVc as MockActiveRecordCard).getListVc()
     }
     public getCardVc() {
         return this.cardVc

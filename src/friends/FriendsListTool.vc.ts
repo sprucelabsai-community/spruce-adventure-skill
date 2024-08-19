@@ -15,13 +15,13 @@ import { Friend } from '../adventure.types'
 
 export default class FriendsListToolViewController extends AbstractViewController<Card> {
     public static id = 'friends-list-tool'
-    protected activeVc: ActiveRecordCardViewController
+    protected activeCardVc: ActiveRecordCardViewController
     private router!: Router
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
         const { buttons, header } = options
-        this.activeVc = this.ActiveRecordVc({ buttons, header })
+        this.activeCardVc = this.ActiveRecordVc({ buttons, header })
     }
 
     private ActiveRecordVc(options: {
@@ -31,7 +31,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         const { buttons, header } = options
 
         return this.Controller(
-            'activeRecordCard',
+            'active-record-card',
             buildActiveRecordCard({
                 eventName: 'adventure.list-friends::v2022_09_09',
                 rowTransformer: this.renderRow.bind(this),
@@ -67,7 +67,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 
     private async handleClickInvite() {
-        this.activeVc.setIsBusy(true)
+        this.activeCardVc.setIsBusy(true)
         const client = await this.connectToApi()
         const [{ connectionId }] = await client.emitAndFlattenResponses(
             'adventure.create-connection::v2022_09_09'
@@ -84,7 +84,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
         })
         await this.router.redirect(id as any, args)
-        this.activeVc.setIsBusy(false)
+        this.activeCardVc.setIsBusy(false)
     }
 
     private renderRow(friend: Friend): ListRow {
@@ -109,15 +109,15 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }: Pick<SkillViewControllerLoadOptions, 'router'> & {
         onNoFriends?: () => void
     }) {
-        await this.activeVc.load()
+        await this.activeCardVc.load()
         this.router = router
-        if (this.activeVc.getRecords().length === 0) {
+        if (this.activeCardVc.getRecords().length === 0) {
             onNoFriends?.()
         }
     }
 
     public render() {
-        return this.activeVc.render()
+        return this.activeCardVc.render()
     }
 }
 
