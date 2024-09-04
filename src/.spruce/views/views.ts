@@ -1,6 +1,6 @@
 import ConnectSkillViewController from '../../friends/Connect.svc'
-import ListSkillViewController from '../../listing/List.svc'
 import PostSkillViewController from '../../posting/Post.svc'
+import ListSkillViewController from '../../listing/List.svc'
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
@@ -16,8 +16,8 @@ import '@sprucelabs/heartwood-view-controllers'
 
 const vcs = {
     ConnectSkillViewController,
-    ListSkillViewController,
     PostSkillViewController,
+    ListSkillViewController,
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
@@ -38,8 +38,8 @@ type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Re
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
 		'adventure.connect': ConnectSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
@@ -47,8 +47,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 
 	interface SkillViewControllerArgsMap {
 		'adventure.connect': LoadOptions<Parameters<ConnectSkillViewController['load']>>
-		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
+		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.equip': LoadOptions<Parameters<EquipSkillViewController['load']>>
 		'adventure.profile': LoadOptions<Parameters<ProfileSkillViewController['load']>>
 		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
@@ -63,8 +63,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
 		'adventure.post-card': PostCardViewController
 		'adventure.connect': ConnectSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.equip': EquipSkillViewController
 		'adventure.profile': ProfileSkillViewController
 		'adventure.root': RootSkillViewController
