@@ -44,6 +44,13 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
     },
     {
+        eventName: 'list',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../listing/listeners/adventure/list.v2022_09_09.listener').default,
+        isGlobal: require('../../listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
+    },
+    {
         eventName: 'register-dashboard-cards',
         eventNamespace: 'people',
         version: 'v2022_05_29',
@@ -63,13 +70,6 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
         isGlobal: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'list',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../listing/listeners/adventure/list.v2022_09_09.listener').default,
-        isGlobal: require('../../listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
 ]
 
