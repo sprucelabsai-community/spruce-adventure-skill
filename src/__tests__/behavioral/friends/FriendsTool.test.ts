@@ -65,6 +65,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
             destinationAfterCreate: {
                 id: 'adventure.root',
             },
+            shouldAllowOrganizationSelection: false,
             destinationAfterAccept: {
                 id: 'adventure.connect',
                 args: {
