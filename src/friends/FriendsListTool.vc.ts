@@ -77,6 +77,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             destinationAfterCreate: {
                 id: 'adventure.root',
             },
+            shouldAllowOrganizationSelection: false,
             destinationAfterAccept: {
                 id: 'adventure.connect',
                 args: {
