@@ -21,6 +21,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
         const { buttons, header } = options
+
         this.activeCardVc = this.ActiveRecordVc({ buttons, header })
     }
 
