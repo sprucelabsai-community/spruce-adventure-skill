@@ -48,7 +48,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         activeRecordCardAssert.assertPagingOptionsEqual(
             this.activeRecordCardVc,
             {
-                pageSize: 10,
+                pageSize: 5,
                 shouldPageClientSide: true,
             }
         )
