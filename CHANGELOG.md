@@ -1,3 +1,10 @@
+# [9.2.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.1.118...v9.2.0) (2024-09-08)
+
+
+### Features
+
+* can create a group with people ([e0d2387](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/e0d2387))
+
 ## [9.1.118](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.1.117...v9.1.118) (2024-09-08)
 
 ## [9.1.117](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.1.116...v9.1.117) (2024-09-08)
