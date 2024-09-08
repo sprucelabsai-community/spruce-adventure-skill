@@ -4,7 +4,7 @@ import {
 } from '@sprucelabs/spruce-event-utils'
 
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import { Group, ListGroup } from '../../../adventure.types'
+import { Group, ListGroup } from '../../../../adventure.types'
 
 export default async (
     event: SpruceEvent

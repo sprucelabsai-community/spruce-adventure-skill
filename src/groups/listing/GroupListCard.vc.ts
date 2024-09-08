@@ -7,7 +7,7 @@ import {
     ListRow,
     Router,
 } from '@sprucelabs/heartwood-view-controllers'
-import { ListGroup } from '../adventure.types'
+import { ListGroup } from '../../adventure.types'
 
 export default class GroupListCardViewController extends AbstractViewController<Card> {
     public static id = 'group-list-card'

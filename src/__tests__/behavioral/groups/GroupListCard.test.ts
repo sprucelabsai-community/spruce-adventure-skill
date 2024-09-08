@@ -9,7 +9,7 @@ import {
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
 import { ListGroup } from '../../../adventure.types'
-import GroupListCardViewController from '../../../groups/GroupListCard.vc'
+import GroupListCardViewController from '../../../groups/listing/GroupListCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
