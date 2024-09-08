@@ -21,20 +21,22 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
-        const { buttons, header } = options
+        const { buttons, header, id } = options
 
-        this.activeCardVc = this.ActiveRecordVc({ buttons, header })
+        this.activeCardVc = this.ActiveRecordVc({ buttons, header, id })
     }
 
     private ActiveRecordVc(options: {
         buttons?: Button[]
         header?: CardHeader
+        id?: string
     }): ActiveRecordCardViewController {
-        const { buttons, header } = options
+        const { buttons, header, id } = options
 
         return this.Controller(
             'active-record-card',
             buildActiveRecordCard({
+                id,
                 eventName: 'adventure.list-friends::v2022_09_09',
                 rowTransformer: this.renderRow.bind(this),
                 responseKey: 'friends',
@@ -74,7 +76,9 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
     private async handleClickInvite() {
         this.activeCardVc.setIsBusy(true)
+
         const client = await this.connectToApi()
+
         const [{ connectionId }] = await client.emitAndFlattenResponses(
             'adventure.create-connection::v2022_09_09'
         )
@@ -133,4 +137,5 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 interface FriendsListOptions {
     buttons?: Button[]
     header?: CardHeader
+    id?: string
 }

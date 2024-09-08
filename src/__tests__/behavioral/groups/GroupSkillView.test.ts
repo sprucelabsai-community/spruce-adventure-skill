@@ -1,6 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
+import FriendSelectionCardViewController from '../../../groups/FriendSelectionCard.vc'
 import GroupSkillViewController from '../../../groups/Group.svc'
 import GroupFormCardViewController from '../../../groups/GroupFormCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
@@ -23,13 +24,20 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async rendersExpectedCards() {
-        const [formCardVc] = vcAssert.assertSkillViewRendersCards(this.vc, [
-            'form',
-            'friend-selection',
-        ])
+        const [formCardVc, friendSelectionCardVc] =
+            vcAssert.assertSkillViewRendersCards(this.vc, [
+                'form',
+                'friend-selection',
+            ])
+
         vcAssert.assertRendersAsInstanceOf(
             formCardVc,
             GroupFormCardViewController
+        )
+
+        vcAssert.assertRendersAsInstanceOf(
+            friendSelectionCardVc,
+            FriendSelectionCardViewController
         )
     }
 
