@@ -49,12 +49,12 @@ export default class ListGroupsListenerTest extends AbstractAdventureTest {
     @test()
     @seed('groups', 1)
     protected static async knowsIfGroupIsNotMine() {
-        const updates = {
+        await this.updateGroup({
+            people: [this.fakedPerson.id],
             source: {
                 personId: generateId(),
             },
-        }
-        await this.updateGroup(updates)
+        })
 
         const [group] = await this.emitListGroups()
         assert.isFalse(group.isMine)
@@ -71,6 +71,18 @@ export default class ListGroupsListenerTest extends AbstractAdventureTest {
 
         const [group] = await this.emitListGroups()
         assert.isEqualDeep(group.people, people)
+    }
+
+    @test()
+    @seed('groups', 1)
+    protected static async returnsNoGroupsIfYouDidNotCreateAndAreNotAFriend() {
+        await this.updateGroup({
+            source: {
+                personId: generateId(),
+            },
+        })
+
+        await this.assertTotalGroups(0)
     }
 
     private static async updateGroup(updates: UpdateGroup) {

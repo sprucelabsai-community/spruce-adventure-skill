@@ -3,6 +3,7 @@ import { AdventureCanceller } from './adventures/cancelling/AdventureCanceller'
 import AdventureFinder from './adventures/listing/AdventureFinder'
 import AdventurePoster from './adventures/posting/AdventurePoster'
 import Rsvper from './adventures/rsvping/Rsvper'
+import FriendFinder from './friends/listing/FriendFinder'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
 export type AdventureWithPerson =
@@ -16,9 +17,10 @@ export type ListGroup = SpruceSchemas.Adventure.v2022_09_09.ListGroup
 
 declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
     interface SkillContext {
-        finder: AdventureFinder
+        adventureFinder: AdventureFinder
         poster: AdventurePoster
         rsvper: Rsvper
         canceller: AdventureCanceller
+        friendFiender: FriendFinder
     }
 }
