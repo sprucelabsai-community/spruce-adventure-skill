@@ -16,7 +16,6 @@ export default async (
     const connections = await stores.getStore('connections')
     const matches = await connections.find({
         isConfirmed: filter === 'confirmed',
-
         //@ts-ignore
         $or: [
             { 'source.personId': source.personId },

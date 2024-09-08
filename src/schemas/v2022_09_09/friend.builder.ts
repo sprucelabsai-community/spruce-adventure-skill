@@ -22,5 +22,8 @@ export default buildSchema({
                 ],
             },
         },
+        isInGroup: {
+            type: 'boolean',
+        },
     },
 })

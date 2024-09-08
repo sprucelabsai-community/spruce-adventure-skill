@@ -2,16 +2,16 @@ import {
     activeRecordCardAssert,
     buttonAssert,
     interactor,
-    MockActiveRecordCard,
+    listAssert,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../adventure.types'
-import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../support/generateAvatarValues'
+import { SpyFriendListTool } from './SpyFriendListTool'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {
@@ -106,17 +106,29 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         })
     }
 
+    @test()
+    protected static async doesNotRenderToggleInRowByDefault() {
+        const friend: Friend = {
+            id: generateId(),
+            casualName: generateId(),
+            avatar: generateAvatarValues(),
+            inviteSender: 'me',
+        }
+
+        await this.eventFaker.fakeListFriends(() => [friend])
+        await this.load()
+
+        listAssert.rowDoesNotRenderToggle(
+            this.activeRecordCardVc.getListVcs()[0],
+            friend.id
+        )
+    }
+
     private static async load() {
         await this.views.load(this.vc)
     }
 
     private static get activeRecordCardVc() {
         return this.vc.getActiveCardVc()
-    }
-}
-
-class SpyFriendListTool extends FriendsListToolViewController {
-    public getActiveCardVc() {
-        return this.activeCardVc as MockActiveRecordCard
     }
 }

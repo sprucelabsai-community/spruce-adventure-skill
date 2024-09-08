@@ -44,18 +44,18 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../friends/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'list-groups',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../groups/listeners/adventure/list-groups.v2022_09_09.listener').default,
-        isGlobal: require('../../groups/listeners/adventure/list-groups.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'register-dashboard-cards',
         eventNamespace: 'people',
         version: 'v2022_05_29',
         callback: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').default,
         isGlobal: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').isGlobal,
+    },
+    {
+        eventName: 'rsvp',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
+        isGlobal: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list',
@@ -72,11 +72,11 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'rsvp',
+        eventName: 'list-groups',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
-        callback: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
-        isGlobal: require('../../rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
+        callback: require('../../groups/listeners/adventure/list-groups.v2022_09_09.listener').default,
+        isGlobal: require('../../groups/listeners/adventure/list-groups.v2022_09_09.listener').isGlobal,
     },
 ]
 

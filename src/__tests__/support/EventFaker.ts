@@ -12,6 +12,7 @@ import {
 } from '../../adventure.types'
 import generateAddressValues from './generateAddressValues'
 import generateAdventureValues from './generateAdventureValues'
+import generateFriendValues from './generateFriendValues'
 
 export default class EventFaker {
     public async fakeListGroups(cb?: () => void | ListGroup[]) {
@@ -149,6 +150,10 @@ export default class EventFaker {
                 }
             }
         )
+    }
+
+    public generateFriendValues() {
+        return generateFriendValues()
     }
 
     public async fakeAcceptConnection(

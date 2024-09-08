@@ -12,7 +12,7 @@ import GroupFormCardViewController from './GroupFormCard.vc'
 export default class GroupSkillViewController extends AbstractSkillViewController {
     public static id = 'group'
     protected formCardVc: GroupFormCardViewController
-    private friendSelectionCardVc: FriendSelectionCardViewController
+    protected friendSelectionCardVc: FriendSelectionCardViewController
     private router?: Router
 
     public constructor(options: ViewControllerOptions) {
@@ -40,6 +40,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     public async load(options: SkillViewControllerLoadOptions) {
         const { router } = options
         this.router = router
+        await this.friendSelectionCardVc.load(router)
     }
 
     public render(): SkillView {

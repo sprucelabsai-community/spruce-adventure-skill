@@ -5,6 +5,7 @@ import {
     Button,
     Card,
     CardHeader,
+    ListCell,
     ListRow,
     Router,
     SkillViewControllerLoadOptions,
@@ -18,19 +19,18 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     public static id = 'friends-list-tool'
     protected activeCardVc: ActiveRecordCardViewController
     private router!: Router
+    private shouldRenderToggle: boolean
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
-        const { buttons, header, id } = options
-
-        this.activeCardVc = this.ActiveRecordVc({ buttons, header, id })
+        const { shouldRenderToggle } = options
+        this.shouldRenderToggle = shouldRenderToggle ?? false
+        this.activeCardVc = this.ActiveRecordVc(options)
     }
 
-    private ActiveRecordVc(options: {
-        buttons?: Button[]
-        header?: CardHeader
-        id?: string
-    }): ActiveRecordCardViewController {
+    private ActiveRecordVc(
+        options: FriendsListOptions
+    ): ActiveRecordCardViewController {
         const { buttons, header, id } = options
 
         return this.Controller(
@@ -39,6 +39,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                 id,
                 eventName: 'adventure.list-friends::v2022_09_09',
                 rowTransformer: this.renderRow.bind(this),
+                columnWidths: ['content', 'fill'],
                 responseKey: 'friends',
                 header: header ?? {
                     title: 'Adventure Friends!!',
@@ -82,6 +83,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         const [{ connectionId }] = await client.emitAndFlattenResponses(
             'adventure.create-connection::v2022_09_09'
         )
+
         const [id, args] = buildRouteToCreateInvite({
             destinationAfterCreate: {
                 id: 'adventure.root',
@@ -99,20 +101,30 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 
     private renderRow(friend: Friend): ListRow {
+        const cells: ListCell[] = [
+            {
+                avatars: friend.avatar?.mUri
+                    ? [friend.avatar.mUri]
+                    : [AVATAR_PLACEHOLDER],
+            },
+            {
+                text: {
+                    content: friend.casualName,
+                },
+            },
+        ]
+
+        if (this.shouldRenderToggle) {
+            cells.push({
+                toggleInput: {
+                    name: 'isSelected',
+                },
+            })
+        }
+
         return {
             id: friend.id,
-            cells: [
-                {
-                    avatars: friend.avatar?.mUri
-                        ? [friend.avatar.mUri]
-                        : [AVATAR_PLACEHOLDER],
-                },
-                {
-                    text: {
-                        content: friend.casualName,
-                    },
-                },
-            ],
+            cells,
         }
     }
 
@@ -138,4 +150,5 @@ interface FriendsListOptions {
     buttons?: Button[]
     header?: CardHeader
     id?: string
+    shouldRenderToggle?: boolean
 }

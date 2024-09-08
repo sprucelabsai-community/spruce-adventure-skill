@@ -18,6 +18,9 @@ const listFriendsEmitPayloadBuilder = buildSchema({
                 ],
             },
         },
+        isInGroupId: {
+            type: 'id',
+        },
     },
 })
 

@@ -2,22 +2,30 @@ import {
     AbstractViewController,
     ViewControllerOptions,
     Card,
+    Router,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController from '../friends/FriendsListTool.vc'
 
 export default class FriendSelectionCardViewController extends AbstractViewController<Card> {
     public static id = 'friend-selection-card'
-    private cardVc: FriendsListToolViewController
+    protected friendListToolVc: FriendsListToolViewController
 
     public constructor(options: ViewControllerOptions & { id?: string }) {
         super(options)
 
         const { id } = options
 
-        this.cardVc = this.Controller('adventure.friends-list-tool', { id })
+        this.friendListToolVc = this.Controller('adventure.friends-list-tool', {
+            id,
+            shouldRenderToggle: true,
+        })
+    }
+
+    public async load(router: Router) {
+        await this.friendListToolVc.load({ router })
     }
 
     public render() {
-        return this.cardVc.render()
+        return this.friendListToolVc.render()
     }
 }
