@@ -1,13 +1,13 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import groupSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/groupSource.schema'
 
-const groupSchema: SpruceSchemas.Adventure.v2022_09_09.GroupSchema  = {
-	id: 'group',
+
+const listGroupSchema: SpruceSchemas.Adventure.v2022_09_09.ListGroupSchema  = {
+	id: 'listGroup',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
-	name: 'Group',
+	name: '',
 	    fields: {
 	            /** . */
 	            'id': {
@@ -38,15 +38,14 @@ const groupSchema: SpruceSchemas.Adventure.v2022_09_09.GroupSchema  = {
 	                options: undefined
 	            },
 	            /** . */
-	            'source': {
-	                type: 'schema',
-	                isPrivate: true,
+	            'isMine': {
+	                type: 'boolean',
 	                isRequired: true,
-	                options: {schema: groupSourceSchema_v2022_09_09,}
+	                options: undefined
 	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(groupSchema)
+SchemaRegistry.getInstance().trackSchema(listGroupSchema)
 
-export default groupSchema
+export default listGroupSchema

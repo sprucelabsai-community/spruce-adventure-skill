@@ -11,6 +11,7 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { AdventureWithPerson } from '../adventure.types'
+import { AVATAR_PLACEHOLDER } from '../root/constants'
 
 export default class BaseAdventureCardViewController extends AbstractViewController<Card> {
     public static id = 'base-adventure-card'
@@ -76,7 +77,7 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
                         {
                             avatars: this.adventure.personAvatar
                                 ? [this.adventure.personAvatar.mUri]
-                                : null,
+                                : [AVATAR_PLACEHOLDER],
                         },
                         {
                             text: {

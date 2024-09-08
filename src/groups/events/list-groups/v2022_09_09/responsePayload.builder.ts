@@ -1,4 +1,4 @@
-import { buildSchema } from '@sprucelabs/schema'
+import { buildSchema, dropPrivateFields } from '@sprucelabs/schema'
 import groupBuilder from '../../../../schemas/v2022_09_09/group.builder'
 
 const listGroupsResponsePayloadBuilder = buildSchema({
@@ -10,7 +10,16 @@ const listGroupsResponsePayloadBuilder = buildSchema({
             isArray: true,
             minArrayLength: 0,
             options: {
-                schema: groupBuilder,
+                schema: buildSchema({
+                    id: 'listGroup',
+                    fields: {
+                        ...dropPrivateFields(groupBuilder.fields),
+                        isMine: {
+                            type: 'boolean',
+                            isRequired: true,
+                        },
+                    },
+                }),
             },
         },
     },

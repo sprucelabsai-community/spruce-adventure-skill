@@ -6,7 +6,7 @@ import {
     ActiveRecordCardViewController,
     ListRow,
 } from '@sprucelabs/heartwood-view-controllers'
-import { Group } from '../adventure.types'
+import { ListGroup } from '../adventure.types'
 
 export default class GroupListCardViewController extends AbstractViewController<Card> {
     public static id = 'group-list-card'
@@ -14,7 +14,6 @@ export default class GroupListCardViewController extends AbstractViewController<
 
     public constructor(options: ViewControllerOptions) {
         super(options)
-
         this.activeRecordCardVc = this.ActiveRecordCardVc()
     }
 
@@ -23,9 +22,19 @@ export default class GroupListCardViewController extends AbstractViewController<
             'active-record-card',
             buildActiveRecordCard({
                 header: {
-                    title: 'Adventure Groups',
+                    title: 'Adventure Groups!!',
                     subtitle:
                         'Create a group based on interests (or whatever) and invite just them to your next adventure!',
+                },
+                noResultsRow: {
+                    height: 'content',
+                    cells: [
+                        {
+                            text: {
+                                content: `You haven't created or been invited to any groups yet!`,
+                            },
+                        },
+                    ],
                 },
                 eventName: 'adventure.list-groups::v2022_09_09',
                 rowTransformer: this.renderRow.bind(this),
@@ -40,6 +49,7 @@ export default class GroupListCardViewController extends AbstractViewController<
                             id: 'add',
                             label: 'Create Group',
                             type: 'primary',
+                            onClick: this.handleClickAdd.bind(this),
                         },
                     ],
                 },
@@ -47,7 +57,12 @@ export default class GroupListCardViewController extends AbstractViewController<
         )
     }
 
-    private renderRow(group: Group) {
+    private async handleClickAdd() {
+        const vc = this.Controller('adventure.create-group-card', {})
+        this.renderInDialog(vc.render())
+    }
+
+    private renderRow(group: ListGroup) {
         return {
             id: group.id,
             cells: [

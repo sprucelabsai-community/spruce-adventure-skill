@@ -1,19 +1,22 @@
 import {
     activeRecordCardAssert,
     buttonAssert,
+    interactor,
     listAssert,
     MockActiveRecordCard,
+    vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
-import { Group } from '../../../adventure.types'
+import { ListGroup } from '../../../adventure.types'
 import GroupListCardViewController from '../../../groups/GroupListCard.vc'
+import CreateGroupCardViewController from '../../../viewControllers/CreateGroupCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class GroupListCardTest extends AbstractAdventureTest {
     private static vc: SpyGroupList
-    private static fakedGroups: Group[]
+    private static fakedGroups: ListGroup[]
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -67,6 +70,22 @@ export default class GroupListCardTest extends AbstractAdventureTest {
         buttonAssert.cardRendersButton(this.vc, 'add')
     }
 
+    @test()
+    protected static async clickingAddRendersDialog() {
+        await this.load()
+        const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
+            interactor.clickButton(this.vc, 'add')
+        )
+
+        vcAssert.assertRendersAsInstanceOf(
+            dialogVc,
+            CreateGroupCardViewController
+        )
+    }
+
+    @test()
+    protected static async rendersAListForFriends() {}
+
     private static get activeRecordCardVc() {
         return this.vc.getActiveRecordCard()
     }
@@ -76,7 +95,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     }
 
     private static addFakedGroup() {
-        const group: Group = this.eventFaker.generateGroupValues()
+        const group = this.eventFaker.generateListGroupValues()
         this.fakedGroups.push(group)
         return group
     }

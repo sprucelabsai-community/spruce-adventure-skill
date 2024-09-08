@@ -10,6 +10,7 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { Friend } from '../adventure.types'
+import { AVATAR_PLACEHOLDER } from '../root/constants'
 
 export default class ConnectSkillViewController extends AbstractSkillViewController {
     public static id = 'connect'
@@ -68,7 +69,9 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
             id: friend.id,
             cells: [
                 {
-                    avatars: friend.avatar ? [friend.avatar.mUri] : undefined,
+                    avatars: friend.avatar
+                        ? [friend.avatar.mUri]
+                        : [AVATAR_PLACEHOLDER],
                 },
                 {
                     text: {

@@ -5,6 +5,7 @@ import { Adventure } from '../../adventure.types'
 import ConnectionManager from '../../listing/ConnectionManager'
 import AdventuresStore from '../../stores/Adventures.store'
 import ConnectionsStore from '../../stores/Connections.store'
+import GroupsStore from '../../stores/Groups.store'
 import { generatePostAdventureValues } from '../behavioral/posting/generatePostAdventureValues'
 import EventFaker from './EventFaker'
 
@@ -12,6 +13,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
     protected static eventFaker: EventFaker
     protected static adventures: AdventuresStore
     protected static connections: ConnectionsStore
+    protected static groups: GroupsStore
 
     protected static async beforeEach() {
         await super.beforeEach()
@@ -19,6 +21,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         this.eventFaker = new EventFaker()
         this.adventures = await this.stores.getStore('adventures')
         this.connections = await this.stores.getStore('connections')
+        this.groups = await this.stores.getStore('groups')
     }
 
     protected static async ConnectionManager(): Promise<ConnectionManager> {
