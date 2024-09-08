@@ -1,22 +1,22 @@
 import '#spruce/permissions/permissions.types'
-import acceptConnectionEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_09/acceptConnectionEmitTargetAndPayload.schema'
+import eventsEmitTargetAndPayloadSchema from '#spruce/schemas/adventure/v2022_09_09/eventsEmitTargetAndPayload.schema'
 import acceptConnectionResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/acceptConnectionResponsePayload.schema'
 import { buildEventContract } from '@sprucelabs/mercury-types'
 
 
-const acceptConnectionEventContract = buildEventContract({
+const eventsEventContract = buildEventContract({
     eventSignatures: {
-        'adventure.accept-connection::v2022_09_09': {
+        'adventure.events::v2022_09_09': {
             isGlobal: true,
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-accept-connection"]},
             
-            emitPayloadSchema: acceptConnectionEmitTargetAndPayloadSchema,
+            emitPayloadSchema: eventsEmitTargetAndPayloadSchema,
             responsePayloadSchema: acceptConnectionResponsePayloadSchema,
             
             
         }
     }
 })
-export default acceptConnectionEventContract
+export default eventsEventContract
 
-export type AcceptConnectionEventContract = typeof acceptConnectionEventContract
+export type EventsEventContract = typeof eventsEventContract

@@ -1,10 +1,10 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 
-import adventureAcceptConnectionEventContract_v2022_09_09, { AcceptConnectionEventContract as AdventureAcceptConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/acceptConnection.v2022_09_09.contract'
 import peopleBroadcastTeamMessageEventContract_v2022_05_29, { BroadcastTeamMessageEventContract as PeopleBroadcastTeamMessageEventContract_v2022_05_29  } from '#spruce/events/people/broadcastTeamMessage.v2022_05_29.contract'
 import adventureCancelEventContract_v2022_09_09, { CancelEventContract as AdventureCancelEventContract_v2022_09_09  } from '#spruce/events/adventure/cancel.v2022_09_09.contract'
 import adventureCreateConnectionEventContract_v2022_09_09, { CreateConnectionEventContract as AdventureCreateConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/createConnection.v2022_09_09.contract'
 import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, { DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
+import adventureEventsEventContract_v2022_09_09, { EventsEventContract as AdventureEventsEventContract_v2022_09_09  } from '#spruce/events/adventure/events.v2022_09_09.contract'
 import heartwoodGenerateUrlEventContract_v2021_02_11, { GenerateUrlEventContract as HeartwoodGenerateUrlEventContract_v2021_02_11  } from '#spruce/events/heartwood/generateUrl.v2021_02_11.contract'
 import peopleGetEventContract_v2022_05_29, { GetEventContract as PeopleGetEventContract_v2022_05_29  } from '#spruce/events/people/get.v2022_05_29.contract'
 import heartwoodGetActiveThemeEventContract_v2021_02_11, { GetActiveThemeEventContract as HeartwoodGetActiveThemeEventContract_v2021_02_11  } from '#spruce/events/heartwood/getActiveTheme.v2021_02_11.contract'
@@ -22,11 +22,11 @@ import peopleSearchEventContract_v2022_05_29, { SearchEventContract as PeopleSea
 import heartwoodUpsertThemeEventContract_v2021_02_11, { UpsertThemeEventContract as HeartwoodUpsertThemeEventContract_v2021_02_11  } from '#spruce/events/heartwood/upsertTheme.v2021_02_11.contract'
 
 export default [
-    adventureAcceptConnectionEventContract_v2022_09_09,
     peopleBroadcastTeamMessageEventContract_v2022_05_29,
     adventureCancelEventContract_v2022_09_09,
     adventureCreateConnectionEventContract_v2022_09_09,
     heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
+    adventureEventsEventContract_v2022_09_09,
     heartwoodGenerateUrlEventContract_v2021_02_11,
     peopleGetEventContract_v2022_05_29,
     heartwoodGetActiveThemeEventContract_v2021_02_11,
@@ -48,9 +48,6 @@ export default [
 declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     interface SkillEventSignatures {
     
-    'adventure.accept-connection::v2022_09_09': AdventureAcceptConnectionEventContract_v2022_09_09['eventSignatures']['adventure.accept-connection::v2022_09_09'],
-    
-    
     'people.broadcast-team-message::v2022_05_29': PeopleBroadcastTeamMessageEventContract_v2022_05_29['eventSignatures']['people.broadcast-team-message::v2022_05_29'],
     
     
@@ -61,6 +58,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11'],
+    
+    
+    'adventure.events::v2022_09_09': AdventureEventsEventContract_v2022_09_09['eventSignatures']['adventure.events::v2022_09_09'],
     
     
     'heartwood.generate-url::v2021_02_11': HeartwoodGenerateUrlEventContract_v2021_02_11['eventSignatures']['heartwood.generate-url::v2021_02_11'],
