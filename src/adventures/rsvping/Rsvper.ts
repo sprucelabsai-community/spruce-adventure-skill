@@ -3,11 +3,11 @@ import { MercuryClient } from '@sprucelabs/mercury-client'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import { Person } from '../../adventure.types'
 import SpruceError from '../../errors/SpruceError'
-import ConnectionManager from '../listing/ConnectionManager'
 import AdventuresStore from '../../stores/Adventures.store'
 import generateUrl from '../../utilities/generateUrl'
 import getPerson from '../../utilities/getPerson'
 import { sendMessage } from '../../utilities/sendMessage'
+import ConnectionManager from '../listing/ConnectionManager'
 
 export default class Rsvper {
     private adventures: AdventuresStore
