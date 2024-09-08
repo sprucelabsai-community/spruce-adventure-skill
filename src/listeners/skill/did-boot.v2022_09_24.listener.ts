@@ -1,4 +1,3 @@
-import { MercuryClient } from '@sprucelabs/mercury-client'
 import { SkillEventContract } from '@sprucelabs/mercury-types'
 import {
     SpruceEvent,
@@ -9,6 +8,7 @@ import AdventureFinder from '../../adventures/listing/AdventureFinder'
 import ConnectionManager from '../../adventures/listing/ConnectionManager'
 import AdventurePoster from '../../adventures/posting/AdventurePoster'
 import Rsvper from '../../adventures/rsvping/Rsvper'
+import FriendFinder from '../../friends/listing/FriendFinder'
 import MessageSenderImpl from '../../messaging/MessageSender'
 
 export default async (
@@ -18,13 +18,13 @@ export default async (
 
     const connections = await ConnectionManager.Manager({ stores })
     const finder = await AdventureFinder.Finder({
-        client: client as MercuryClient,
+        client,
         stores,
         connections,
     })
 
     const sender = MessageSenderImpl.Sender({
-        client: client as MercuryClient,
+        client,
         connections,
     })
 
@@ -35,7 +35,7 @@ export default async (
 
     const rsvp = await Rsvper.Rsvper({
         stores,
-        client: client as MercuryClient,
+        client,
         connections,
     })
 
@@ -44,8 +44,14 @@ export default async (
         messageSender: sender,
     })
 
+    const friendFinder = await FriendFinder.Finder({
+        client,
+        stores,
+    })
+
     skill.updateContext('canceller', canceller)
-    skill.updateContext('finder', finder)
+    skill.updateContext('adventureFinder', finder)
     skill.updateContext('poster', poster)
     skill.updateContext('rsvper', rsvp)
+    skill.updateContext('friendFiender', friendFinder)
 }

@@ -1,10 +1,9 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, SpruceSchemas } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { Friend, Person } from '../../../../adventure.types'
+import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
+import { Friend } from '../../../../adventure.types'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import { ListPeopleTargetAndPayload } from '../../../support/EventFaker'
-import generateFriendValues from '../../../support/generateFriendValues'
 
 @fake.login()
 export default class ListFriendsListenerTest extends AbstractFriendsTest {
@@ -108,8 +107,8 @@ export default class ListFriendsListenerTest extends AbstractFriendsTest {
     @test()
     protected static async canTellProperWhoInvitedWhom() {
         const me = this.fakedPerson
-        const friend1 = generateFriendValues('me')
-        const friend2 = generateFriendValues('them')
+        const friend1 = this.generateFriendValues('me')
+        const friend2 = this.generateFriendValues('them')
 
         await this.createConnection(me.id, friend1.id)
         await this.createConnection(friend2.id, me.id)
@@ -119,20 +118,12 @@ export default class ListFriendsListenerTest extends AbstractFriendsTest {
         await this.emitAndAssertFriends(friends)
     }
 
-    private static async fakeListPeople(friends: Friend[]) {
-        await this.eventFaker.fakeListPeople(() => {
-            const people: Person[] = friends.map((f) => {
-                const friend = { ...f }
-                //@ts-ignore
-                delete friend.inviteSender
-                return {
-                    ...friend,
-                    dateCreated: new Date().getTime(),
-                }
-            })
-
-            return people
-        })
+    @test()
+    protected static async throwsWhenTryingToFilterByGroupNotFound() {
+        const err = await assert.doesThrowAsync(() =>
+            this.emit({ isInGroupId: generateId() })
+        )
+        errorAssert.assertError(err, 'NOT_FOUND')
     }
 
     private static async createNewConnectionAndEmit() {
@@ -172,10 +163,6 @@ export default class ListFriendsListenerTest extends AbstractFriendsTest {
     private static async emitAndAssertFriends(expected: Friend[]) {
         const friends = await this.emit()
         assert.isEqualDeep(friends, expected)
-    }
-
-    private static generateFriendValues(): Friend {
-        return generateFriendValues()
     }
 
     private static async emit(payload?: ListFriendsPayload) {

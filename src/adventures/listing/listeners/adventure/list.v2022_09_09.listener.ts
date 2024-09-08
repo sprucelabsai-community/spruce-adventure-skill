@@ -8,7 +8,7 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 export default async (
     event: SpruceEvent<SkillEventContract>
 ): SpruceEventResponse<ResponsePayload> => {
-    const { source, finder } = event
+    const { source, adventureFinder: finder } = event
     const personId = source.personId!
     const adventures = await finder.findForPerson(personId)
 

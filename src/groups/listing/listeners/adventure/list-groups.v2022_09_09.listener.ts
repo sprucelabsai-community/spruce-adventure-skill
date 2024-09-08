@@ -11,11 +11,19 @@ export default async (
 ): SpruceEventResponse<ResponsePayload> => {
     const { stores, source } = event
 
+    const personId = source?.personId
     const groups = await stores.getStore('groups')
-    const all = await groups.find({}, {}, { shouldIncludePrivateFields: true })
+    const all = await groups.find(
+        {
+            //@ts-ignore
+            $or: [{ 'source.personId': personId }, { people: personId }],
+        },
+        {},
+        { shouldIncludePrivateFields: true }
+    )
 
     return {
-        groups: all.map((group) => mapToListGroup(group, source?.personId)),
+        groups: all.map((group) => mapToListGroup(group, personId)),
     }
 }
 
