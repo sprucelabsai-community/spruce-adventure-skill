@@ -12,8 +12,8 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
-import { Friend } from '../adventure.types'
-import { AVATAR_PLACEHOLDER } from '../root/constants'
+import { Friend } from '../../adventure.types'
+import { AVATAR_PLACEHOLDER } from '../../root/constants'
 
 export default class FriendsListToolViewController extends AbstractViewController<Card> {
     public static id = 'friends-list-tool'

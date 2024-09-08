@@ -4,16 +4,17 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { Friend } from '../../../adventure.types'
+import { Friend } from '../../../../adventure.types'
+
 import ConnectSkillViewController, {
     ConnectSkillViewArgs,
-} from '../../../friends/Connect.svc'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+} from '../../../../friends/connecting/Connect.svc'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import {
     AcceptConnectionTargetAndPayload,
     ListFriendsTargetAndPayload,
-} from '../../support/EventFaker'
-import generateFriendValues from '../../support/generateFriendValues'
+} from '../../../support/EventFaker'
+import generateFriendValues from '../../../support/generateFriendValues'
 
 @fake.login()
 export default class AcceptSkillViewTest extends AbstractAdventureTest {

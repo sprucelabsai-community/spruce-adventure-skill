@@ -12,7 +12,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { Person } from '@sprucelabs/spruce-core-schemas'
 import { AdventureWithPerson } from '../../adventure.types'
-import FriendsListToolViewController from '../../friends/FriendsListTool.vc'
+import FriendsListToolViewController from '../../friends/listing/FriendsListTool.vc'
 import GroupListCardViewController from '../../groups/GroupListCard.vc'
 import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'

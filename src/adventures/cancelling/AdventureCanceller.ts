@@ -1,7 +1,7 @@
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { assertOptions } from '@sprucelabs/schema'
 import { MessageSender } from '../../messaging/MessageSender'
-import AdventuresStore from '../../stores/Adventures.store'
+import AdventuresStore from '../Adventures.store'
 
 export default class AdventureCancellerImpl implements AdventureCanceller {
     private adventures: AdventuresStore

@@ -9,8 +9,8 @@ import {
     splitCardsIntoLayouts,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import { Friend } from '../adventure.types'
-import { AVATAR_PLACEHOLDER } from '../root/constants'
+import { Friend } from '../../adventure.types'
+import { AVATAR_PLACEHOLDER } from '../../root/constants'
 
 export default class ConnectSkillViewController extends AbstractSkillViewController {
     public static id = 'connect'

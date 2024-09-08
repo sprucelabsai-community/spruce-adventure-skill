@@ -5,7 +5,7 @@ import {
     SkillViewControllerLoadOptions,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import FriendsListToolViewController from '../friends/FriendsListTool.vc'
+import FriendsListToolViewController from '../friends/listing/FriendsListTool.vc'
 
 export default class FriendsDashboardCardViewController extends AbstractViewController<Card> {
     public static id = 'friends-dashboard-card'

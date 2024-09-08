@@ -4,7 +4,7 @@ import {
     SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import { Friend } from '../../../adventure.types'
+import { Friend } from '../../../../adventure.types'
 
 export default async (
     event: SpruceEvent<SkillEventContract, EmitPayload>

@@ -5,7 +5,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
-import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
+import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
 import FriendsDashboardCardViewController from '../../../peopleDashboardCards/FriendsDashboardCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 

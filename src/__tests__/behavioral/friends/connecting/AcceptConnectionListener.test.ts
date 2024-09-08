@@ -1,6 +1,6 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
-import AbstractFriendsTest from '../../support/AbstractFriendsTest'
+import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 
 @fake.login()
 export default class AcceptConnectionListenerTest extends AbstractFriendsTest {

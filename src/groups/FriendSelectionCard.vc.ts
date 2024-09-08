@@ -4,7 +4,7 @@ import {
     Card,
     Router,
 } from '@sprucelabs/heartwood-view-controllers'
-import FriendsListToolViewController from '../friends/FriendsListTool.vc'
+import FriendsListToolViewController from '../friends/listing/FriendsListTool.vc'
 
 export default class FriendSelectionCardViewController extends AbstractViewController<Card> {
     public static id = 'friend-selection-card'

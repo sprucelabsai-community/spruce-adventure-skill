@@ -8,10 +8,10 @@ import {
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
-import { Friend } from '../../../adventure.types'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { generateAvatarValues } from '../../support/generateAvatarValues'
-import { SpyFriendListTool } from './SpyFriendListTool'
+import { Friend } from '../../../../adventure.types'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
+import { generateAvatarValues } from '../../../support/generateAvatarValues'
+import { SpyFriendListTool } from '../SpyFriendListTool'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {

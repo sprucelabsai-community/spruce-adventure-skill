@@ -11,7 +11,7 @@ import AdventureCardViewController from '../../../../adventures/listing/Adventur
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../../adventures/listing/List.svc'
 import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
-import FriendsListToolViewController from '../../../../friends/FriendsListTool.vc'
+import FriendsListToolViewController from '../../../../friends/listing/FriendsListTool.vc'
 import GroupListCardViewController from '../../../../groups/GroupListCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import FakePostCard from '../../../support/FakePostCard'

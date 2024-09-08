@@ -1,6 +1,6 @@
-import AdventuresStore from '../../stores/Adventures.store'
-import ConnectionsStore from '../../stores/Connections.store'
-import GroupsStore from '../../stores/Groups.store'
+import AdventuresStore from '../../adventures/Adventures.store'
+import ConnectionsStore from '../../friends/connecting/Connections.store'
+import GroupsStore from '../../groups/Groups.store'
 
 declare module '@sprucelabs/data-stores/build/types/stores.types' {
 	interface StoreMap {

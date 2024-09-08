@@ -1,5 +1,5 @@
 import { StoreFactory } from '@sprucelabs/data-stores'
-import ConnectionsStore from '../../stores/Connections.store'
+import ConnectionsStore from '../../friends/connecting/Connections.store'
 
 export default class ConnectionManager {
     private connections: ConnectionsStore

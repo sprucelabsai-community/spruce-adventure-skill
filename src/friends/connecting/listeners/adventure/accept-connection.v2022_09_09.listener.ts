@@ -4,7 +4,7 @@ import {
     SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import SpruceError from '../../../errors/SpruceError'
+import SpruceError from '../../../../errors/SpruceError'
 
 export default async (
     event: SpruceEvent<SkillEventContract, EmitPayload>

@@ -1,10 +1,10 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, SpruceSchemas } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { Friend, Person } from '../../../adventure.types'
-import AbstractFriendsTest from '../../support/AbstractFriendsTest'
-import { ListPeopleTargetAndPayload } from '../../support/EventFaker'
-import generateFriendValues from '../../support/generateFriendValues'
+import { Friend, Person } from '../../../../adventure.types'
+import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
+import { ListPeopleTargetAndPayload } from '../../../support/EventFaker'
+import generateFriendValues from '../../../support/generateFriendValues'
 
 @fake.login()
 export default class ListFriendsListenerTest extends AbstractFriendsTest {
