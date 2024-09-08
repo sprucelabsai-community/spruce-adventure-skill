@@ -109,12 +109,13 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
         this.triggerRender()
 
-        await this.friendsToolVc.load({
-            router,
-            onNoFriends: () => this.toolBeltVc.focusTool('friends'),
-        })
-
-        await this.groupsToolVc.load()
+        await Promise.all([
+            this.friendsToolVc.load({
+                router,
+                onNoFriends: () => this.toolBeltVc.focusTool('friends'),
+            }),
+            this.groupsToolVc.load(router),
+        ])
     }
 
     private buildAdventureCards(

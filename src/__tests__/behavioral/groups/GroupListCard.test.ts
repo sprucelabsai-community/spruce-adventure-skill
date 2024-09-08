@@ -10,7 +10,6 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
 import { ListGroup } from '../../../adventure.types'
 import GroupListCardViewController from '../../../groups/GroupListCard.vc'
-import CreateGroupCardViewController from '../../../viewControllers/CreateGroupCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
@@ -71,16 +70,16 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async clickingAddRendersDialog() {
+    protected static async clickingAddRedirectsToAddGroup() {
         await this.load()
-        const dialogVc = await vcAssert.assertRendersDialog(this.vc, () =>
-            interactor.clickButton(this.vc, 'add')
-        )
 
-        vcAssert.assertRendersAsInstanceOf(
-            dialogVc,
-            CreateGroupCardViewController
-        )
+        await vcAssert.assertActionRedirects({
+            action: () => interactor.clickButton(this.vc, 'add'),
+            destination: {
+                id: 'adventure.group',
+            },
+            router: this.views.getRouter(),
+        })
     }
 
     private static get activeRecordCardVc() {
@@ -88,7 +87,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     }
 
     private static async load() {
-        await this.vc.load()
+        await this.vc.load(this.views.getRouter())
     }
 
     private static addFakedGroup() {

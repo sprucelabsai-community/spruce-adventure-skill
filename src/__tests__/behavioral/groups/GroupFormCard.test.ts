@@ -1,33 +1,25 @@
-import {
-    formAssert,
-    listAssert,
-    vcAssert,
-} from '@sprucelabs/heartwood-view-controllers'
+import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import {
     FormCardViewController,
     SpyFormCardViewController,
 } from '@sprucelabs/spruce-form-utils'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
-import CreateGroupCardViewController from '../../../viewControllers/CreateGroupCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { SpyGroupFormCard } from './SpyGroupFormCard'
 
 @fake.login()
-export default class CreateGroupCardTest extends AbstractAdventureTest {
-    private static vc: SpyCreateGroupCard
+export default class GroupFormCardTest extends AbstractAdventureTest {
+    private static vc: SpyGroupFormCard
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
-        this.views.setController(
-            'adventure.create-group-card',
-            SpyCreateGroupCard
-        )
+        this.views.setController('adventure.group-form-card', SpyGroupFormCard)
         this.views.setController('forms.card', SpyFormCardViewController)
-        this.vc = this.views.Controller(
-            'adventure.create-group-card',
-            {}
-        ) as SpyCreateGroupCard
+        this.vc = this.views.Controller('adventure.group-form-card', {
+            onCancel: () => {},
+        }) as SpyGroupFormCard
     }
 
     @test()
@@ -46,16 +38,5 @@ export default class CreateGroupCardTest extends AbstractAdventureTest {
             'title',
             'description',
         ])
-    }
-
-    @test()
-    protected static async rendersAListForFriends() {
-        listAssert.cardRendersList(this.vc, 'friends')
-    }
-}
-
-class SpyCreateGroupCard extends CreateGroupCardViewController {
-    public getFormVc() {
-        return (this.formCardVc as SpyFormCardViewController).formVc
     }
 }

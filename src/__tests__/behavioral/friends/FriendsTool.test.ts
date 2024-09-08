@@ -32,6 +32,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
     }
+
     @test()
     protected static async friendsToolRendersActiveRecordCard() {
         activeRecordCardAssert.rendersAsActiveRecordCard(this.vc)

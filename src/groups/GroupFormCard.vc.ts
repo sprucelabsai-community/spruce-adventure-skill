@@ -2,7 +2,6 @@ import {
     AbstractViewController,
     ViewControllerOptions,
     Card,
-    ListViewController,
 } from '@sprucelabs/heartwood-view-controllers'
 import {
     buildFormCard,
@@ -10,40 +9,37 @@ import {
 } from '@sprucelabs/spruce-form-utils'
 import groupSchema from '#spruce/schemas/adventure/v2022_09_09/group.schema'
 
-export default class CreateGroupCardViewController extends AbstractViewController<Card> {
-    public static id = 'create-group-card'
+export default class GroupFormCardViewController extends AbstractViewController<Card> {
+    public static id = 'group-form-card'
     protected formCardVc: FormCardViewController
-    private listVc: ListViewController
+    private onCancelHandler: () => void
 
-    public constructor(options: ViewControllerOptions) {
+    public constructor(options: ViewControllerOptions & GroupFormCardOptions) {
         super(options)
 
-        this.getVcFactory().setController('forms.card', FormCardViewController)
+        const { id, onCancel } = options
 
-        this.listVc = this.Controller('list', {
-            id: 'friends',
-            rows: [],
-        })
-        this.formCardVc = this.FormVc()
+        this.onCancelHandler = onCancel
+        this.getVcFactory().setController('forms.card', FormCardViewController)
+        this.formCardVc = this.FormVc(id)
     }
 
-    private FormVc(): FormCardViewController<any> {
+    private FormVc(id?: string): FormCardViewController<any> {
         return this.Controller(
             'forms.card',
             buildFormCard({
+                id,
                 header: {
                     title: 'Invite friends to your group!',
                 },
                 schema: groupSchema,
+                onCancel: this.onCancelHandler,
                 sections: [
                     {
                         fields: [
                             'title',
                             { name: 'description', renderAs: 'textarea' },
                         ],
-                    },
-                    {
-                        list: this.listVc.render(),
                     },
                 ],
             })
@@ -53,4 +49,9 @@ export default class CreateGroupCardViewController extends AbstractViewControlle
     public render() {
         return this.formCardVc.render()
     }
+}
+
+interface GroupFormCardOptions {
+    id?: string
+    onCancel: () => void
 }

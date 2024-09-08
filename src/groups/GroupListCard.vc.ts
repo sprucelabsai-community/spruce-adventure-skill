@@ -5,12 +5,14 @@ import {
     buildActiveRecordCard,
     ActiveRecordCardViewController,
     ListRow,
+    Router,
 } from '@sprucelabs/heartwood-view-controllers'
 import { ListGroup } from '../adventure.types'
 
 export default class GroupListCardViewController extends AbstractViewController<Card> {
     public static id = 'group-list-card'
     protected activeRecordCardVc: ActiveRecordCardViewController
+    private router?: Router
 
     public constructor(options: ViewControllerOptions) {
         super(options)
@@ -58,8 +60,7 @@ export default class GroupListCardViewController extends AbstractViewController<
     }
 
     private async handleClickAdd() {
-        const vc = this.Controller('adventure.create-group-card', {})
-        this.renderInDialog(vc.render())
+        await this.router?.redirect('adventure.group')
     }
 
     private renderRow(group: ListGroup) {
@@ -81,7 +82,8 @@ export default class GroupListCardViewController extends AbstractViewController<
         } as ListRow
     }
 
-    public async load() {
+    public async load(router: Router) {
+        this.router = router
         await this.activeRecordCardVc.load()
     }
 

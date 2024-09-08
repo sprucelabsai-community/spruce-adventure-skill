@@ -1,5 +1,6 @@
 import {
     interactor,
+    Router,
     toolBeltAssert,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
@@ -324,9 +325,9 @@ class MockFriendsTool extends FriendsListToolViewController {
 
 class MockGroupsTool extends GroupListCardViewController {
     private isLoaded = false
-    public async load() {
+    public async load(router: Router) {
         this.isLoaded = true
-        return super.load()
+        return super.load(router)
     }
 
     public assertIsLoaded() {
