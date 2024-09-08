@@ -1,7 +1,7 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
-import { PostAdventure } from '../../../adventure.types'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { PostAdventure } from '../../../../adventure.types'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()

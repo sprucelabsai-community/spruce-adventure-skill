@@ -1,11 +1,11 @@
 import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test-utils'
-import { Adventure } from '../../../adventure.types'
-import { PostCardOptions } from '../../../posting/PostCard.vc'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { PostTargetAndPayload } from '../../support/EventFaker'
-import FakePostCard from '../../support/FakePostCard'
+import { Adventure } from '../../../../adventure.types'
+import { PostCardOptions } from '../../../../posting/PostCard.vc'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
+import { PostTargetAndPayload } from '../../../support/EventFaker'
+import FakePostCard from '../../../support/FakePostCard'
 
 @fake.login()
 export default class PostCardTest extends AbstractAdventureTest {

@@ -1,7 +1,7 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class RsvpListenerTest extends AbstractAdventureTest {

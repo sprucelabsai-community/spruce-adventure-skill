@@ -1,8 +1,8 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import Rsvper from '../../../rsvping/Rsvper'
-import AbstractFriendsTest from '../../support/AbstractFriendsTest'
-import { SendMessageTargetAndPayload } from '../../support/EventFaker'
+import Rsvper from '../../../../rsvping/Rsvper'
+import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
+import { SendMessageTargetAndPayload } from '../../../support/EventFaker'
 
 @fake.login()
 export default class RsvperTest extends AbstractFriendsTest {

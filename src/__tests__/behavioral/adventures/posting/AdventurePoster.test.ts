@@ -1,12 +1,13 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import MessageSenderImpl from '../../../messaging/MessageSender'
-import AdventurePoster from '../../../posting/AdventurePoster'
-import AbstractFriendsTest from '../../support/AbstractFriendsTest'
+
+import MessageSenderImpl from '../../../../messaging/MessageSender'
+import AdventurePoster from '../../../../posting/AdventurePoster'
+import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import {
-    GenerateUrlTargetAndPayload,
     SendMessageTargetAndPayload,
-} from '../../support/EventFaker'
+    GenerateUrlTargetAndPayload,
+} from '../../../support/EventFaker'
 import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()

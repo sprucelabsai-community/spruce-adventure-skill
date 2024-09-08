@@ -6,7 +6,7 @@ import ConnectionManager from '../../listing/ConnectionManager'
 import AdventuresStore from '../../stores/Adventures.store'
 import ConnectionsStore from '../../stores/Connections.store'
 import GroupsStore from '../../stores/Groups.store'
-import { generatePostAdventureValues } from '../behavioral/posting/generatePostAdventureValues'
+import { generatePostAdventureValues } from '../behavioral/adventures/posting/generatePostAdventureValues'
 import EventFaker from './EventFaker'
 
 export default abstract class AbstractAdventureTest extends AbstractSpruceFixtureTest {

@@ -1,5 +1,5 @@
-import { PostAdventure } from '../../../adventure.types'
-import generateAdventureValues from '../../support/generateAdventureValues'
+import { PostAdventure } from '../../../../adventure.types'
+import generateAdventureValues from '../../../support/generateAdventureValues'
 
 export function generatePostAdventureValues(
     values?: Partial<PostAdventure>
