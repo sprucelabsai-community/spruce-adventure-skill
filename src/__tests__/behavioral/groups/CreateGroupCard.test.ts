@@ -1,4 +1,8 @@
-import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    formAssert,
+    listAssert,
+    vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import {
     FormCardViewController,
     SpyFormCardViewController,
@@ -42,6 +46,11 @@ export default class CreateGroupCardTest extends AbstractAdventureTest {
             'title',
             'description',
         ])
+    }
+
+    @test()
+    protected static async rendersAListForFriends() {
+        listAssert.cardRendersList(this.vc, 'friends')
     }
 }
 

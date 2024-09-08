@@ -34,7 +34,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
     @test()
     protected static async friendsToolRendersActiveRecordCard() {
-        activeRecordCardAssert.isActiveRecordCard(this.vc)
+        activeRecordCardAssert.rendersAsActiveRecordCard(this.vc)
     }
 
     @test()

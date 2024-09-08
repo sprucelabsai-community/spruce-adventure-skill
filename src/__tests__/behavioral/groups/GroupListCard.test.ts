@@ -83,11 +83,6 @@ export default class GroupListCardTest extends AbstractAdventureTest {
         )
     }
 
-    @test()
-    protected static async rendersAListForFriends() {
-        listAssert.cardRendersList(this.vc, 'friends')
-    }
-
     private static get activeRecordCardVc() {
         return this.vc.getActiveRecordCard()
     }
