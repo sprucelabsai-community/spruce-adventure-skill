@@ -19,6 +19,7 @@ export default class GroupFormCardTest extends AbstractAdventureTest {
         this.views.setController('forms.card', SpyFormCardViewController)
         this.vc = this.views.Controller('adventure.group-form-card', {
             onCancel: () => {},
+            onSubmit: () => {},
         }) as SpyGroupFormCard
     }
 

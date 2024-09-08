@@ -4,6 +4,7 @@ import {
     buildActiveRecordCard,
     Button,
     Card,
+    CardFooter,
     CardHeader,
     ListCell,
     ListRow,
@@ -31,7 +32,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private ActiveRecordVc(
         options: FriendsListOptions
     ): ActiveRecordCardViewController {
-        const { buttons, header, id } = options
+        const { buttons, header, id, shouldAllowInvite = true } = options
 
         return this.Controller(
             'active-record-card',
@@ -60,19 +61,50 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                     pageSize: 5,
                     shouldPageClientSide: true,
                 },
-                footer: {
-                    buttons: [
-                        {
-                            id: 'invite',
-                            label: 'Invite a friend!',
-                            type: 'primary',
-                            onClick: this.handleClickInvite.bind(this),
-                        },
-                        ...(buttons ?? []),
-                    ],
-                },
+                footer: this.renderFooter(shouldAllowInvite, buttons),
             })
         )
+    }
+
+    private renderFooter(shouldAllowInvite: boolean, buttons?: Button[]) {
+        const renderedButtons: Button[] = this.renderFooterButtons(
+            shouldAllowInvite,
+            buttons
+        )
+
+        let footer: CardFooter | undefined
+
+        if (renderedButtons.length > 0) {
+            footer = {
+                buttons: renderedButtons,
+            }
+        }
+        return footer
+    }
+
+    private renderFooterButtons(
+        shouldAllowInvite: boolean,
+        buttons?: Button[]
+    ) {
+        const renderedButtons: Button[] = []
+
+        if (shouldAllowInvite) {
+            renderedButtons.push({
+                id: 'invite',
+                label: 'Invite a friend!',
+                type: 'primary',
+                onClick: this.handleClickInvite.bind(this),
+            })
+        }
+
+        if (buttons) {
+            renderedButtons.push(...buttons)
+        }
+        return renderedButtons
+    }
+
+    public getValues() {
+        return this.activeCardVc.getValues()
     }
 
     private async handleClickInvite() {
@@ -146,9 +178,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 }
 
-interface FriendsListOptions {
+export interface FriendsListOptions {
     buttons?: Button[]
     header?: CardHeader
     id?: string
     shouldRenderToggle?: boolean
+    shouldAllowInvite?: boolean
 }

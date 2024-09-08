@@ -4,6 +4,7 @@ import adventureAcceptConnectionEventContract_v2022_09_09, { AcceptConnectionEve
 import peopleBroadcastTeamMessageEventContract_v2022_05_29, { BroadcastTeamMessageEventContract as PeopleBroadcastTeamMessageEventContract_v2022_05_29  } from '#spruce/events/people/broadcastTeamMessage.v2022_05_29.contract'
 import adventureCancelEventContract_v2022_09_09, { CancelEventContract as AdventureCancelEventContract_v2022_09_09  } from '#spruce/events/adventure/cancel.v2022_09_09.contract'
 import adventureCreateConnectionEventContract_v2022_09_09, { CreateConnectionEventContract as AdventureCreateConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/createConnection.v2022_09_09.contract'
+import adventureCreateGroupEventContract_v2022_09_09, { CreateGroupEventContract as AdventureCreateGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/createGroup.v2022_09_09.contract'
 import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, { DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
 import heartwoodGenerateUrlEventContract_v2021_02_11, { GenerateUrlEventContract as HeartwoodGenerateUrlEventContract_v2021_02_11  } from '#spruce/events/heartwood/generateUrl.v2021_02_11.contract'
 import peopleGetEventContract_v2022_05_29, { GetEventContract as PeopleGetEventContract_v2022_05_29  } from '#spruce/events/people/get.v2022_05_29.contract'
@@ -26,6 +27,7 @@ export default [
     peopleBroadcastTeamMessageEventContract_v2022_05_29,
     adventureCancelEventContract_v2022_09_09,
     adventureCreateConnectionEventContract_v2022_09_09,
+    adventureCreateGroupEventContract_v2022_09_09,
     heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
     heartwoodGenerateUrlEventContract_v2021_02_11,
     peopleGetEventContract_v2022_05_29,
@@ -58,6 +60,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'adventure.create-connection::v2022_09_09': AdventureCreateConnectionEventContract_v2022_09_09['eventSignatures']['adventure.create-connection::v2022_09_09'],
+    
+    
+    'adventure.create-group::v2022_09_09': AdventureCreateGroupEventContract_v2022_09_09['eventSignatures']['adventure.create-group::v2022_09_09'],
     
     
     'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11'],

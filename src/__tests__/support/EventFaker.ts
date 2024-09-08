@@ -15,6 +15,33 @@ import generateAdventureValues from './generateAdventureValues'
 import generateFriendValues from './generateFriendValues'
 
 export default class EventFaker {
+    public fakedFriends: Friend[] = []
+
+    public async fakeCreateGroup(
+        cb?: (targetAndPayload: CreateGroupTargetAndPayload) => void
+    ) {
+        await eventFaker.on(
+            'adventure.create-group::v2022_09_09',
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
+                return {
+                    group: {
+                        id: generateId(),
+                        ...this.generateCreateGroupValues(),
+                    },
+                }
+            }
+        )
+    }
+
+    public generateCreateGroupValues(): SpruceSchemas.Adventure.v2022_09_09.CreateGroup {
+        return {
+            people: [],
+            title: generateId(),
+            description: generateId(),
+        }
+    }
+
     public async fakeListGroups(cb?: () => void | ListGroup[]) {
         await eventFaker.on('adventure.list-groups::v2022_09_09', () => {
             return {
@@ -146,10 +173,16 @@ export default class EventFaker {
             'adventure.list-friends::v2022_09_09',
             (targetAndPayload) => {
                 return {
-                    friends: cb?.(targetAndPayload) ?? [],
+                    friends: cb?.(targetAndPayload) ?? this.fakedFriends,
                 }
             }
         )
+    }
+
+    public seedFriend(friend?: Friend) {
+        const f = friend ?? this.generateFriendValues()
+        this.fakedFriends.push(f)
+        return f
     }
 
     public generateFriendValues() {
@@ -226,3 +259,6 @@ export type GenerateUrlTargetAndPayload =
 
 export type CancelPayload =
     SpruceSchemas.Adventure.v2022_09_09.CancelEmitPayload
+
+export type CreateGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.CreateGroupEmitTargetAndPayload

@@ -28,6 +28,7 @@ export default class GroupListCardViewController extends AbstractViewController<
                     subtitle:
                         'Create a group based on interests (or whatever) and invite just them to your next adventure!',
                 },
+                columnWidths: ['fill'],
                 noResultsRow: {
                     height: 'content',
                     cells: [

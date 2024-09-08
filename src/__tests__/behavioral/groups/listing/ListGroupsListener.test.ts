@@ -1,8 +1,8 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { ListGroup } from '../../../adventure.types'
-import { UpdateGroup } from '../../../groups/Groups.store'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { ListGroup } from '../../../../adventure.types'
+import { UpdateGroup } from '../../../../groups/Groups.store'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class ListGroupsListenerTest extends AbstractAdventureTest {

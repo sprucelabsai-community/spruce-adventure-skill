@@ -15,14 +15,27 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
 
         const { id } = options
 
-        this.friendListToolVc = this.Controller('adventure.friends-list-tool', {
+        this.friendListToolVc = this.FriendListToolVc(id)
+    }
+
+    private FriendListToolVc(id?: string): FriendsListToolViewController {
+        return this.Controller('adventure.friends-list-tool', {
             id,
             shouldRenderToggle: true,
+            shouldAllowInvite: false,
         })
     }
 
     public async load(router: Router) {
         await this.friendListToolVc.load({ router })
+    }
+
+    public getSelectedFriends() {
+        const values = this.friendListToolVc.getValues()
+        return values
+            .filter((v) => !!v.isSelected)
+            .map((value) => value.rowId)
+            .filter(Boolean) as string[]
     }
 
     public render() {

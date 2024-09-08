@@ -9,6 +9,7 @@ import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../../adventure.types'
+import { FriendsListOptions } from '../../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../../support/generateAvatarValues'
 import { SpyFriendListTool } from '../SpyFriendListTool'
@@ -25,10 +26,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
             'adventure.friends-list-tool',
             SpyFriendListTool
         )
-        this.vc = this.views.Controller(
-            'adventure.friends-list-tool',
-            {}
-        ) as SpyFriendListTool
+        this.vc = this.Vc()
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
     }
@@ -124,11 +122,24 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         )
     }
 
+    @test()
+    protected static async shouldNotRenderFooterInNoFooterButtons() {
+        this.vc = this.Vc({ shouldAllowInvite: false })
+        await this.load()
+        vcAssert.assertCardDoesNotRenderFooter(this.vc)
+    }
+
     private static async load() {
         await this.views.load(this.vc)
     }
 
     private static get activeRecordCardVc() {
         return this.vc.getActiveCardVc()
+    }
+
+    private static Vc(options?: FriendsListOptions): SpyFriendListTool {
+        return this.views.Controller('adventure.friends-list-tool', {
+            ...options,
+        }) as SpyFriendListTool
     }
 }
