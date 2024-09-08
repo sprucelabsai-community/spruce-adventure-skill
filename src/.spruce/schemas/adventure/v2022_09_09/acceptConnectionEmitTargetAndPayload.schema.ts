@@ -4,8 +4,8 @@ import { SpruceSchemas } from '../../schemas.types'
 import eventSourceSchema_v2021_09_13 from '#spruce/schemas/spruceEventUtils/v2021_09_13/eventSource.schema'
 import acceptConnectionEmitTargetSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/acceptConnectionEmitTarget.schema'
 
-const eventsEmitTargetAndPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.EventsEmitTargetAndPayloadSchema  = {
-	id: 'eventsEmitTargetAndPayload',
+const acceptConnectionEmitTargetAndPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.AcceptConnectionEmitTargetAndPayloadSchema  = {
+	id: 'acceptConnectionEmitTargetAndPayload',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
 	name: '',
@@ -25,6 +25,6 @@ const eventsEmitTargetAndPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.Even
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(eventsEmitTargetAndPayloadSchema)
+SchemaRegistry.getInstance().trackSchema(acceptConnectionEmitTargetAndPayloadSchema)
 
-export default eventsEmitTargetAndPayloadSchema
+export default acceptConnectionEmitTargetAndPayloadSchema
