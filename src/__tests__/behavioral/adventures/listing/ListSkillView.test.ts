@@ -12,7 +12,7 @@ import CurrentAdventureCardViewController from '../../../../adventures/listing/C
 import ListSkillViewController from '../../../../adventures/listing/List.svc'
 import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
 import FriendsListToolViewController from '../../../../friends/listing/FriendsListTool.vc'
-import GroupListCardViewController from '../../../../groups/GroupListCard.vc'
+import GroupListCardViewController from '../../../../groups/listing/GroupListCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import FakePostCard from '../../../support/FakePostCard'
 import generateAdventureWithPersonValues from '../../../support/generateAdventureWithPersonValues'

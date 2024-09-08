@@ -13,7 +13,7 @@ import {
 import { Person } from '@sprucelabs/spruce-core-schemas'
 import { AdventureWithPerson } from '../../adventure.types'
 import FriendsListToolViewController from '../../friends/listing/FriendsListTool.vc'
-import GroupListCardViewController from '../../groups/GroupListCard.vc'
+import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 

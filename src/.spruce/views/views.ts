@@ -4,7 +4,6 @@ import ListSkillViewController from '../../adventures/listing/List.svc'
 import PostSkillViewController from '../../adventures/posting/Post.svc'
 import FriendSelectionCardViewController from '../../groups/FriendSelectionCard.vc'
 import GroupFormCardViewController from '../../groups/GroupFormCard.vc'
-import GroupListCardViewController from '../../groups/GroupListCard.vc'
 import FriendsDashboardCardViewController from '../../peopleDashboardCards/FriendsDashboardCard.vc'
 import ConfirmCancelCardViewController from '../../adventures/cancelling/ConfirmCancelCard.vc'
 import AdventureCardViewController from '../../adventures/listing/AdventureCard.vc'
@@ -13,6 +12,7 @@ import CurrentAdventureCardViewController from '../../adventures/listing/Current
 import PostCardViewController from '../../adventures/posting/PostCard.vc'
 import FriendsListToolViewController from '../../friends/listing/FriendsListTool.vc'
 import ConnectSkillViewController from '../../friends/connecting/Connect.svc'
+import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 
 import '@sprucelabs/heartwood-view-controllers'
 
