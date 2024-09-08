@@ -2,6 +2,7 @@ import {
     AbstractViewController,
     ViewControllerOptions,
     Card,
+    ListViewController,
 } from '@sprucelabs/heartwood-view-controllers'
 import {
     buildFormCard,
@@ -12,12 +13,17 @@ import groupSchema from '#spruce/schemas/adventure/v2022_09_09/group.schema'
 export default class CreateGroupCardViewController extends AbstractViewController<Card> {
     public static id = 'create-group-card'
     protected formCardVc: FormCardViewController
+    private listVc: ListViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
 
         this.getVcFactory().setController('forms.card', FormCardViewController)
 
+        this.listVc = this.Controller('list', {
+            id: 'friends',
+            rows: [],
+        })
         this.formCardVc = this.FormVc()
     }
 
@@ -29,9 +35,16 @@ export default class CreateGroupCardViewController extends AbstractViewControlle
                     title: 'Invite friends to your group!',
                 },
                 schema: groupSchema,
-                fields: [
-                    'title',
-                    { name: 'description', renderAs: 'textarea' },
+                sections: [
+                    {
+                        fields: [
+                            'title',
+                            { name: 'description', renderAs: 'textarea' },
+                        ],
+                    },
+                    {
+                        list: this.listVc.render(),
+                    },
                 ],
             })
         )
