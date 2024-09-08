@@ -36,6 +36,11 @@ const friendSchema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema  = {
 	                isRequired: true,
 	                options: {choices: [{"value":"me","label":"Me"},{"value":"them","label":"Them"}],}
 	            },
+	            /** . */
+	            'isInGroup': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	    }
 }
 

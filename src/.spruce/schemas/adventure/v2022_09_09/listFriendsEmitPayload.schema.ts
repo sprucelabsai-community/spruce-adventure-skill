@@ -14,6 +14,11 @@ const listFriendsEmitPayloadSchema: SpruceSchemas.Adventure.v2022_09_09.ListFrie
 	                type: 'select',
 	                options: {choices: [{"value":"confirmed","label":"Confirmed"},{"value":"pending","label":"Pending"}],}
 	            },
+	            /** . */
+	            'isInGroupId': {
+	                type: 'id',
+	                options: undefined
+	            },
 	    }
 }
 
