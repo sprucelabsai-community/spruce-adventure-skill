@@ -2,8 +2,8 @@ import { tomorrowLunch, tomorrowStartOfDay } from '@sprucelabs/calendar-utils'
 import { Skill } from '@sprucelabs/spruce-skill-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { AdventureCanceller } from '../../../cancelling/AdventureCanceller'
-import AbstractAdventureTest from '../../support/AbstractAdventureTest'
+import { AdventureCanceller } from '../../../../cancelling/AdventureCanceller'
+import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
 export default class CancelListenerTest extends AbstractAdventureTest {

@@ -1,10 +1,10 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
+import { Person } from '@sprucelabs/spruce-core-schemas'
 import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import { Person } from '../../../adventure.types'
-import AdventureFinder from '../../../listing/AdventureFinder'
-import AbstractFriendsTest from '../../support/AbstractFriendsTest'
+import AdventureFinder from '../../../../listing/AdventureFinder'
+import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 
 @fake.login()
 export default class AdventureFinderTest extends AbstractFriendsTest {

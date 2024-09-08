@@ -1,4 +1,4 @@
-import ConfirmCancelCardViewController from '../../../cancelling/ConfirmCancelCard.vc'
+import ConfirmCancelCardViewController from '../../../../cancelling/ConfirmCancelCard.vc'
 
 export default class ControlledConfirmCancelCard extends ConfirmCancelCardViewController {
     public async accept(message?: string | undefined | null) {
