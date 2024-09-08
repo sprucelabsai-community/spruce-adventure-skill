@@ -36,7 +36,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async rendersAList() {
-        activeRecordCardAssert.isActiveRecordCard(this.vc)
+        activeRecordCardAssert.rendersAsActiveRecordCard(this.vc)
     }
 
     @test()
