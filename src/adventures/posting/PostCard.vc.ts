@@ -9,7 +9,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import postAdventureSchema from '#spruce/schemas/adventure/v2022_09_09/postAdventure.schema'
-import { Adventure } from '../adventure.types'
+import { Adventure } from '../../adventure.types'
 
 export default class PostCardViewController extends AbstractViewController<Card> {
     public static id = 'post-card'

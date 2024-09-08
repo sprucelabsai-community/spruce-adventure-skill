@@ -4,12 +4,12 @@ import {
     SpruceEvent,
     SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
-import AdventureCancellerImpl from '../../cancelling/AdventureCanceller'
-import AdventureFinder from '../../listing/AdventureFinder'
-import ConnectionManager from '../../listing/ConnectionManager'
+import AdventureCancellerImpl from '../../adventures/cancelling/AdventureCanceller'
+import AdventureFinder from '../../adventures/listing/AdventureFinder'
+import ConnectionManager from '../../adventures/listing/ConnectionManager'
+import AdventurePoster from '../../adventures/posting/AdventurePoster'
+import Rsvper from '../../adventures/rsvping/Rsvper'
 import MessageSenderImpl from '../../messaging/MessageSender'
-import AdventurePoster from '../../posting/AdventurePoster'
-import Rsvper from '../../rsvping/Rsvper'
 
 export default async (
     event: SpruceEvent<SkillEventContract>

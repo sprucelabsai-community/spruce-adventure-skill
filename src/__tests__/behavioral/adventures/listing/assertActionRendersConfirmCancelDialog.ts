@@ -1,6 +1,6 @@
 import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
-import ConfirmCancelCardViewController from '../../../../cancelling/ConfirmCancelCard.vc'
-import CurrentAdventureCardViewController from '../../../../listing/CurrentAdventureCard.vc'
+import ConfirmCancelCardViewController from '../../../../adventures/cancelling/ConfirmCancelCard.vc'
+import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
 import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 
 export async function assertActionRendersConfirmCancelDialog(

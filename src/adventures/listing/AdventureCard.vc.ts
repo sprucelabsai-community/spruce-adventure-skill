@@ -5,7 +5,7 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
-import { AdventureWithPerson } from '../adventure.types'
+import { AdventureWithPerson } from '../../adventure.types'
 import BaseAdventureCardViewController from './BaseAdventureCard.vc'
 
 export default class AdventureCardViewController extends AbstractViewController<Card> {

@@ -1,6 +1,6 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import Rsvper from '../../../../rsvping/Rsvper'
+import Rsvper from '../../../../adventures/rsvping/Rsvper'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import { SendMessageTargetAndPayload } from '../../../support/EventFaker'
 

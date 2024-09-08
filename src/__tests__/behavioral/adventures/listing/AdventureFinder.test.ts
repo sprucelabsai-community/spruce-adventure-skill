@@ -3,7 +3,7 @@ import { Person } from '@sprucelabs/spruce-core-schemas'
 import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import AdventureFinder from '../../../../listing/AdventureFinder'
+import AdventureFinder from '../../../../adventures/listing/AdventureFinder'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 
 @fake.login()

@@ -1,7 +1,7 @@
 import { StoreFactory } from '@sprucelabs/data-stores'
-import { PostAdventure } from '../adventure.types'
-import { MessageSender } from '../messaging/MessageSender'
-import AdventuresStore from '../stores/Adventures.store'
+import { PostAdventure } from '../../adventure.types'
+import { MessageSender } from '../../messaging/MessageSender'
+import AdventuresStore from '../../stores/Adventures.store'
 
 export default class AdventurePoster {
     private adventures: AdventuresStore

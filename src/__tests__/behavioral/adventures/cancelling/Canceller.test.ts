@@ -1,6 +1,6 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
-import AdventureCancellerImpl from '../../../../cancelling/AdventureCanceller'
+import AdventureCancellerImpl from '../../../../adventures/cancelling/AdventureCanceller'
 import { MessageSender } from '../../../../messaging/MessageSender'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 

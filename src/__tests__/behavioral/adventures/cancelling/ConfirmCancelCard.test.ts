@@ -1,7 +1,7 @@
 import { formAssert, interactor } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
-import ConfirmCancelCardViewController from '../../../../cancelling/ConfirmCancelCard.vc'
+import ConfirmCancelCardViewController from '../../../../adventures/cancelling/ConfirmCancelCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()

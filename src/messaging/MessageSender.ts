@@ -1,6 +1,6 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { Person } from '../adventure.types'
-import ConnectionManager from '../listing/ConnectionManager'
+import ConnectionManager from '../adventures/listing/ConnectionManager'
 import generateUrl from '../utilities/generateUrl'
 import getPerson from '../utilities/getPerson'
 import { sendMessage } from '../utilities/sendMessage'

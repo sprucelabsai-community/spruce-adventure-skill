@@ -1,8 +1,8 @@
 import { SpruceSchemas } from '@sprucelabs/spruce-core-schemas'
-import { AdventureCanceller } from './cancelling/AdventureCanceller'
-import AdventureFinder from './listing/AdventureFinder'
-import AdventurePoster from './posting/AdventurePoster'
-import Rsvper from './rsvping/Rsvper'
+import { AdventureCanceller } from './adventures/cancelling/AdventureCanceller'
+import AdventureFinder from './adventures/listing/AdventureFinder'
+import AdventurePoster from './adventures/posting/AdventurePoster'
+import Rsvper from './adventures/rsvping/Rsvper'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
 export type AdventureWithPerson =

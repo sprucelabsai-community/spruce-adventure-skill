@@ -1,13 +1,13 @@
 import { StoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { Person } from '@sprucelabs/spruce-core-schemas'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
-import ConnectionManager from '../adventures/listing/ConnectionManager'
-import SpruceError from '../errors/SpruceError'
-import AdventuresStore from '../stores/Adventures.store'
-import generateUrl from '../utilities/generateUrl'
-import getPerson from '../utilities/getPerson'
-import { sendMessage } from '../utilities/sendMessage'
+import { Person } from '../../adventure.types'
+import SpruceError from '../../errors/SpruceError'
+import ConnectionManager from '../listing/ConnectionManager'
+import AdventuresStore from '../../stores/Adventures.store'
+import generateUrl from '../../utilities/generateUrl'
+import getPerson from '../../utilities/getPerson'
+import { sendMessage } from '../../utilities/sendMessage'
 
 export default class Rsvper {
     private adventures: AdventuresStore

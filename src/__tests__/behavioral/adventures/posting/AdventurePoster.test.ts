@@ -1,8 +1,8 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 
+import AdventurePoster from '../../../../adventures/posting/AdventurePoster'
 import MessageSenderImpl from '../../../../messaging/MessageSender'
-import AdventurePoster from '../../../../posting/AdventurePoster'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import {
     SendMessageTargetAndPayload,

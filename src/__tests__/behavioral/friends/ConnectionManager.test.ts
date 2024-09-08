@@ -1,6 +1,6 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
-import ConnectionManager from '../../../listing/ConnectionManager'
+import ConnectionManager from '../../../adventures/listing/ConnectionManager'
 import AbstractFriendsTest from '../../support/AbstractFriendsTest'
 
 @fake.login()
