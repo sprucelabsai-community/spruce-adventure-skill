@@ -1,8 +1,8 @@
 import CurrentAdventureCardViewController from '../../listing/CurrentAdventureCard.vc'
+import SpyBaseAdventureCard from './SpyBaseAdventureCard'
 
 export class SpyCurrentCard extends CurrentAdventureCardViewController {
     public getAdventure() {
-        //@ts-ignore
-        return this.baseAdventureCardVc.adventure
+        return (this.baseAdventureCardVc as SpyBaseAdventureCard).adventure
     }
 }

@@ -6,12 +6,29 @@ import {
     Adventure,
     AdventureWithPerson,
     Friend,
+    Group,
     Person,
 } from '../../adventure.types'
 import generateAddressValues from './generateAddressValues'
 import generateAdventureValues from './generateAdventureValues'
 
 export default class EventFaker {
+    public async fakeListGroups(cb?: () => void | Group[]) {
+        await eventFaker.on('adventure.list-groups::v2022_09_09', () => {
+            return {
+                groups: cb?.() ?? [],
+            }
+        })
+    }
+
+    public generateGroupValues(): Group {
+        return {
+            id: generateId(),
+            people: [],
+            title: generateId(),
+        }
+    }
+
     public async fakeSendMessage(
         cb?: (targetAndPayload: SendMessageTargetAndPayload) => void
     ) {

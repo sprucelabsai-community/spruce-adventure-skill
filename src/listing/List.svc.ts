@@ -10,7 +10,9 @@ import {
     ViewController,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
+import { AdventureWithPerson, Person } from '../adventure.types'
 import FriendsListToolViewController from '../friends/FriendsListTool.vc'
+import GroupListCardViewController from '../groups/GroupListCard.vc'
 import PostCardViewController from '../posting/PostCard.vc'
 import CurrentAdventureCardViewController from './CurrentAdventureCard.vc'
 
@@ -23,14 +25,20 @@ export default class ListSkillViewController extends AbstractSkillViewController
     private router!: Router
     protected cards: ViewController<Card>[] = []
     protected loadingCardVc: ViewController<Card>
+    protected groupsToolVc: GroupListCardViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
 
+        this.groupsToolVc = this.Controller('adventure.group-list-card', {})
         this.friendsToolVc = this.FriendsToolVc()
         this.toolBeltVc = this.ToolBeltVc()
         this.postCardVc = this.PostCardVc()
-        this.loadingCardVc = this.Controller('card', {
+        this.loadingCardVc = this.LoadingCardVc()
+    }
+
+    private LoadingCardVc() {
+        return this.Controller('card', {
             id: 'loading',
             body: {
                 isBusy: true,
@@ -50,6 +58,11 @@ export default class ListSkillViewController extends AbstractSkillViewController
                 {
                     id: 'friends',
                     card: this.friendsToolVc.render(),
+                    lineIcon: 'user',
+                },
+                {
+                    id: 'groups',
+                    card: this.groupsToolVc.render(),
                     lineIcon: 'users',
                 },
             ],
@@ -88,25 +101,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
             return
         }
 
-        for (const adventure of adventures) {
-            if (adventure.source.personId === person.id) {
-                this.currentCardVc = this.Controller(
-                    'adventure.current-adventure-card',
-                    {
-                        adventure,
-                        onDidCancel:
-                            this.onDidCancelCurrentAdventure.bind(this),
-                    }
-                )
-            } else {
-                this.cards.push(
-                    this.Controller('adventure.adventure-card', {
-                        adventure,
-                        loggedInPersonId: person.id,
-                    })
-                )
-            }
-        }
+        this.buildAdventureCards(adventures, person)
 
         if (!this.currentCardVc) {
             this.cards.push(this.postCardVc)
@@ -117,6 +112,40 @@ export default class ListSkillViewController extends AbstractSkillViewController
         await this.friendsToolVc.load({
             router,
             onNoFriends: () => this.toolBeltVc.focusTool('friends'),
+        })
+
+        await this.groupsToolVc.load()
+    }
+
+    private buildAdventureCards(
+        adventures: AdventureWithPerson[],
+        loggedInPerson: Person
+    ) {
+        for (const adventure of adventures) {
+            if (adventure.source.personId === loggedInPerson.id) {
+                this.currentCardVc = this.CurrentAdventureCard(adventure)
+            } else {
+                this.cards.push(this.AdventureCardVc(adventure, loggedInPerson))
+            }
+        }
+    }
+
+    private AdventureCardVc(
+        adventure: AdventureWithPerson,
+        loggedInPerson: Person
+    ) {
+        return this.Controller('adventure.adventure-card', {
+            adventure,
+            loggedInPersonId: loggedInPerson.id,
+        })
+    }
+
+    private CurrentAdventureCard(
+        adventure: AdventureWithPerson
+    ): CurrentAdventureCardViewController {
+        return this.Controller('adventure.current-adventure-card', {
+            adventure,
+            onDidCancel: this.onDidCancelCurrentAdventure.bind(this),
         })
     }
 

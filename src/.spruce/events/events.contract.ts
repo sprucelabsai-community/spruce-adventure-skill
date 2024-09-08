@@ -11,6 +11,7 @@ import heartwoodGetActiveThemeEventContract_v2021_02_11, { GetActiveThemeEventCo
 import heartwoodGetSkillViewsEventContract_v2021_02_11, { GetSkillViewsEventContract as HeartwoodGetSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/getSkillViews.v2021_02_11.contract'
 import adventureListEventContract_v2022_09_09, { ListEventContract as AdventureListEventContract_v2022_09_09  } from '#spruce/events/adventure/list.v2022_09_09.contract'
 import adventureListFriendsEventContract_v2022_09_09, { ListFriendsEventContract as AdventureListFriendsEventContract_v2022_09_09  } from '#spruce/events/adventure/listFriends.v2022_09_09.contract'
+import adventureListGroupsEventContract_v2022_09_09, { ListGroupsEventContract as AdventureListGroupsEventContract_v2022_09_09  } from '#spruce/events/adventure/listGroups.v2022_09_09.contract'
 import heartwoodListViewsEventContract_v2021_02_11, { ListViewsEventContract as HeartwoodListViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/listViews.v2021_02_11.contract'
 import adventurePostEventContract_v2022_09_09, { PostEventContract as AdventurePostEventContract_v2022_09_09  } from '#spruce/events/adventure/post.v2022_09_09.contract'
 import heartwoodRegisterDashboardCardsEventContract_v2021_02_11, { RegisterDashboardCardsEventContract as HeartwoodRegisterDashboardCardsEventContract_v2021_02_11  } from '#spruce/events/heartwood/registerDashboardCards.v2021_02_11.contract'
@@ -32,6 +33,7 @@ export default [
     heartwoodGetSkillViewsEventContract_v2021_02_11,
     adventureListEventContract_v2022_09_09,
     adventureListFriendsEventContract_v2022_09_09,
+    adventureListGroupsEventContract_v2022_09_09,
     heartwoodListViewsEventContract_v2021_02_11,
     adventurePostEventContract_v2022_09_09,
     heartwoodRegisterDashboardCardsEventContract_v2021_02_11,
@@ -77,6 +79,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'adventure.list-friends::v2022_09_09': AdventureListFriendsEventContract_v2022_09_09['eventSignatures']['adventure.list-friends::v2022_09_09'],
+    
+    
+    'adventure.list-groups::v2022_09_09': AdventureListGroupsEventContract_v2022_09_09['eventSignatures']['adventure.list-groups::v2022_09_09'],
     
     
     'heartwood.list-views::v2021_02_11': HeartwoodListViewsEventContract_v2021_02_11['eventSignatures']['heartwood.list-views::v2021_02_11'],

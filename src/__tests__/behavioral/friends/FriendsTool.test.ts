@@ -1,4 +1,6 @@
 import {
+    activeRecordCardAssert,
+    buttonAssert,
     interactor,
     MockActiveRecordCard,
     vcAssert,
@@ -13,27 +15,42 @@ import { generateAvatarValues } from '../../support/generateAvatarValues'
 
 @fake.login()
 export default class FriendsToolTest extends AbstractAdventureTest {
-    private static vc: SpyListTool
+    private static vc: SpyFriendListTool
+
     protected static async beforeEach() {
         await super.beforeEach()
         await this.eventFaker.fakeListFriends()
 
-        this.views.setController('adventure.friends-list-tool', SpyListTool)
+        this.views.setController(
+            'adventure.friends-list-tool',
+            SpyFriendListTool
+        )
         this.vc = this.views.Controller(
             'adventure.friends-list-tool',
             {}
-        ) as SpyListTool
+        ) as SpyFriendListTool
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
     }
     @test()
     protected static async friendsToolRendersActiveRecordCard() {
-        vcAssert.assertIsActiveRecordCard(this.vc)
+        activeRecordCardAssert.isActiveRecordCard(this.vc)
     }
 
     @test()
     protected static async rendersInviteButton() {
-        vcAssert.assertCardRendersButton(this.vc, 'invite')
+        buttonAssert.cardRendersButton(this.vc, 'invite')
+    }
+
+    @test()
+    protected static async pagesAsExpected() {
+        activeRecordCardAssert.assertPagingOptionsEqual(
+            this.activeRecordCardVc,
+            {
+                pageSize: 10,
+                shouldPageClientSide: true,
+            }
+        )
     }
 
     @test()
@@ -46,10 +63,12 @@ export default class FriendsToolTest extends AbstractAdventureTest {
                 inviteSender: 'me',
             },
         ]
+
         await this.eventFaker.fakeListFriends(() => friends)
-        await this.loadVc()
+        await this.load()
+
         for (const friend of friends) {
-            vcAssert.assertListRendersRow(this.vc.getListVc(), friend.id)
+            this.activeRecordCardVc.assertRendersRow(friend.id)
         }
     }
 
@@ -74,7 +93,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
             },
         })
 
-        await this.loadVc()
+        await this.load()
 
         await vcAssert.assertActionRedirects({
             action: () => interactor.clickButton(this.vc, 'invite'),
@@ -86,13 +105,17 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         })
     }
 
-    private static async loadVc() {
+    private static async load() {
         await this.views.load(this.vc)
+    }
+
+    private static get activeRecordCardVc() {
+        return this.vc.getActiveCardVc()
     }
 }
 
-class SpyListTool extends FriendsListToolViewController {
-    public getListVc() {
-        return (this.activeCardVc as MockActiveRecordCard).getListVc()
+class SpyFriendListTool extends FriendsListToolViewController {
+    public getActiveCardVc() {
+        return this.activeCardVc as MockActiveRecordCard
     }
 }

@@ -1,4 +1,7 @@
-import { EventSignature } from '@sprucelabs/mercury-types'
+import {
+    buildPermissionReference,
+    EventSignature,
+} from '@sprucelabs/mercury-types'
 
 type Options = Omit<
     EventSignature,
@@ -10,6 +13,9 @@ type Options = Omit<
 
 const eventOptions: Options = {
     isGlobal: true,
+    emitPermissions: buildPermissionReference('adventure.adventure', [
+        'can-cancel-adventure',
+    ]),
 }
 
 export default eventOptions

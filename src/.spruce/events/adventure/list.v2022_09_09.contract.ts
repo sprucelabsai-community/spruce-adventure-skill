@@ -1,7 +1,6 @@
 import '#spruce/permissions/permissions.types'
 import listResponsePayloadSchema from '#spruce/schemas/adventure/v2022_09_09/listResponsePayload.schema'
 import { buildEventContract } from '@sprucelabs/mercury-types'
-import { buildPermissionContract } from '@sprucelabs/mercury-types'
 
 
 const listEventContract = buildEventContract({
@@ -9,26 +8,10 @@ const listEventContract = buildEventContract({
         'adventure.list::v2022_09_09': {
             isGlobal: true,
             
-            
+            listenPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-adventures"]},
             
             responsePayloadSchema: listResponsePayloadSchema,
-            emitPermissionContract: buildPermissionContract({
-  "id": "listEmitPermissions",
-  "name": "List",
-  "requireAllPermissions": false,
-  "permissions": [
-    {
-      "id": "can-list-adventures",
-      "name": "Can list adventures",
-      "defaults": {
-        "loggedIn": {
-          "default": true
-        }
-      },
-      "requireAllStatuses": false
-    }
-  ]
-}),
+            
             
         }
     }

@@ -4,8 +4,9 @@ import PostSkillViewController from '../../posting/Post.svc'
 import EquipSkillViewController from '../../root/Equip.svc'
 import ProfileSkillViewController from '../../root/Profile.svc'
 import RootSkillViewController from '../../root/Root.svc'
-import ConfirmCancelCardViewController from '../../cancelling/ConfirmCancelCard.vc'
+import GroupListCardViewController from '../../groups/GroupListCard.vc'
 import FriendsListToolViewController from '../../friends/FriendsListTool.vc'
+import ConfirmCancelCardViewController from '../../cancelling/ConfirmCancelCard.vc'
 import AdventureCardViewController from '../../listing/AdventureCard.vc'
 import BaseAdventureCardViewController from '../../listing/BaseAdventureCard.vc'
 import CurrentAdventureCardViewController from '../../listing/CurrentAdventureCard.vc'
@@ -21,8 +22,9 @@ const vcs = {
     EquipSkillViewController,
     ProfileSkillViewController,
     RootSkillViewController,
-    ConfirmCancelCardViewController,
+    GroupListCardViewController,
     FriendsListToolViewController,
+    ConfirmCancelCardViewController,
     AdventureCardViewController,
     BaseAdventureCardViewController,
     CurrentAdventureCardViewController,
@@ -55,8 +57,9 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 	}
 
 	interface ViewControllerMap {
-		'adventure.confirm-cancel-card': ConfirmCancelCardViewController
+		'adventure.group-list-card': GroupListCardViewController
 		'adventure.friends-list-tool': FriendsListToolViewController
+		'adventure.confirm-cancel-card': ConfirmCancelCardViewController
 		'adventure.adventure-card': AdventureCardViewController
 		'adventure.base-adventure-card': BaseAdventureCardViewController
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
@@ -71,8 +74,9 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 	}
 
     interface ViewControllerOptionsMap {
-		'adventure.confirm-cancel-card': ConstructorParameters<typeof ConfirmCancelCardViewController>[0]
+		'adventure.group-list-card': ConstructorParameters<typeof GroupListCardViewController>[0]
 		'adventure.friends-list-tool': ConstructorParameters<typeof FriendsListToolViewController>[0]
+		'adventure.confirm-cancel-card': ConstructorParameters<typeof ConfirmCancelCardViewController>[0]
 		'adventure.adventure-card': ConstructorParameters<typeof AdventureCardViewController>[0]
 		'adventure.base-adventure-card': ConstructorParameters<typeof BaseAdventureCardViewController>[0]
 		'adventure.current-adventure-card': ConstructorParameters<typeof CurrentAdventureCardViewController>[0]

@@ -7,6 +7,7 @@ import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/FriendsListTool.vc'
+import GroupListCardViewController from '../../../groups/GroupListCard.vc'
 import AdventureCardViewController from '../../../listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../listing/List.svc'
@@ -37,6 +38,8 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
             return this.adventureRecords
         })
 
+        await this.eventFaker.fakeListGroups()
+
         this.resetAdventureRecords()
         this.seedCurrentAdventure()
 
@@ -45,11 +48,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
             ControlledConfirmCancelCard
         )
         this.views.setController('adventure.list', SpyListViewController)
+        this.views.setController('adventure.group-list-card', MockGroupsTool)
         this.views.setController('adventure.friends-list-tool', MockFriendsTool)
         this.views.setController('adventure.post-card', FakePostCard)
         this.views.setController(
             'adventure.current-adventure-card',
-            SpyCurrentCard as any
+            SpyCurrentCard
         )
 
         await this.reload()
@@ -77,12 +81,18 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersToolBeltWithFriendsTool() {
+    protected static async rendersToolBeltWithExpectedTools() {
         toolBeltAssert.rendersToolBelt(this.vc)
         toolBeltAssert.toolInstanceOf(
             this.vc,
             'friends',
             FriendsListToolViewController
+        )
+
+        toolBeltAssert.toolInstanceOf(
+            this.vc,
+            'groups',
+            GroupListCardViewController
         )
     }
 
@@ -113,8 +123,14 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadsTool() {
+    protected static async loadsFriendTool() {
         const tool = this.vc.getFriendsTool()
+        tool.assertIsLoaded()
+    }
+
+    @test()
+    protected static async loadsGroupsTool() {
+        const tool = this.vc.getGroupsTool()
         tool.assertIsLoaded()
     }
 
@@ -273,6 +289,9 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 }
 
 class SpyListViewController extends ListSkillViewController {
+    public getGroupsTool() {
+        return this.groupsToolVc as MockGroupsTool
+    }
     public getLoadingCardVc() {
         return this.loadingCardVc
     }
@@ -300,5 +319,17 @@ class MockFriendsTool extends FriendsListToolViewController {
 
     public assertIsLoaded() {
         assert.isTrue(this.isLoaded, `Your friends tool is not loaded`)
+    }
+}
+
+class MockGroupsTool extends GroupListCardViewController {
+    private isLoaded = false
+    public async load() {
+        this.isLoaded = true
+        return super.load()
+    }
+
+    public assertIsLoaded() {
+        assert.isTrue(this.isLoaded, `Your groups tool is not loaded`)
     }
 }

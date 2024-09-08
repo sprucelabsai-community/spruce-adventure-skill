@@ -2,6 +2,8 @@ import {
     buildPermissionReference,
     EventSignature,
 } from '@sprucelabs/mercury-types'
+import '#spruce/permissions/permissions.types'
+import '@sprucelabs/mercury-core-events'
 
 type Options = Omit<
     EventSignature,
@@ -14,7 +16,7 @@ type Options = Omit<
 const eventOptions: Options = {
     isGlobal: true,
     emitPermissions: buildPermissionReference('adventure.adventure', [
-        'can-list-friends',
+        'can-list-groups',
     ]),
 }
 

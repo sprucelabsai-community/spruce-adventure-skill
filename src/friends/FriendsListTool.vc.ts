@@ -52,6 +52,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                         },
                     ],
                 },
+                paging: {
+                    pageSize: 10,
+                    shouldPageClientSide: true,
+                },
                 footer: {
                     buttons: [
                         {
