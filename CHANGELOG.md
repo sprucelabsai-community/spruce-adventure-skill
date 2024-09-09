@@ -1,3 +1,10 @@
+# [9.4.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.3.0...v9.4.0) (2024-09-09)
+
+
+### Features
+
+* can totally load group. next up, saving updates ([366063a](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/366063a))
+
 # [9.3.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.2.1...v9.3.0) (2024-09-09)
 
 
