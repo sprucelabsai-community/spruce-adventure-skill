@@ -1,3 +1,10 @@
+# [9.7.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.6.1...v9.7.0) (2024-09-09)
+
+
+### Features
+
+* invite passes group! ([9b1147f](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/9b1147f))
+
 ## [9.6.1](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.6.0...v9.6.1) (2024-09-09)
 
 # [9.6.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.5.0...v9.6.0) (2024-09-09)
