@@ -84,6 +84,8 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
             friendSelectionCardVc,
             FriendSelectionCardViewController
         )
+
+        vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'details')
     }
 
     @test()
@@ -295,6 +297,26 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         assert.isEqual(passedGroupId, group.id)
     }
 
+    @test()
+    protected static async doesNotRenderFormCardIfGroupNotMine() {
+        await this.loadWithGroup({ isMine: false })
+
+        vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'form')
+        vcAssert.assertSkillViewRendersCard(this.vc, 'details')
+        vcAssert.assertTriggerRenderCount(this.vc, 1)
+    }
+
+    @test()
+    protected static async detailsCardRendersExpectedContent() {
+        const group = await this.loadWithGroup({ isMine: false })
+
+        const detailsCardVc = this.vc.getDetailsCardVc()
+        const { header } = this.views.render(detailsCardVc)
+
+        assert.doesInclude(header?.title, group.title)
+        assert.doesInclude(header?.subtitle, group.description)
+    }
+
     private static async loadWithFriendsSubmitAndAssertRedirect(
         friends: Friend[]
     ) {
@@ -322,8 +344,8 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         return group
     }
 
-    private static async loadWithGroup(group?: ListGroup) {
-        const g = group ?? this.eventFaker.generateListGroupValues()
+    private static async loadWithGroup(group?: Partial<ListGroup>) {
+        const g = this.eventFaker.generateListGroupValues(group)
         await this.eventFaker.fakeGetGroup(() => g)
         await this.load({ id: g.id })
         return g
@@ -399,6 +421,9 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 }
 
 class SpyGroupSkillView extends GroupSkillViewController {
+    public getDetailsCardVc() {
+        return this.detailCardVc
+    }
     public getFriendSelectionCardVc() {
         return this.friendSelectionCardVc as SpyFriendSelectionCard
     }

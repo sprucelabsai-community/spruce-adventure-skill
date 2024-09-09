@@ -5,6 +5,8 @@ import {
     splitCardsIntoLayouts,
     SkillViewControllerLoadOptions,
     Router,
+    Card,
+    CardViewController,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendSelectionCardViewController from './FriendSelectionCard.vc'
 import GroupFormCardViewController, {
@@ -13,16 +15,27 @@ import GroupFormCardViewController, {
 
 export default class GroupSkillViewController extends AbstractSkillViewController {
     public static id = 'group'
+
     protected formCardVc: GroupFormCardViewController
     protected friendSelectionCardVc: FriendSelectionCardViewController
+    protected detailCardVc: CardViewController
+
     private router?: Router
     private groupId?: string
+    private shouldRenderForm = true
 
     public constructor(options: ViewControllerOptions) {
         super(options)
 
         this.formCardVc = this.FormCardVc()
         this.friendSelectionCardVc = this.FriendSelectionCardVc()
+        this.detailCardVc = this.DetailCardVc()
+    }
+
+    private DetailCardVc() {
+        return this.Controller('card', {
+            id: 'details',
+        })
     }
 
     private FriendSelectionCardVc(): FriendSelectionCardViewController {
@@ -98,17 +111,19 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         options: SkillViewControllerLoadOptions<GroupSkillViewArgs>
     ) {
         const { router, args } = options
-
-        this.router = router
         const { id } = args
 
+        this.router = router
         this.groupId = id
+
         await this.friendSelectionCardVc.load(router)
 
         if (id) {
             await this.loadGroup(id)
             this.friendSelectionCardVc.enableInvite(id)
         }
+
+        this.triggerRender()
     }
 
     private async loadGroup(id: string) {
@@ -122,6 +137,12 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             }
         )
 
+        this.shouldRenderForm = group.isMine
+        this.detailCardVc.setHeader({
+            title: group.title,
+            subtitle: group.description,
+        })
+
         await this.formCardVc.setValues(group)
         await this.friendSelectionCardVc.setSelectedFriends(group.people)
     }
@@ -129,7 +150,12 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     public render(): SkillView {
         return {
             layouts: splitCardsIntoLayouts(
-                [this.formCardVc.render(), this.friendSelectionCardVc.render()],
+                [
+                    this.shouldRenderForm
+                        ? this.formCardVc.render()
+                        : this.detailCardVc.render(),
+                    this.friendSelectionCardVc.render(),
+                ].filter(Boolean) as Card[],
                 2
             ),
         }

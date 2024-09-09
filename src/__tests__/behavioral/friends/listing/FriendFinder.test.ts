@@ -13,6 +13,8 @@ export default class FriendFinderTest extends AbstractFriendsTest {
             client: this.fakedClient,
             stores: this.stores,
         })
+
+        await this.eventFaker.fakeListPeople(() => this.fakedGuests)
     }
 
     @test()
@@ -21,7 +23,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         await this.connectToOneFriend()
 
         const group = await this.getNewestGroup()
-        await this.assertMatchIsInGroup(group.id, false)
+        await this.assertFirstPersonIsInGroup(group.id, false)
     }
 
     @test()
@@ -39,7 +41,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     protected static async returnsInGroupIfInGroup() {
         const friend = await this.connectToOneFriend()
         const match = await this.addPeopleToGroup([friend.id])
-        await this.assertMatchIsInGroup(match.id, true)
+        await this.assertFirstPersonIsInGroup(match.id, true)
     }
 
     @test()
@@ -47,7 +49,29 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     protected static async canFindIfSecondPersonInGroup() {
         const friend = await this.connectToOneFriend()
         const match = await this.addPeopleToGroup([generateId(), friend.id])
-        await this.assertMatchIsInGroup(match.id, true)
+        await this.assertFirstPersonIsInGroup(match.id, true)
+    }
+
+    @test()
+    @seed('groups', 1)
+    @seed('organizations', 1)
+    @seed('guests', 1)
+    protected static async ifPassingGroupReturnsPeopleInGroupAsWell() {
+        let passedPeopleIds: string[] | undefined | null
+
+        await this.eventFaker.fakeListPeople(({ payload }) => {
+            passedPeopleIds = payload?.personIds
+        })
+
+        const group = await this.groups.updateOne(
+            {},
+            {
+                people: [this.fakedGuests[0].id],
+            }
+        )
+
+        await this.findInGroup(group.id)
+        assert.isEqualDeep(passedPeopleIds, [this.fakedGuests[0].id])
     }
 
     private static async addPeopleToGroup(peopleIds: string[]) {
@@ -59,7 +83,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         )
     }
 
-    private static async assertMatchIsInGroup(
+    private static async assertFirstPersonIsInGroup(
         groupId: string,
         isInGroup: boolean
     ) {

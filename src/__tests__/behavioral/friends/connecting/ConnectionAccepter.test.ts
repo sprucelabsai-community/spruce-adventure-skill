@@ -48,6 +48,7 @@ export default class ConnectionAccepterTest extends AbstractFriendsTest {
     protected static async updatesTheCorrectGroup() {
         const [group1, group2] = await this.groups.find({})
         const connectionId = await this.connectWithGroup(group2.id)
+
         await this.accept(connectionId)
         await this.assertGroupsPeopleEqual([], group1.id)
     }

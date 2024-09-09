@@ -56,10 +56,11 @@ export default class FriendFinder {
 
         let friends: Friend[] = []
 
-        if (matches.length > 0) {
+        if (matches.length > 0 || friendIdsInGroup) {
             const personIds = [
                 ...matches.map((m) => m.target?.personId),
                 ...matches.map((m) => m.source.personId),
+                ...(friendIdsInGroup ?? []),
             ].filter((id) => id && id !== personId) as string[]
 
             const [{ people }] = await this.client.emitAndFlattenResponses(
