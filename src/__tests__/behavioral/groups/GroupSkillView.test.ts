@@ -15,6 +15,7 @@ import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import {
     CreateGroupTargetAndPayload,
     GetGroupTargetAndPayload,
+    UpdateGroupTargetAndPayload,
 } from '../../support/EventFaker'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
@@ -25,6 +26,8 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyGroupSkillView
     private static createGroupPayload?: CreateGroupTargetAndPayload['payload']
     private static getGroupTarget?: GetGroupTargetAndPayload['target']
+    private static updateGroupPayload: UpdateGroupTargetAndPayload['payload']
+    private static updateGroupTarget: UpdateGroupTargetAndPayload['target']
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -54,6 +57,11 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         })
         await this.eventFaker.fakeCreateGroup(({ payload }) => {
             this.createGroupPayload = payload
+        })
+
+        await this.eventFaker.fakeUpdateGroup(({ payload, target }) => {
+            this.updateGroupTarget = target
+            this.updateGroupPayload = payload
         })
     }
 
@@ -204,17 +212,73 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         await this.loadWithFriendsAndAssertSelected(friends)
     }
 
-    private static async loadWithFriendsAndAssertSelected(friends: Friend[]) {
-        const group = this.eventFaker.generateListGroupValues({
-            people: friends.map((f) => f.id),
-        })
+    @test()
+    protected static async submittingFormOnUpdateDoesNotEmitCreateGroup() {
+        await this.loadWithGroup(this.eventFaker.generateListGroupValues())
+        await this.submitAndAssertRedirect()
+        assert.isUndefined(this.createGroupPayload)
+    }
 
+    @test()
+    protected static async emitsUpdateGroupOnSave() {
+        const group = this.eventFaker.generateListGroupValues()
         await this.loadWithGroup(group)
+        await this.submitAndAssertRedirect()
+
+        assert.isEqualDeep(
+            this.updateGroupTarget,
+            {
+                id: group.id,
+            },
+            'Target does not match expected'
+        )
+
+        //@ts-ignore
+        delete group.id
+        //@ts-ignore
+        delete group.isMine
+        assert.isEqualDeep(
+            this.updateGroupPayload,
+            {
+                group: {
+                    ...group,
+                    people: [],
+                },
+            },
+            'Payload does not match expected'
+        )
+    }
+
+    @test()
+    protected static async emitsUpdateGroupWithSelectedFriends() {
+        const friends = [
+            this.eventFaker.seedFriend(),
+            this.eventFaker.seedFriend(),
+        ]
+        await this.loadWithFriends(friends)
+        await this.submitAndAssertRedirect()
+
+        assert.isEqualDeep(
+            this.updateGroupPayload.group.people,
+            friends.map((f) => f.id)
+        )
+    }
+
+    private static async loadWithFriendsAndAssertSelected(friends: Friend[]) {
+        await this.loadWithFriends(friends)
         const selected = this.friendSelectionCardVc.getSelectedFriends()
         assert.isEqualDeep(
             selected,
             friends.map((f) => f.id)
         )
+    }
+
+    private static async loadWithFriends(friends: Friend[]) {
+        const group = this.eventFaker.generateListGroupValues({
+            people: friends.map((f) => f.id),
+        })
+
+        await this.loadWithGroup(group)
     }
 
     private static async loadWithGroup(group: ListGroup) {

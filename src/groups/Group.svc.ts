@@ -16,6 +16,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     protected formCardVc: GroupFormCardViewController
     protected friendSelectionCardVc: FriendSelectionCardViewController
     private router?: Router
+    private groupId?: string
 
     public constructor(options: ViewControllerOptions) {
         super(options)
@@ -45,7 +46,11 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         values: Required<NonNullable<GroupFormValues>>
     ) {
         try {
-            await this.createGroup(values)
+            if (!this.groupId) {
+                await this.createGroup(values)
+            } else {
+                await this.updateGroup(values)
+            }
             await this.router?.redirect('adventure.list')
         } catch (err: any) {
             this.log.error('failed to save group', err.stack)
@@ -53,6 +58,24 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
                 message: err.message ?? 'Failed to create group',
             })
         }
+    }
+
+    private async updateGroup(values: Required<GroupFormValues>) {
+        const client = await this.connectToApi()
+        await client.emitAndFlattenResponses(
+            'adventure.update-group::v2022_09_09',
+            {
+                target: {
+                    id: this.groupId!,
+                },
+                payload: {
+                    group: {
+                        ...values,
+                        people: this.friendSelectionCardVc.getSelectedFriends(),
+                    },
+                },
+            }
+        )
     }
 
     private async createGroup(values: Required<GroupFormValues>) {
@@ -79,6 +102,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         this.router = router
         const { id } = args
 
+        this.groupId = id
         await this.friendSelectionCardVc.load(router)
 
         if (id) {

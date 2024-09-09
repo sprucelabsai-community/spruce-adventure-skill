@@ -21,6 +21,7 @@ import peopleRegisterDashboardCardsEventContract_v2022_05_29, { RegisterDashboar
 import heartwoodRegisterSkillViewsEventContract_v2021_02_11, { RegisterSkillViewsEventContract as HeartwoodRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/registerSkillViews.v2021_02_11.contract'
 import adventureRsvpEventContract_v2022_09_09, { RsvpEventContract as AdventureRsvpEventContract_v2022_09_09  } from '#spruce/events/adventure/rsvp.v2022_09_09.contract'
 import peopleSearchEventContract_v2022_05_29, { SearchEventContract as PeopleSearchEventContract_v2022_05_29  } from '#spruce/events/people/search.v2022_05_29.contract'
+import adventureUpdateGroupEventContract_v2022_09_09, { UpdateGroupEventContract as AdventureUpdateGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/updateGroup.v2022_09_09.contract'
 import heartwoodUpsertThemeEventContract_v2021_02_11, { UpsertThemeEventContract as HeartwoodUpsertThemeEventContract_v2021_02_11  } from '#spruce/events/heartwood/upsertTheme.v2021_02_11.contract'
 
 export default [
@@ -45,6 +46,7 @@ export default [
     heartwoodRegisterSkillViewsEventContract_v2021_02_11,
     adventureRsvpEventContract_v2022_09_09,
     peopleSearchEventContract_v2022_05_29,
+    adventureUpdateGroupEventContract_v2022_09_09,
     heartwoodUpsertThemeEventContract_v2021_02_11,
     ...coreEventContracts,
 ]
@@ -113,6 +115,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'people.search::v2022_05_29': PeopleSearchEventContract_v2022_05_29['eventSignatures']['people.search::v2022_05_29'],
+    
+    
+    'adventure.update-group::v2022_09_09': AdventureUpdateGroupEventContract_v2022_09_09['eventSignatures']['adventure.update-group::v2022_09_09'],
     
     
     'heartwood.upsert-theme::v2021_02_11': HeartwoodUpsertThemeEventContract_v2021_02_11['eventSignatures']['heartwood.upsert-theme::v2021_02_11'],

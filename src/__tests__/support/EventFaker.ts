@@ -50,6 +50,23 @@ export default class EventFaker {
         )
     }
 
+    public async fakeUpdateGroup(
+        cb?: (targetAndPayload: UpdateGroupTargetAndPayload) => void
+    ) {
+        await eventFaker.on(
+            'adventure.update-group::v2022_09_09',
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
+                return {
+                    group: {
+                        id: generateId(),
+                        ...this.generateCreateGroupValues(),
+                    },
+                }
+            }
+        )
+    }
+
     public generateCreateGroupValues(): SpruceSchemas.Adventure.v2022_09_09.CreateGroup {
         return {
             people: [],
@@ -283,3 +300,6 @@ export type CreateGroupTargetAndPayload =
 
 export type GetGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetAndPayload
+
+export type UpdateGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetAndPayload
