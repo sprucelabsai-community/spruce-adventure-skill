@@ -38,6 +38,10 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
         await this.friendListToolVc.setSelectedFriends(people)
     }
 
+    public enableInvite(groupId?: string) {
+        this.friendListToolVc.enableInvite(groupId)
+    }
+
     public render() {
         return this.friendListToolVc.render()
     }

@@ -5,13 +5,13 @@ import {
     listAssert,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../../adventure.types'
 import { FriendsListOptions } from '../../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../../support/generateAvatarValues'
+import buildInviteDestination from '../../groups/buildInviteDestination'
 import { SpyFriendListTool } from '../SpyFriendListTool'
 
 @fake.login()
@@ -26,6 +26,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
             'adventure.friends-list-tool',
             SpyFriendListTool
         )
+
         this.vc = this.Vc()
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
@@ -79,27 +80,11 @@ export default class FriendsToolTest extends AbstractAdventureTest {
             return connection.id
         })
 
-        const [id, args] = buildRouteToCreateInvite({
-            destinationAfterCreate: {
-                id: 'adventure.root',
-            },
-            shouldAllowOrganizationSelection: false,
-            destinationAfterAccept: {
-                id: 'adventure.connect',
-                args: {
-                    connection: connection.id,
-                },
-            },
-        })
-
         await this.load()
 
         await vcAssert.assertActionRedirects({
             action: () => interactor.clickButton(this.vc, 'invite'),
-            destination: {
-                id,
-                args,
-            },
+            destination: buildInviteDestination(connection.id),
             router: this.views.getRouter(),
         })
     }

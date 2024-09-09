@@ -116,4 +116,5 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
 
 export interface ConnectSkillViewArgs {
     connection?: string
+    group?: string
 }

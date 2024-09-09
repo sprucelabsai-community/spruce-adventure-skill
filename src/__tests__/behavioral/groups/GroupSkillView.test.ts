@@ -3,7 +3,7 @@ import {
     interactor,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
+import { eventFaker, fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { Friend, ListGroup } from '../../../adventure.types'
 import FriendSelectionCardViewController from '../../../groups/FriendSelectionCard.vc'
@@ -18,6 +18,7 @@ import {
     UpdateGroupTargetAndPayload,
 } from '../../support/EventFaker'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
+import buildInviteDestination from './buildInviteDestination'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
 import { SpyGroupFormCard } from './SpyGroupFormCard'
 
@@ -34,6 +35,8 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
         delete this.createGroupPayload
         delete this.getGroupTarget
+
+        TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
 
         this.views.setController(
             'adventure.friend-selection-card',
@@ -214,16 +217,13 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async submittingFormOnUpdateDoesNotEmitCreateGroup() {
-        await this.loadWithGroup(this.eventFaker.generateListGroupValues())
-        await this.submitAndAssertRedirect()
+        await this.loadWithFriendsSubmitAndAssertRedirect([])
         assert.isUndefined(this.createGroupPayload)
     }
 
     @test()
     protected static async emitsUpdateGroupOnSave() {
-        const group = this.eventFaker.generateListGroupValues()
-        await this.loadWithGroup(group)
-        await this.submitAndAssertRedirect()
+        const group = await this.loadWithFriendsSubmitAndAssertRedirect([])
 
         assert.isEqualDeep(
             this.updateGroupTarget,
@@ -255,13 +255,47 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
             this.eventFaker.seedFriend(),
             this.eventFaker.seedFriend(),
         ]
-        await this.loadWithFriends(friends)
-        await this.submitAndAssertRedirect()
+        await this.loadWithFriendsSubmitAndAssertRedirect(friends)
 
         assert.isEqualDeep(
             this.updateGroupPayload.group.people,
             friends.map((f) => f.id)
         )
+    }
+
+    @test()
+    protected static async loadingWithGroupRendersInviteButton() {
+        await this.loadWithGroup()
+        buttonAssert.cardRendersButton(this.friendSelectionCardVc, 'invite')
+    }
+
+    @test()
+    protected static async formIsNotDirtyOnLoadOfGroup() {
+        await this.loadWithGroup()
+        assert.isFalse(this.formVc.getIsDirty())
+    }
+
+    @test()
+    protected static async inviteButtonRedirectsToInviteSkillViewWithGroupInRedirect() {
+        const group = await this.loadWithGroup()
+
+        const connectionId = generateId()
+        await this.eventFaker.fakeCreateConnection(() => connectionId)
+
+        await vcAssert.assertActionRedirects({
+            action: () =>
+                interactor.clickButton(this.friendSelectionCardVc, 'invite'),
+            destination: buildInviteDestination(connectionId, group.id),
+            router: this.views.getRouter(),
+        })
+    }
+
+    private static async loadWithFriendsSubmitAndAssertRedirect(
+        friends: Friend[]
+    ) {
+        const group = await this.loadWithFriends(friends)
+        await this.submitAndAssertRedirect()
+        return group
     }
 
     private static async loadWithFriendsAndAssertSelected(friends: Friend[]) {
@@ -279,11 +313,15 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         })
 
         await this.loadWithGroup(group)
+
+        return group
     }
 
-    private static async loadWithGroup(group: ListGroup) {
-        await this.eventFaker.fakeGetGroup(() => group)
-        await this.load({ id: group.id })
+    private static async loadWithGroup(group?: ListGroup) {
+        const g = group ?? this.eventFaker.generateListGroupValues()
+        await this.eventFaker.fakeGetGroup(() => g)
+        await this.load({ id: g.id })
+        return g
     }
 
     private static async fillOutFormSubmitAndAssertRedirect() {
@@ -359,6 +397,7 @@ class SpyGroupSkillView extends GroupSkillViewController {
     public getFriendSelectionCardVc() {
         return this.friendSelectionCardVc as SpyFriendSelectionCard
     }
+
     public getFormVc() {
         return (this.formCardVc as SpyGroupFormCard).getFormVc()
     }

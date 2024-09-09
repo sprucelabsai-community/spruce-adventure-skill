@@ -26,7 +26,7 @@ export default class GroupListCardViewController extends AbstractViewController<
                 header: {
                     title: 'Adventure Groups!!',
                     subtitle:
-                        'Create a group based on interests (or whatever) and invite just them to your next adventure!',
+                        'Here are the groups you have created or are part of.',
                 },
                 columnWidths: ['fill'],
                 noResultsRow: {

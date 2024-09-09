@@ -107,6 +107,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
 
         if (id) {
             await this.loadGroup(id)
+            this.friendSelectionCardVc.enableInvite(id)
         }
     }
 

@@ -21,9 +21,11 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     protected activeCardVc: ActiveRecordCardViewController
     private router!: Router
     private shouldAllowFriendSelection: boolean
+    private groupId?: string
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
+
         const { shouldAllowFriendSelection } = options
         this.shouldAllowFriendSelection = shouldAllowFriendSelection ?? false
         this.activeCardVc = this.ActiveRecordVc(options)
@@ -66,13 +68,18 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         )
     }
 
+    public enableInvite(groupId?: string) {
+        this.groupId = groupId
+        this.activeCardVc.setFooter(this.renderFooter(true, []))
+    }
+
     private renderFooter(shouldAllowInvite: boolean, buttons?: Button[]) {
         const renderedButtons: Button[] = this.renderFooterButtons(
             shouldAllowInvite,
             buttons
         )
 
-        let footer: CardFooter | undefined
+        let footer: CardFooter | null = null
 
         if (renderedButtons.length > 0) {
             footer = {
@@ -138,7 +145,12 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                 },
             },
         })
-        await this.router.redirect(id as any, args)
+
+        if (this.groupId) {
+            args.destinationAfterAccept.args!.group = this.groupId
+        }
+
+        await this.router.redirect(id, args)
         this.activeCardVc.setIsBusy(false)
     }
 
