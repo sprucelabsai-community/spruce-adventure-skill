@@ -45,15 +45,6 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
         assert.isEqualDeep(group, match)
     }
 
-    private static async getNewestGroup(shouldIncludePrivateFields = true) {
-        const match = await this.groups.findOne(
-            {},
-            { shouldIncludePrivateFields }
-        )
-        assert.isTruthy(match, 'A group was not created')
-        return match
-    }
-
     private static async emitCreateGroup(
         values?: SpruceSchemas.Adventure.v2022_09_09.CreateGroup
     ) {

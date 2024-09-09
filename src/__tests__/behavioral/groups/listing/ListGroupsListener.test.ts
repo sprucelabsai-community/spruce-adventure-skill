@@ -27,8 +27,7 @@ export default class ListGroupsListenerTest extends AbstractAdventureTest {
     @seed('groups', 1)
     protected static async firstGroupMatchesExpected() {
         const [group] = await this.emitListGroups()
-        const match = await this.groups.findOne({})
-        assert.isTruthy(match)
+        const match = await this.getNewestGroup()
         const expected: ListGroup = {
             id: match.id,
             people: [],

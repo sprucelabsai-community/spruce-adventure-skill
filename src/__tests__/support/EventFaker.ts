@@ -6,6 +6,7 @@ import {
     Adventure,
     AdventureWithPerson,
     Friend,
+    GetGroup,
     Group,
     ListGroup,
     Person,
@@ -16,6 +17,21 @@ import generateFriendValues from './generateFriendValues'
 
 export default class EventFaker {
     public fakedFriends: Friend[] = []
+
+    public async fakeGetGroup(
+        cb?: (targetAndPayload: GetGroupTargetAndPayload) => void | GetGroup
+    ) {
+        await eventFaker.on(
+            'adventure.get-group::v2022_09_09',
+            (targetAndPayload) => {
+                return {
+                    group: cb?.(targetAndPayload) ?? {
+                        ...this.generateListGroupValues(),
+                    },
+                }
+            }
+        )
+    }
 
     public async fakeCreateGroup(
         cb?: (targetAndPayload: CreateGroupTargetAndPayload) => void
@@ -67,6 +83,7 @@ export default class EventFaker {
             people: [],
             title: generateId(),
             isMine: true,
+            description: generateId(),
         }
     }
 
@@ -262,3 +279,6 @@ export type CancelPayload =
 
 export type CreateGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.CreateGroupEmitTargetAndPayload
+
+export type GetGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetAndPayload

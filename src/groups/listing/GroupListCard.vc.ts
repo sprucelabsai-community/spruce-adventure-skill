@@ -67,6 +67,9 @@ export default class GroupListCardViewController extends AbstractViewController<
     private renderRow(group: ListGroup) {
         return {
             id: group.id,
+            onClick: async () => {
+                await this.handleClickRow(group.id)
+            },
             cells: [
                 {
                     text: { content: group.title },
@@ -81,6 +84,10 @@ export default class GroupListCardViewController extends AbstractViewController<
                 },
             ],
         } as ListRow
+    }
+
+    private async handleClickRow(groupId: string) {
+        await this.router?.redirect('adventure.group', { id: groupId })
     }
 
     public async load(router: Router) {

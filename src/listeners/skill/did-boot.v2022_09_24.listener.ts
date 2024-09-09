@@ -9,6 +9,7 @@ import ConnectionManager from '../../adventures/listing/ConnectionManager'
 import AdventurePoster from '../../adventures/posting/AdventurePoster'
 import Rsvper from '../../adventures/rsvping/Rsvper'
 import FriendFinder from '../../friends/listing/FriendFinder'
+import GroupFinder from '../../groups/GroupFinder'
 import MessageSenderImpl from '../../messaging/MessageSender'
 
 export default async (
@@ -49,9 +50,14 @@ export default async (
         stores,
     })
 
+    const groupFinder = await GroupFinder.Finder({
+        stores,
+    })
+
     skill.updateContext('canceller', canceller)
     skill.updateContext('adventureFinder', finder)
     skill.updateContext('poster', poster)
     skill.updateContext('rsvper', rsvp)
     skill.updateContext('friendFiender', friendFinder)
+    skill.updateContext('groupFinder', groupFinder)
 }

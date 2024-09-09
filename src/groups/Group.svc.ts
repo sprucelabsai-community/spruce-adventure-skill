@@ -71,10 +71,33 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         )
     }
 
-    public async load(options: SkillViewControllerLoadOptions) {
-        const { router } = options
+    public async load(
+        options: SkillViewControllerLoadOptions<GroupSkillViewArgs>
+    ) {
+        const { router, args } = options
+
         this.router = router
+        const { id } = args
+
+        if (id) {
+            await this.loadGroup(id)
+        }
+
         await this.friendSelectionCardVc.load(router)
+    }
+
+    private async loadGroup(id: string) {
+        const client = await this.connectToApi()
+        const [{ group }] = await client.emitAndFlattenResponses(
+            'adventure.get-group::v2022_09_09',
+            {
+                target: {
+                    id,
+                },
+            }
+        )
+
+        await this.formCardVc.setValues(group)
     }
 
     public render(): SkillView {
@@ -85,4 +108,8 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             ),
         }
     }
+}
+
+export interface GroupSkillViewArgs {
+    id?: string
 }

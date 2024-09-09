@@ -60,8 +60,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     protected static async rendersDeleteButtonInRow() {
         this.addFakedGroup()
         await this.load()
-        const listVc = this.activeRecordCardVc.getListVcs()[0]
-        listAssert.rowRendersButton(listVc, 0, 'delete')
+        listAssert.rowRendersButton(this.listVc, 0, 'delete')
     }
 
     @test()
@@ -73,11 +72,36 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     protected static async clickingAddRedirectsToAddGroup() {
         await this.load()
 
-        await vcAssert.assertActionRedirects({
-            action: () => interactor.clickButton(this.vc, 'add'),
-            destination: {
+        await this.assertRedirects(
+            {
                 id: 'adventure.group',
             },
+            () => interactor.clickButton(this.vc, 'add')
+        )
+    }
+
+    @test()
+    protected static async clickingRowRedirectsToGroupDetails() {
+        this.addFakedGroup()
+        await this.load()
+        await this.assertRedirects(
+            {
+                id: 'adventure.group',
+                args: {
+                    id: this.fakedGroups[0].id,
+                },
+            },
+            () => interactor.clickRow(this.listVc, 0)
+        )
+    }
+
+    private static async assertRedirects(
+        destination: { id: string; args?: Record<string, any> },
+        action: () => Promise<void>
+    ) {
+        await vcAssert.assertActionRedirects({
+            action,
+            destination,
             router: this.views.getRouter(),
         })
     }
@@ -94,6 +118,10 @@ export default class GroupListCardTest extends AbstractAdventureTest {
         const group = this.eventFaker.generateListGroupValues()
         this.fakedGroups.push(group)
         return group
+    }
+
+    private static get listVc() {
+        return this.activeRecordCardVc.getListVcs()[0]
     }
 }
 

@@ -83,6 +83,16 @@ const adventurePermissions = buildPermissionContract({
             },
             requireAllStatuses: false,
         },
+        {
+            id: 'can-create-groups',
+            name: 'Can create groups',
+            defaults: {
+                loggedIn: {
+                    default: true,
+                },
+            },
+            requireAllStatuses: false,
+        },
     ],
 })
 

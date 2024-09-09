@@ -6,10 +6,15 @@ import {
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
 import FriendSelectionCardViewController from '../../../groups/FriendSelectionCard.vc'
-import GroupSkillViewController from '../../../groups/Group.svc'
+import GroupSkillViewController, {
+    GroupSkillViewArgs,
+} from '../../../groups/Group.svc'
 import GroupFormCardViewController from '../../../groups/GroupFormCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
-import { CreateGroupTargetAndPayload } from '../../support/EventFaker'
+import {
+    CreateGroupTargetAndPayload,
+    GetGroupTargetAndPayload,
+} from '../../support/EventFaker'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
 import { SpyGroupFormCard } from './SpyGroupFormCard'
@@ -17,14 +22,14 @@ import { SpyGroupFormCard } from './SpyGroupFormCard'
 @fake.login()
 export default class GroupSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyGroupSkillView
-    private static passedPayload?:
-        | CreateGroupTargetAndPayload['payload']
-        | undefined
+    private static createGroupPayload?: CreateGroupTargetAndPayload['payload']
+    private static getGroupTarget?: GetGroupTargetAndPayload['target']
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
-        delete this.passedPayload
+        delete this.createGroupPayload
+        delete this.getGroupTarget
 
         this.views.setController(
             'adventure.friend-selection-card',
@@ -43,8 +48,11 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         ) as SpyGroupSkillView
 
         await this.eventFaker.fakeListFriends()
+        await this.eventFaker.fakeGetGroup(({ target }) => {
+            this.getGroupTarget = target
+        })
         await this.eventFaker.fakeCreateGroup(({ payload }) => {
-            this.passedPayload = payload
+            this.createGroupPayload = payload
         })
     }
 
@@ -93,7 +101,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
         await this.submitAndAssertRedirect()
 
-        assert.isEqualDeep(this.passedPayload, {
+        assert.isEqualDeep(this.createGroupPayload, {
             group: {
                 title,
                 description,
@@ -161,6 +169,25 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         )
     }
 
+    @test()
+    protected static async emitsGetGroupOnLoad() {
+        const id = generateId()
+        await this.load({ id })
+        assert.isEqualDeep(this.getGroupTarget, { id })
+    }
+
+    @test()
+    protected static async populateFormWithGroupValues() {
+        const group = this.eventFaker.generateListGroupValues()
+        await this.eventFaker.fakeGetGroup(() => group)
+        await this.load({ id: group.id })
+        const values = this.formVc.getValues()
+        assert.isEqualDeep(values, {
+            title: group.title,
+            description: group.description,
+        })
+    }
+
     private static async fillOutFormSubmitAndAssertRedirect() {
         await this.fillOutForm()
         await this.submitAndAssertRedirect()
@@ -189,7 +216,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     }
 
     private static assertSavedPeople(expected: string[]) {
-        assert.isEqualDeep(this.passedPayload?.group.people, expected)
+        assert.isEqualDeep(this.createGroupPayload?.group.people, expected)
     }
 
     private static async toggleFriend(id: string) {
@@ -225,8 +252,8 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         return this.vc.getFormVc()
     }
 
-    private static async load() {
-        await this.views.load(this.vc)
+    private static async load(args?: GroupSkillViewArgs) {
+        await this.views.load(this.vc, args)
     }
 }
 

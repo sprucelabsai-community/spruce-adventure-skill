@@ -54,6 +54,10 @@ export default class GroupFormCardViewController extends AbstractViewController<
         )
     }
 
+    public async setValues(group: Partial<Group>) {
+        await this.formCardVc.setValues(group)
+    }
+
     public render() {
         return this.formCardVc.render()
     }

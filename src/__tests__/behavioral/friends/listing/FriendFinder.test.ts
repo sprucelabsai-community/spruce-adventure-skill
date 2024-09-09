@@ -85,10 +85,4 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     private static async connectToMe(friendId: string) {
         await this.createConnection(this.fakedPerson.id, friendId)
     }
-
-    private static async getNewestGroup() {
-        const group = await this.groups.findOne({})
-        assert.isTruthy(group)
-        return group
-    }
 }

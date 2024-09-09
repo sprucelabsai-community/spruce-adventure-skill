@@ -1,6 +1,6 @@
 import { MockActiveRecordCard } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
-import { generateId } from '@sprucelabs/test-utils'
+import { assert, generateId } from '@sprucelabs/test-utils'
 import { Adventure } from '../../adventure.types'
 import AdventuresStore from '../../adventures/Adventures.store'
 import ConnectionManager from '../../adventures/listing/ConnectionManager'
@@ -42,5 +42,14 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
                 ...values?.source,
             },
         })
+    }
+
+    protected static async getNewestGroup(shouldIncludePrivateFields = true) {
+        const match = await this.groups.findOne(
+            {},
+            { shouldIncludePrivateFields }
+        )
+        assert.isTruthy(match, 'A group was not created')
+        return match
     }
 }

@@ -4,6 +4,7 @@ import AdventureFinder from './adventures/listing/AdventureFinder'
 import AdventurePoster from './adventures/posting/AdventurePoster'
 import Rsvper from './adventures/rsvping/Rsvper'
 import FriendFinder from './friends/listing/FriendFinder'
+import GroupFinder from './groups/GroupFinder'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
 export type AdventureWithPerson =
@@ -14,6 +15,7 @@ export type PostAdventure = SpruceSchemas.Adventure.v2022_09_09.PostAdventure
 export type Group = SpruceSchemas.Adventure.v2022_09_09.Group
 export type PublicGroup = Omit<Group, 'source'>
 export type ListGroup = SpruceSchemas.Adventure.v2022_09_09.ListGroup
+export type GetGroup = SpruceSchemas.Adventure.v2022_09_09.GetGroup
 
 declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
     interface SkillContext {
@@ -22,5 +24,6 @@ declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
         rsvper: Rsvper
         canceller: AdventureCanceller
         friendFiender: FriendFinder
+        groupFinder: GroupFinder
     }
 }
