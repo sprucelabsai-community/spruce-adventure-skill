@@ -1,7 +1,8 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
-import connectionTargetSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/connectionTargetSource.schema'
+import connectionSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/connectionSource.schema'
+import connectionTargetSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/connectionTarget.schema'
 
 const connectionSchema: SpruceSchemas.Adventure.v2022_09_09.ConnectionSchema  = {
 	id: 'connection',
@@ -24,12 +25,12 @@ const connectionSchema: SpruceSchemas.Adventure.v2022_09_09.ConnectionSchema  = 
 	            'source': {
 	                type: 'schema',
 	                isRequired: true,
-	                options: {schema: connectionTargetSourceSchema_v2022_09_09,}
+	                options: {schema: connectionSourceSchema_v2022_09_09,}
 	            },
 	            /** . */
 	            'target': {
 	                type: 'schema',
-	                options: {schema: connectionTargetSourceSchema_v2022_09_09,}
+	                options: {schema: connectionTargetSchema_v2022_09_09,}
 	            },
 	    }
 }

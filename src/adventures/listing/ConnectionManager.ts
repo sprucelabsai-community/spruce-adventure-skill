@@ -28,7 +28,7 @@ export default class ConnectionManager {
         const peopleIds: string[] = []
 
         for (const connection of connections) {
-            let id: string | undefined = connection.source.personId
+            let id: string | undefined | null = connection.source.personId
             if (id !== personId) {
                 peopleIds.push(id)
             }

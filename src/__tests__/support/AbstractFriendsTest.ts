@@ -5,13 +5,36 @@ import generateFriendValues from './generateFriendValues'
 
 export default class AbstractFriendsTest extends AbstractAdventureTest {
     protected static async createConnection(
-        sourceId: string,
-        targetId?: string,
+        fromPersonId: string,
+        toPersonId?: string,
         isConfirmed = true
     ) {
+        return this.createConnectionWithGroup({
+            fromPersonId,
+            toPersonId,
+            isConfirmed,
+        })
+    }
+
+    protected static async createConnectionWithGroup(options: {
+        fromPersonId: string
+        toPersonId?: string
+        groupId?: string
+        isConfirmed?: boolean
+    }) {
+        const {
+            fromPersonId,
+            toPersonId,
+            groupId,
+            isConfirmed = true,
+        } = options
+
         const { id } = await this.connections.createOne({
-            source: { personId: sourceId },
-            target: targetId ? { personId: targetId } : null,
+            source: { personId: fromPersonId },
+            target:
+                toPersonId || groupId
+                    ? { personId: toPersonId, groupId }
+                    : null,
             isConfirmed,
         })
 

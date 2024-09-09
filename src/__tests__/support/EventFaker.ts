@@ -183,12 +183,19 @@ export default class EventFaker {
         })
     }
 
-    public async fakeCreateConnection(cb?: () => void | string) {
-        await eventFaker.on('adventure.create-connection::v2022_09_09', () => {
-            return {
-                connectionId: cb?.() ?? generateId(),
+    public async fakeCreateConnection(
+        cb?: (
+            targetAndPayload: CreateConnectionTargetAndPayload
+        ) => void | string
+    ) {
+        await eventFaker.on(
+            'adventure.create-connection::v2022_09_09',
+            (targetAndPayload) => {
+                return {
+                    connectionId: cb?.(targetAndPayload) ?? generateId(),
+                }
             }
-        })
+        )
     }
 
     public generatePendingConnectionValues() {
@@ -305,3 +312,6 @@ export type UpdateGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetAndPayload
 
 export type UpdateGroup = SpruceSchemas.Adventure.v2022_09_09.UpdateGroup
+
+export type CreateConnectionTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetAndPayload

@@ -3,8 +3,8 @@ import { SpruceSchemas } from '../../schemas.types'
 
 
 
-const connectionTargetSourceSchema: SpruceSchemas.Adventure.v2022_09_09.ConnectionTargetSourceSchema  = {
-	id: 'connectionTargetSource',
+const connectionSourceSchema: SpruceSchemas.Adventure.v2022_09_09.ConnectionSourceSchema  = {
+	id: 'connectionSource',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
 	name: '',
@@ -18,6 +18,6 @@ const connectionTargetSourceSchema: SpruceSchemas.Adventure.v2022_09_09.Connecti
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(connectionTargetSourceSchema)
+SchemaRegistry.getInstance().trackSchema(connectionSourceSchema)
 
-export default connectionTargetSourceSchema
+export default connectionSourceSchema

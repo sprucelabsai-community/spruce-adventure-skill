@@ -18,7 +18,6 @@ import {
     UpdateGroupTargetAndPayload,
 } from '../../support/EventFaker'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
-import buildInviteDestination from './buildInviteDestination'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
 import { SpyGroupFormCard } from './SpyGroupFormCard'
 
@@ -276,18 +275,24 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async inviteButtonRedirectsToInviteSkillViewWithGroupInRedirect() {
+    protected static async inviteButtonAddsGroupToCreatedConnection() {
         const group = await this.loadWithGroup()
 
         const connectionId = generateId()
-        await this.eventFaker.fakeCreateConnection(() => connectionId)
+        let passedGroupId: string | undefined | null
+
+        await this.eventFaker.fakeCreateConnection(({ target }) => {
+            passedGroupId = target?.groupId
+            return connectionId
+        })
 
         await vcAssert.assertActionRedirects({
             action: () =>
                 interactor.clickButton(this.friendSelectionCardVc, 'invite'),
-            destination: buildInviteDestination(connectionId, group.id),
             router: this.views.getRouter(),
         })
+
+        assert.isEqual(passedGroupId, group.id)
     }
 
     private static async loadWithFriendsSubmitAndAssertRedirect(

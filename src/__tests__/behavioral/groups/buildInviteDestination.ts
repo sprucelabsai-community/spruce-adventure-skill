@@ -1,16 +1,9 @@
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
 import { ConnectSkillViewArgs } from '../../../friends/connecting/Connect.svc'
 
-export default function buildInviteDestination(
-    connectionId: string,
-    groupId?: string
-) {
+export default function buildInviteDestination(connectionId: string) {
     const expectedArgs: ConnectSkillViewArgs = {
         connection: connectionId,
-    }
-
-    if (groupId) {
-        expectedArgs.group = groupId
     }
 
     const [id, args] = buildRouteToCreateInvite({

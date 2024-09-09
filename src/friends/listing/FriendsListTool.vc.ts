@@ -98,7 +98,9 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         if (shouldAllowInvite) {
             renderedButtons.push({
                 id: 'invite',
-                label: 'Invite a friend!',
+                label: this.groupId
+                    ? 'Invite a friend to this group!'
+                    : 'Invite a friend!',
                 type: 'primary',
                 onClick: this.handleClickInvite.bind(this),
             })
@@ -130,7 +132,12 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         const client = await this.connectToApi()
 
         const [{ connectionId }] = await client.emitAndFlattenResponses(
-            'adventure.create-connection::v2022_09_09'
+            'adventure.create-connection::v2022_09_09',
+            {
+                target: {
+                    groupId: this.groupId,
+                },
+            }
         )
 
         const [id, args] = buildRouteToCreateInvite({

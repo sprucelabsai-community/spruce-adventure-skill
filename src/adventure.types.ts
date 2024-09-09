@@ -3,6 +3,7 @@ import { AdventureCanceller } from './adventures/cancelling/AdventureCanceller'
 import AdventureFinder from './adventures/listing/AdventureFinder'
 import AdventurePoster from './adventures/posting/AdventurePoster'
 import Rsvper from './adventures/rsvping/Rsvper'
+import ConnectionAccepter from './friends/connecting/ConnectionAccepter'
 import FriendFinder from './friends/listing/FriendFinder'
 import GroupFinder from './groups/GroupFinder'
 
@@ -25,5 +26,6 @@ declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
         canceller: AdventureCanceller
         friendFiender: FriendFinder
         groupFinder: GroupFinder
+        connectionAccepter: ConnectionAccepter
     }
 }
