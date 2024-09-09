@@ -40,7 +40,9 @@ export default class GroupFormCardViewController extends AbstractViewController<
                 schema: groupSchema,
                 onCancel: this.onCancelHandler,
                 onSubmit: async ({ values }) => {
+                    this.formCardVc.setIsBusy(true)
                     await this.onSubmitHandler(values as GroupFormValues)
+                    this.formCardVc.setIsBusy(false)
                 },
                 sections: [
                     {
