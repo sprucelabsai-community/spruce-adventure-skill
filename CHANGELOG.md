@@ -1,3 +1,10 @@
+# [9.5.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.4.0...v9.5.0) (2024-09-09)
+
+
+### Features
+
+* can update group ([119d524](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/119d524))
+
 # [9.4.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.3.0...v9.4.0) (2024-09-09)
 
 
