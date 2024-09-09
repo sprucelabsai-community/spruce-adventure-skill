@@ -1,4 +1,7 @@
-import { buildPermissionReference, EventSignature } from '@sprucelabs/mercury-types'
+import {
+    buildPermissionReference,
+    EventSignature,
+} from '@sprucelabs/mercury-types'
 import '#spruce/permissions/permissions.types'
 import '@sprucelabs/mercury-core-events'
 
@@ -14,7 +17,7 @@ const eventOptions: Options = {
     isGlobal: true,
     emitPermissions: buildPermissionReference('adventure.adventure', [
         'can-create-groups',
-    ])
+    ]),
 }
 
 export default eventOptions
