@@ -77,13 +77,14 @@ export default class EventFaker {
         }
     }
 
-    public generateListGroupValues(): ListGroup {
+    public generateListGroupValues(group?: Partial<ListGroup>): ListGroup {
         return {
             id: generateId(),
             people: [],
             title: generateId(),
             isMine: true,
             description: generateId(),
+            ...group,
         }
     }
 

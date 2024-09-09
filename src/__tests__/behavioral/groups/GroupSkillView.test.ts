@@ -5,6 +5,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { Friend, ListGroup } from '../../../adventure.types'
 import FriendSelectionCardViewController from '../../../groups/FriendSelectionCard.vc'
 import GroupSkillViewController, {
     GroupSkillViewArgs,
@@ -179,13 +180,46 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async populateFormWithGroupValues() {
         const group = this.eventFaker.generateListGroupValues()
-        await this.eventFaker.fakeGetGroup(() => group)
-        await this.load({ id: group.id })
+        await this.loadWithGroup(group)
         const values = this.formVc.getValues()
         assert.isEqualDeep(values, {
             title: group.title,
             description: group.description,
         })
+    }
+
+    @test()
+    protected static async selectsFirstFriendFromGroup() {
+        const friend = this.eventFaker.seedFriend()
+        await this.loadWithFriendsAndAssertSelected([friend])
+    }
+
+    @test()
+    protected static async selectsMultipleFriendsFromGroup() {
+        const friends = [
+            this.eventFaker.seedFriend(),
+            this.eventFaker.seedFriend(),
+        ]
+
+        await this.loadWithFriendsAndAssertSelected(friends)
+    }
+
+    private static async loadWithFriendsAndAssertSelected(friends: Friend[]) {
+        const group = this.eventFaker.generateListGroupValues({
+            people: friends.map((f) => f.id),
+        })
+
+        await this.loadWithGroup(group)
+        const selected = this.friendSelectionCardVc.getSelectedFriends()
+        assert.isEqualDeep(
+            selected,
+            friends.map((f) => f.id)
+        )
+    }
+
+    private static async loadWithGroup(group: ListGroup) {
+        await this.eventFaker.fakeGetGroup(() => group)
+        await this.load({ id: group.id })
     }
 
     private static async fillOutFormSubmitAndAssertRedirect() {

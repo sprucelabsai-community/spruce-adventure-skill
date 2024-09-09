@@ -20,12 +20,12 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     public static id = 'friends-list-tool'
     protected activeCardVc: ActiveRecordCardViewController
     private router!: Router
-    private shouldRenderToggle: boolean
+    private shouldAllowFriendSelection: boolean
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
-        const { shouldRenderToggle } = options
-        this.shouldRenderToggle = shouldRenderToggle ?? false
+        const { shouldAllowFriendSelection } = options
+        this.shouldAllowFriendSelection = shouldAllowFriendSelection ?? false
         this.activeCardVc = this.ActiveRecordVc(options)
     }
 
@@ -103,8 +103,18 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         return renderedButtons
     }
 
-    public getValues() {
-        return this.activeCardVc.getValues()
+    public getSelectedFriends() {
+        const values = this.activeCardVc.getValues()
+        return values
+            .filter((v) => !!v.isSelected)
+            .map((value) => value.rowId)
+            .filter(Boolean) as string[]
+    }
+
+    public async setSelectedFriends(ids: string[]) {
+        for (const id of ids) {
+            await this.activeCardVc.setValue(id, 'isSelected', true)
+        }
     }
 
     private async handleClickInvite() {
@@ -146,7 +156,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
         ]
 
-        if (this.shouldRenderToggle) {
+        if (this.shouldAllowFriendSelection) {
             cells.push({
                 toggleInput: {
                     name: 'isSelected',
@@ -182,6 +192,6 @@ export interface FriendsListOptions {
     buttons?: Button[]
     header?: CardHeader
     id?: string
-    shouldRenderToggle?: boolean
+    shouldAllowFriendSelection?: boolean
     shouldAllowInvite?: boolean
 }

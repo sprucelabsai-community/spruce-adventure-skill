@@ -79,11 +79,11 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         this.router = router
         const { id } = args
 
+        await this.friendSelectionCardVc.load(router)
+
         if (id) {
             await this.loadGroup(id)
         }
-
-        await this.friendSelectionCardVc.load(router)
     }
 
     private async loadGroup(id: string) {
@@ -98,6 +98,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         )
 
         await this.formCardVc.setValues(group)
+        await this.friendSelectionCardVc.setSelectedFriends(group.people)
     }
 
     public render(): SkillView {
