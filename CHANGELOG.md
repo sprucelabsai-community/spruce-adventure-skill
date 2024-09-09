@@ -1,3 +1,10 @@
+# [9.3.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.2.1...v9.3.0) (2024-09-09)
+
+
+### Features
+
+* cat get group ([62ebf50](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/62ebf50))
+
 ## [9.2.1](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.2.0...v9.2.1) (2024-09-08)
 
 # [9.2.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.1.118...v9.2.0) (2024-09-08)
