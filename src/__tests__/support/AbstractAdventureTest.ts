@@ -49,7 +49,10 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
             {},
             { shouldIncludePrivateFields }
         )
-        assert.isTruthy(match, 'A group was not created')
+        assert.isTruthy(
+            match,
+            'A group was not created, try @seed("groups", 1)'
+        )
         return match
     }
 }

@@ -11,6 +11,10 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = `I could not find that!`
                 break
 
+            case 'NOT_YOUR_GROUP':
+                message = 'A Not your group just happened!'
+                break
+
             default:
                 message = super.friendlyMessage()
         }

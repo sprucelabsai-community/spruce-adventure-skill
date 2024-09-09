@@ -303,3 +303,5 @@ export type GetGroupTargetAndPayload =
 
 export type UpdateGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetAndPayload
+
+export type UpdateGroup = SpruceSchemas.Adventure.v2022_09_09.UpdateGroup
