@@ -1,3 +1,10 @@
+# [9.6.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.5.0...v9.6.0) (2024-09-09)
+
+
+### Features
+
+* update group listener ([816496c](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/816496c))
+
 # [9.5.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.4.0...v9.5.0) (2024-09-09)
 
 
