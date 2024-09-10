@@ -111,7 +111,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     }
 
     private static async load() {
-        await this.vc.load(this.views.getRouter())
+        await this.views.load(this.vc)
     }
 
     private static addFakedGroup() {

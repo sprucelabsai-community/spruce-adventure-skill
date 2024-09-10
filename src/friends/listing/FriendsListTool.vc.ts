@@ -99,7 +99,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             renderedButtons.push({
                 id: 'invite',
                 label: this.groupId
-                    ? 'Invite a friend to this group!'
+                    ? 'Invite a new friend to this group!'
                     : 'Invite a friend!',
                 type: 'primary',
                 onClick: this.handleClickInvite.bind(this),
@@ -162,6 +162,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 
     private renderRow(friend: Friend): ListRow {
+        const isMe = this.authenticator.getPerson()?.id === friend.id
         const cells: ListCell[] = [
             {
                 avatars: friend.avatar?.mUri
@@ -170,15 +171,12 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
             {
                 text: {
-                    content:
-                        this.authenticator.getPerson()?.id === friend.id
-                            ? `You`
-                            : `${friend.casualName}`,
+                    content: isMe ? `You` : `${friend.casualName}`,
                 },
             },
         ]
 
-        if (this.shouldAllowFriendSelection) {
+        if (this.shouldAllowFriendSelection && !isMe) {
             cells.push({
                 toggleInput: {
                     name: 'isSelected',

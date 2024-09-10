@@ -85,10 +85,9 @@ export default class ListSkillViewController extends AbstractSkillViewController
         await this.router.redirect('adventure.list')
     }
 
-    public async load({
-        router,
-        authenticator,
-    }: SkillViewControllerLoadOptions) {
+    public async load(options: SkillViewControllerLoadOptions) {
+        const { router, authenticator } = options
+
         this.router = router
         const person = authenticator.getPerson()!
         const client = await this.connectToApi()
@@ -116,7 +115,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
                 authenticator,
                 onNoFriends: () => this.toolBeltVc.focusTool('friends'),
             }),
-            this.groupsToolVc.load(router),
+            this.groupsToolVc.load(options),
         ])
     }
 

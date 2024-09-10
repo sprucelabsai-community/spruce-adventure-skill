@@ -221,8 +221,11 @@ export default class EventFaker {
         )
     }
 
-    public seedFriend(friend?: Friend) {
-        const f = friend ?? this.generateFriendValues()
+    public seedFriend(friend?: Partial<Friend>) {
+        const f = {
+            ...this.generateFriendValues(),
+            ...friend,
+        }
         this.fakedFriends.push(f)
         return f
     }

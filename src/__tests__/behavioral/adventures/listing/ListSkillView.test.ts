@@ -325,9 +325,9 @@ class MockFriendsTool extends FriendsListToolViewController {
 
 class MockGroupsTool extends GroupListCardViewController {
     private isLoaded = false
-    public async load(router: Router) {
+    public async load(options: { router: Router }) {
         this.isLoaded = true
-        return super.load(router)
+        return super.load(options)
     }
 
     public assertIsLoaded() {

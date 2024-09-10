@@ -24,7 +24,7 @@ export default class GroupListCardViewController extends AbstractViewController<
             'active-record-card',
             buildActiveRecordCard({
                 header: {
-                    title: 'Adventure Groups!!',
+                    title: 'Adventure Groups! ⚒️',
                     subtitle:
                         'Here are the groups you have created or are part of.',
                 },
@@ -90,7 +90,8 @@ export default class GroupListCardViewController extends AbstractViewController<
         await this.router?.redirect('adventure.group', { id: groupId })
     }
 
-    public async load(router: Router) {
+    public async load(options: { router: Router }) {
+        const { router } = options
         this.router = router
         await this.activeRecordCardVc.load()
     }

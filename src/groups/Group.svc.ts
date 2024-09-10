@@ -156,7 +156,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
                         : this.detailCardVc.render(),
                     this.friendSelectionCardVc.render(),
                 ].filter(Boolean) as Card[],
-                2
+                this.shouldRenderForm ? 2 : 1
             ),
         }
     }

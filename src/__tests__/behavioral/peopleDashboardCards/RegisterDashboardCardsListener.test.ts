@@ -11,6 +11,9 @@ export default class RegisterDashboardCardsListenerTest extends AbstractAdventur
             'people.register-dashboard-cards::v2022_05_29'
         )
 
-        assert.isEqualDeep(vcIds, ['adventure.friends-dashboard-card'])
+        assert.isEqualDeep(vcIds, [
+            'adventure.friends-dashboard-card',
+            'adventure.group-list-card',
+        ])
     }
 }

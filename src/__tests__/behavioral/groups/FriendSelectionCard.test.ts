@@ -1,7 +1,6 @@
 import { listAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
-import { Friend } from '../../../adventure.types'
 import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
@@ -28,6 +27,8 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
             'adventure.friend-selection-card',
             {}
         ) as SpyFriendSelectionCard
+
+        await this.eventFaker.fakeListFriends()
     }
 
     @test()
@@ -40,13 +41,23 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async rendersToggleInFriendRow() {
-        const friend: Friend = this.eventFaker.generateFriendValues()
-        await this.eventFaker.fakeListFriends(() => [friend])
+        const friend = this.eventFaker.seedFriend()
+        await this.load()
+        listAssert.rowRendersToggle(this.listVc, friend.id, 'isSelected')
+    }
+
+    @test()
+    protected static async doesNotRenderToggleIfRowRenderingSelf() {
+        const friend = this.eventFaker.seedFriend({ id: this.fakedPerson.id })
+        await this.load()
+        listAssert.rowDoesNotRenderToggle(this.listVc, friend.id)
+    }
+
+    private static get listVc() {
+        return this.vc.getListVc()
+    }
+
+    private static async load() {
         await this.views.load(this.vc)
-        listAssert.rowRendersToggle(
-            this.vc.getListVc(),
-            friend.id,
-            'isSelected'
-        )
     }
 }
