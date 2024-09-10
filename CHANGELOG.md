@@ -1,3 +1,10 @@
+# [9.9.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.8.5...v9.9.0) (2024-09-10)
+
+
+### Features
+
+* can not remove people in group if it's not yours ([88c2722](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/88c2722))
+
 ## [9.8.5](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.8.4...v9.8.5) (2024-09-10)
 
 ## [9.8.4](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.8.3...v9.8.4) (2024-09-10)
