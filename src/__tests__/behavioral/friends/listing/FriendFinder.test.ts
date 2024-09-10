@@ -6,6 +6,7 @@ import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 @fake.login()
 export default class FriendFinderTest extends AbstractFriendsTest {
     private static finder: FriendFinder
+    private static passedPeopleIds?: string[] | null
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
@@ -14,7 +15,10 @@ export default class FriendFinderTest extends AbstractFriendsTest {
             stores: this.stores,
         })
 
-        await this.eventFaker.fakeListPeople(() => this.fakedGuests)
+        await this.eventFaker.fakeListPeople(({ payload }) => {
+            this.passedPeopleIds = payload?.personIds
+            return this.fakedGuests
+        })
     }
 
     @test()
@@ -57,21 +61,41 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     @seed('organizations', 1)
     @seed('guests', 1)
     protected static async ifPassingGroupReturnsPeopleInGroupAsWell() {
-        let passedPeopleIds: string[] | undefined | null
+        const group = await this.setPeopleOnGroup([this.fakedGuests[0].id])
 
-        await this.eventFaker.fakeListPeople(({ payload }) => {
-            passedPeopleIds = payload?.personIds
-        })
+        await this.findInGroup(group.id)
+        this.assertPeoplePassedToListPeople([this.fakedGuests[0].id])
+    }
 
-        const group = await this.groups.updateOne(
-            {},
-            {
-                people: [this.fakedGuests[0].id],
-            }
+    @test()
+    @seed('groups', 1)
+    @seed('organizations', 1)
+    @seed('guests', 1)
+    protected static async returnsSelfIfListedInGroup() {
+        const group = await this.setPeopleOnGroup(
+            [this.fakedPerson.id],
+            this.fakedGuests[0].id
         )
 
         await this.findInGroup(group.id)
-        assert.isEqualDeep(passedPeopleIds, [this.fakedGuests[0].id])
+        this.assertPeoplePassedToListPeople([this.fakedPerson.id])
+    }
+
+    private static assertPeoplePassedToListPeople(expected: string[]) {
+        assert.isEqualDeep(this.passedPeopleIds, expected)
+    }
+
+    private static async setPeopleOnGroup(
+        people: string[],
+        sourcePersonId?: string
+    ) {
+        return await this.groups.updateOne(
+            {},
+            {
+                people,
+                source: { personId: sourcePersonId ?? this.fakedPerson.id },
+            }
+        )
     }
 
     private static async addPeopleToGroup(peopleIds: string[]) {

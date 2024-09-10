@@ -42,7 +42,7 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     protected static async rendersToggleInFriendRow() {
         const friend: Friend = this.eventFaker.generateFriendValues()
         await this.eventFaker.fakeListFriends(() => [friend])
-        await this.vc.load(this.views.getRouter())
+        await this.views.load(this.vc)
         listAssert.rowRendersToggle(
             this.vc.getListVc(),
             friend.id,

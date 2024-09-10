@@ -60,8 +60,9 @@ export default class FriendFinder {
             const personIds = [
                 ...matches.map((m) => m.target?.personId),
                 ...matches.map((m) => m.source.personId),
-                ...(friendIdsInGroup ?? []),
             ].filter((id) => id && id !== personId) as string[]
+
+            personIds.push(...(friendIdsInGroup ?? []))
 
             const [{ people }] = await this.client.emitAndFlattenResponses(
                 'list-people::v2020_12_25',
@@ -84,9 +85,9 @@ export default class FriendFinder {
         return friends
     }
 
-    private async loadGroup(arePartOfGroupId: string) {
+    private async loadGroup(groupId: string) {
         const group = await this.groups.findOne({
-            id: arePartOfGroupId,
+            id: groupId,
         })
         if (!group) {
             throw new SpruceError({

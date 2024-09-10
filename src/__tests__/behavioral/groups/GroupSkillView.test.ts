@@ -15,6 +15,7 @@ import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import {
     CreateGroupTargetAndPayload,
     GetGroupTargetAndPayload,
+    ListFriendsTargetAndPayload,
     UpdateGroupTargetAndPayload,
 } from '../../support/EventFaker'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
@@ -315,6 +316,19 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
         assert.doesInclude(header?.title, group.title)
         assert.doesInclude(header?.subtitle, group.description)
+    }
+
+    @test()
+    protected static async loadWithGroupPassesGroupToListFriends() {
+        let passedPayload: ListFriendsTargetAndPayload['payload'] | undefined
+        await this.eventFaker.fakeListFriends(({ payload }) => {
+            passedPayload = payload
+        })
+
+        const group = await this.loadWithGroup()
+        assert.isEqualDeep(passedPayload, {
+            isInGroupId: group.id,
+        })
     }
 
     private static async loadWithFriendsSubmitAndAssertRedirect(

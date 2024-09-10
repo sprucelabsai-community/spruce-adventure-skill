@@ -1,6 +1,7 @@
 import {
     AbstractViewController,
     ActiveRecordCardViewController,
+    Authenticator,
     buildActiveRecordCard,
     Button,
     Card,
@@ -9,7 +10,6 @@ import {
     ListCell,
     ListRow,
     Router,
-    SkillViewControllerLoadOptions,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { buildRouteToCreateInvite } from '@sprucelabs/spruce-invite-utils'
@@ -22,6 +22,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private router!: Router
     private shouldAllowFriendSelection: boolean
     private groupId?: string
+    private authenticator!: Authenticator
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
@@ -68,8 +69,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         )
     }
 
-    public enableInvite(groupId?: string) {
-        this.groupId = groupId
+    public enableInvite() {
         this.activeCardVc.setFooter(this.renderFooter(true, []))
     }
 
@@ -170,7 +170,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
             {
                 text: {
-                    content: friend.casualName,
+                    content:
+                        this.authenticator.getPerson()?.id === friend.id
+                            ? `You`
+                            : `${friend.casualName}`,
                 },
             },
         ]
@@ -192,10 +195,18 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     public async load({
         router,
         onNoFriends,
-    }: Pick<SkillViewControllerLoadOptions, 'router'> & {
-        onNoFriends?: () => void
-    }) {
+        groupId,
+        authenticator,
+    }: FriendsListToolOptions) {
+        this.groupId = groupId
+        this.authenticator = authenticator
+
+        if (groupId) {
+            this.activeCardVc.setPayload({ isInGroupId: groupId })
+        }
+
         await this.activeCardVc.load()
+
         this.router = router
         if (this.activeCardVc.getRecords().length === 0) {
             onNoFriends?.()
@@ -213,4 +224,11 @@ export interface FriendsListOptions {
     id?: string
     shouldAllowFriendSelection?: boolean
     shouldAllowInvite?: boolean
+}
+
+interface FriendsListToolOptions {
+    router: Router
+    authenticator: Authenticator
+    groupId?: string
+    onNoFriends?: () => void
 }

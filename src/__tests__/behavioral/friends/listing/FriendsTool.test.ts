@@ -69,6 +69,12 @@ export default class FriendsToolTest extends AbstractAdventureTest {
 
         for (const friend of friends) {
             this.activeRecordCardVc.assertRendersRow(friend.id)
+            this.activeRecordCardVc.assertRowRendersContent(
+                friend.id,
+                friend.casualName
+            )
+
+            listAssert.rowDoesNotRenderContent(this.listVc, friend.id, `You`)
         }
     }
 
@@ -101,10 +107,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         await this.eventFaker.fakeListFriends(() => [friend])
         await this.load()
 
-        listAssert.rowDoesNotRenderToggle(
-            this.activeRecordCardVc.getListVcs()[0],
-            friend.id
-        )
+        listAssert.rowDoesNotRenderToggle(this.listVc, friend.id)
     }
 
     @test()
@@ -112,6 +115,22 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         this.vc = this.Vc({ shouldAllowInvite: false })
         await this.load()
         vcAssert.assertCardDoesNotRenderFooter(this.vc)
+    }
+
+    @test()
+    protected static async rendersYouIfRowHasYoursef() {
+        const friend: Friend = {
+            id: this.fakedPerson.id,
+            casualName: this.fakedPerson.casualName,
+            inviteSender: 'them',
+        }
+        await this.eventFaker.fakeListFriends(() => [friend])
+        await this.load()
+        this.activeRecordCardVc.assertRowRendersContent(friend.id, 'You')
+    }
+
+    private static get listVc() {
+        return this.activeRecordCardVc.getListVcs()[0]
     }
 
     private static async load() {

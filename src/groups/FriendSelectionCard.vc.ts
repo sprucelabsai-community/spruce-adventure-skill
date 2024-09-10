@@ -3,6 +3,7 @@ import {
     ViewControllerOptions,
     Card,
     Router,
+    Authenticator,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController from '../friends/listing/FriendsListTool.vc'
 
@@ -26,8 +27,8 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
         })
     }
 
-    public async load(router: Router) {
-        await this.friendListToolVc.load({ router })
+    public async load(options: FriendSelectionCardLoadOptions) {
+        await this.friendListToolVc.load(options)
     }
 
     public getSelectedFriends() {
@@ -38,11 +39,17 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
         await this.friendListToolVc.setSelectedFriends(people)
     }
 
-    public enableInvite(groupId?: string) {
-        this.friendListToolVc.enableInvite(groupId)
+    public enableInvite() {
+        this.friendListToolVc.enableInvite()
     }
 
     public render() {
         return this.friendListToolVc.render()
     }
+}
+
+export interface FriendSelectionCardLoadOptions {
+    router: Router
+    groupId?: string
+    authenticator: Authenticator
 }

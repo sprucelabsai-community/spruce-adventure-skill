@@ -1,12 +1,14 @@
-import { interactor, Router } from '@sprucelabs/heartwood-view-controllers'
-import FriendSelectionCardViewController from '../../../groups/FriendSelectionCard.vc'
+import { interactor } from '@sprucelabs/heartwood-view-controllers'
+import FriendSelectionCardViewController, {
+    FriendSelectionCardLoadOptions,
+} from '../../../groups/FriendSelectionCard.vc'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 
 export class SpyFriendSelectionCard extends FriendSelectionCardViewController {
     public isLoaded = false
-    public async load(router: Router) {
+    public async load(options: FriendSelectionCardLoadOptions) {
         this.isLoaded = true
-        await super.load(router)
+        await super.load(options)
     }
 
     public async clickToggle(id: string) {

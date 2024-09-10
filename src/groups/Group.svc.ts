@@ -116,11 +116,11 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         this.router = router
         this.groupId = id
 
-        await this.friendSelectionCardVc.load(router)
+        await this.friendSelectionCardVc.load({ ...options, groupId: id })
 
         if (id) {
             await this.loadGroup(id)
-            this.friendSelectionCardVc.enableInvite(id)
+            this.friendSelectionCardVc.enableInvite()
         }
 
         this.triggerRender()
