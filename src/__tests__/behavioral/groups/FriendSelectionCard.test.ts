@@ -1,6 +1,6 @@
 import { listAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test-utils'
+import { generateId, test } from '@sprucelabs/test-utils'
 import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
@@ -51,6 +51,12 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
         const friend = this.eventFaker.seedFriend({ id: this.fakedPerson.id })
         await this.load()
         listAssert.rowDoesNotRenderToggle(this.listVc, friend.id)
+    }
+
+    @test()
+    protected static async doesNotBlowUpIfTryingToSelectFriendThatDoesNotExist() {
+        await this.load()
+        await this.vc.setSelectedFriends([generateId()])
     }
 
     private static get listVc() {

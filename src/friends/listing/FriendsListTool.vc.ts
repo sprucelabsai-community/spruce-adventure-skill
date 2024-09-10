@@ -122,7 +122,9 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
     public async setSelectedFriends(ids: string[]) {
         for (const id of ids) {
-            await this.activeCardVc.setValue(id, 'isSelected', true)
+            if (this.activeCardVc.doesRowExist(id)) {
+                await this.activeCardVc.setValue(id, 'isSelected', true)
+            }
         }
     }
 
