@@ -8,7 +8,7 @@ import {
     Card,
     CardViewController,
 } from '@sprucelabs/heartwood-view-controllers'
-import { Group, ListGroup } from '../adventure.types'
+import { ListGroup } from '../adventure.types'
 import FriendSelectionCardViewController from './FriendSelectionCard.vc'
 import GroupFormCardViewController, {
     GroupFormValues,
@@ -141,13 +141,13 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     }
 
     private async setFormValues() {
-        await this.formCardVc.setValues(this.group)
+        await this.formCardVc.setValues(this.group!)
     }
 
     private updateCardHeader() {
         this.detailCardVc.setHeader({
-            title: this.group.title,
-            subtitle: this.group.description,
+            title: this.group!.title,
+            subtitle: this.group!.description,
         })
     }
 
