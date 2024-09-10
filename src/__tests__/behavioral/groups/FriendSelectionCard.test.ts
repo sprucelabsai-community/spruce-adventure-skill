@@ -2,6 +2,7 @@ import { listAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { generateId, test } from '@sprucelabs/test-utils'
 import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
+import { FriendSelectionCardLoadOptions } from '../../../groups/FriendSelectionCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
@@ -43,14 +44,23 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     protected static async rendersToggleInFriendRow() {
         const friend = this.eventFaker.seedFriend()
         await this.load()
-        listAssert.rowRendersToggle(this.listVc, friend.id, 'isSelected')
+        this.assertRowRendersToggle(friend.id)
     }
 
     @test()
-    protected static async doesNotRenderToggleIfRowRenderingSelf() {
-        const friend = this.eventFaker.seedFriend({ id: this.fakedPerson.id })
-        await this.load()
+    protected static async doesNotRenderTogglesIfNotMyGroupAndPersonInGroup() {
+        const friend = this.eventFaker.seedFriend()
+        friend.isInGroup = true
+        await this.load({ group: { id: generateId(), isMine: false } })
         listAssert.rowDoesNotRenderToggle(this.listVc, friend.id)
+    }
+
+    @test()
+    protected static async rendersTogglesIfIsMyGroup() {
+        const friend = this.eventFaker.seedFriend()
+        friend.isInGroup = true
+        await this.load({ group: { id: generateId(), isMine: true } })
+        this.assertRowRendersToggle(friend.id)
     }
 
     @test()
@@ -59,11 +69,20 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
         await this.vc.setSelectedFriends([generateId()])
     }
 
+    private static assertRowRendersToggle(id: string) {
+        listAssert.rowRendersToggle(this.listVc, id, 'isSelected')
+    }
+
     private static get listVc() {
         return this.vc.getListVc()
     }
 
-    private static async load() {
-        await this.views.load(this.vc)
+    private static async load(
+        options?: Partial<FriendSelectionCardLoadOptions>
+    ) {
+        await this.vc.load({
+            ...this.views.getRouter().buildLoadOptions(),
+            ...options,
+        })
     }
 }

@@ -331,6 +331,18 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         })
     }
 
+    @test('passes through group isMine status to friend list false', false)
+    @test('passes through group isMine status to friend list true', true)
+    protected static async passesGroupIsMineStatusToListFriends(
+        isMine: boolean
+    ) {
+        const group = await this.loadWithGroup({ isMine })
+        assert.isEqualDeep(this.friendSelectionCardVc.getLoadOptions()?.group, {
+            id: group.id,
+            isMine: group.isMine,
+        })
+    }
+
     private static async loadWithFriendsSubmitAndAssertRedirect(
         friends: Friend[]
     ) {

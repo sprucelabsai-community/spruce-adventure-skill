@@ -23,6 +23,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private shouldAllowFriendSelection: boolean
     private groupId?: string
     private authenticator!: Authenticator
+    private isMyGroup?: boolean
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
@@ -178,7 +179,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
         ]
 
-        if (this.shouldAllowFriendSelection && !isMe) {
+        if (
+            this.shouldAllowFriendSelection &&
+            (this.isMyGroup || !friend.isInGroup)
+        ) {
             cells.push({
                 toggleInput: {
                     name: 'isSelected',
@@ -192,12 +196,11 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         }
     }
 
-    public async load({
-        router,
-        onNoFriends,
-        groupId,
-        authenticator,
-    }: FriendsListToolOptions) {
+    public async load(options: FriendsListToolOptions) {
+        const { router, onNoFriends, group, authenticator } = options
+        const { id: groupId, isMine } = group ?? {}
+
+        this.isMyGroup = isMine
         this.groupId = groupId
         this.authenticator = authenticator
 
@@ -226,9 +229,9 @@ export interface FriendsListOptions {
     shouldAllowInvite?: boolean
 }
 
-interface FriendsListToolOptions {
+export interface FriendsListToolOptions {
     router: Router
     authenticator: Authenticator
-    groupId?: string
+    group?: { id: string; isMine: boolean }
     onNoFriends?: () => void
 }

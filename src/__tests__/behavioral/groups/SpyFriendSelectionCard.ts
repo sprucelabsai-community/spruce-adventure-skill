@@ -6,8 +6,10 @@ import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 
 export class SpyFriendSelectionCard extends FriendSelectionCardViewController {
     public isLoaded = false
+    private loadOptions?: FriendSelectionCardLoadOptions
     public async load(options: FriendSelectionCardLoadOptions) {
         this.isLoaded = true
+        this.loadOptions = options
         await super.load(options)
     }
 
@@ -25,5 +27,9 @@ export class SpyFriendSelectionCard extends FriendSelectionCardViewController {
 
     public getValues() {
         return this.getListVc().getValues()
+    }
+
+    public getLoadOptions() {
+        return this.loadOptions
     }
 }

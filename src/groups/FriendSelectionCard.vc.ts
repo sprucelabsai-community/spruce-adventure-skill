@@ -2,10 +2,10 @@ import {
     AbstractViewController,
     ViewControllerOptions,
     Card,
-    Router,
-    Authenticator,
 } from '@sprucelabs/heartwood-view-controllers'
-import FriendsListToolViewController from '../friends/listing/FriendsListTool.vc'
+import FriendsListToolViewController, {
+    FriendsListToolOptions,
+} from '../friends/listing/FriendsListTool.vc'
 
 export default class FriendSelectionCardViewController extends AbstractViewController<Card> {
     public static id = 'friend-selection-card'
@@ -48,8 +48,7 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
     }
 }
 
-export interface FriendSelectionCardLoadOptions {
-    router: Router
-    groupId?: string
-    authenticator: Authenticator
-}
+export type FriendSelectionCardLoadOptions = Omit<
+    FriendsListToolOptions,
+    'onNoFriends'
+>
