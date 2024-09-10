@@ -2,6 +2,7 @@ import {
     AbstractViewController,
     ViewControllerOptions,
     Card,
+    Button,
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController, {
     FriendsListToolOptions,
@@ -15,7 +16,6 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
         super(options)
 
         const { id } = options
-
         this.friendListToolVc = this.FriendListToolVc(id)
     }
 
@@ -41,6 +41,10 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
 
     public enableInvite() {
         this.friendListToolVc.enableInvite()
+    }
+
+    public setFooterButtons(buttons: Button[]) {
+        this.friendListToolVc.setFooterButtons(buttons)
     }
 
     public render() {

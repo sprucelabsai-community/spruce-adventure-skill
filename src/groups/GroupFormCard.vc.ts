@@ -35,7 +35,7 @@ export default class GroupFormCardViewController extends AbstractViewController<
             buildFormCard({
                 id,
                 header: {
-                    title: 'Invite friends to your group!',
+                    title: 'Create your new group!',
                 },
                 schema: groupSchema,
                 onCancel: this.onCancelHandler,
@@ -57,6 +57,7 @@ export default class GroupFormCardViewController extends AbstractViewController<
     }
 
     public async setValues(group: Partial<Group>) {
+        this.formCardVc.setHeaderTitle(group.title!)
         await this.formCardVc.setValues(group)
     }
 

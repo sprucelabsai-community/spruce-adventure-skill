@@ -121,7 +121,12 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             this.friendSelectionCardVc.enableInvite()
             this.shouldRenderForm = this.group.isMine
             this.updateCardHeader()
+
             await this.setFormValues()
+
+            if (!this.group.isMine) {
+                this.dropInBackButton()
+            }
         }
 
         await this.friendSelectionCardVc.load({
@@ -138,6 +143,16 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         }
 
         this.triggerRender()
+    }
+
+    private dropInBackButton() {
+        this.friendSelectionCardVc.setFooterButtons([
+            {
+                id: 'back',
+                label: 'Go Back',
+                onClick: () => this.router?.redirect('adventure.list'),
+            },
+        ])
     }
 
     private async setFormValues() {

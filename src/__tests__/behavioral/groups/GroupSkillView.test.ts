@@ -177,10 +177,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async friendSelectionCardShouldNotBeRenderingInviteButton() {
         await this.load()
-        buttonAssert.cardDoesNotRenderButton(
-            this.friendSelectionCardVc,
-            'invite'
-        )
+        this.assertFriendListCardDoesNotRenderButton('invite')
     }
 
     @test()
@@ -268,7 +265,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async loadingWithGroupRendersInviteButton() {
         await this.loadWithGroup()
-        buttonAssert.cardRendersButton(this.friendSelectionCardVc, 'invite')
+        this.assertFriendListCardRendersButton('invite')
     }
 
     @test()
@@ -289,9 +286,9 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
             return connectionId
         })
 
+        const button = 'invite'
         await vcAssert.assertActionRedirects({
-            action: () =>
-                interactor.clickButton(this.friendSelectionCardVc, 'invite'),
+            action: () => this.clickFriendListButton(button),
             router: this.views.getRouter(),
         })
 
@@ -343,6 +340,39 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         })
     }
 
+    @test()
+    protected static async friendListRendersBackButtonIfLoadingGroupThatIsNotMine() {
+        await this.loadWithGroup({ isMine: false })
+        this.assertFriendListCardRendersButton('back')
+    }
+
+    @test()
+    protected static async doesNotRenderBackButtonIfLoadingGroupThatIsMine() {
+        await this.loadWithGroup({ isMine: true })
+        this.assertFriendListCardDoesNotRenderButton('back')
+    }
+
+    @test()
+    protected static async backButtonRedirectsToList() {
+        await this.loadWithGroup({ isMine: false })
+
+        await vcAssert.assertActionRedirects({
+            action: () => this.clickFriendListButton('back'),
+            destination: {
+                id: 'adventure.list',
+            },
+            router: this.views.getRouter(),
+        })
+    }
+
+    private static assertFriendListCardDoesNotRenderButton(id: string) {
+        buttonAssert.cardDoesNotRenderButton(this.friendSelectionCardVc, id)
+    }
+
+    private static assertFriendListCardRendersButton(id: string) {
+        buttonAssert.cardRendersButton(this.friendSelectionCardVc, id)
+    }
+
     private static async loadWithFriendsSubmitAndAssertRedirect(
         friends: Friend[]
     ) {
@@ -380,6 +410,10 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     private static async fillOutFormSubmitAndAssertRedirect() {
         await this.fillOutForm()
         await this.submitAndAssertRedirect()
+    }
+
+    private static clickFriendListButton(button: string): any {
+        return interactor.clickButton(this.friendSelectionCardVc, button)
     }
 
     private static async submitAndAssertRedirect() {

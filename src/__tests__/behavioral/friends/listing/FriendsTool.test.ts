@@ -6,7 +6,7 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
-import { generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test } from '@sprucelabs/test-utils'
 import { Friend } from '../../../../adventure.types'
 import { FriendsListOptions } from '../../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
@@ -127,6 +127,13 @@ export default class FriendsToolTest extends AbstractAdventureTest {
         await this.eventFaker.fakeListFriends(() => [friend])
         await this.load()
         this.activeRecordCardVc.assertRowRendersContent(friend.id, 'You')
+    }
+
+    @test()
+    protected static async rendersExpectedInviteButtonLabel() {
+        await this.load()
+        const { footer } = this.views.render(this.vc)
+        assert.isEqual(footer?.buttons?.[0].label, 'Invite a friend!')
     }
 
     private static get listVc() {

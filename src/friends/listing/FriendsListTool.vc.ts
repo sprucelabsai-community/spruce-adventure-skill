@@ -24,11 +24,17 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private groupId?: string
     private authenticator!: Authenticator
     private isMyGroup?: boolean
+    private shouldAllowInvite: boolean
+    private buttons?: Button[]
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
 
-        const { shouldAllowFriendSelection } = options
+        const { shouldAllowFriendSelection, shouldAllowInvite, buttons } =
+            options
+
+        this.shouldAllowInvite = shouldAllowInvite ?? true
+        this.buttons = buttons
         this.shouldAllowFriendSelection = shouldAllowFriendSelection ?? false
         this.activeCardVc = this.ActiveRecordVc(options)
     }
@@ -36,7 +42,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private ActiveRecordVc(
         options: FriendsListOptions
     ): ActiveRecordCardViewController {
-        const { buttons, header, id, shouldAllowInvite = true } = options
+        const { header, id } = options
 
         return this.Controller(
             'active-record-card',
@@ -65,20 +71,21 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                     pageSize: 5,
                     shouldPageClientSide: true,
                 },
-                footer: this.renderFooter(shouldAllowInvite, buttons),
+                footer: this.renderFooter(),
             })
         )
     }
 
     public enableInvite() {
-        this.activeCardVc.setFooter(this.renderFooter(true, []))
+        this.shouldAllowInvite = true
     }
 
-    private renderFooter(shouldAllowInvite: boolean, buttons?: Button[]) {
-        const renderedButtons: Button[] = this.renderFooterButtons(
-            shouldAllowInvite,
-            buttons
-        )
+    private refreshFooter() {
+        this.activeCardVc.setFooter(this.renderFooter())
+    }
+
+    private renderFooter() {
+        const renderedButtons: Button[] = this.renderFooterButtons()
 
         let footer: CardFooter | null = null
 
@@ -90,13 +97,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         return footer
     }
 
-    private renderFooterButtons(
-        shouldAllowInvite: boolean,
-        buttons?: Button[]
-    ) {
+    private renderFooterButtons() {
         const renderedButtons: Button[] = []
 
-        if (shouldAllowInvite) {
+        if (this.shouldAllowInvite) {
             renderedButtons.push({
                 id: 'invite',
                 label: this.groupId
@@ -107,8 +111,8 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             })
         }
 
-        if (buttons) {
-            renderedButtons.push(...buttons)
+        if (this.buttons) {
+            renderedButtons.push(...this.buttons)
         }
         return renderedButtons
     }
@@ -123,7 +127,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
     public async setSelectedFriends(ids: string[]) {
         for (const id of ids) {
-            if (this.activeCardVc.doesRowExist(id)) {
+            const friend = this.activeCardVc
+                .getRecords()
+                .find((r) => r.id === id)
+            if (friend && this.isFriendSelectable(friend)) {
                 await this.activeCardVc.setValue(id, 'isSelected', true)
             }
         }
@@ -156,16 +163,11 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
         })
 
-        if (this.groupId) {
-            args.destinationAfterAccept.args!.group = this.groupId
-        }
-
         await this.router.redirect(id, args)
         this.activeCardVc.setIsBusy(false)
     }
 
     private renderRow(friend: Friend): ListRow {
-        const isMe = this.authenticator.getPerson()?.id === friend.id
         const cells: ListCell[] = [
             {
                 avatars: friend.avatar?.mUri
@@ -174,14 +176,16 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
             {
                 text: {
-                    content: isMe ? `You` : `${friend.casualName}`,
+                    content: this.isMe(friend.id)
+                        ? `You`
+                        : `${friend.casualName}`,
                 },
             },
         ]
 
         if (
             this.shouldAllowFriendSelection &&
-            (this.isMyGroup || !friend.isInGroup)
+            this.isFriendSelectable(friend)
         ) {
             cells.push({
                 toggleInput: {
@@ -196,6 +200,19 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         }
     }
 
+    private isMe(id: string) {
+        return this.authenticator.getPerson()?.id === id
+    }
+
+    private isFriendSelectable(friend: Friend) {
+        return this.isMyGroup || !friend.isInGroup || this.isMe(friend.id)
+    }
+
+    public setFooterButtons(buttons: Button[]) {
+        this.buttons = buttons
+        this.refreshFooter()
+    }
+
     public async load(options: FriendsListToolOptions) {
         const { router, onNoFriends, group, authenticator } = options
         const { id: groupId, isMine } = group ?? {}
@@ -203,17 +220,28 @@ export default class FriendsListToolViewController extends AbstractViewControlle
         this.isMyGroup = isMine
         this.groupId = groupId
         this.authenticator = authenticator
-
-        if (groupId) {
-            this.activeCardVc.setPayload({ isInGroupId: groupId })
-        }
-
-        await this.activeCardVc.load()
-
         this.router = router
+
+        await this.loadActiveRecordCard()
+
         if (this.activeCardVc.getRecords().length === 0) {
             onNoFriends?.()
         }
+
+        if (this.groupId) {
+            this.activeCardVc.setHeaderSubtitle(
+                'Below are the friends in this group plus any friends you have that are not invited. You can invite them by tapping the toggle next to their name.'
+            )
+        }
+        this.refreshFooter()
+    }
+
+    private async loadActiveRecordCard() {
+        if (this.groupId) {
+            this.activeCardVc.setPayload({ isInGroupId: this.groupId })
+        }
+
+        await this.activeCardVc.load()
     }
 
     public render() {
