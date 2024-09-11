@@ -6,21 +6,28 @@ import {
     MockActiveRecordCard,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test-utils'
+import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
+import { assert, test } from '@sprucelabs/test-utils'
 import { ListGroup } from '../../../../adventure.types'
 import GroupListCardViewController from '../../../../groups/listing/GroupListCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
+import {
+    DeleteGroupTargetAndPayload,
+    LeaveGroupTargetAndPayload,
+} from '../../../support/EventFaker'
 
 @fake.login()
 export default class GroupListCardTest extends AbstractAdventureTest {
     private static vc: SpyGroupList
     private static fakedGroups: ListGroup[]
+    private static passedDeleteTarget?: DeleteGroupTargetAndPayload['target']
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.fakedGroups = []
+
+        delete this.passedDeleteTarget
 
         this.views.setController('adventure.group-list-card', SpyGroupList)
         this.vc = this.views.Controller(
@@ -30,6 +37,10 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
         await this.eventFaker.fakeListGroups(() => {
             return this.fakedGroups
+        })
+
+        await this.eventFaker.fakeDeleteGroup(({ target }) => {
+            this.passedDeleteTarget = target
         })
     }
 
@@ -51,14 +62,14 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async rendersGroups() {
-        const group = this.addFakedGroup()
+        const group = this.seedGroup()
         await this.load()
         this.activeRecordCardVc.assertRendersRow(group.id)
     }
 
     @test()
     protected static async rendersDeleteButtonInRow() {
-        this.addFakedGroup()
+        this.seedGroup()
         await this.load()
         listAssert.rowRendersButton(this.listVc, 0, 'delete')
     }
@@ -82,7 +93,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async clickingRowRedirectsToGroupDetails() {
-        this.addFakedGroup()
+        this.seedGroup()
         await this.load()
         await this.assertRedirects(
             {
@@ -93,6 +104,103 @@ export default class GroupListCardTest extends AbstractAdventureTest {
             },
             () => interactor.clickRow(this.listVc, 0)
         )
+    }
+
+    @test()
+    protected static async clickingDeleteRendersConfirmation() {
+        await this.seedGroupLoadClickDeleteAndAssertConfirm()
+    }
+
+    @test()
+    protected static async confirmingDeleteEmitsDeleteEvent() {
+        await this.seedGroupLoadClickDeleteAndAccept()
+
+        assert.isEqualDeep(this.passedDeleteTarget, {
+            groupId: this.fakedGroups[0].id,
+        })
+    }
+
+    @test()
+    protected static async cancellingDeleteDoesNotEmitDeleteEvent() {
+        const confirmVc = await this.seedGroupLoadClickDeleteAndAssertConfirm()
+        await confirmVc.decline()
+        assert.isFalsy(this.passedDeleteTarget)
+    }
+
+    @test()
+    protected static async differentConfrmDeleteMessageIfNotOwnGroup() {
+        this.seedGroup({ isMine: false })
+        await this.loadClickDeleteAndAssertConfirmationTitle(
+            'Leave this group?'
+        )
+    }
+
+    @test()
+    protected static async differentConfrmDeleteMessageIfOwnGroup() {
+        this.seedGroup()
+        await this.loadClickDeleteAndAssertConfirmationTitle(
+            'Delete this group?'
+        )
+    }
+
+    @test()
+    protected static async rendersAlertIfDeleteThrows() {
+        await eventFaker.makeEventThrow('adventure.delete-group::v2022_09_09')
+        await vcAssert.assertRendersAlert(this.vc, () =>
+            this.seedGroupLoadClickDeleteAndAccept()
+        )
+    }
+
+    @test()
+    protected static async confirmDeleteOnGroupNotMineEmitsLeaveGroupEvent() {
+        let wasHit = false
+        let passedTarget: LeaveGroupTargetAndPayload['target'] | undefined
+
+        await this.eventFaker.fakeLeaveGroup(({ target }) => {
+            wasHit = true
+            passedTarget = target
+        })
+
+        await this.seedGroupLoadClickDeleteAndAccept({ isMine: false })
+        assert.isFalsy(this.passedDeleteTarget)
+        assert.isTrue(wasHit)
+        assert.isEqualDeep(passedTarget, {
+            groupId: this.fakedGroups[0].id,
+        })
+    }
+
+    private static async seedGroupLoadClickDeleteAndAccept(
+        group?: Partial<ListGroup>
+    ) {
+        const confirmVc =
+            await this.seedGroupLoadClickDeleteAndAssertConfirm(group)
+
+        await confirmVc.accept()
+    }
+
+    private static async loadClickDeleteAndAssertConfirmationTitle(
+        expected: string
+    ) {
+        const confirmVc = await this.seedGroupLoadClickDeleteAndAssertConfirm()
+        assert.isEqual(confirmVc.options.title, expected)
+    }
+
+    private static async seedGroupLoadClickDeleteAndAssertConfirm(
+        group?: Partial<ListGroup>
+    ) {
+        await this.seedGroupAndLoad(group)
+        return await vcAssert.assertRendersConfirm(this.vc, () =>
+            this.clickDeleteOnFirstGroup()
+        )
+    }
+
+    private static clickDeleteOnFirstGroup(): any {
+        return interactor.clickButtonInRow(this.listVc, 0, 'delete')
+    }
+
+    private static async seedGroupAndLoad(group?: Partial<ListGroup>) {
+        this.seedGroup(group)
+        await this.load()
     }
 
     private static async assertRedirects(
@@ -114,10 +222,10 @@ export default class GroupListCardTest extends AbstractAdventureTest {
         await this.views.load(this.vc)
     }
 
-    private static addFakedGroup() {
-        const group = this.eventFaker.generateListGroupValues()
-        this.fakedGroups.push(group)
-        return group
+    private static seedGroup(group?: Partial<ListGroup>) {
+        const g = this.eventFaker.generateListGroupValues(group)
+        this.fakedGroups.push(g)
+        return g
     }
 
     private static get listVc() {

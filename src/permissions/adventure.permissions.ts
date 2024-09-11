@@ -93,6 +93,26 @@ const adventurePermissions = buildPermissionContract({
             },
             requireAllStatuses: false,
         },
+        {
+            id: 'can-delete-groups',
+            name: 'Can delete groups',
+            defaults: {
+                loggedIn: {
+                    default: true,
+                },
+            },
+            requireAllStatuses: false,
+        },
+        {
+            id: 'can-leave-groups',
+            name: 'Can leave groups',
+            defaults: {
+                loggedIn: {
+                    default: true,
+                },
+            },
+            requireAllStatuses: false,
+        },
     ],
 })
 

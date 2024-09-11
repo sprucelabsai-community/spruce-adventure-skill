@@ -5,12 +5,14 @@ import peopleBroadcastTeamMessageEventContract_v2022_05_29, { BroadcastTeamMessa
 import adventureCancelEventContract_v2022_09_09, { CancelEventContract as AdventureCancelEventContract_v2022_09_09  } from '#spruce/events/adventure/cancel.v2022_09_09.contract'
 import adventureCreateConnectionEventContract_v2022_09_09, { CreateConnectionEventContract as AdventureCreateConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/createConnection.v2022_09_09.contract'
 import adventureCreateGroupEventContract_v2022_09_09, { CreateGroupEventContract as AdventureCreateGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/createGroup.v2022_09_09.contract'
+import adventureDeleteGroupEventContract_v2022_09_09, { DeleteGroupEventContract as AdventureDeleteGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/deleteGroup.v2022_09_09.contract'
 import heartwoodDidRegisterSkillViewsEventContract_v2021_02_11, { DidRegisterSkillViewsEventContract as HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/didRegisterSkillViews.v2021_02_11.contract'
 import heartwoodGenerateUrlEventContract_v2021_02_11, { GenerateUrlEventContract as HeartwoodGenerateUrlEventContract_v2021_02_11  } from '#spruce/events/heartwood/generateUrl.v2021_02_11.contract'
 import peopleGetEventContract_v2022_05_29, { GetEventContract as PeopleGetEventContract_v2022_05_29  } from '#spruce/events/people/get.v2022_05_29.contract'
 import heartwoodGetActiveThemeEventContract_v2021_02_11, { GetActiveThemeEventContract as HeartwoodGetActiveThemeEventContract_v2021_02_11  } from '#spruce/events/heartwood/getActiveTheme.v2021_02_11.contract'
 import adventureGetGroupEventContract_v2022_09_09, { GetGroupEventContract as AdventureGetGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/getGroup.v2022_09_09.contract'
 import heartwoodGetSkillViewsEventContract_v2021_02_11, { GetSkillViewsEventContract as HeartwoodGetSkillViewsEventContract_v2021_02_11  } from '#spruce/events/heartwood/getSkillViews.v2021_02_11.contract'
+import adventureLeaveGroupEventContract_v2022_09_09, { LeaveGroupEventContract as AdventureLeaveGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/leaveGroup.v2022_09_09.contract'
 import adventureListEventContract_v2022_09_09, { ListEventContract as AdventureListEventContract_v2022_09_09  } from '#spruce/events/adventure/list.v2022_09_09.contract'
 import adventureListFriendsEventContract_v2022_09_09, { ListFriendsEventContract as AdventureListFriendsEventContract_v2022_09_09  } from '#spruce/events/adventure/listFriends.v2022_09_09.contract'
 import adventureListGroupsEventContract_v2022_09_09, { ListGroupsEventContract as AdventureListGroupsEventContract_v2022_09_09  } from '#spruce/events/adventure/listGroups.v2022_09_09.contract'
@@ -30,12 +32,14 @@ export default [
     adventureCancelEventContract_v2022_09_09,
     adventureCreateConnectionEventContract_v2022_09_09,
     adventureCreateGroupEventContract_v2022_09_09,
+    adventureDeleteGroupEventContract_v2022_09_09,
     heartwoodDidRegisterSkillViewsEventContract_v2021_02_11,
     heartwoodGenerateUrlEventContract_v2021_02_11,
     peopleGetEventContract_v2022_05_29,
     heartwoodGetActiveThemeEventContract_v2021_02_11,
     adventureGetGroupEventContract_v2022_09_09,
     heartwoodGetSkillViewsEventContract_v2021_02_11,
+    adventureLeaveGroupEventContract_v2022_09_09,
     adventureListEventContract_v2022_09_09,
     adventureListFriendsEventContract_v2022_09_09,
     adventureListGroupsEventContract_v2022_09_09,
@@ -69,6 +73,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     'adventure.create-group::v2022_09_09': AdventureCreateGroupEventContract_v2022_09_09['eventSignatures']['adventure.create-group::v2022_09_09'],
     
     
+    'adventure.delete-group::v2022_09_09': AdventureDeleteGroupEventContract_v2022_09_09['eventSignatures']['adventure.delete-group::v2022_09_09'],
+    
+    
     'heartwood.did-register-skill-views::v2021_02_11': HeartwoodDidRegisterSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.did-register-skill-views::v2021_02_11'],
     
     
@@ -85,6 +92,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     
     
     'heartwood.get-skill-views::v2021_02_11': HeartwoodGetSkillViewsEventContract_v2021_02_11['eventSignatures']['heartwood.get-skill-views::v2021_02_11'],
+    
+    
+    'adventure.leave-group::v2022_09_09': AdventureLeaveGroupEventContract_v2022_09_09['eventSignatures']['adventure.leave-group::v2022_09_09'],
     
     
     'adventure.list::v2022_09_09': AdventureListEventContract_v2022_09_09['eventSignatures']['adventure.list::v2022_09_09'],

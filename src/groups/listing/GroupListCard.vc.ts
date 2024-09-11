@@ -26,7 +26,7 @@ export default class GroupListCardViewController extends AbstractViewController<
                 header: {
                     title: 'Adventure Groups! ⚒️',
                     subtitle:
-                        'Here are the groups you have created or are part of.',
+                        'Here are groups you can invite on adventures! Anyone who is part of a group can invite everyone else in that group on adventures, too!',
                 },
                 columnWidths: ['fill'],
                 noResultsRow: {
@@ -80,10 +80,55 @@ export default class GroupListCardViewController extends AbstractViewController<
                         id: 'delete',
                         type: 'destructive',
                         lineIcon: 'delete',
+                        onClick: () => this.handleClickDelete(group),
                     },
                 },
             ],
         } as ListRow
+    }
+
+    private async handleClickDelete(group: ListGroup) {
+        const { id, isMine } = group
+
+        const didAccept = await this.confirm({
+            title: isMine ? 'Delete this group?' : 'Leave this group?',
+            isDestructive: true,
+        })
+
+        if (!didAccept) {
+            return
+        }
+
+        if (!isMine) {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.leave-group::v2022_09_09',
+                {
+                    target: {
+                        groupId: group.id,
+                    },
+                }
+            )
+            return
+        }
+
+        try {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.delete-group::v2022_09_09',
+                {
+                    target: {
+                        groupId: id,
+                    },
+                }
+            )
+        } catch (err: any) {
+            this.log.error('Failed to delete group', err)
+            await this.alert({
+                title: 'Failed to delete group',
+                message: err.message,
+            })
+        }
     }
 
     private async handleClickRow(groupId: string) {

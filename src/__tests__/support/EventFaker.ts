@@ -18,6 +18,34 @@ import generateFriendValues from './generateFriendValues'
 export default class EventFaker {
     public fakedFriends: Friend[] = []
 
+    public async fakeLeaveGroup(
+        cb?: (targetAndPayload: LeaveGroupTargetAndPayload) => void
+    ) {
+        await eventFaker.on(
+            'adventure.leave-group::v2022_09_09',
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
+                return {
+                    success: true,
+                }
+            }
+        )
+    }
+
+    public async fakeDeleteGroup(
+        cb?: (targetAndPayload: DeleteGroupTargetAndPayload) => void
+    ) {
+        await eventFaker.on(
+            'adventure.delete-group::v2022_09_09',
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
+                return {
+                    success: true,
+                }
+            }
+        )
+    }
+
     public async fakeGetGroup(
         cb?: (targetAndPayload: GetGroupTargetAndPayload) => void | GetGroup
     ) {
@@ -318,3 +346,9 @@ export type UpdateGroup = SpruceSchemas.Adventure.v2022_09_09.UpdateGroup
 
 export type CreateConnectionTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetAndPayload
+
+export type DeleteGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetAndPayload
+
+export type LeaveGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.LeaveGroupEmitTargetAndPayload
