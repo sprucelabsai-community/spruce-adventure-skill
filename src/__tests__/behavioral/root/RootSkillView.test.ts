@@ -67,12 +67,12 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async clickingSkipRedirectsToAdd() {
+    protected static async clickingSkipRedirectsToList() {
         await vcAssert.assertActionRedirects({
             action: () => this.clickNextOnIntro(),
             router: this.views.getRouter(),
             destination: {
-                id: 'adventure.post',
+                id: 'adventure.list',
             },
         })
     }

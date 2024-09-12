@@ -63,11 +63,13 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     @test()
     protected static async passesGenerateUrlToListView() {
         const url = generateId()
+
         let passedTargetAndPayload: GenerateUrlTargetAndPayload | undefined
         await this.eventFaker.fakeGenerateUrl((targetAndPayload) => {
             passedTargetAndPayload = targetAndPayload
             return url
         })
+
         await this.connect(0)
         await this.post()
         assert.isEqual(

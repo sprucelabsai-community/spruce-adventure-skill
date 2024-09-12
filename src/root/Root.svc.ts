@@ -96,7 +96,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
     }
 
     private async handleClickNextFromIntro() {
-        await this.router.redirect('adventure.post')
+        await this.router.redirect('adventure.list')
     }
 
     public async load({
