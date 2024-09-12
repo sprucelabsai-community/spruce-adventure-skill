@@ -1,4 +1,3 @@
-import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractViewController,
     Card,
