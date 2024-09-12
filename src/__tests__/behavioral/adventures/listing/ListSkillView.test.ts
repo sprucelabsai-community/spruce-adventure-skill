@@ -3,6 +3,7 @@ import {
     Router,
     toolBeltAssert,
     vcAssert,
+    vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert } from '@sprucelabs/test-utils'
@@ -29,6 +30,9 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
 
     protected static async beforeEach() {
         await super.beforeEach()
+
+        vcDurationAssert.beforeEach(this.views.getFactory())
+
         this.currentAdventure = generateAdventureWithPersonValues({
             source: { personId: this.fakedPerson.id },
         })
@@ -58,6 +62,11 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         )
 
         await this.reload()
+    }
+
+    @test()
+    protected static async hasDurationUtilConfigured() {
+        vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
     }
 
     @test()

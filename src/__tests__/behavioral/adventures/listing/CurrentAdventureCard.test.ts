@@ -120,11 +120,6 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
         assert.isFalse(this.didCancelHandlerInvoked)
     }
 
-    @test()
-    protected static async durationUtilSetupCorrectly() {
-        vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
-    }
-
     private static get mapVc() {
         return mapAssert.assertCardRendersMap(this.vc)
     }

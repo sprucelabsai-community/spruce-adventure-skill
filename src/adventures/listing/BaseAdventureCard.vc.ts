@@ -84,18 +84,25 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
                                 html: `"<em>${this.adventure.what}</em>" - ${this.adventure.personCasualName}`,
                             },
                             subText: {
-                                content: durationUtil.renderDateTimeUntil(
-                                    this.adventure.when,
-                                    {
-                                        shouldCapitalize: true,
-                                    }
-                                ),
+                                content: this.renderTimeUntil(),
                             },
                         },
                     ],
                 },
             ],
         }
+    }
+
+    private renderTimeUntil(): string {
+        console.log('before')
+
+        const until = durationUtil.renderDateTimeUntil(this.adventure.when, {
+            shouldCapitalize: true,
+        })
+
+        console.log(this.adventure.when, until)
+
+        return until
     }
 
     private MapVc(): MapViewController {

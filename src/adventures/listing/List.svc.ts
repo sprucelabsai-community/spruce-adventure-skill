@@ -1,3 +1,4 @@
+import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractSkillViewController,
     Card,
@@ -30,6 +31,8 @@ export default class ListSkillViewController extends AbstractSkillViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
+
+        durationUtil.dates = this.dates
 
         this.groupsToolVc = this.Controller('adventure.group-list-card', {})
         this.friendsToolVc = this.FriendsToolVc()

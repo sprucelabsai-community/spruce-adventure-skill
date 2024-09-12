@@ -18,8 +18,6 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
     ) {
         super(options)
 
-        durationUtil.dates = this.dates
-
         const { adventure, onDidCancel } = assertOptions(options, [
             'adventure',
             'onDidCancel',
