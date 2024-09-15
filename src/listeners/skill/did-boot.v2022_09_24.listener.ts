@@ -11,6 +11,7 @@ import Rsvper from '../../adventures/rsvping/Rsvper'
 import ConnectionAccepter from '../../friends/connecting/ConnectionAccepter'
 import FriendFinder from '../../friends/listing/FriendFinder'
 import GroupFinder from '../../groups/GroupFinder'
+import GroupManager from '../../groups/GroupManager'
 import MessageSenderImpl from '../../messaging/MessageSender'
 
 export default async (
@@ -55,6 +56,11 @@ export default async (
         stores,
     })
 
+    const groupManager = await GroupManager.Manager({
+        stores,
+        finder: groupFinder,
+    })
+
     const accepter = await ConnectionAccepter.Accepter({ stores })
 
     skill.updateContext('canceller', canceller)
@@ -63,5 +69,6 @@ export default async (
     skill.updateContext('rsvper', rsvp)
     skill.updateContext('friendFiender', friendFinder)
     skill.updateContext('groupFinder', groupFinder)
+    skill.updateContext('groupManager', groupManager)
     skill.updateContext('connectionAccepter', accepter)
 }

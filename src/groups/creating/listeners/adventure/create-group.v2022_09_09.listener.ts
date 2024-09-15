@@ -8,15 +8,12 @@ import { SpruceSchemas } from '#spruce/schemas/schemas.types'
 export default async (
     event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-    const { stores, payload, source } = event
+    const { payload, source, groupManager } = event
     const { group } = payload
     const { personId } = source
 
-    const groups = await stores.getStore('groups')
-    const created = await groups.createOne({
-        ...group,
-        source: { personId: personId! },
-    })
+    const created = await groupManager.createGroup(personId!, group)
+
     return {
         group: created,
     }

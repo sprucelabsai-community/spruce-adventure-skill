@@ -4,29 +4,20 @@ import {
     SpruceEventResponse,
 } from '@sprucelabs/spruce-event-utils'
 import { SpruceSchemas } from '#spruce/schemas/schemas.types'
-import SpruceError from '#spruce/../errors/SpruceError'
 
 export default async (
     event: SpruceEvent<SkillEventContract, EmitPayload>
 ): SpruceEventResponse<ResponsePayload> => {
-    const { groupFinder, target, source, payload, stores } = event
+    const { target, source, payload, groupManager } = event
     const { id } = target
     const { group } = payload
     const { personId } = source
 
-    const match = await groupFinder.findGroupForPerson(id, personId!)
-
-    if (!match.isMine) {
-        throw new SpruceError({
-            code: 'NOT_YOUR_GROUP',
-            friendlyMessage:
-                'You cannot update a group that is not yours. You can, however, invite new friends to it or remove yourself from it.',
-            groupId: id,
-        })
-    }
-
-    const groups = await stores.getStore('groups')
-    const updated = await groups.updateOne({ id }, { ...group })
+    const updated = await groupManager.updateGroup({
+        groupId: id,
+        personId: personId!,
+        values: group,
+    })
 
     return {
         group: { ...updated },
