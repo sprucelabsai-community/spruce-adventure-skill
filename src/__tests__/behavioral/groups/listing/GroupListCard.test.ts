@@ -153,20 +153,42 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async confirmDeleteOnGroupNotMineEmitsLeaveGroupEvent() {
-        let wasHit = false
         let passedTarget: LeaveGroupTargetAndPayload['target'] | undefined
 
         await this.eventFaker.fakeLeaveGroup(({ target }) => {
-            wasHit = true
             passedTarget = target
         })
 
         await this.seedGroupLoadClickDeleteAndAccept({ isMine: false })
         assert.isFalsy(this.passedDeleteTarget)
-        assert.isTrue(wasHit)
         assert.isEqualDeep(passedTarget, {
             groupId: this.fakedGroups[0].id,
         })
+    }
+
+    @test()
+    protected static async leaveGroupFailingRendersAlert() {
+        await eventFaker.makeEventThrow('adventure.leave-group::v2022_09_09')
+        await vcAssert.assertRendersAlert(this.vc, () =>
+            this.seedGroupLoadClickDeleteAndAccept({ isMine: false })
+        )
+    }
+
+    @test()
+    protected static async deletingOnlyGroupRefreshesh() {
+        const hits: string[] = []
+
+        await this.eventFaker.fakeDeleteGroup(() => {
+            hits.push('emit-delete-group')
+        })
+
+        this.activeRecordCardVc.refresh = async () => {
+            hits.push('refresh')
+        }
+
+        await this.load()
+        await this.seedGroupLoadClickDeleteAndAccept()
+        assert.isEqualDeep(hits, ['emit-delete-group', 'refresh'])
     }
 
     private static async seedGroupLoadClickDeleteAndAccept(

@@ -99,35 +99,39 @@ export default class GroupListCardViewController extends AbstractViewController<
             return
         }
 
-        if (!isMine) {
-            const client = await this.connectToApi()
-            await client.emitAndFlattenResponses(
-                'adventure.leave-group::v2022_09_09',
-                {
-                    target: {
-                        groupId: group.id,
-                    },
-                }
-            )
-            return
-        }
-
         try {
-            const client = await this.connectToApi()
-            await client.emitAndFlattenResponses(
-                'adventure.delete-group::v2022_09_09',
-                {
-                    target: {
-                        groupId: id,
-                    },
-                }
-            )
+            await this.emit(id, isMine)
+            await this.activeRecordCardVc.refresh()
         } catch (err: any) {
             this.log.error('Failed to delete group', err)
             await this.alert({
                 title: 'Failed to delete group',
                 message: err.message,
             })
+        }
+    }
+
+    private async emit(groupId: string, isMine: boolean) {
+        if (!isMine) {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.leave-group::v2022_09_09',
+                {
+                    target: {
+                        groupId,
+                    },
+                }
+            )
+        } else {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.delete-group::v2022_09_09',
+                {
+                    target: {
+                        groupId,
+                    },
+                }
+            )
         }
     }
 

@@ -4,7 +4,8 @@
   "version": "9.9.13",
   "skill": {
     "namespace": "adventure",
-    "upgradeIgnoreList": []
+    "upgradeIgnoreList": [],
+    "version": "v2022_09_09"
   },
   "homepage": "https://github.com/sprucelabsai/spruce-adventure-skill",
   "bugs": {
