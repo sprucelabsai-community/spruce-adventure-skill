@@ -1,4 +1,7 @@
-import { MockActiveRecordCard } from '@sprucelabs/heartwood-view-controllers'
+import {
+    MockActiveRecordCard,
+    vcDurationAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId } from '@sprucelabs/test-utils'
 import { Adventure } from '../../adventure.types'
@@ -22,6 +25,8 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         this.adventures = await this.stores.getStore('adventures')
         this.connections = await this.stores.getStore('connections')
         this.groups = await this.stores.getStore('groups')
+
+        vcDurationAssert.beforeEach(this.views.getFactory())
     }
 
     protected static async ConnectionManager(): Promise<ConnectionManager> {

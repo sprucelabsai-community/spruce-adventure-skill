@@ -31,8 +31,6 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     protected static async beforeEach() {
         await super.beforeEach()
 
-        vcDurationAssert.beforeEach(this.views.getFactory())
-
         this.currentAdventure = generateAdventureWithPersonValues({
             source: { personId: this.fakedPerson.id },
         })

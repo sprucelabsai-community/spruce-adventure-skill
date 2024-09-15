@@ -1,3 +1,4 @@
+import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractSkillViewController,
     Router,
@@ -15,7 +16,13 @@ export default class PostSkillViewController extends AbstractSkillViewController
 
     public constructor(options: ViewControllerOptions) {
         super(options)
-        this.postCardVc = this.Controller('adventure.post-card', {
+
+        durationUtil.dates = this.dates
+        this.postCardVc = this.PostVc()
+    }
+
+    private PostVc(): PostCardViewController {
+        return this.Controller('adventure.post-card', {
             onPost: this.handlePostAdventure.bind(this),
         })
     }

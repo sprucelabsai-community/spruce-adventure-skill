@@ -1,4 +1,7 @@
-import { vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    vcAssert,
+    vcDurationAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../../adventure.types'
@@ -39,6 +42,11 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async requiresLogin() {
         await vcAssert.assertLoginIsRequired(this.vc)
+    }
+
+    @test()
+    protected static async hasDurationUtilConfigured() {
+        vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
     }
 
     @test()
