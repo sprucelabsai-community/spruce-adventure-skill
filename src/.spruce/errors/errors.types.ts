@@ -6,6 +6,8 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
+
 export declare namespace SpruceErrors.Adventure {
 
 	
@@ -50,6 +52,46 @@ export declare namespace SpruceErrors.Adventure {
 	}
 
 	export type NotFoundEntity = SchemaEntity<SpruceErrors.Adventure.NotFoundSchema>
+
+}
+
+
+export declare namespace SpruceErrors.Adventure {
+
+	
+	export interface CannotLeaveOwnGroup {
+		
+	}
+
+	export interface CannotLeaveOwnGroupSchema extends SpruceSchema.Schema {
+		id: 'cannotLeaveOwnGroup',
+		namespace: 'Adventure',
+		name: 'Cannot leave own group',
+		    fields: {
+		    }
+	}
+
+	export type CannotLeaveOwnGroupEntity = SchemaEntity<SpruceErrors.Adventure.CannotLeaveOwnGroupSchema>
+
+}
+
+
+export declare namespace SpruceErrors.Adventure {
+
+	
+	export interface CannotLeaveGroupYouAreNotPartOf {
+		
+	}
+
+	export interface CannotLeaveGroupYouAreNotPartOfSchema extends SpruceSchema.Schema {
+		id: 'cannotLeaveGroupYouAreNotPartOf',
+		namespace: 'Adventure',
+		name: 'Cannot leave group you are not part of',
+		    fields: {
+		    }
+	}
+
+	export type CannotLeaveGroupYouAreNotPartOfEntity = SchemaEntity<SpruceErrors.Adventure.CannotLeaveGroupYouAreNotPartOfSchema>
 
 }
 

@@ -4,7 +4,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { AbstractSpruceFixtureTest } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId } from '@sprucelabs/test-utils'
-import { Adventure } from '../../adventure.types'
+import { Adventure, Group } from '../../adventure.types'
 import AdventuresStore from '../../adventures/Adventures.store'
 import ConnectionManager from '../../adventures/listing/ConnectionManager'
 import ConnectionsStore from '../../friends/connecting/Connections.store'
@@ -58,6 +58,6 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
             match,
             'A group was not created, try @seed("groups", 1)'
         )
-        return match
+        return match as Group
     }
 }

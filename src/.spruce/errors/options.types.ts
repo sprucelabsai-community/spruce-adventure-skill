@@ -7,7 +7,13 @@ export interface NotYourGroupErrorOptions extends SpruceErrors.Adventure.NotYour
 export interface NotFoundErrorOptions extends SpruceErrors.Adventure.NotFound, ISpruceErrorOptions {
 	code: 'NOT_FOUND'
 }
+export interface CannotLeaveOwnGroupErrorOptions extends SpruceErrors.Adventure.CannotLeaveOwnGroup, ISpruceErrorOptions {
+	code: 'CANNOT_LEAVE_OWN_GROUP'
+}
+export interface CannotLeaveGroupYouAreNotPartOfErrorOptions extends SpruceErrors.Adventure.CannotLeaveGroupYouAreNotPartOf, ISpruceErrorOptions {
+	code: 'CANNOT_LEAVE_GROUP_YOU_ARE_NOT_PART_OF'
+}
 
-type ErrorOptions =  | NotYourGroupErrorOptions  | NotFoundErrorOptions 
+type ErrorOptions =  | NotYourGroupErrorOptions  | NotFoundErrorOptions  | CannotLeaveOwnGroupErrorOptions  | CannotLeaveGroupYouAreNotPartOfErrorOptions 
 
 export default ErrorOptions
