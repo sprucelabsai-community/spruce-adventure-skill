@@ -17,6 +17,7 @@ export type Group = SpruceSchemas.Adventure.v2022_09_09.Group
 export type PublicGroup = Omit<Group, 'source'>
 export type ListGroup = SpruceSchemas.Adventure.v2022_09_09.ListGroup
 export type GetGroup = SpruceSchemas.Adventure.v2022_09_09.GetGroup
+export type CreateGroup = SpruceSchemas.Adventure.v2022_09_09.CreateGroup
 
 declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
     interface SkillContext {
