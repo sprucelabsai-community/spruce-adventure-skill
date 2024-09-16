@@ -8,6 +8,8 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
+        await this.eventFaker.fakeSendMessage()
+        await this.eventFaker.fakeGetPerson()
     }
 
     @test()

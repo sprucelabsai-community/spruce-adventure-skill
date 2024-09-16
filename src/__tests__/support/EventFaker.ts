@@ -168,7 +168,7 @@ export default class EventFaker {
     }
 
     public async fakeGetPerson(
-        cb?: () => SpruceSchemas.Spruce.v2020_07_22.Person
+        cb?: () => SpruceSchemas.Spruce.v2020_07_22.Person | void
     ) {
         await eventFaker.on('get-person::v2020_12_25', () => {
             return {

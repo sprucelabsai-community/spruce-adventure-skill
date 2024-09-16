@@ -1,14 +1,22 @@
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
+import { MercuryClient } from '@sprucelabs/mercury-client'
 import { CreateGroup } from '../adventure.types'
 import SpruceError from '../errors/SpruceError'
 import GroupFinder from './GroupFinder'
 import GroupsStore from './Groups.store'
 
-export default class GroupManager {
+export default class GroupManagerImpl implements GroupManager {
+    public static Class?: new (
+        options: GroupManageConstructorOptions
+    ) => GroupManager
     private groups: GroupsStore
     private finder: GroupFinder
-    private constructor(options: { groups: GroupsStore; finder: GroupFinder }) {
-        const { groups, finder } = options
+    private client: MercuryClient
+    private peoplesNames: Record<string, Promise<string>> = {}
+
+    protected constructor(options: GroupManageConstructorOptions) {
+        const { groups, finder, client } = options
+        this.client = client
         this.groups = groups
         this.finder = finder
     }
@@ -16,26 +24,80 @@ export default class GroupManager {
     public static async Manager(options: {
         stores: SimpleStoreFactory
         finder: GroupFinder
+        client: MercuryClient
     }) {
-        const { stores, finder } = options
+        const { stores, finder, client } = options
+
         const groups = await stores.getStore('groups')
-        return new this({ groups, finder })
+        return new (this.Class ?? this)({ groups, finder, client })
     }
 
     public async createGroup(personId: string, values: CreateGroup) {
+        const { people, title } = values
+
         const created = await this.groups.createOne({
             ...values,
             source: { personId: personId! },
         })
 
+        const promises = people.map((to) =>
+            this.sendBeenInvitedMessageTo({ toId: to, fromId: personId, title })
+        )
+        await Promise.all(promises)
+
         return created
     }
 
-    public async updateGroup(options: {
-        personId: string
-        groupId: string
-        values: CreateGroup
-    }) {
+    protected async sendBeenInvitedMessageTo(
+        options: SendBeenInvitedMessageOptions
+    ) {
+        const { toId, fromId, title } = options
+        const toName = await this.getPersonsName(toId)
+        const fromName = await this.getPersonsName(fromId)
+
+        await this.client.emitAndFlattenResponses('send-message::v2020_12_25', {
+            target: {
+                personId: toId,
+            },
+            payload: {
+                message: {
+                    classification: 'transactional',
+                    body: `Hey ${toName}! ${fromName} has added you to join their Adventure Group, "${title}". Anytime you want to invite everyone in the group to your own adventure, use this link: https://adventure.spruce.bot`,
+                    context: {
+                        title,
+                        toName,
+                        fromName,
+                    },
+                },
+            },
+        })
+    }
+
+    private async getPersonsName(personId: string) {
+        //@ts-ignore
+        if (this.peoplesNames[personId]) {
+            return this.peoplesNames[personId]
+        }
+
+        this.peoplesNames[personId] = this._getPersonsName(personId)
+
+        return this.peoplesNames[personId]
+    }
+
+    private async _getPersonsName(personId: string) {
+        const [{ person }] = await this.client.emitAndFlattenResponses(
+            'get-person::v2020_12_25',
+            {
+                target: {
+                    personId,
+                },
+            }
+        )
+        const toName = person.casualName
+        return toName
+    }
+
+    public async updateGroup(options: UpdateGroupOptions) {
         const { personId, groupId: id, values } = options
         const match = await this.finder.findGroupForPerson(id, personId!)
 
@@ -103,4 +165,29 @@ export default class GroupManager {
             { people }
         )
     }
+}
+
+export interface SendBeenInvitedMessageOptions {
+    toId: string
+    fromId: string
+    title: string
+}
+
+export interface GroupManager {
+    createGroup(personId: string, values: CreateGroup): Promise<CreateGroup>
+    updateGroup(options: UpdateGroupOptions): Promise<CreateGroup>
+    deleteGroup(groupId: string, personId: string): Promise<void>
+    leaveGroup(groupId: string, personId: string): Promise<void>
+}
+
+interface UpdateGroupOptions {
+    personId: string
+    groupId: string
+    values: CreateGroup
+}
+
+export interface GroupManageConstructorOptions {
+    groups: GroupsStore
+    finder: GroupFinder
+    client: MercuryClient
 }
