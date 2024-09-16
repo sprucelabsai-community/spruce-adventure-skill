@@ -113,6 +113,16 @@ const adventurePermissions = buildPermissionContract({
             },
             requireAllStatuses: false,
         },
+        {
+            id: 'can-add-friend-to-groups',
+            name: 'Can add friend to groups',
+            defaults: {
+                loggedIn: {
+                    default: true,
+                },
+            },
+            requireAllStatuses: false,
+        },
     ],
 })
 

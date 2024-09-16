@@ -26,13 +26,19 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     private isMyGroup?: boolean
     private shouldAllowInvite: boolean
     private buttons?: Button[]
+    private selectFriendHandler?: SelectFriendHandler
 
     public constructor(options: ViewControllerOptions & FriendsListOptions) {
         super(options)
 
-        const { shouldAllowFriendSelection, shouldAllowInvite, buttons } =
-            options
+        const {
+            shouldAllowFriendSelection,
+            shouldAllowInvite,
+            buttons,
+            onSelectFriend,
+        } = options
 
+        this.selectFriendHandler = onSelectFriend
         this.shouldAllowInvite = shouldAllowInvite ?? true
         this.buttons = buttons
         this.shouldAllowFriendSelection = shouldAllowFriendSelection ?? false
@@ -190,6 +196,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             cells.push({
                 toggleInput: {
                     name: 'isSelected',
+                    onChange: () => this.selectFriendHandler?.(true, friend),
                 },
             })
         }
@@ -249,12 +256,18 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 }
 
+export type SelectFriendHandler = (
+    isSelected: boolean,
+    person: Friend
+) => void | Promise<void>
+
 export interface FriendsListOptions {
     buttons?: Button[]
     header?: CardHeader
     id?: string
     shouldAllowFriendSelection?: boolean
     shouldAllowInvite?: boolean
+    onSelectFriend?: SelectFriendHandler
 }
 
 export interface FriendsListToolOptions {

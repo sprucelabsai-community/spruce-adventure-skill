@@ -365,6 +365,58 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         })
     }
 
+    @test()
+    protected static async toggleFriendInGroupThatIsNotMineRendersConfirm() {
+        await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+    }
+
+    @test()
+    protected static async confirmingToggleFriendEmitsAddFriendEvent() {
+        let wasHit = false
+        await this.eventFaker.fakeAddFriendToGroup(() => {
+            wasHit = true
+        })
+
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+
+        await confirmVc.accept()
+
+        assert.isTrue(wasHit, `Add friend to group event was not hit`)
+    }
+
+    @test()
+    protected static async shouldNotEmitAddFriendIfDeclinesConfirmation() {
+        let wasHit = false
+        await this.eventFaker.fakeAddFriendToGroup(() => {
+            wasHit = true
+        })
+
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+
+        await confirmVc.decline()
+
+        assert.isFalse(wasHit, `Add friend to group event was hit`)
+    }
+
+    private static async loadGroupNotMineToggleFriendAndAssertConfirm() {
+        const friend = await this.loadGroupNotMinWithOneFriend()
+        return await this.toggleFriendAndAssertConfirm(friend.id)
+    }
+
+    private static async toggleFriendAndAssertConfirm(friendId: string) {
+        return await vcAssert.assertRendersConfirm(this.vc, () =>
+            this.toggleFriend(friendId)
+        )
+    }
+
+    private static async loadGroupNotMinWithOneFriend() {
+        const friend = this.eventFaker.seedFriend()
+        await this.loadWithGroup({ isMine: false })
+        return friend
+    }
+
     private static assertFriendListCardDoesNotRenderButton(id: string) {
         buttonAssert.cardDoesNotRenderButton(this.friendSelectionCardVc, id)
     }

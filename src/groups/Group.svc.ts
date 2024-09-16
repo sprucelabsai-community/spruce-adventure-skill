@@ -8,7 +8,7 @@ import {
     Card,
     CardViewController,
 } from '@sprucelabs/heartwood-view-controllers'
-import { ListGroup } from '../adventure.types'
+import { Friend, ListGroup } from '../adventure.types'
 import FriendSelectionCardViewController from './FriendSelectionCard.vc'
 import GroupFormCardViewController, {
     GroupFormValues,
@@ -42,10 +42,34 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     private FriendSelectionCardVc(): FriendSelectionCardViewController {
         return this.Controller('adventure.friend-selection-card', {
             id: 'friend-selection',
-            header: {
-                title: 'Your friends!',
-            },
+            onSelectFriend: this.handleSelectFriend.bind(this),
         })
+    }
+
+    private async handleSelectFriend(isSelected: boolean, friend: Friend) {
+        if (this.group?.isMine !== false) {
+            return
+        }
+        const didConfirm = await this.confirm({
+            message: `Add ${friend.casualName} to the group?`,
+        })
+
+        if (!didConfirm) {
+            return
+        }
+
+        const client = await this.connectToApi()
+        await client.emitAndFlattenResponses(
+            'adventure.add-friend-to-group::v2022_09_09',
+            {
+                target: {
+                    groupId: 'aoue',
+                },
+                payload: {
+                    friendId: 'aeou',
+                },
+            }
+        )
     }
 
     private FormCardVc(): GroupFormCardViewController {

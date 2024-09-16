@@ -84,7 +84,7 @@ export default class GroupManagerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadingPersonsNameIsRaceConditionSafe() {
+    protected static async loadingPersonForInviteIsRaceConditionSafe() {
         let hitCount = 0
         await this.eventFaker.fakeGetPerson(() => {
             hitCount++

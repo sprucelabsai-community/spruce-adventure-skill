@@ -18,6 +18,18 @@ import generateFriendValues from './generateFriendValues'
 export default class EventFaker {
     public fakedFriends: Friend[] = []
 
+    public async fakeAddFriendToGroup(cb?: () => void) {
+        await eventFaker.on(
+            'adventure.add-friend-to-group::v2022_09_09',
+            () => {
+                cb?.()
+                return {
+                    success: true,
+                }
+            }
+        )
+    }
+
     public async fakeLeaveGroup(
         cb?: (targetAndPayload: LeaveGroupTargetAndPayload) => void
     ) {

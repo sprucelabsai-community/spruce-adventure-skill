@@ -6,22 +6,25 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import FriendsListToolViewController, {
     FriendsListToolOptions,
+    SelectFriendHandler,
 } from '../friends/listing/FriendsListTool.vc'
 
 export default class FriendSelectionCardViewController extends AbstractViewController<Card> {
     public static id = 'friend-selection-card'
     protected friendListToolVc: FriendsListToolViewController
 
-    public constructor(options: ViewControllerOptions & { id?: string }) {
+    public constructor(
+        options: ViewControllerOptions & FriendSelectionCardOptions
+    ) {
         super(options)
-
-        const { id } = options
-        this.friendListToolVc = this.FriendListToolVc(id)
+        this.friendListToolVc = this.FriendListToolVc(options)
     }
 
-    private FriendListToolVc(id?: string): FriendsListToolViewController {
+    private FriendListToolVc(
+        options: FriendSelectionCardOptions
+    ): FriendsListToolViewController {
         return this.Controller('adventure.friends-list-tool', {
-            id,
+            ...options,
             shouldAllowFriendSelection: true,
             shouldAllowInvite: false,
         })
@@ -56,3 +59,8 @@ export type FriendSelectionCardLoadOptions = Omit<
     FriendsListToolOptions,
     'onNoFriends'
 >
+
+export interface FriendSelectionCardOptions {
+    id?: string
+    onSelectFriend?: SelectFriendHandler
+}

@@ -1,6 +1,7 @@
 import { coreEventContracts } from '@sprucelabs/mercury-core-events'
 
 import adventureAcceptConnectionEventContract_v2022_09_09, { AcceptConnectionEventContract as AdventureAcceptConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/acceptConnection.v2022_09_09.contract'
+import adventureAddFriendToGroupEventContract_v2022_09_09, { AddFriendToGroupEventContract as AdventureAddFriendToGroupEventContract_v2022_09_09  } from '#spruce/events/adventure/addFriendToGroup.v2022_09_09.contract'
 import peopleBroadcastTeamMessageEventContract_v2022_05_29, { BroadcastTeamMessageEventContract as PeopleBroadcastTeamMessageEventContract_v2022_05_29  } from '#spruce/events/people/broadcastTeamMessage.v2022_05_29.contract'
 import adventureCancelEventContract_v2022_09_09, { CancelEventContract as AdventureCancelEventContract_v2022_09_09  } from '#spruce/events/adventure/cancel.v2022_09_09.contract'
 import adventureCreateConnectionEventContract_v2022_09_09, { CreateConnectionEventContract as AdventureCreateConnectionEventContract_v2022_09_09  } from '#spruce/events/adventure/createConnection.v2022_09_09.contract'
@@ -28,6 +29,7 @@ import heartwoodUpsertThemeEventContract_v2021_02_11, { UpsertThemeEventContract
 
 export default [
     adventureAcceptConnectionEventContract_v2022_09_09,
+    adventureAddFriendToGroupEventContract_v2022_09_09,
     peopleBroadcastTeamMessageEventContract_v2022_05_29,
     adventureCancelEventContract_v2022_09_09,
     adventureCreateConnectionEventContract_v2022_09_09,
@@ -59,6 +61,9 @@ declare module '@sprucelabs/mercury-types/build/types/mercury.types' {
     interface SkillEventSignatures {
     
     'adventure.accept-connection::v2022_09_09': AdventureAcceptConnectionEventContract_v2022_09_09['eventSignatures']['adventure.accept-connection::v2022_09_09'],
+    
+    
+    'adventure.add-friend-to-group::v2022_09_09': AdventureAddFriendToGroupEventContract_v2022_09_09['eventSignatures']['adventure.add-friend-to-group::v2022_09_09'],
     
     
     'people.broadcast-team-message::v2022_05_29': PeopleBroadcastTeamMessageEventContract_v2022_05_29['eventSignatures']['people.broadcast-team-message::v2022_05_29'],
