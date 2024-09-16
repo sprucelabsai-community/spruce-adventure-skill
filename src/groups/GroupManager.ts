@@ -1,6 +1,6 @@
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { CreateGroup } from '../adventure.types'
+import { CreateGroup, Group } from '../adventure.types'
 import SpruceError from '../errors/SpruceError'
 import GroupFinder from './GroupFinder'
 import GroupsStore from './Groups.store'
@@ -45,7 +45,7 @@ export default class GroupManagerImpl implements GroupManager {
         )
         await Promise.all(promises)
 
-        return created
+        return created as Group
     }
 
     protected async sendBeenInvitedMessageTo(
@@ -111,7 +111,7 @@ export default class GroupManagerImpl implements GroupManager {
         }
 
         const updated = await this.groups.updateOne({ id }, { ...values })
-        return updated
+        return updated as Group
     }
 
     public async deleteGroup(groupId: string, personId: string) {
@@ -174,8 +174,8 @@ export interface SendBeenInvitedMessageOptions {
 }
 
 export interface GroupManager {
-    createGroup(personId: string, values: CreateGroup): Promise<CreateGroup>
-    updateGroup(options: UpdateGroupOptions): Promise<CreateGroup>
+    createGroup(personId: string, values: CreateGroup): Promise<Group>
+    updateGroup(options: UpdateGroupOptions): Promise<Group>
     deleteGroup(groupId: string, personId: string): Promise<void>
     leaveGroup(groupId: string, personId: string): Promise<void>
 }
