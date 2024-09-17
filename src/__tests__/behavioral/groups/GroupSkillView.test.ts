@@ -1,6 +1,7 @@
 import {
     buttonAssert,
     interactor,
+    listAssert,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
@@ -13,8 +14,10 @@ import GroupSkillViewController, {
 import GroupFormCardViewController from '../../../groups/GroupFormCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import {
+    AddFriendToGroupTargetAndPayload,
     CreateGroupTargetAndPayload,
     GetGroupTargetAndPayload,
+    LeaveGroupTargetAndPayload,
     ListFriendsTargetAndPayload,
     UpdateGroupTargetAndPayload,
 } from '../../support/EventFaker'
@@ -29,15 +32,18 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     private static getGroupTarget?: GetGroupTargetAndPayload['target']
     private static updateGroupPayload: UpdateGroupTargetAndPayload['payload']
     private static updateGroupTarget: UpdateGroupTargetAndPayload['target']
-    private static wasAddFriendEmitted = false
+    private static addFriendTarget?: AddFriendToGroupTargetAndPayload['target']
+    private static addFriendPayload?: AddFriendToGroupTargetAndPayload['payload']
+    private static leaveGroupTarget?: LeaveGroupTargetAndPayload['target']
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         delete this.createGroupPayload
         delete this.getGroupTarget
-
-        this.wasAddFriendEmitted = false
+        delete this.addFriendTarget
+        delete this.addFriendPayload
+        delete this.leaveGroupTarget
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
 
@@ -72,8 +78,13 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
             this.updateGroupPayload = payload
         })
 
-        await this.eventFaker.fakeAddFriendToGroup(() => {
-            this.wasAddFriendEmitted = true
+        await this.eventFaker.fakeAddFriendToGroup(({ target, payload }) => {
+            this.addFriendTarget = target
+            this.addFriendPayload = payload
+        })
+
+        await this.eventFaker.fakeLeaveGroup(({ target }) => {
+            this.leaveGroupTarget = target
         })
     }
 
@@ -376,27 +387,37 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async toggleFriendInGroupThatIsNotMineRendersConfirm() {
-        await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+        assert.isEqual(
+            confirmVc.options.isDestructive,
+            false,
+            `The confirm adding friend should not be destructive!`
+        )
     }
 
     @test()
     protected static async confirmingToggleFriendEmitsAddFriendEvent() {
         await this.loadGroupNotMineToggleFriendAndAccept()
 
-        assert.isTrue(
-            this.wasAddFriendEmitted,
+        assert.isTruthy(
+            this.addFriendTarget,
             `Add friend to group event was not hit`
         )
+
+        assert.isEqualDeep(this.addFriendTarget, {
+            groupId: this.groupId,
+        })
+
+        assert.isEqualDeep(this.addFriendPayload, {
+            friendId: this.friendId,
+        })
     }
 
     @test()
     protected static async shouldNotEmitAddFriendIfDeclinesConfirmation() {
         await this.loadGroupNotMineToggleFriendAndDecline()
-
-        assert.isFalse(
-            this.wasAddFriendEmitted,
-            `Add friend to group event was hit`
-        )
+        this.assertDidNotEmitAddFriend()
     }
 
     @test()
@@ -408,13 +429,14 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async decliningAddFriendRevertsToggle() {
         await this.loadGroupNotMineToggleFriendAndDecline()
-        this.assertSelectedFriends([])
+        this.assertNoFriendsSelected()
     }
 
     @test()
     protected static async acceptingAddFriendKeepsThemSelected() {
         await this.loadGroupNotMineToggleFriendAndAccept()
-        this.assertSelectedFriends([this.eventFaker.fakedFriends[0].id])
+        this.assertSelectedFriends([this.friendId])
+        this.assertDidNotEmitLeaveGroup()
     }
 
     @test()
@@ -426,7 +448,106 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         const confirmVc =
             await this.loadGroupNotMineToggleFriendAndAssertConfirm()
 
+        const alertVc = await vcAssert.assertRendersAlert(this.vc, () =>
+            confirmVc.accept()
+        )
+        await alertVc.hide()
+        this.assertNoFriendsSelected()
+    }
+
+    @test()
+    protected static async friendsAlreadyPartOfGroupNotMineDoNotRenderToggle() {
+        const friend = this.eventFaker.seedFriend()
+        await this.loadWithGroup({ isMine: false, people: [friend.id] })
+
+        listAssert.rowDoesNotRenderToggle(
+            this.friendSelectionCardVc.getListVc(),
+            0
+        )
+    }
+
+    @test()
+    protected static async togglingSelfInGroupNotMineEmitsLeaveGroupAndRedirectsAway() {
+        const confirmVc =
+            await this.loadGroupNotMineWithMeSelectedToggleAndAssertConfirm()
+
+        await vcAssert.assertActionRedirects({
+            action: () => confirmVc.accept(),
+            destination: {
+                id: 'adventure.list',
+            },
+            router: this.views.getRouter(),
+        })
+
+        assert.isTrue(
+            confirmVc.options.isDestructive,
+            `Confirmation should be destructive when removing self from group`
+        )
+        assert.isEqualDeep(this.leaveGroupTarget, {
+            groupId: this.groupId,
+        })
+
+        this.assertDidNotEmitAddFriend()
+    }
+
+    @test()
+    protected static async togglingSelfInGroupNotMineAndDecliningDoesNotEmitLeaveGroup() {
+        const confirmVc =
+            await this.loadGroupNotMineWithMeSelectedToggleAndAssertConfirm()
+        await confirmVc.decline()
+
+        this.assertDidNotEmitLeaveGroup()
+    }
+
+    @test()
+    protected static async rendersAlertIfLeaveGroupThrows() {
+        await eventFaker.makeEventThrow('adventure.leave-group::v2022_09_09')
+        const confirmVc =
+            await this.loadGroupNotMineWithMeSelectedToggleAndAssertConfirm()
         await vcAssert.assertRendersAlert(this.vc, () => confirmVc.accept())
+    }
+
+    private static assertDidNotEmitAddFriend() {
+        assert.isFalsy(
+            this.addFriendTarget,
+            `Add friend to group event was hit`
+        )
+    }
+
+    private static assertDidNotEmitLeaveGroup() {
+        assert.isFalsy(
+            this.leaveGroupTarget,
+            `Should not have emitted leave group`
+        )
+    }
+
+    private static async loadGroupNotMineWithMeSelectedToggleAndAssertConfirm() {
+        await this.loadGroupNotMineWithMeIn()
+
+        const confirmVc = await this.toggleFriendAndAssertConfirm(
+            this.fakedPerson.id
+        )
+        return confirmVc
+    }
+
+    private static async loadGroupNotMineWithMeIn() {
+        this.eventFaker.seedFriend({ id: this.fakedPerson.id })
+        await this.loadWithGroup({
+            isMine: false,
+            people: [this.fakedPerson.id],
+        })
+    }
+
+    private static assertNoFriendsSelected() {
+        this.assertSelectedFriends([])
+    }
+
+    private static get groupId(): string {
+        return this.eventFaker.fakedGroups[0].id
+    }
+
+    private static get friendId(): string {
+        return this.eventFaker.fakedFriends[0].id
     }
 
     private static async loadGroupNotMineToggleFriendAndAccept() {
@@ -498,8 +619,10 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     }
 
     private static async loadWithGroup(group?: Partial<ListGroup>) {
-        const g = this.eventFaker.generateListGroupValues(group)
-        await this.eventFaker.fakeGetGroup(() => g)
+        const g = this.eventFaker.seedGroup({
+            ...this.eventFaker.generateListGroupValues(),
+            ...group,
+        })
         await this.load({ id: g.id })
         return g
     }
@@ -509,7 +632,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         await this.submitAndAssertRedirect()
     }
 
-    private static clickFriendListButton(button: string): any {
+    private static clickFriendListButton(button: string) {
         return interactor.clickButton(this.friendSelectionCardVc, button)
     }
 

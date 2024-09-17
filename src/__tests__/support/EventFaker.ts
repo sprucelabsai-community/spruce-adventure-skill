@@ -17,12 +17,15 @@ import generateFriendValues from './generateFriendValues'
 
 export default class EventFaker {
     public fakedFriends: Friend[] = []
+    public fakedGroups: ListGroup[] = []
 
-    public async fakeAddFriendToGroup(cb?: () => void) {
+    public async fakeAddFriendToGroup(
+        cb?: (targetAndPayload: AddFriendToGroupTargetAndPayload) => void
+    ) {
         await eventFaker.on(
             'adventure.add-friend-to-group::v2022_09_09',
-            () => {
-                cb?.()
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
                 return {
                     success: true,
                 }
@@ -65,9 +68,10 @@ export default class EventFaker {
             'adventure.get-group::v2022_09_09',
             (targetAndPayload) => {
                 return {
-                    group: cb?.(targetAndPayload) ?? {
-                        ...this.generateListGroupValues(),
-                    },
+                    group: cb?.(targetAndPayload) ??
+                        this.fakedGroups[0] ?? {
+                            ...this.generateListGroupValues(),
+                        },
                 }
             }
         )
@@ -118,7 +122,7 @@ export default class EventFaker {
     public async fakeListGroups(cb?: () => void | ListGroup[]) {
         await eventFaker.on('adventure.list-groups::v2022_09_09', () => {
             return {
-                groups: cb?.() ?? [],
+                groups: cb?.() ?? this.fakedGroups,
             }
         })
     }
@@ -143,6 +147,13 @@ export default class EventFaker {
             description: generateId(),
             ...group,
         }
+    }
+
+    public seedGroup(group: ListGroup) {
+        const g = group ?? this.generateListGroupValues()
+        this.fakedGroups.push(g)
+
+        return g
     }
 
     public async fakeSendMessage(
@@ -364,3 +375,6 @@ export type DeleteGroupTargetAndPayload =
 
 export type LeaveGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.LeaveGroupEmitTargetAndPayload
+
+export type AddFriendToGroupTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetAndPayload

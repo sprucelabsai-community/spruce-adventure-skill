@@ -136,8 +136,14 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             const friend = this.activeCardVc
                 .getRecords()
                 .find((r) => r.id === id)
-            if (friend && this.isFriendSelectable(friend)) {
-                await this.activeCardVc.setValue(id, 'isSelected', true)
+
+            if (friend) {
+                friend.isInGroup = true
+                if (this.isFriendSelectable(friend)) {
+                    await this.activeCardVc.setValue(id, 'isSelected', true)
+                } else {
+                    this.activeCardVc.upsertRow(id, this.renderRow(friend))
+                }
             }
         }
     }
@@ -196,7 +202,8 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             cells.push({
                 toggleInput: {
                     name: 'isSelected',
-                    onChange: () => this.selectFriendHandler?.(true, friend),
+                    onChange: (value) =>
+                        this.selectFriendHandler?.(value, friend),
                 },
             })
         }

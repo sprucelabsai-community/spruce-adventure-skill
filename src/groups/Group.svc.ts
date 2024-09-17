@@ -25,6 +25,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     private shouldRenderForm = true
     private group?: ListGroup
     private isloaded = false
+    private myId?: string
 
     public constructor(options: ViewControllerOptions) {
         super(options)
@@ -43,16 +44,22 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     private FriendSelectionCardVc(): FriendSelectionCardViewController {
         return this.Controller('adventure.friend-selection-card', {
             id: 'friend-selection',
-            onSelectFriend: this.handleSelectFriend.bind(this),
+            onSelectFriend: this.handleToggleFriend.bind(this),
         })
     }
 
-    private async handleSelectFriend(isSelected: boolean, friend: Friend) {
+    private async handleToggleFriend(isSelected: boolean, friend: Friend) {
         if (this.group?.isMine !== false || !this.isloaded) {
             return true
         }
+
+        const isMe = this.myId === friend.id
         const didConfirm = await this.confirm({
-            message: `Add ${friend.casualName} to the group?`,
+            isDestructive: isMe,
+            title: isMe ? 'Leave Group?' : 'Add Friend?',
+            message: isMe
+                ? `Are you sure you want to leave ${this.group.title}? Once you do you will be redirected away and won't be able to see it again!`
+                : `Add ${friend.casualName} to ${this.group.title}?`,
         })
 
         if (!didConfirm) {
@@ -60,26 +67,50 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         }
 
         try {
-            const client = await this.connectToApi()
-            await client.emitAndFlattenResponses(
-                'adventure.add-friend-to-group::v2022_09_09',
-                {
-                    target: {
-                        groupId: 'aoue',
-                    },
-                    payload: {
-                        friendId: 'aeou',
-                    },
-                }
-            )
+            if (isMe) {
+                await this.emitLeaveGroup()
+                await this.router?.redirect('adventure.list')
+            } else {
+                const friendId = friend.id
+                await this.emitAddFriendToGroup(friendId)
+            }
         } catch (err: any) {
             this.log.error('failed to add friend to group', err.stack)
             await this.alert({
                 message: err.message ?? 'Failed to add friend to group',
             })
+
+            return false
         }
 
         return true
+    }
+
+    private async emitAddFriendToGroup(friendId: string) {
+        const client = await this.connectToApi()
+        await client.emitAndFlattenResponses(
+            'adventure.add-friend-to-group::v2022_09_09',
+            {
+                target: {
+                    groupId: this.group!.id,
+                },
+                payload: {
+                    friendId,
+                },
+            }
+        )
+    }
+
+    private async emitLeaveGroup() {
+        const client = await this.connectToApi()
+        await client.emitAndFlattenResponses(
+            'adventure.leave-group::v2022_09_09',
+            {
+                target: {
+                    groupId: this.group!.id,
+                },
+            }
+        )
     }
 
     private FormCardVc(): GroupFormCardViewController {
@@ -145,10 +176,11 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     public async load(
         options: SkillViewControllerLoadOptions<GroupSkillViewArgs>
     ) {
-        const { router, args } = options
+        const { router, args, authenticator } = options
         const { id } = args
 
         this.router = router
+        this.myId = authenticator.getPerson()?.id
 
         if (id) {
             this.group = await this.loadGroup(id)

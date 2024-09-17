@@ -7,6 +7,7 @@ import {
     ListRow,
     Router,
 } from '@sprucelabs/heartwood-view-controllers'
+import { EventName, SkillEventContract } from '@sprucelabs/mercury-types'
 import { ListGroup } from '../../adventure.types'
 
 export default class GroupListCardViewController extends AbstractViewController<Card> {
@@ -112,27 +113,16 @@ export default class GroupListCardViewController extends AbstractViewController<
     }
 
     private async emit(groupId: string, isMine: boolean) {
-        if (!isMine) {
-            const client = await this.connectToApi()
-            await client.emitAndFlattenResponses(
-                'adventure.leave-group::v2022_09_09',
-                {
-                    target: {
-                        groupId,
-                    },
-                }
-            )
-        } else {
-            const client = await this.connectToApi()
-            await client.emitAndFlattenResponses(
-                'adventure.delete-group::v2022_09_09',
-                {
-                    target: {
-                        groupId,
-                    },
-                }
-            )
-        }
+        const client = await this.connectToApi()
+        const eventName: EventName<SkillEventContract> = isMine
+            ? 'adventure.delete-group::v2022_09_09'
+            : 'adventure.leave-group::v2022_09_09'
+
+        await client.emitAndFlattenResponses(eventName, {
+            target: {
+                groupId,
+            },
+        })
     }
 
     private async handleClickRow(groupId: string) {
