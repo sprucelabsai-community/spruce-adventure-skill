@@ -259,7 +259,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 export type SelectFriendHandler = (
     isSelected: boolean,
     person: Friend
-) => void | Promise<void>
+) => boolean | Promise<boolean>
 
 export interface FriendsListOptions {
     buttons?: Button[]

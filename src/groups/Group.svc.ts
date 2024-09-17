@@ -24,6 +24,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     private router?: Router
     private shouldRenderForm = true
     private group?: ListGroup
+    private isloaded = false
 
     public constructor(options: ViewControllerOptions) {
         super(options)
@@ -47,29 +48,38 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     }
 
     private async handleSelectFriend(isSelected: boolean, friend: Friend) {
-        if (this.group?.isMine !== false) {
-            return
+        if (this.group?.isMine !== false || !this.isloaded) {
+            return true
         }
         const didConfirm = await this.confirm({
             message: `Add ${friend.casualName} to the group?`,
         })
 
         if (!didConfirm) {
-            return
+            return false
         }
 
-        const client = await this.connectToApi()
-        await client.emitAndFlattenResponses(
-            'adventure.add-friend-to-group::v2022_09_09',
-            {
-                target: {
-                    groupId: 'aoue',
-                },
-                payload: {
-                    friendId: 'aeou',
-                },
-            }
-        )
+        try {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.add-friend-to-group::v2022_09_09',
+                {
+                    target: {
+                        groupId: 'aoue',
+                    },
+                    payload: {
+                        friendId: 'aeou',
+                    },
+                }
+            )
+        } catch (err: any) {
+            this.log.error('failed to add friend to group', err.stack)
+            await this.alert({
+                message: err.message ?? 'Failed to add friend to group',
+            })
+        }
+
+        return true
     }
 
     private FormCardVc(): GroupFormCardViewController {
@@ -165,6 +175,8 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
                 this.group.people
             )
         }
+
+        this.isloaded = true
 
         this.triggerRender()
     }

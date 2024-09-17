@@ -29,12 +29,15 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     private static getGroupTarget?: GetGroupTargetAndPayload['target']
     private static updateGroupPayload: UpdateGroupTargetAndPayload['payload']
     private static updateGroupTarget: UpdateGroupTargetAndPayload['target']
+    private static wasAddFriendEmitted = false
 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         delete this.createGroupPayload
         delete this.getGroupTarget
+
+        this.wasAddFriendEmitted = false
 
         TestRouter.setShouldThrowWhenRedirectingToBadSvc(false)
 
@@ -55,9 +58,11 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         ) as SpyGroupSkillView
 
         await this.eventFaker.fakeListFriends()
+
         await this.eventFaker.fakeGetGroup(({ target }) => {
             this.getGroupTarget = target
         })
+
         await this.eventFaker.fakeCreateGroup(({ payload }) => {
             this.createGroupPayload = payload
         })
@@ -65,6 +70,10 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         await this.eventFaker.fakeUpdateGroup(({ payload, target }) => {
             this.updateGroupTarget = target
             this.updateGroupPayload = payload
+        })
+
+        await this.eventFaker.fakeAddFriendToGroup(() => {
+            this.wasAddFriendEmitted = true
         })
     }
 
@@ -372,32 +381,66 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async confirmingToggleFriendEmitsAddFriendEvent() {
-        let wasHit = false
-        await this.eventFaker.fakeAddFriendToGroup(() => {
-            wasHit = true
-        })
+        await this.loadGroupNotMineToggleFriendAndAccept()
 
-        const confirmVc =
-            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
-
-        await confirmVc.accept()
-
-        assert.isTrue(wasHit, `Add friend to group event was not hit`)
+        assert.isTrue(
+            this.wasAddFriendEmitted,
+            `Add friend to group event was not hit`
+        )
     }
 
     @test()
     protected static async shouldNotEmitAddFriendIfDeclinesConfirmation() {
-        let wasHit = false
-        await this.eventFaker.fakeAddFriendToGroup(() => {
-            wasHit = true
-        })
+        await this.loadGroupNotMineToggleFriendAndDecline()
+
+        assert.isFalse(
+            this.wasAddFriendEmitted,
+            `Add friend to group event was hit`
+        )
+    }
+
+    @test()
+    protected static async loadingOtherGroupWithSelectedFriendsDoesNotRenderAlert() {
+        const friend = this.eventFaker.seedFriend()
+        await this.loadWithGroup({ isMine: false, people: [friend.id] })
+    }
+
+    @test()
+    protected static async decliningAddFriendRevertsToggle() {
+        await this.loadGroupNotMineToggleFriendAndDecline()
+        this.assertSelectedFriends([])
+    }
+
+    @test()
+    protected static async acceptingAddFriendKeepsThemSelected() {
+        await this.loadGroupNotMineToggleFriendAndAccept()
+        this.assertSelectedFriends([this.eventFaker.fakedFriends[0].id])
+    }
+
+    @test()
+    protected static async addingFriendThrowingRendersAlert() {
+        await eventFaker.makeEventThrow(
+            'adventure.add-friend-to-group::v2022_09_09'
+        )
 
         const confirmVc =
             await this.loadGroupNotMineToggleFriendAndAssertConfirm()
 
-        await confirmVc.decline()
+        await vcAssert.assertRendersAlert(this.vc, () => confirmVc.accept())
+    }
 
-        assert.isFalse(wasHit, `Add friend to group event was hit`)
+    private static async loadGroupNotMineToggleFriendAndAccept() {
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+
+        await confirmVc.accept()
+    }
+
+    private static async loadGroupNotMineToggleFriendAndDecline() {
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+
+        await confirmVc.decline()
     }
 
     private static async loadGroupNotMineToggleFriendAndAssertConfirm() {
@@ -435,11 +478,13 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     private static async loadWithFriendsAndAssertSelected(friends: Friend[]) {
         await this.loadWithFriends(friends)
+        const ids = friends.map((f) => f.id)
+        this.assertSelectedFriends(ids)
+    }
+
+    private static assertSelectedFriends(ids: string[]) {
         const selected = this.friendSelectionCardVc.getSelectedFriends()
-        assert.isEqualDeep(
-            selected,
-            friends.map((f) => f.id)
-        )
+        assert.isEqualDeep(selected, ids)
     }
 
     private static async loadWithFriends(friends: Friend[]) {
