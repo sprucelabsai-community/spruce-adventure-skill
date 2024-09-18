@@ -55,6 +55,22 @@ export default class GroupManagerImpl implements GroupManager {
         const toName = await this.getPersonsName(toId)
         const fromName = await this.getPersonsName(fromId)
 
+        await this.sendMessage(
+            toId,
+            `Hey ${toName}! ${fromName} has added you to join their Adventure Group, "${title}". Anytime you want to invite everyone in the group to your own adventure, use this link: https://adventure.spruce.bot`,
+            {
+                title,
+                toName,
+                fromName,
+            }
+        )
+    }
+
+    private async sendMessage(
+        toId: string,
+        body: string,
+        context: Record<string, any>
+    ) {
         await this.client.emitAndFlattenResponses('send-message::v2020_12_25', {
             target: {
                 personId: toId,
@@ -62,12 +78,8 @@ export default class GroupManagerImpl implements GroupManager {
             payload: {
                 message: {
                     classification: 'transactional',
-                    body: `Hey ${toName}! ${fromName} has added you to join their Adventure Group, "${title}". Anytime you want to invite everyone in the group to your own adventure, use this link: https://adventure.spruce.bot`,
-                    context: {
-                        title,
-                        toName,
-                        fromName,
-                    },
+                    body,
+                    context,
                 },
             },
         })
@@ -130,19 +142,10 @@ export default class GroupManagerImpl implements GroupManager {
     }
 
     public async leaveGroup(groupId: string, personId: string) {
-        const match = await this.groups.findOne(
-            {
-                id: groupId,
-            },
-            { shouldIncludePrivateFields: true }
+        const match = await this.getGroup(
+            groupId,
+            `I couldn't find the group you're trying to leave.`
         )
-
-        if (!match) {
-            throw new SpruceError({
-                code: 'NOT_FOUND',
-                friendlyMessage: `I couldn't find the group you're trying to leave.`,
-            })
-        }
 
         if (match.source.personId === personId) {
             throw new SpruceError({
@@ -165,6 +168,61 @@ export default class GroupManagerImpl implements GroupManager {
             { people }
         )
     }
+
+    private async getGroup(groupId: string, notFoundErrMessage: string) {
+        const match = await this.groups.findOne(
+            {
+                id: groupId,
+            },
+            { shouldIncludePrivateFields: true }
+        )
+
+        if (!match) {
+            throw new SpruceError({
+                code: 'NOT_FOUND',
+                friendlyMessage: notFoundErrMessage,
+            })
+        }
+        return match
+    }
+
+    public async addFriendToGroup(
+        options: AddFriendToGroupOptions
+    ): Promise<void> {
+        const { groupId, sourcePersonId, friendId } = options
+
+        const group = await this.getGroup(
+            groupId,
+            `I couldn't find the group you're to add a friend to!`
+        )
+
+        const invitersName = await this.getPersonsName(sourcePersonId)
+        const invitedsName = await this.getPersonsName(friendId)
+
+        await this.sendMessage(group.source.personId, 'aoeu', {
+            invitersName,
+            invitedsName,
+            groupTitle: group.title,
+        })
+
+        if (
+            group.source.personId !== sourcePersonId &&
+            !group.people.includes(sourcePersonId)
+        ) {
+            throw new SpruceError({
+                code: 'CANNOT_ADD_FRIEND_TO_GROUP_YOU_ARE_NOT_PART_OF',
+            })
+        }
+
+        if (group.people.includes(friendId)) {
+            throw new SpruceError({
+                code: 'ALREADY_IN_GROUP',
+                friendlyMessage: `That friend is already in the group!`,
+            })
+        }
+
+        await this.groups.updateOne({}, { people: [...group.people, friendId] })
+    }
 }
 
 export interface SendBeenInvitedMessageOptions {
@@ -178,6 +236,7 @@ export interface GroupManager {
     updateGroup(options: UpdateGroupOptions): Promise<Group>
     deleteGroup(groupId: string, personId: string): Promise<void>
     leaveGroup(groupId: string, personId: string): Promise<void>
+    addFriendToGroup(options: AddFriendToGroupOptions): Promise<void>
 }
 
 interface UpdateGroupOptions {
@@ -190,4 +249,10 @@ export interface GroupManageConstructorOptions {
     groups: GroupsStore
     finder: GroupFinder
     client: MercuryClient
+}
+
+export interface AddFriendToGroupOptions {
+    groupId: string
+    sourcePersonId: string
+    friendId: string
 }

@@ -8,6 +8,8 @@ import * as SpruceSchema from '@sprucelabs/schema'
 
 
 
+
+
 export declare namespace SpruceErrors.Adventure {
 
 	
@@ -92,6 +94,46 @@ export declare namespace SpruceErrors.Adventure {
 	}
 
 	export type CannotLeaveGroupYouAreNotPartOfEntity = SchemaEntity<SpruceErrors.Adventure.CannotLeaveGroupYouAreNotPartOfSchema>
+
+}
+
+
+export declare namespace SpruceErrors.Adventure {
+
+	
+	export interface CannotAddFriendToGroupYouAreNotPartOf {
+		
+	}
+
+	export interface CannotAddFriendToGroupYouAreNotPartOfSchema extends SpruceSchema.Schema {
+		id: 'cannotAddFriendToGroupYouAreNotPartOf',
+		namespace: 'Adventure',
+		name: 'Cannot add friend to group you are not part of',
+		    fields: {
+		    }
+	}
+
+	export type CannotAddFriendToGroupYouAreNotPartOfEntity = SchemaEntity<SpruceErrors.Adventure.CannotAddFriendToGroupYouAreNotPartOfSchema>
+
+}
+
+
+export declare namespace SpruceErrors.Adventure {
+
+	
+	export interface AlreadyInGroup {
+		
+	}
+
+	export interface AlreadyInGroupSchema extends SpruceSchema.Schema {
+		id: 'alreadyInGroup',
+		namespace: 'Adventure',
+		name: 'Already in group',
+		    fields: {
+		    }
+	}
+
+	export type AlreadyInGroupEntity = SchemaEntity<SpruceErrors.Adventure.AlreadyInGroupSchema>
 
 }
 

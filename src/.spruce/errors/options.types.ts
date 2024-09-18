@@ -13,7 +13,13 @@ export interface CannotLeaveOwnGroupErrorOptions extends SpruceErrors.Adventure.
 export interface CannotLeaveGroupYouAreNotPartOfErrorOptions extends SpruceErrors.Adventure.CannotLeaveGroupYouAreNotPartOf, ISpruceErrorOptions {
 	code: 'CANNOT_LEAVE_GROUP_YOU_ARE_NOT_PART_OF'
 }
+export interface CannotAddFriendToGroupYouAreNotPartOfErrorOptions extends SpruceErrors.Adventure.CannotAddFriendToGroupYouAreNotPartOf, ISpruceErrorOptions {
+	code: 'CANNOT_ADD_FRIEND_TO_GROUP_YOU_ARE_NOT_PART_OF'
+}
+export interface AlreadyInGroupErrorOptions extends SpruceErrors.Adventure.AlreadyInGroup, ISpruceErrorOptions {
+	code: 'ALREADY_IN_GROUP'
+}
 
-type ErrorOptions =  | NotYourGroupErrorOptions  | NotFoundErrorOptions  | CannotLeaveOwnGroupErrorOptions  | CannotLeaveGroupYouAreNotPartOfErrorOptions 
+type ErrorOptions =  | NotYourGroupErrorOptions  | NotFoundErrorOptions  | CannotLeaveOwnGroupErrorOptions  | CannotLeaveGroupYouAreNotPartOfErrorOptions  | CannotAddFriendToGroupYouAreNotPartOfErrorOptions  | AlreadyInGroupErrorOptions 
 
 export default ErrorOptions

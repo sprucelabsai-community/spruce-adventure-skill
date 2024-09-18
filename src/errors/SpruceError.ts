@@ -23,6 +23,14 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
                 message = 'You cannot leave a group you are not part of!'
                 break
 
+            case 'CANNOT_ADD_FRIEND_TO_GROUP_YOU_ARE_NOT_PART_OF':
+                message = `You can't add a person to this group because you are not part of it!`
+                break
+
+            case 'ALREADY_IN_GROUP':
+                message = 'Already in group!'
+                break
+
             default:
                 message = super.friendlyMessage()
         }
