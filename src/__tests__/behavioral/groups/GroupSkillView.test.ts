@@ -2,7 +2,9 @@ import {
     buttonAssert,
     interactor,
     listAssert,
+    ListRow,
     vcAssert,
+    AssertConfirmViewController,
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
@@ -433,13 +435,6 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async acceptingAddFriendKeepsThemSelected() {
-        await this.loadGroupNotMineToggleFriendAndAccept()
-        this.assertSelectedFriends([this.friendId])
-        this.assertDidNotEmitLeaveGroup()
-    }
-
-    @test()
     protected static async addingFriendThrowingRendersAlert() {
         await eventFaker.makeEventThrow(
             'adventure.add-friend-to-group::v2022_09_09'
@@ -460,10 +455,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         const friend = this.eventFaker.seedFriend()
         await this.loadWithGroup({ isMine: false, people: [friend.id] })
 
-        listAssert.rowDoesNotRenderToggle(
-            this.friendSelectionCardVc.getListVc(),
-            0
-        )
+        this.assertFriendRowDoesNotRenderToggle()
     }
 
     @test()
@@ -505,6 +497,60 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         const confirmVc =
             await this.loadGroupNotMineWithMeSelectedToggleAndAssertConfirm()
         await vcAssert.assertRendersAlert(this.vc, () => confirmVc.accept())
+    }
+
+    @test()
+    protected static async toggleHidesAfterAddingPersonToGroupThatIsNotMine() {
+        await this.loadGroupNotMineToggleFriendAndAccept()
+        this.assertFriendRowDoesNotRenderToggle()
+    }
+
+    @test()
+    protected static async toggleHidingLeavesRemainderOfCells() {
+        const confirmVc =
+            await this.loadGroupNotMineToggleFriendAndAssertConfirm()
+
+        await this.assertRowRemovesToggelOnAccept(0, confirmVc)
+    }
+
+    @test()
+    protected static async toggleHidesInSecondRow() {
+        this.eventFaker.seedFriend()
+        const friend = this.eventFaker.seedFriend()
+        await this.loadWithGroup({ isMine: false })
+        const confirmVc = await this.toggleFriendAndAssertConfirm(friend.id)
+        await this.assertRowRemovesToggelOnAccept(1, confirmVc)
+    }
+
+    private static async assertRowRemovesToggelOnAccept(
+        idx: number,
+        confirmVc: AssertConfirmViewController
+    ) {
+        const expected = this.getFriendRow(idx)
+        expected.cells.pop()
+
+        await confirmVc.accept()
+
+        this.assertRowEquals(idx, expected)
+    }
+
+    private static assertRowEquals(idx: number, expected: ListRow) {
+        const actual = this.getFriendRow(idx)
+        assert.isEqualDeep(actual, expected)
+    }
+
+    private static getFriendRow(idx: number) {
+        const row = { ...this.friendListVc.getRows()[idx] }
+        row.cells = [...row.cells]
+        return row
+    }
+
+    private static assertFriendRowDoesNotRenderToggle() {
+        listAssert.rowDoesNotRenderToggle(this.friendListVc, 0)
+    }
+
+    private static get friendListVc() {
+        return this.friendSelectionCardVc.getListVc()
     }
 
     private static assertDidNotEmitAddFriend() {

@@ -59,7 +59,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             title: isMe ? 'Leave Group?' : 'Add Friend?',
             message: isMe
                 ? `Are you sure you want to leave ${this.group.title}? Once you do you will be redirected away and won't be able to see it again!`
-                : `Add ${friend.casualName} to ${this.group.title}?`,
+                : `Add ${friend.casualName} to ${this.group.title}? Make sure you have asked the group owner if this is OK. Also, once you add them you can't remove them! Only the group owner can.`,
         })
 
         if (!didConfirm) {
@@ -73,9 +73,10 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             } else {
                 const friendId = friend.id
                 await this.emitAddFriendToGroup(friendId)
+                this.friendSelectionCardVc.markPersonAsInGroup(friendId)
             }
         } catch (err: any) {
-            this.log.error('failed to add friend to group', err.stack)
+            this.log.error('failed to add friend to group', err)
             await this.alert({
                 message: err.message ?? 'Failed to add friend to group',
             })
@@ -186,6 +187,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             this.group = await this.loadGroup(id)
             this.friendSelectionCardVc.enableInvite()
             this.shouldRenderForm = this.group.isMine
+            this.triggerRender()
             this.updateCardHeader()
 
             await this.setFormValues()
@@ -209,8 +211,6 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         }
 
         this.isloaded = true
-
-        this.triggerRender()
     }
 
     private dropInBackButton() {

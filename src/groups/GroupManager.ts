@@ -1,5 +1,6 @@
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
+import { buildLog } from '@sprucelabs/spruce-skill-utils'
 import { CreateGroup, Group } from '../adventure.types'
 import SpruceError from '../errors/SpruceError'
 import GroupFinder from './GroupFinder'
@@ -13,6 +14,7 @@ export default class GroupManagerImpl implements GroupManager {
     private finder: GroupFinder
     private client: MercuryClient
     private peoplesNames: Record<string, Promise<string>> = {}
+    private log = buildLog('GroupManagerImpl')
 
     protected constructor(options: GroupManageConstructorOptions) {
         const { groups, finder, client } = options
@@ -71,18 +73,25 @@ export default class GroupManagerImpl implements GroupManager {
         body: string,
         context: Record<string, any>
     ) {
-        await this.client.emitAndFlattenResponses('send-message::v2020_12_25', {
-            target: {
-                personId: toId,
-            },
-            payload: {
-                message: {
-                    classification: 'transactional',
-                    body,
-                    context,
-                },
-            },
-        })
+        try {
+            await this.client.emitAndFlattenResponses(
+                'send-message::v2020_12_25',
+                {
+                    target: {
+                        personId: toId,
+                    },
+                    payload: {
+                        message: {
+                            classification: 'transactional',
+                            body,
+                            context,
+                        },
+                    },
+                }
+            )
+        } catch (err) {
+            this.log.error('Failed to send message', err)
+        }
     }
 
     private async getPersonsName(personId: string) {

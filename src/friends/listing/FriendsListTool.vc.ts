@@ -133,9 +133,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
 
     public async setSelectedFriends(ids: string[]) {
         for (const id of ids) {
-            const friend = this.activeCardVc
-                .getRecords()
-                .find((r) => r.id === id)
+            const friend = this.findFriendRecord(id)
 
             if (friend) {
                 friend.isInGroup = true
@@ -146,6 +144,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
                 }
             }
         }
+    }
+
+    private findFriendRecord(id: string) {
+        return this.activeCardVc.getRecords().find((r) => r.id === id)
     }
 
     private async handleClickInvite() {
@@ -195,10 +197,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             },
         ]
 
-        if (
-            this.shouldAllowFriendSelection &&
-            this.isFriendSelectable(friend)
-        ) {
+        if (this.isFriendSelectable(friend)) {
             cells.push({
                 toggleInput: {
                     name: 'isSelected',
@@ -219,7 +218,10 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 
     private isFriendSelectable(friend: Friend) {
-        return this.isMyGroup || !friend.isInGroup || this.isMe(friend.id)
+        return (
+            this.shouldAllowFriendSelection &&
+            (this.isMyGroup || !friend.isInGroup || this.isMe(friend.id))
+        )
     }
 
     public setFooterButtons(buttons: Button[]) {
@@ -248,6 +250,12 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             )
         }
         this.refreshFooter()
+    }
+
+    public markPersonAsInGroup(personId: string) {
+        const friend = this.findFriendRecord(personId)
+        friend.isInGroup = true
+        this.activeCardVc.upsertRow(friend.id, this.renderRow(friend))
     }
 
     private async loadActiveRecordCard() {

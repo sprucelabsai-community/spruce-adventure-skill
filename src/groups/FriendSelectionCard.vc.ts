@@ -50,6 +50,10 @@ export default class FriendSelectionCardViewController extends AbstractViewContr
         this.friendListToolVc.setFooterButtons(buttons)
     }
 
+    public markPersonAsInGroup(personId: string) {
+        this.friendListToolVc.markPersonAsInGroup(personId)
+    }
+
     public render() {
         return this.friendListToolVc.render()
     }

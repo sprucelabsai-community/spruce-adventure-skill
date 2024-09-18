@@ -1,4 +1,4 @@
-import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
+import { eventFaker, fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
 import { Group } from '../../../adventure.types'
 import GroupFinder from '../../../groups/GroupFinder'
@@ -183,6 +183,12 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         this.group = group as Group
         await this.addFriendToGroup(this.guest1Id)
         await this.assertPoepleOnGroupEqual([this.guest1Id])
+    }
+
+    @test()
+    protected static async sendMessageThrowingDoesNotThrow() {
+        await eventFaker.makeEventThrow('send-message::v2020_12_25')
+        await this.addFriendToGroup(this.guest1Id)
     }
 
     private static assertNoMessageSent() {
