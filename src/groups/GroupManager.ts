@@ -196,15 +196,46 @@ export default class GroupManagerImpl implements GroupManager {
             `I couldn't find the group you're to add a friend to!`
         )
 
+        this.assertFriendCanBeAdded(group, sourcePersonId, friendId)
+
+        await this.groups.updateOne(
+            {
+                id: groupId,
+            },
+            { people: [...group.people, friendId] }
+        )
+
+        await this.sendFriendAddedMessageToGroupOwner(
+            sourcePersonId,
+            friendId,
+            group
+        )
+    }
+
+    private async sendFriendAddedMessageToGroupOwner(
+        sourcePersonId: string,
+        friendId: string,
+        group: Group
+    ) {
         const invitersName = await this.getPersonsName(sourcePersonId)
         const invitedsName = await this.getPersonsName(friendId)
 
-        await this.sendMessage(group.source.personId, 'aoeu', {
-            invitersName,
-            invitedsName,
-            groupTitle: group.title,
-        })
+        await this.sendMessage(
+            group.source.personId,
+            'Adventure Update: {{invitersName}} just invited {{invitedsName}} to join your Adventure Group, "{{groupTitle}}"!!',
+            {
+                invitersName,
+                invitedsName,
+                groupTitle: group.title,
+            }
+        )
+    }
 
+    private assertFriendCanBeAdded(
+        group: Group,
+        sourcePersonId: string,
+        friendId: string
+    ) {
         if (
             group.source.personId !== sourcePersonId &&
             !group.people.includes(sourcePersonId)
@@ -220,8 +251,6 @@ export default class GroupManagerImpl implements GroupManager {
                 friendlyMessage: `That friend is already in the group!`,
             })
         }
-
-        await this.groups.updateOne({}, { people: [...group.people, friendId] })
     }
 }
 

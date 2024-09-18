@@ -42,10 +42,10 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
             people: [generateId()],
             description: generateId(),
         }
-        const group = await this.getNewestGroup()
+        const group = await this.getFirstGroup()
         await this.emitUpdateGroup(group.id, updates)
 
-        const updated = await this.getNewestGroup()
+        const updated = await this.getFirstGroup()
 
         assert.isEqual(updated.title, updates.title)
         assert.isEqual(updated.description, updates.description)
@@ -77,7 +77,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
             people: [generateId()],
             description: generateId(),
         }
-        const group = await this.getNewestGroup()
+        const group = await this.getFirstGroup()
         const response = await this.emitUpdateGroup(group.id, updates)
 
         assert.isEqualDeep(response, {

@@ -15,7 +15,7 @@ export default class ConnectionAccepterTest extends AbstractFriendsTest {
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
 
-        this.group = (await this.getNewestGroup()) as Group
+        this.group = (await this.getFirstGroup()) as Group
         this.accepter = await ConnectionAccepter.Accepter({
             stores: this.stores,
         })

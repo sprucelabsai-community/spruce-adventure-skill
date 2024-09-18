@@ -34,7 +34,7 @@ export default class DeleteGroupListenerTest extends AbstractAdventureTest {
     @seed('groups', 1)
     protected static async throwsIfPersonEmittingIsNotSource() {
         await this.groups.updateOne({}, { source: { personId: generateId() } })
-        const group = await this.getNewestGroup()
+        const group = await this.getFirstGroup()
         await this.emitAndAssertNotFound(group.id)
     }
 
@@ -44,7 +44,7 @@ export default class DeleteGroupListenerTest extends AbstractAdventureTest {
     }
 
     private static async deleteNewestGroup() {
-        const group = await this.getNewestGroup()
+        const group = await this.getFirstGroup()
         const success = await this.emitDelete(group.id)
         return success
     }

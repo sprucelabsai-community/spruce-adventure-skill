@@ -11,7 +11,7 @@ export default class LeaveGroupListenerTest extends AbstractAdventureTest {
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
-        this.group = await this.getNewestGroup()
+        this.group = await this.getFirstGroup()
     }
 
     @test()

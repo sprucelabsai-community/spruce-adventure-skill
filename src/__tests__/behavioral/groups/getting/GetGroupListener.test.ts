@@ -19,7 +19,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
     @test()
     @seed('groups', 1)
     protected static async canFindOwnGroup() {
-        const group = await this.getNewestGroup(false)
+        const group = await this.getFirstGroup(false)
         await this.assertGetGroupResultMatches(group, true)
     }
 

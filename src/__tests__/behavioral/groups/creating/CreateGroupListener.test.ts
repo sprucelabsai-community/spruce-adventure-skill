@@ -20,7 +20,7 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
     @test()
     protected static async createsAGroupRecord() {
         await this.emitCreateGroup()
-        await this.getNewestGroup()
+        await this.getFirstGroup()
     }
 
     @test()
@@ -35,14 +35,14 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
             },
         }
 
-        const match = await this.getNewestGroup()
+        const match = await this.getFirstGroup()
         assert.isEqualDeep(match, { id: match.id, ...expected })
     }
 
     @test()
     protected static async returnsTheGroupThatWasCreated() {
         const group = await this.emitCreateGroup()
-        const match = await this.getNewestGroup(false)
+        const match = await this.getFirstGroup(false)
 
         assert.isEqualDeep(group, match)
     }

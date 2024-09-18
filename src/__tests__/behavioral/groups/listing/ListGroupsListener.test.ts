@@ -27,7 +27,7 @@ export default class ListGroupsListenerTest extends AbstractAdventureTest {
     @seed('groups', 1)
     protected static async firstGroupMatchesExpected() {
         const [group] = await this.emitListGroups()
-        const match = await this.getNewestGroup()
+        const match = await this.getFirstGroup()
         const expected: ListGroup = {
             id: match.id,
             people: [],

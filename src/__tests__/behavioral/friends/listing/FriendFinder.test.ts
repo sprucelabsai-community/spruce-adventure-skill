@@ -26,7 +26,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     protected static async canCreateFriendFinder() {
         await this.connectToOneFriend()
 
-        const group = await this.getNewestGroup()
+        const group = await this.getFirstGroup()
         await this.assertFirstPersonIsInGroup(group.id, false)
     }
 

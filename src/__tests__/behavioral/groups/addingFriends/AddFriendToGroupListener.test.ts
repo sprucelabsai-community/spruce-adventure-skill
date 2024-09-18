@@ -11,8 +11,9 @@ export default class AddFriendToGroupListenerTest extends AbstractAdventureTest 
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
-        this.group = await this.getNewestGroup()
+        this.group = await this.getFirstGroup()
         await this.eventFaker.fakeSendMessage()
+        await this.eventFaker.fakeGetPerson()
     }
 
     @test()
@@ -33,7 +34,7 @@ export default class AddFriendToGroupListenerTest extends AbstractAdventureTest 
     protected static async canAddFriendToGroup() {
         const friendId = generateId()
         await this.emitAddFriend(friendId)
-        const updated = await this.getNewestGroup()
+        const updated = await this.getFirstGroup()
         assert.isEqualDeep(updated.people, [friendId])
     }
 

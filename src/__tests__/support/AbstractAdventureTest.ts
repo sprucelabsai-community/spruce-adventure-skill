@@ -49,7 +49,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         })
     }
 
-    protected static async getNewestGroup(shouldIncludePrivateFields = true) {
+    protected static async getFirstGroup(shouldIncludePrivateFields = true) {
         const match = await this.groups.findOne(
             {},
             { shouldIncludePrivateFields }

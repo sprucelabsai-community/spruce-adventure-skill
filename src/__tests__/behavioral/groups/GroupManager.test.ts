@@ -19,7 +19,7 @@ export default class GroupManagerTest extends AbstractAdventureTest {
     private static group: Group
 
     @seed('organizations', 1)
-    @seed('guests', 1)
+    @seed('guests', 2)
     @seed('groups', 1)
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
@@ -34,7 +34,7 @@ export default class GroupManagerTest extends AbstractAdventureTest {
 
         const finder = await GroupFinder.Finder({ stores: this.stores })
 
-        this.group = await this.getNewestGroup()
+        this.group = await this.getFirstGroup()
 
         GroupManagerImpl.Class = SpyGroupManager
         this.manager = (await GroupManagerImpl.Manager({
@@ -46,27 +46,26 @@ export default class GroupManagerTest extends AbstractAdventureTest {
 
     @test()
     protected static async creatingGroupSendsMessageToPerson() {
-        const { title } = await this.createGroup([this.firstGuestId])
+        const { title } = await this.createGroup([this.guest1Id])
 
-        this.assertMessageSentTo(this.firstGuestId)
+        this.assertMessageSentTo(this.guest1Id)
 
         this.assertMessageSentWithContext({
             title,
-            toName: this.firstGuest.casualName,
+            toName: this.guest1.casualName,
             fromName: this.fakedPerson.casualName,
         })
     }
 
     @test()
-    @seed('guests', 1)
     protected static async creatingAGroupSendsToMoreThanOnePerson() {
-        await this.createGroup([this.firstGuestId, this.secondGuestId])
+        await this.createGroup([this.guest1Id, this.guest2Id])
         assert.isEqualDeep(this.sendMessageTargets, [
             {
-                personId: this.firstGuestId,
+                personId: this.guest1Id,
             },
             {
-                personId: this.secondGuestId,
+                personId: this.guest2Id,
             },
         ])
     }
@@ -106,33 +105,34 @@ export default class GroupManagerTest extends AbstractAdventureTest {
 
     @test()
     protected static async addingFriendRetainsOriginalFriends() {
-        const friend1Id = generateId()
-        const friend2Id = generateId()
+        const friend1Id = this.guest1Id
+        const friend2Id = this.guest2Id
 
         await this.setFriendsOnGroup([friend1Id])
         await this.addFriendToGroup(friend2Id)
 
-        const updated = await this.getNewestGroup()
-        assert.isEqualDeep(updated.people, [friend1Id, friend2Id])
+        const expected = [friend1Id, friend2Id]
+        await this.assertPoepleOnGroupEqual(expected)
     }
 
     @test()
     protected static async addingFriendThatAlreadyExistsThrows() {
-        const friendId = generateId()
+        const friendId = this.guest1Id
         await this.setFriendsOnGroup([friendId])
         await this.assertAddingFriendThrowsAlreadyInGroup(friendId)
+        this.assertNoMessageSent()
     }
 
     @test()
     protected static async throwsAlreadyInGroupIfIsSecondPersonInGroup() {
-        const friendId = generateId()
-        await this.setFriendsOnGroup([generateId(), friendId])
+        const friendId = this.guest1Id
+        await this.setFriendsOnGroup([this.guest2Id, friendId])
         await this.assertAddingFriendThrowsAlreadyInGroup(friendId)
     }
 
     @test()
     protected static async messageOwnerIfOwnerAddedFriend() {
-        await this.addFriendToGroup(this.firstGuestId)
+        await this.addFriendToGroup(this.guest1Id)
         this.assertMessageSentTo(this.fakedPerson.id)
     }
 
@@ -141,7 +141,7 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         const sourcePersonId = generateId()
         await this.setGroupsSourcePersonAndAddSelfToGroup(sourcePersonId)
 
-        await this.addFriendToGroup(this.firstGuestId)
+        await this.addFriendToGroup(this.guest1Id)
         this.assertMessageSentTo(sourcePersonId)
     }
 
@@ -154,22 +154,43 @@ export default class GroupManagerTest extends AbstractAdventureTest {
                 source: { personId: generateId() },
             }
         )
-        await this.addFriendToGroup(this.firstGuestId)
+        await this.addFriendToGroup(this.guest1Id)
     }
 
     @test()
-    @seed('guests', 1)
     protected static async sendsWithExpectedContext() {
-        const expected = {
+        await this.setGroupsSourcePersonAndAddSelfToGroup(this.guest1Id)
+        await this.addFriendToGroup(this.guest2Id)
+
+        this.assertMessageSentWithContext({
             groupTitle: this.group.title,
-            invitersName: this.firstGuest.casualName,
-            invitedsName: this.secondGuest.casualName,
-        }
+            invitersName: this.fakedPerson.casualName,
+            invitedsName: this.guest2.casualName,
+        })
+    }
 
-        await this.setGroupsSourcePersonAndAddSelfToGroup(this.firstGuestId)
-        await this.addFriendToGroup(this.secondGuestId)
+    @test()
+    protected static async doesNotSendIfSavingGroupFails() {
+        this.groups.updateOne = async () => assert.fail('forced fail') as any
+        await assert.doesThrowAsync(() => this.addFriendToGroup(this.guest2Id))
+        this.assertNoMessageSent()
+    }
 
-        this.assertMessageSentWithContext(expected)
+    @test()
+    @seed('groups', 1)
+    protected static async updatesCorrectGroup() {
+        const [, group] = await this.groups.find({})
+        this.group = group as Group
+        await this.addFriendToGroup(this.guest1Id)
+        await this.assertPoepleOnGroupEqual([this.guest1Id])
+    }
+
+    private static assertNoMessageSent() {
+        assert.isLength(
+            this.sendMessageTargets,
+            0,
+            `You should not have sent a message yet!`
+        )
     }
 
     private static async setGroupsSourcePersonAndAddSelfToGroup(
@@ -190,7 +211,7 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         })
     }
 
-    private static get firstGuest() {
+    private static get guest1() {
         return this.fakedGuests[0]
     }
 
@@ -204,8 +225,8 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         errorAssert.assertError(err, 'ALREADY_IN_GROUP')
     }
 
-    private static get firstGuestId() {
-        return this.firstGuest.id
+    private static get guest1Id() {
+        return this.guest1.id
     }
 
     private static async setFriendsOnGroup(friends: string[]) {
@@ -235,18 +256,24 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         })
     }
 
-    private static get secondGuestId(): string {
-        return this.secondGuest.id
+    private static get guest2Id(): string {
+        return this.guest2.id
     }
 
-    private static get secondGuest() {
+    private static get guest2() {
         return this.fakedGuests[1]
     }
 
     private static assertMessageSentWithContext(context: Record<string, any>) {
         const { message } = this.sendMessagePayloads[0] ?? {}
         assert.isEqual(message?.classification, 'transactional')
-        assert.doesInclude(message?.context, context)
+        assert.isEqualDeep(message?.context, context)
+    }
+
+    private static async assertPoepleOnGroupEqual(expected: string[]) {
+        const updated = await this.groups.findOne({ id: this.group.id })
+        assert.isTruthy(updated)
+        assert.isEqualDeep(updated.people, expected)
     }
 }
 
