@@ -1,3 +1,12 @@
+# [9.10.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.9.13...v9.10.0) (2024-09-19)
+
+
+### Features
+
+* can actually delete group ([965967d](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/965967d))
+* can leave group ([62f1328](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/62f1328))
+* sends message to person invited to group ([8de5acd](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/8de5acd))
+
 ## [9.9.13](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.9.12...v9.9.13) (2024-09-13)
 
 ## [9.9.12](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.9.11...v9.9.12) (2024-09-13)
