@@ -1,4 +1,10 @@
-import { formAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    formAssert,
+    interactor,
+    listAssert,
+    RowValues,
+    vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test-utils'
 import { Adventure } from '../../../../adventure.types'
@@ -13,6 +19,8 @@ export default class PostCardTest extends AbstractAdventureTest {
 
     protected static async beforeEach() {
         await super.beforeEach()
+        await this.eventFaker.fakeListGroups()
+
         this.views.setController('adventure.post-card', FakePostCard)
         this.vc = this.PostCardVc()
     }
@@ -41,14 +49,17 @@ export default class PostCardTest extends AbstractAdventureTest {
     @test()
     protected static async confirmingSubmitPostsAdventure() {
         let passedPayload: PostTargetAndPayload['payload'] | undefined
+        let passedTarget: PostTargetAndPayload['target'] | undefined
 
-        await this.eventFaker.fakePostAdventure(({ payload }) => {
+        await this.eventFaker.fakePostAdventure(({ payload, target }) => {
             passedPayload = payload
+            passedTarget = target
         })
 
         const { what, when, where } = await this.fillOutFormSubmitAndAccept()
 
         assert.isEqualDeep(passedPayload?.adventure, { what, when, where })
+        assert.isFalsy(passedTarget, `Should not have a target`)
     }
 
     @test()
@@ -89,6 +100,168 @@ export default class PostCardTest extends AbstractAdventureTest {
         const confirmVc = await this.submitAndAssertConfirm()
         await confirmVc.decline()
         assert.isFalse(wasHit)
+    }
+
+    @test()
+    protected static async ifPartOfGroupRendersGroupsList() {
+        await this.seedGroupAndLoad()
+        this.assertRendersGroupsList()
+    }
+
+    @test()
+    protected static async noGroupDoesNotRenderGroupsList() {
+        await this.load()
+        assert.doesThrow(() => this.assertRendersGroupsList())
+    }
+
+    @test()
+    protected static async grousListRendersRowForFirstGroup() {
+        await this.seedGroupAndLoad()
+        this.assertRendersRowForEachGroup()
+    }
+
+    @test()
+    protected static async rendersRowForAllGroups() {
+        this.seedGroup()
+        await this.seedGroupAndLoad()
+        this.assertRendersRowForEachGroup()
+    }
+
+    @test()
+    protected static async rendersFriendsRowInGroupsList() {
+        await this.seedGroupAndLoad()
+        listAssert.listRendersRow(this.groupListVc, 'friends')
+    }
+
+    @test()
+    protected static async rendersTogglesForGroupsRows() {
+        await this.seedGroupAndLoad()
+        this.assertGroupsListRendersRow(this.group1Id)
+        this.assertGroupsListRendersRow('friends')
+    }
+
+    @test()
+    protected static async friendsListIsSelectedByToStart() {
+        await this.seedGroupAndLoad()
+
+        this.assertSelectedGroups({
+            friends: true,
+            [this.group1Id]: undefined,
+        })
+    }
+
+    @test()
+    protected static async selectingGroupDeselectsFriends() {
+        await this.seedGroupAndLoad()
+        await this.clickToggleInGroupsRow(this.group1Id)
+        this.assertSelectedGroups({
+            friends: false,
+            [this.group1Id]: true,
+        })
+
+        await this.clickToggleInGroupsRow('friends')
+        this.assertSelectedGroups({
+            friends: true,
+            [this.group1Id]: false,
+        })
+    }
+
+    @test('can post and target group 0', 0)
+    @test('can post and target group 1', 1)
+    protected static async targetsGroupIfSelected(idx: number) {
+        let passedTarget: PostTargetAndPayload['target'] | undefined
+
+        await this.eventFaker.fakePostAdventure(({ target }) => {
+            passedTarget = target
+        })
+
+        this.seedGroup()
+        this.seedGroup()
+        await this.seedGroupAndLoad()
+
+        const id = this.fakedGroups[idx].id
+        await this.clickToggleInGroupsRow(id)
+        await this.fillOutFormSubmitAndAccept()
+
+        assert.isEqualDeep(passedTarget, {
+            groupId: id,
+        })
+    }
+
+    @test()
+    protected static async selectingFriendDoesNotTargetGroup() {
+        await this.seedGroupAndLoad()
+        let passedTarget: PostTargetAndPayload['target'] | undefined
+
+        await this.eventFaker.fakePostAdventure(({ target }) => {
+            passedTarget = target
+        })
+
+        await this.clickToggleInGroupsRow('friends')
+        await this.fillOutFormSubmitAndAccept()
+
+        assert.isFalsy(passedTarget, `Should not have a target`)
+    }
+
+    private static get group1Id(): string {
+        return this.fakedGroups[0].id
+    }
+
+    private static assertSelectedGroups(expected: {
+        [x: string]: boolean | undefined
+        friends: boolean
+    }) {
+        this.assertGroupsListValues(
+            Object.entries(expected).map(([id, isSelected]) => ({
+                rowId: id,
+                isSelected,
+            }))
+        )
+    }
+
+    private static async clickToggleInGroupsRow(row: string) {
+        await interactor.clickToggleInRow(this.groupListVc, row)
+    }
+
+    private static assertGroupsListValues(expected: RowValues[]) {
+        const values = this.groupListVc.getValues()
+        assert.isEqualDeep(values, expected)
+    }
+
+    private static assertGroupsListRendersRow(row: string) {
+        listAssert.rowRendersToggle(this.groupListVc, row, 'isSelected')
+    }
+
+    private static get groupListVc() {
+        return this.vc.getGroupsListVc()
+    }
+
+    private static assertRendersRowForEachGroup() {
+        listAssert.listRendersRows(
+            this.groupListVc,
+            this.fakedGroups.map((group) => group.id)
+        )
+    }
+
+    private static get fakedGroups() {
+        return this.eventFaker.fakedGroups
+    }
+
+    private static async seedGroupAndLoad() {
+        this.seedGroup()
+        await this.load()
+    }
+
+    private static seedGroup() {
+        this.eventFaker.seedGroup()
+    }
+
+    private static assertRendersGroupsList() {
+        listAssert.cardRendersList(this.vc, 'groups')
+    }
+
+    private static async load() {
+        await this.vc.load()
     }
 
     private static async fillOutFormSubmitAndAccept() {

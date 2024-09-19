@@ -149,7 +149,7 @@ export default class EventFaker {
         }
     }
 
-    public seedGroup(group: ListGroup) {
+    public seedGroup(group?: ListGroup) {
         const g = group ?? this.generateListGroupValues()
         this.fakedGroups.push(g)
 

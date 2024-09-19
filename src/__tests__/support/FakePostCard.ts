@@ -1,11 +1,30 @@
-import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
+import {
+    interactor,
+    ListViewController,
+    vcAssert,
+} from '@sprucelabs/heartwood-view-controllers'
 import { generateId } from '@sprucelabs/test-utils'
 import PostCardViewController from '../../adventures/posting/PostCard.vc'
 import EventFaker from './EventFaker'
 
 export default class FakePostCard extends PostCardViewController {
+    private isLoaded = false
+
+    public getIsLoaded(): boolean | null | undefined {
+        return this.isLoaded
+    }
+
+    public async load() {
+        await super.load()
+        this.isLoaded = true
+    }
+
     public getFormVc() {
         return this.formVc
+    }
+
+    public getGroupsListVc(): ListViewController {
+        return this.groupsListVc!
     }
 
     public async fillWithRandomValues() {

@@ -2,7 +2,11 @@ import { buildSchema } from '@sprucelabs/schema'
 
 const postAdventureEmitTargetBuilder = buildSchema({
     id: 'postEmitTarget',
-    fields: {},
+    fields: {
+        groupId: {
+            type: 'id',
+        },
+    },
 })
 
 export default postAdventureEmitTargetBuilder

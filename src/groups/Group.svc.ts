@@ -48,7 +48,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
         })
     }
 
-    private async handleToggleFriend(isSelected: boolean, friend: Friend) {
+    private async handleToggleFriend(_isSelected: boolean, friend: Friend) {
         if (this.group?.isMine !== false || !this.isloaded) {
             return true
         }

@@ -3,7 +3,7 @@ import {
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test-utils'
+import { assert, test } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../../adventure.types'
 import PostSkillViewController from '../../../../adventures/posting/Post.svc'
 import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
@@ -28,15 +28,17 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
 
         this.adventuresWithPerson = []
         await this.eventFaker.fakePostAdventure()
+        await this.eventFaker.fakeListGroups()
 
         this.views.setController('adventure.post-card', FakePostCard)
         this.views.setController('adventure.post', SpyPostSkillView)
-        this.vc = this.views.Controller(
-            'adventure.post',
-            {}
-        ) as SpyPostSkillView
+        this.vc = this.Vc()
 
-        await this.loadVc()
+        await this.load()
+    }
+
+    private static Vc(): SpyPostSkillView {
+        return this.views.Controller('adventure.post', {}) as SpyPostSkillView
     }
 
     @test()
@@ -77,19 +79,30 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async doesNotRedirectIfNotOwnAdventure() {
         this.pushAdventureByAnother()
-        await this.loadVc()
+        await this.load()
     }
 
     @test()
     protected static async redirectsToListEvenIfOwnAdventureIsNotFirst() {
+        this.vc = this.Vc()
         this.pushAdventureByAnother()
         this.pushAdventureByMe()
         await this.assertLoadRedirectsToList()
+        assert.isFalse(
+            this.postCardVc.getIsLoaded(),
+            `Post card should not be loaded`
+        )
+    }
+
+    @test()
+    protected static async loadsPostCardOnLoad() {
+        await this.load()
+        assert.isTrue(this.postCardVc.getIsLoaded(), 'Post card not loaded')
     }
 
     private static async assertLoadRedirectsToList() {
         await vcAssert.assertActionRedirects({
-            action: () => this.loadVc(),
+            action: () => this.load(),
             destination: {
                 id: 'adventure.list',
             },
@@ -102,7 +115,7 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
         this.adventuresWithPerson.push(adventure)
     }
 
-    private static async loadVc() {
+    private static async load() {
         await this.views.load(this.vc)
     }
 
