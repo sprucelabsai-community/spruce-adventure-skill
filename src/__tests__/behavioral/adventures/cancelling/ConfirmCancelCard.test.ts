@@ -47,6 +47,11 @@ export default class ConfirmCancelCardTest extends AbstractAdventureTest {
     }
 
     @test()
+    protected static doesNotRenderCancelButton() {
+        assert.isFalse(this.formVc.getShouldRenderCancelButton())
+    }
+
+    @test()
     protected static async formRendersExpectedFields() {
         formAssert.formRendersField(this.formVc, 'message')
     }

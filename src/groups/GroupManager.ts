@@ -89,7 +89,7 @@ export default class GroupManagerImpl implements GroupManager {
                     },
                 }
             )
-        } catch (err) {
+        } catch (err: any) {
             this.log.error('Failed to send message', err)
         }
     }

@@ -59,7 +59,7 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
             title: isMe ? 'Leave Group?' : 'Add Friend?',
             message: isMe
                 ? `Are you sure you want to leave ${this.group.title}? Once you do you will be redirected away and won't be able to see it again!`
-                : `Add ${friend.casualName} to ${this.group.title}? Make sure you have asked the group owner if this is OK. Also, once you add them you can't remove them! Only the group owner can.`,
+                : `Add ${friend.casualName} to ${this.group.title}? Make sure you have asked the group owner if this is OK. Also, once you add them you can't remove them! Only the group owner can do that.`,
         })
 
         if (!didConfirm) {
