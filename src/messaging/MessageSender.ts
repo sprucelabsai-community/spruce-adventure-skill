@@ -29,13 +29,17 @@ export default class MessageSenderImpl {
         const { fromPersonId, message, context } = options
         const url = await this.generateUrl()
 
-        const connections =
-            await this.connections.loadConnectionsForPerson(fromPersonId)
+        const toPeopleIds =
+            options.toPeopleIds ??
+            (await this.connections.loadConnectionsForPerson(fromPersonId))
 
         const from = await this.getPerson(fromPersonId)
+        const toPeopleExclutingSender = toPeopleIds.filter(
+            (id) => id !== fromPersonId
+        )
 
         await Promise.all(
-            connections.map((connection) =>
+            toPeopleExclutingSender.map((connection) =>
                 this.messageConnection({
                     toId: connection,
                     from,
@@ -58,15 +62,15 @@ export default class MessageSenderImpl {
 
         const to = await this.getPerson(toId)
 
-        let updatedMessage = message
-            .replaceAll('{{to}}', to.casualName)
-            .replaceAll('{{from}}', from.casualName)
-
         await sendMessage({
             ...options,
-            message: updatedMessage,
+            message,
             client: this.client,
-            context,
+            context: {
+                ...context,
+                from: from.casualName,
+                to: to.casualName,
+            },
         })
     }
 
@@ -82,6 +86,7 @@ interface MessageSenderOptions {
 
 export interface SendMessageOptions {
     fromPersonId: string
+    toPeopleIds?: string[]
     message: string
     context: Record<string, any>
 }

@@ -72,10 +72,9 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     @seed('organizations', 1)
     @seed('guests', 1)
     protected static async returnsSelfIfListedInGroup() {
-        const group = await this.setPeopleOnGroup(
-            [this.fakedPerson.id],
-            this.fakedGuests[0].id
-        )
+        const group = await this.setPeopleOnGroup([this.fakedPerson.id], {
+            sourcePersonId: this.fakedGuests[0].id,
+        })
 
         await this.findInGroup(group.id)
         this.assertPeoplePassedToListPeople([this.fakedPerson.id])
@@ -83,19 +82,6 @@ export default class FriendFinderTest extends AbstractFriendsTest {
 
     private static assertPeoplePassedToListPeople(expected: string[]) {
         assert.isEqualDeep(this.passedPeopleIds, expected)
-    }
-
-    private static async setPeopleOnGroup(
-        people: string[],
-        sourcePersonId?: string
-    ) {
-        return await this.groups.updateOne(
-            {},
-            {
-                people,
-                source: { personId: sourcePersonId ?? this.fakedPerson.id },
-            }
-        )
     }
 
     private static async addPeopleToGroup(peopleIds: string[]) {

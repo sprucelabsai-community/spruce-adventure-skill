@@ -1,5 +1,6 @@
+import { QueryBuilder } from '@sprucelabs/data-stores'
 import { Person } from '@sprucelabs/spruce-core-schemas'
-import { Friend } from '../../adventure.types'
+import { Friend, Group } from '../../adventure.types'
 import AbstractAdventureTest from './AbstractAdventureTest'
 import generateFriendValues from './generateFriendValues'
 
@@ -68,6 +69,23 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
             })
 
             return people
+        })
+    }
+
+    protected static async setPeopleOnGroup(
+        people: string[],
+        options?: { sourcePersonId?: string; groupId?: string }
+    ) {
+        const { sourcePersonId, groupId } = options ?? {}
+        const target: QueryBuilder<Group> = {}
+
+        if (groupId) {
+            target.id = groupId
+        }
+
+        return await this.groups.updateOne(target, {
+            people,
+            source: { personId: sourcePersonId ?? this.fakedPerson.id },
         })
     }
 
