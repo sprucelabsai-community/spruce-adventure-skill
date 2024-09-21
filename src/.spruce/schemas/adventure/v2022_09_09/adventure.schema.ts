@@ -1,6 +1,7 @@
 import { SchemaRegistry } from '@sprucelabs/schema'
 import { SpruceSchemas } from '../../schemas.types'
 
+import adventureTargetSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureTarget.schema'
 import adventureSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureSource.schema'
 
 const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
@@ -54,6 +55,11 @@ const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
 	                isArray: true,
 	                minArrayLength: 0,
 	                options: undefined
+	            },
+	            /** . */
+	            'target': {
+	                type: 'schema',
+	                options: {schema: adventureTargetSchema_v2022_09_09,}
 	            },
 	            /** . */
 	            'source': {

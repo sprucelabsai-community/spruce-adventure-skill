@@ -46,7 +46,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         await this.post()
 
         assert.isEqualDeep(
-            this.lastSendMessageTargetAndPayload?.target?.personId,
+            this.sendMessageTargetAndPayload?.target?.personId,
             id
         )
     }
@@ -72,11 +72,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
         await this.connect(0)
         await this.post()
-        assert.isEqual(
-            this.lastSendMessageTargetAndPayload.payload.message?.links?.[0]
-                ?.uri,
-            url
-        )
+        assert.isEqual(this.firstMessage.links?.[0]?.uri, url)
 
         assert.isEqualDeep(passedTargetAndPayload?.target, {
             skillViewId: 'adventure.list',
@@ -84,20 +80,19 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async passesExpectedTemplateAndCentext() {
+    protected static async passesExpectedTemplateAndContext() {
         await this.connect(0)
 
         const post = await this.post()
 
-        assert.doesInclude(
-            this.sendMessageTargetAndPayloads[0].payload.message.body,
-            '{{formatDateTimeUntil when}}'
-        )
+        const message = this.sendMessageTargetAndPayloads[0].payload.message
+        assert.doesInclude(message.body, '{{formatDateTimeUntil when}}')
 
-        assert.isEqual(
-            this.sendMessageTargetAndPayloads[0].payload.message.context?.when,
-            post.when
-        )
+        assert.isEqual(message.context?.when, post.when)
+    }
+
+    private static get firstMessage() {
+        return this.sendMessageTargetAndPayload.payload.message!
     }
 
     private static async post() {
@@ -107,7 +102,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         })
     }
 
-    private static get lastSendMessageTargetAndPayload() {
+    private static get sendMessageTargetAndPayload() {
         return this.sendMessageTargetAndPayloads[0]
     }
 }

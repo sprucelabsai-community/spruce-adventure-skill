@@ -38,11 +38,25 @@ export default buildSchema({
             minArrayLength: 0,
             isRequired: true,
         },
+        target: {
+            type: 'schema',
+            options: {
+                schema: buildSchema({
+                    id: 'adventureTarget',
+                    fields: {
+                        groupId: {
+                            type: 'id',
+                            isRequired: true,
+                        },
+                    },
+                }),
+            },
+        },
         source: {
             type: 'schema',
             isRequired: true,
             options: {
-                schema: {
+                schema: buildSchema({
                     id: 'adventureSource',
                     fields: {
                         personId: {
@@ -50,7 +64,7 @@ export default buildSchema({
                             isRequired: true,
                         },
                     },
-                },
+                }),
             },
         },
     },

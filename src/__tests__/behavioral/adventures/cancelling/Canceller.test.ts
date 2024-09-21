@@ -1,7 +1,10 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
 import AdventureCancellerImpl from '../../../../adventures/cancelling/AdventureCanceller'
-import { MessageSender } from '../../../../messaging/MessageSender'
+import {
+    MessageSender,
+    SendMessageOptions,
+} from '../../../../messaging/MessageSender'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
@@ -39,7 +42,9 @@ export default class CancellerTest extends AbstractAdventureTest {
         await this.cancel(message)
 
         assert.isEqual(this.spySender.lastFromPersonId, this.fakedPerson.id)
-        assert.doesInclude(this.spySender.lastMessage, message)
+        assert.isEqualDeep(this.spySender.lastContext, {
+            message,
+        })
     }
 
     @test()
@@ -67,8 +72,12 @@ export default class CancellerTest extends AbstractAdventureTest {
 class SpySender implements MessageSender {
     public lastMessage?: string
     public lastFromPersonId?: string
-    public async sendMessage(fromPersonId: string, message: string) {
+    public lastContext?: Record<string, any>
+
+    public async sendMessage(options: SendMessageOptions) {
+        const { fromPersonId, message, context } = options
         this.lastFromPersonId = fromPersonId
         this.lastMessage = message
+        this.lastContext = context
     }
 }

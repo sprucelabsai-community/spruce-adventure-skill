@@ -25,11 +25,12 @@ export default class AdventurePoster {
         return new this({ adventures, messageSender })
     }
 
-    public async create(values: PostAdventure & { personId: string }) {
-        const { personId, ...adventure } = values
+    public async create(values: CreateAdventureOptions) {
+        const { personId, groupId, ...adventure } = values
 
         const created = await this.adventures.createOne({
             ...adventure,
+            target: groupId ? { groupId } : undefined,
             source: {
                 personId: personId!,
             },
@@ -37,12 +38,19 @@ export default class AdventurePoster {
 
         const message = `Hey {{to}}! {{from}} posted a new adventure!\n\n"${
             created.what
-        }" in {{formatDateTimeUntil when}} Mountain Time`
+        }" in {{formatDateTimeUntil when}}!`
 
-        await this.messageSender.sendMessage(personId!, message, {
-            when: created.when,
+        await this.messageSender.sendMessage({
+            fromPersonId: personId,
+            message,
+            context: { when: created.when },
         })
 
         return created
     }
+}
+
+type CreateAdventureOptions = PostAdventure & {
+    personId: string
+    groupId?: string
 }

@@ -39,10 +39,11 @@ export default class AdventureCancellerImpl implements AdventureCanceller {
             })
 
             if (message) {
-                await this.messageSender.sendMessage(
-                    posterId,
-                    `Hey {{to}}! {{from}} has cancelled their adventure and sent this message: ${message}`
-                )
+                await this.messageSender.sendMessage({
+                    fromPersonId: posterId,
+                    message: `Hey {{to}}! {{from}} has cancelled their adventure and sent this message: {{message}}`,
+                    context: { message },
+                })
             }
         }
 

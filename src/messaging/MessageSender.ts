@@ -25,11 +25,8 @@ export default class MessageSenderImpl {
         return url
     }
 
-    public async sendMessage(
-        fromPersonId: string,
-        message: string,
-        context?: Record<string, any>
-    ) {
+    public async sendMessage(options: SendMessageOptions) {
+        const { fromPersonId, message, context } = options
         const url = await this.generateUrl()
 
         const connections =
@@ -83,10 +80,12 @@ interface MessageSenderOptions {
     connections: ConnectionManager
 }
 
+export interface SendMessageOptions {
+    fromPersonId: string
+    message: string
+    context: Record<string, any>
+}
+
 export interface MessageSender {
-    sendMessage(
-        fromPersonId: string,
-        message: string,
-        context?: Record<string, any>
-    ): Promise<void>
+    sendMessage(options: SendMessageOptions): Promise<void>
 }
