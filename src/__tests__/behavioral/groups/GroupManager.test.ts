@@ -1,10 +1,11 @@
 import { eventFaker, fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
-import { Group } from '../../../adventure.types'
+import { Group, Person } from '../../../adventure.types'
 import GroupFinder from '../../../groups/GroupFinder'
 import GroupManagerImpl, {
     GroupManageConstructorOptions,
     SendBeenInvitedMessageOptions,
+    UpdateGroupOptions,
 } from '../../../groups/GroupManager'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SendMessageTargetAndPayload } from '../../support/EventFaker'
@@ -191,11 +192,93 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         await this.addFriendToGroup(this.guest1Id)
     }
 
+    @test()
+    protected static async updatingGroupSendsMessagesToFirstAddedMember() {
+        await this.updateGroup({
+            people: [this.guest1Id],
+        })
+        this.assertSentMessageToWithExpectedContext(this.guest1)
+    }
+
+    @test()
+    protected static async includesUpdatedTitleInMessage() {
+        const newTitle = generateId()
+        await this.updateGroup({
+            title: newTitle,
+            people: [this.guest1Id],
+        })
+
+        this.group.title = newTitle
+        this.assertSentMessageToWithExpectedContext(this.guest1)
+    }
+
+    @test()
+    protected static async sendsToMultipleNewPeopleWhenUpdatingGroup() {
+        await this.updateGroup({
+            people: [this.guest1Id, this.guest2Id],
+        })
+
+        this.assertSentMessageToWithExpectedContext(this.guest1)
+        this.assertSentMessageToWithExpectedContext(this.guest2, 1)
+    }
+
+    @test()
+    protected static async doesNotSendIfPersonAlreadyInGroup() {
+        await this.updateGroup({
+            people: [this.guest1Id],
+        })
+
+        await this.updateGroup({
+            people: [this.guest1Id],
+        })
+
+        this.assertTotalMessagesSent(1)
+
+        await this.updateGroup({
+            people: [this.guest2Id, this.guest1Id],
+        })
+
+        this.assertTotalMessagesSent(2)
+
+        await this.updateGroup({
+            people: [this.guest1Id, this.guest2Id],
+        })
+
+        this.assertTotalMessagesSent(2)
+    }
+
+    private static async updateGroup(values: UpdateGroupOptions['values']) {
+        await this.manager.updateGroup({
+            groupId: this.group.id,
+            personId: this.fakedPerson.id,
+            values,
+        })
+    }
+
+    private static assertSentMessageToWithExpectedContext(
+        guest: Person,
+        messageIxd = 0
+    ) {
+        this.assertMessageSentTo(guest.id, messageIxd)
+        this.assertMessageSentWithContext(
+            {
+                title: this.group.title,
+                toName: guest.casualName,
+                fromName: this.fakedPerson.casualName,
+            },
+            messageIxd
+        )
+    }
+
     private static assertNoMessageSent() {
+        this.assertTotalMessagesSent(0)
+    }
+
+    private static assertTotalMessagesSent(expected: number) {
         assert.isLength(
             this.sendMessageTargets,
-            0,
-            `You should not have sent a message yet!`
+            expected,
+            `You didn't send the right number of messages!`
         )
     }
 
@@ -211,8 +294,8 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         )
     }
 
-    private static assertMessageSentTo(toId: string) {
-        assert.isEqualDeep(this.sendMessageTargets[0], {
+    private static assertMessageSentTo(toId: string, messageIxd = 0) {
+        assert.isEqualDeep(this.sendMessageTargets[messageIxd], {
             personId: toId,
         })
     }
@@ -270,8 +353,11 @@ export default class GroupManagerTest extends AbstractAdventureTest {
         return this.fakedGuests[1]
     }
 
-    private static assertMessageSentWithContext(context: Record<string, any>) {
-        const { message } = this.sendMessagePayloads[0] ?? {}
+    private static assertMessageSentWithContext(
+        context: Record<string, any>,
+        messageIxd = 0
+    ) {
+        const { message } = this.sendMessagePayloads[messageIxd] ?? {}
         assert.isEqual(message?.classification, 'transactional')
         assert.isEqualDeep(message?.context, context)
     }

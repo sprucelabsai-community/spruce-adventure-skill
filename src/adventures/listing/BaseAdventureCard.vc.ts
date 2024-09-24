@@ -62,7 +62,7 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
             id: id ?? 'current',
             header: this.adventure.groupTitle
                 ? {
-                      title: `For ${this.adventure.groupTitle}`,
+                      title: `Posted to "${this.adventure.groupTitle}"`,
                   }
                 : undefined,
             body: {

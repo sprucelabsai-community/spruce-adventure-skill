@@ -8,6 +8,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
     protected static async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
+        await this.eventFaker.fakeGetPerson()
     }
 
     @test()

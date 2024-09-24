@@ -1,7 +1,7 @@
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { buildLog } from '@sprucelabs/spruce-skill-utils'
-import { CreateGroup, Group } from '../adventure.types'
+import { CreateGroup, Group, ListGroup } from '../adventure.types'
 import SpruceError from '../errors/SpruceError'
 import GroupFinder from './GroupFinder'
 import GroupsStore from './Groups.store'
@@ -131,8 +131,38 @@ export default class GroupManagerImpl implements GroupManager {
             })
         }
 
-        const updated = await this.groups.updateOne({ id }, { ...values })
-        return updated as Group
+        const updated = (await this.groups.updateOne(
+            { id },
+            { ...values }
+        )) as Group
+        const newMembers = values.people ?? []
+
+        await this.sendInvitedMessageToNewMembers({
+            newMembers,
+            groupBeforeUpdate: match,
+            personId,
+            title: updated.title,
+        })
+
+        return updated
+    }
+
+    private async sendInvitedMessageToNewMembers(options: {
+        newMembers: string[]
+        groupBeforeUpdate: ListGroup
+        personId: string
+        title: string
+    }) {
+        const { newMembers, groupBeforeUpdate, personId, title } = options
+        for (const memberId of newMembers) {
+            if (!groupBeforeUpdate.people.find((id) => id === memberId)) {
+                await this.sendBeenInvitedMessageTo({
+                    fromId: personId,
+                    title,
+                    toId: memberId,
+                })
+            }
+        }
     }
 
     public async deleteGroup(groupId: string, personId: string) {
@@ -277,10 +307,10 @@ export interface GroupManager {
     addFriendToGroup(options: AddFriendToGroupOptions): Promise<void>
 }
 
-interface UpdateGroupOptions {
+export interface UpdateGroupOptions {
     personId: string
     groupId: string
-    values: CreateGroup
+    values: Partial<CreateGroup>
 }
 
 export interface GroupManageConstructorOptions {
