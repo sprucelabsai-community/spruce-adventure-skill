@@ -17,6 +17,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
             stores: this.stores,
             client: this.fakedClient,
             connections: await this.ConnectionManager(),
+            groupFinder: await this.GroupFinder(),
         })
     }
 
@@ -45,22 +46,84 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         }
     }
 
-    @test()
-    protected static async showsAdventures2HoursPast() {
-        await this.seedAdventureStartingIn(-3)
+    @test('shows adventures 2 hours past without group', false)
+    @test('shows adventures 2 hours past with group', true)
+    @seed('groups', 2, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    protected static async showsAdventures2HoursPast(
+        shouldPostToGroup: boolean
+    ) {
+        let groupId: string | undefined
+
+        if (shouldPostToGroup) {
+            const group = await this.getFirstGroup()
+            groupId = group.id
+        }
+        await this.seedAdventureStartingIn(-3, groupId)
         await this.assertTotalAdventures(0)
-        await this.seedAdventureStartingIn(-2)
+        await this.seedAdventureStartingIn(-2, groupId)
         await this.assertTotalAdventures(1)
+    }
+
+    @test()
+    @seed('groups', 2, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    protected static async findsAdventurePostedInSecondGroupImPartOf() {
+        await this.eventFaker.fakeGetPerson()
+        const [group1, group2] = await this.groups.find({})
+        await this.seedAdventureTargetingGroup(group1.id)
+        await this.seedAdventureTargetingGroup(group2.id)
+        await this.assertTotalAdventures(2)
+    }
+
+    @test()
+    @seed('groups', 2, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    @seed('locations', 1)
+    @seed('teammates', 1)
+    protected static async mixesInAdventuresPostedByFriendAndInGroup() {
+        await this.eventFaker.fakeGetPerson()
+        const teammate = this.fakedTeammates[0]
+
+        await this.seedAdventure(teammate.id)
+        await this.createConnection(this.myId, teammate.id)
+        await this.assertTotalAdventures(2)
+    }
+
+    private static async seedAdventureTargetingGroup(groupId: string) {
+        await this.seedAdventure(generateId(), {
+            target: {
+                groupId,
+            },
+        })
     }
 
     private static async assertTotalAdventures(expected: number) {
         const adventures = await this.findAdventures()
-        assert.isLength(adventures, expected)
+        assert.isLength(
+            adventures,
+            expected,
+            `Didn't get back the right number of adventures!`
+        )
     }
 
-    private static async seedAdventureStartingIn(hours: number) {
+    private static async seedAdventureStartingIn(
+        hours: number,
+        groupId?: string
+    ) {
         await this.seedAdventure(this.myId, {
             when: dateUtil.addMinutes(new Date().getTime(), hours * 60),
+            target: groupId ? { groupId } : undefined,
         })
     }
 

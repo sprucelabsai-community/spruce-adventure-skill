@@ -12,6 +12,7 @@ import {
     SchemaFieldNames,
 } from '@sprucelabs/schema'
 import { StoreSeedOptions } from '@sprucelabs/spruce-test-fixtures'
+import { generateId } from '@sprucelabs/test-utils'
 import adventureSchema from '#spruce/schemas/adventure/v2022_09_09/adventure.schema'
 import generateAdventureValues from '../__tests__/support/generateAdventureValues'
 
@@ -57,16 +58,40 @@ export default class AdventuresStore extends AbstractStore<
 
     public async seed(
         options: StoreSeedOptions,
-        custom?: { shouldAttachToFakedPerson: boolean }
+        custom?: {
+            shouldPostAsFakedPerson?: boolean
+            shouldPostToGroup?: boolean
+        }
     ) {
         const { totalToSeed, TestClass } = options
-        const personId = custom?.shouldAttachToFakedPerson
-            ? TestClass.fakedPerson?.id
-            : null
+
+        const { shouldPostAsFakedPerson, shouldPostToGroup } = custom || {}
+
+        let personId = null
+        let groupId = null
+
+        if (shouldPostAsFakedPerson) {
+            personId = TestClass.fakedPerson?.id
+        } else {
+            personId = generateId()
+        }
+
+        if (shouldPostToGroup) {
+            const groups = await TestClass.stores.getStore('groups')
+            const match = await groups.findOne({})
+            if (!match) {
+                throw new Error(
+                    `You must @seed('groups') before seeding an adventure posted to a group.`
+                )
+            }
+            groupId = match.id
+        }
 
         await Promise.all(
             new Array(totalToSeed).fill(0).map(async () => {
-                const values = generateAdventureValues()
+                const values = generateAdventureValues(
+                    groupId ? { target: { groupId } } : {}
+                )
 
                 //@ts-ignore
                 delete values.id

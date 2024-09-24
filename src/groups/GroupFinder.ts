@@ -53,7 +53,12 @@ export default class GroupFinder {
                 friendlyMessage: `I could not find that group!`,
             })
         }
-        return this.mapToListGroup(match, personId)
+
+        const group = this.mapToListGroup(match, personId)
+        if (!group.isMine) {
+            group.people.push(match.source.personId)
+        }
+        return group
     }
 
     private buildFindQueryForPerson(personId: string): Record<string, any> {

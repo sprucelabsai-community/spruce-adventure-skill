@@ -53,19 +53,34 @@ export default class GroupsStore extends AbstractStore<
         return record as PrepareResults<FullSchema, IncludePrivateFields>
     }
 
-    public async seed(options: StoreSeedOptions) {
+    public async seed(
+        options: StoreSeedOptions,
+        custom?: {
+            shouldCreateAsFakedPerson?: boolean
+            shouldAddFakedPersonAsMember?: boolean
+        }
+    ) {
         const { TestClass, totalToSeed } = options
+        const {
+            shouldCreateAsFakedPerson = true,
+            shouldAddFakedPersonAsMember = false,
+        } = custom ?? {}
+
+        const fakedPersonId = TestClass.fakedPerson.id
+
         await Promise.all(
-            Array.from({ length: totalToSeed }).map(() =>
-                this.createOne({
+            Array.from({ length: totalToSeed }).map(async () => {
+                await this.createOne({
                     title: generateId(),
-                    people: [],
+                    people: shouldAddFakedPersonAsMember ? [fakedPersonId] : [],
                     description: generateId(),
                     source: {
-                        personId: TestClass.fakedPerson.id,
+                        personId: shouldCreateAsFakedPerson
+                            ? fakedPersonId
+                            : generateId(),
                     },
                 })
-            )
+            })
         )
     }
 }

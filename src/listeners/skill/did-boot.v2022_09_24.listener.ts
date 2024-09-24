@@ -20,11 +20,6 @@ export default async (
     const { client, stores, skill } = event
 
     const connections = await ConnectionManager.Manager({ stores })
-    const finder = await AdventureFinder.Finder({
-        client,
-        stores,
-        connections,
-    })
 
     const sender = MessageSenderImpl.Sender({
         client,
@@ -63,6 +58,13 @@ export default async (
     })
 
     const accepter = await ConnectionAccepter.Accepter({ stores })
+
+    const finder = await AdventureFinder.Finder({
+        client,
+        stores,
+        connections,
+        groupFinder,
+    })
 
     skill.updateContext('canceller', canceller)
     skill.updateContext('adventureFinder', finder)

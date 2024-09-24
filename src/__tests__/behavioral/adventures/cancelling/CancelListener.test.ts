@@ -22,7 +22,7 @@ export default class CancelListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async cancelsMine() {
         await this.assertCancels(1)
         const total = await this.adventures.count({})
@@ -36,7 +36,7 @@ export default class CancelListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    @seed('adventures', 2, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 2, { shouldPostAsFakedPerson: true })
     protected static async deletesNewestAdventure() {
         const [a1, a2] = await this.adventures.find({})
 

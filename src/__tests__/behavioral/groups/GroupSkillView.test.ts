@@ -319,7 +319,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async doesNotRenderFormCardIfGroupNotMine() {
-        await this.loadWithGroup({ isMine: false })
+        await this.loadGroupNotMineWithOneFriend()
 
         vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'form')
         vcAssert.assertSkillViewRendersCard(this.vc, 'details')
@@ -364,7 +364,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async friendListRendersBackButtonIfLoadingGroupThatIsNotMine() {
-        await this.loadWithGroup({ isMine: false })
+        await this.loadGroupNotMineWithOneFriend()
         this.assertFriendListCardRendersButton('back')
     }
 
@@ -376,7 +376,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
 
     @test()
     protected static async backButtonRedirectsToList() {
-        await this.loadWithGroup({ isMine: false })
+        await this.loadGroupNotMineWithOneFriend()
 
         await vcAssert.assertActionRedirects({
             action: () => this.clickFriendListButton('back'),
@@ -517,7 +517,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     protected static async toggleHidesInSecondRow() {
         this.eventFaker.seedFriend()
         const friend = this.eventFaker.seedFriend()
-        await this.loadWithGroup({ isMine: false })
+        await this.loadGroupNotMineWithOneFriend()
         const confirmVc = await this.toggleFriendAndAssertConfirm(friend.id)
         await this.assertRowRemovesToggelOnAccept(1, confirmVc)
     }
@@ -576,11 +576,12 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         return confirmVc
     }
 
-    private static async loadGroupNotMineWithMeIn() {
+    private static async loadGroupNotMineWithMeIn(group?: Partial<ListGroup>) {
         this.eventFaker.seedFriend({ id: this.fakedPerson.id })
         await this.loadWithGroup({
             isMine: false,
             people: [this.fakedPerson.id],
+            ...group,
         })
     }
 
@@ -611,7 +612,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
     }
 
     private static async loadGroupNotMineToggleFriendAndAssertConfirm() {
-        const friend = await this.loadGroupNotMinWithOneFriend()
+        const friend = await this.loadGroupNotMineWithOneFriend()
         return await this.toggleFriendAndAssertConfirm(friend.id)
     }
 
@@ -621,7 +622,7 @@ export default class GroupSkillViewTest extends AbstractAdventureTest {
         )
     }
 
-    private static async loadGroupNotMinWithOneFriend() {
+    private static async loadGroupNotMineWithOneFriend() {
         const friend = this.eventFaker.seedFriend()
         await this.loadWithGroup({ isMine: false })
         return friend

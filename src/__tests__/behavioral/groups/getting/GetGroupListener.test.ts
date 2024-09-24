@@ -36,15 +36,24 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
     @test()
     @seed('groups', 1)
     protected static async returnsIfImAFriend() {
+        const { group, sourcePersonId } =
+            await this.setRandomSourcePersonAndAddMeToGroup()
+
+        group.people.push(sourcePersonId)
+
+        await this.assertGetGroupResultMatches(group, false)
+    }
+
+    private static async setRandomSourcePersonAndAddMeToGroup() {
+        const sourcePersonId = generateId()
         const group = await this.groups.updateOne(
             {},
             {
                 people: [this.fakedPerson.id],
-                source: { personId: generateId() },
+                source: { personId: sourcePersonId },
             }
         )
-
-        await this.assertGetGroupResultMatches(group, false)
+        return { group, sourcePersonId }
     }
 
     private static async assertGetGroupResultMatches(

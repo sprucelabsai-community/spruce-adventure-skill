@@ -95,12 +95,6 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
         return success
     }
 
-    private static async getFirstAdventure() {
-        const adventure = await this.adventures.findOne({})
-        assert.isTruthy(adventure)
-        return adventure
-    }
-
     private static async emitRsvp(options: {
         id: string
         client?: MercuryClient

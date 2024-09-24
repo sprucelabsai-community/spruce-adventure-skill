@@ -15,7 +15,7 @@ export default class RsvperTest extends AbstractFriendsTest {
 
     @seed('organizations', 1)
     @seed('teammates', 1)
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async beforeEach() {
         await super.beforeEach()
 
@@ -99,7 +99,7 @@ export default class RsvperTest extends AbstractFriendsTest {
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async updatesCurrentAdventure() {
         await this.connect(0)
         const [a1, a2] = await this.adventures.find({})
@@ -145,11 +145,5 @@ export default class RsvperTest extends AbstractFriendsTest {
         })
 
         return id
-    }
-
-    private static async getFirstAdventure() {
-        const adventure = await this.adventures.findOne({})
-        assert.isTruthy(adventure)
-        return adventure
     }
 }

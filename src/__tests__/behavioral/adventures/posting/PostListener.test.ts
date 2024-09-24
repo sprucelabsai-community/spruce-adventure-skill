@@ -35,12 +35,6 @@ export default class PostListenerTest extends AbstractAdventureTest {
         assert.isEqualDeep(saved.target, { groupId })
     }
 
-    private static async getFirstAdventure() {
-        const adventure = await this.adventures.findOne({})
-        assert.isTruthy(adventure)
-        return adventure
-    }
-
     private static async emitPostAdventure(
         values?: PostAdventure,
         target?: PostTargetAndPayload['target']

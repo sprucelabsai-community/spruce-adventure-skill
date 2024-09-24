@@ -35,7 +35,7 @@ export default class CancellerTest extends AbstractAdventureTest {
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async sendsCancelMessageIfMessageIsPassedToCancel() {
         const message = generateId()
 
@@ -48,7 +48,7 @@ export default class CancellerTest extends AbstractAdventureTest {
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async shouldNotSendMessageIfNoMessagePassed() {
         await this.cancel()
         this.assertNoMessageSent()

@@ -18,28 +18,28 @@ export default class ListListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async returnsOwnsAdventure() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
     @test()
     @seed('adventures', 1)
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async onlyReturnsYoursWithoutFriends() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
     @test()
     @seed('adventures', 1)
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     @seed('adventures', 1)
     protected static async onlyReturnsYoursWithoutFriendsInTheMiddle() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
     @test()
-    @seed('adventures', 1, { shouldAttachToFakedPerson: true })
+    @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     protected static async dropsInAvatar() {
         this.fakedPerson.avatar = {
             ...generateAvatarValues(),
@@ -49,22 +49,22 @@ export default class ListListenerTest extends AbstractAdventureTest {
 
     @test()
     protected static async returnsAdventuresFromConnections() {
-        const toId = await this.createFriendAdventure()
+        const toId = await this.seedAdventurePostedByFriend()
         await this.createConnection(this.fakedPerson.id, toId)
         await this.assertReturnsOneAdventure()
     }
 
     @test()
     protected static async canReturnAdventureFromReverseConnection() {
-        const fromId = await this.createFriendAdventure()
+        const fromId = await this.seedAdventurePostedByFriend()
         await this.createConnection(fromId, this.fakedPerson.id)
         await this.assertReturnsOneAdventure()
     }
 
     @test()
     protected static async canCheckMultipleConnections() {
-        const friend1 = await this.createFriendAdventure()
-        const friend2 = await this.createFriendAdventure()
+        const friend1 = await this.seedAdventurePostedByFriend()
+        const friend2 = await this.seedAdventurePostedByFriend()
         await this.createConnection(friend1, this.fakedPerson.id)
         await this.createConnection(this.fakedPerson.id, friend2)
         await this.assertTotalAdventures(2)
@@ -72,17 +72,16 @@ export default class ListListenerTest extends AbstractAdventureTest {
 
     @test()
     protected static async ignoresOtherPeoplesConnections() {
-        const friend1 = await this.createFriendAdventure()
-        await this.createConnection(friend1, generateId())
+        const friend = await this.seedAdventurePostedByFriend()
+        await this.createConnection(friend, generateId())
         await this.assertTotalAdventures(0)
     }
 
     @test()
     protected static async sortsDateTimeAsc() {
-        const adventures = await this.stores.getStore('adventures')
         let passedOptions: Record<string, any> | undefined
 
-        adventures.find = async (_, options) => {
+        this.adventures.find = async (_, options) => {
             passedOptions = options
             return []
         }
@@ -99,6 +98,49 @@ export default class ListListenerTest extends AbstractAdventureTest {
         })
     }
 
+    @test()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async shouldReturnAdventuresPostedToGroupsImIn() {
+        await this.assertTotalAdventures(1)
+    }
+
+    @test()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: false,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async doesNotReturnAdventuresPostedToGroupsImNotIn() {
+        await this.assertTotalAdventures(0)
+    }
+
+    @test.only()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async returnsIfPartOfMultipleAdventuresInSameGroup() {
+        await this.assertTotalAdventures(2)
+    }
+
     private static async assertReturnsOneAdventure() {
         const expected = 1
         await this.assertTotalAdventures(expected)
@@ -106,7 +148,11 @@ export default class ListListenerTest extends AbstractAdventureTest {
 
     private static async assertTotalAdventures(expected: number) {
         const adventures = await this.emit()
-        assert.isLength(adventures, expected)
+        assert.isLength(
+            adventures,
+            expected,
+            `Didn't get back the right number of adventures!`
+        )
     }
 
     private static async createConnection(fromId: string, toId: string) {
@@ -121,7 +167,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         })
     }
 
-    private static async createFriendAdventure(when?: number) {
+    private static async seedAdventurePostedByFriend(when?: number) {
         const personId = generateId()
         const adventure = await this.seedAdventure(personId)
         adventure.when = when ?? adventure.when
@@ -138,7 +184,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
 
         assert.isTruthy(
             record,
-            `You need '@seed('adventures', 1, { shouldAttachToFakedPerson: true })' to continue.`
+            `You need '@seed('adventures', 1, { shouldPostAsFakedPerson: true })' to continue.`
         )
 
         const expected: AdventureWithPerson[] = [
