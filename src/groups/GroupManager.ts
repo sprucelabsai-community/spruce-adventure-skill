@@ -153,16 +153,21 @@ export default class GroupManagerImpl implements GroupManager {
         personId: string
         title: string
     }) {
+        const promises: Promise<void>[] = []
         const { newMembers, groupBeforeUpdate, personId, title } = options
         for (const memberId of newMembers) {
             if (!groupBeforeUpdate.people.find((id) => id === memberId)) {
-                await this.sendBeenInvitedMessageTo({
-                    fromId: personId,
-                    title,
-                    toId: memberId,
-                })
+                promises.push(
+                    this.sendBeenInvitedMessageTo({
+                        fromId: personId,
+                        title,
+                        toId: memberId,
+                    })
+                )
             }
         }
+
+        await Promise.all(promises)
     }
 
     public async deleteGroup(groupId: string, personId: string) {
