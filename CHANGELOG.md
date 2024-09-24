@@ -1,3 +1,10 @@
+# [9.12.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.11.1...v9.12.0) (2024-09-24)
+
+
+### Features
+
+* group title in header ([ca247ef](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/ca247ef))
+
 ## [9.11.1](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.11.0...v9.11.1) (2024-09-24)
 
 # [9.11.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.10.4...v9.11.0) (2024-09-24)
