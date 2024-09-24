@@ -6,7 +6,7 @@ import {
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
@@ -248,6 +248,22 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         })
     }
 
+    @test()
+    protected static async rendersGroupTitleInHeaderOfAdventureCard() {
+        const groupTitle = generateId()
+        this.resetAdventuresAndSeedOne({ groupTitle })
+        await this.reload()
+        const adventureCardVc =
+            this.vc.getCards()[0] as AdventureCardViewController
+
+        const { header } = this.views.render(adventureCardVc)
+        assert.doesInclude(
+            header?.title,
+            groupTitle,
+            `Your adventure card is not rendering the group title in the header`
+        )
+    }
+
     private static resetAdventureRecords() {
         this.adventureRecords = []
     }
@@ -284,15 +300,19 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         this.adventureRecords.push(this.currentAdventure)
     }
 
-    private static seedAdventureWithPerson() {
-        const adventure = generateAdventureWithPersonValues()
+    private static seedAdventureWithPerson(
+        values?: Partial<AdventureWithPerson>
+    ) {
+        const adventure = generateAdventureWithPersonValues(values)
         this.adventureRecords.push(adventure)
         return adventure
     }
 
-    private static resetAdventuresAndSeedOne() {
+    private static resetAdventuresAndSeedOne(
+        values?: Partial<AdventureWithPerson>
+    ) {
         this.resetAdventureRecords()
-        this.seedAdventureWithPerson()
+        this.seedAdventureWithPerson(values)
     }
 }
 
