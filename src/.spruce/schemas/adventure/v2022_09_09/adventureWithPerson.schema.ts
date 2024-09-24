@@ -78,6 +78,11 @@ const adventureWithPersonSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureWi
 	                type: 'image',
 	                options: undefined
 	            },
+	            /** . */
+	            'groupTitle': {
+	                type: 'text',
+	                options: undefined
+	            },
 	    }
 }
 

@@ -21,6 +21,9 @@ const listResponsePayloadBuilder = buildSchema({
                         personAvatar: {
                             type: 'image',
                         },
+                        groupTitle: {
+                            type: 'text',
+                        },
                     },
                 },
             },

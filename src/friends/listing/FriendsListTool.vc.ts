@@ -230,6 +230,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
     }
 
     public async load(options: FriendsListToolOptions) {
+        this.activeCardVc.setIsBusy(true)
         const { router, onNoFriends, group, authenticator } = options
         const { id: groupId, isMine } = group ?? {}
 
@@ -250,6 +251,7 @@ export default class FriendsListToolViewController extends AbstractViewControlle
             )
         }
         this.refreshFooter()
+        this.activeCardVc.setIsBusy(false)
     }
 
     public markPersonAsInGroup(personId: string) {

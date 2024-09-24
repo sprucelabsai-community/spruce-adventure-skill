@@ -27,8 +27,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
     protected static async finderReturnsNameOfPoster() {
         for (const teammate of this.fakedTeammates) {
             this.assignAvatarToTeammate(teammate)
-            await this.seedAdventure(teammate.id)
-            await this.createConnection(this.myId, teammate.id)
+            await this.seedAdventureAndConnectWithPerson(teammate.id)
         }
 
         const adventures = await this.findAdventures()
@@ -48,7 +47,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
 
     @test('shows adventures 2 hours past without group', false)
     @test('shows adventures 2 hours past with group', true)
-    @seed('groups', 2, {
+    @seed('groups', 1, {
         shouldCreateAsFakedPerson: false,
         shouldAddFakedPersonAsMember: true,
     })
@@ -81,7 +80,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
     }
 
     @test()
-    @seed('groups', 2, {
+    @seed('groups', 1, {
         shouldCreateAsFakedPerson: false,
         shouldAddFakedPersonAsMember: true,
     })
@@ -98,6 +97,109 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         await this.seedAdventure(teammate.id)
         await this.createConnection(this.myId, teammate.id)
         await this.assertTotalAdventures(2)
+    }
+
+    @test()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async returnsGroupTitleInSingleResponse() {
+        await this.eventFaker.fakeGetPerson()
+        const [match] = await this.findAdventures()
+        const actual = match.groupTitle
+        await this.assertEqualsFirstGroupsTitle(actual)
+    }
+
+    @test()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async returnsGroupTitleInMultipleResponses() {
+        await this.eventFaker.fakeGetPerson()
+        const [adventure1, adventure2] = await this.findAdventures()
+        await this.assertEqualsFirstGroupsTitle(adventure1.groupTitle)
+        await this.assertEqualsFirstGroupsTitle(adventure2.groupTitle)
+    }
+
+    @test()
+    @seed('locations', 1)
+    @seed('teammates', 1)
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async matchesGroupTitleToAdventureIfOneAdventureIsNotInGroup() {
+        await this.eventFaker.fakeGetPerson()
+        await this.seedAdventureAndConnectWithPerson(this.fakedTeammates[0].id)
+        const [adventure1, adventure2] = await this.findAdventures()
+        assert.isFalsy(adventure2.groupTitle)
+        await this.assertEqualsFirstGroupsTitle(adventure1.groupTitle)
+    }
+
+    @test()
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    @seed('groups', 1, {
+        shouldCreateAsFakedPerson: false,
+        shouldAddFakedPersonAsMember: true,
+    })
+    @seed('adventures', 1, {
+        shouldPostAsFakedPerson: false,
+        shouldPostToGroup: true,
+    })
+    protected static async matchesGroupTitleAccrossMultipleGroups() {
+        await this.eventFaker.fakeGetPerson()
+        const adventures = await this.findAdventures()
+
+        for (const adventure of adventures) {
+            const group = await this.groups.findOne({
+                id: adventure.target!.groupId,
+            })
+            assert.isTruthy(group, `Could not find group for adventure!`)
+            assert.isEqual(
+                adventure.groupTitle,
+                group.title,
+                `Group title does not match!`
+            )
+        }
+    }
+
+    private static async seedAdventureAndConnectWithPerson(teammateId: string) {
+        await this.seedAdventure(teammateId)
+        await this.createConnection(this.myId, teammateId)
+    }
+
+    private static async assertEqualsFirstGroupsTitle(actual?: string | null) {
+        const group = await this.getFirstGroup()
+        assert.isEqual(
+            actual,
+            group.title,
+            `Does not match first group's title!`
+        )
     }
 
     private static async seedAdventureTargetingGroup(groupId: string) {

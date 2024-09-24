@@ -124,7 +124,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         await this.assertTotalAdventures(0)
     }
 
-    @test.only()
+    @test()
     @seed('groups', 1, {
         shouldCreateAsFakedPerson: false,
         shouldAddFakedPersonAsMember: true,

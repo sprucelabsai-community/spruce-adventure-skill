@@ -143,7 +143,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         this.assertTotalMessagesSent(0)
     }
 
-    @test.only()
+    @test()
     @seed('groups', 1)
     protected static async sendsNoticeToGroupOwner() {
         const group = await this.setPeopleOnGroup([])

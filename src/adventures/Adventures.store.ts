@@ -78,7 +78,8 @@ export default class AdventuresStore extends AbstractStore<
 
         if (shouldPostToGroup) {
             const groups = await TestClass.stores.getStore('groups')
-            const match = await groups.findOne({})
+            const all = await groups.find({})
+            const match = all.pop()
             if (!match) {
                 throw new Error(
                     `You must @seed('groups') before seeding an adventure posted to a group.`

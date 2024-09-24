@@ -1,7 +1,7 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { Adventure } from '../../adventure.types'
+import { Adventure, AdventureWithPerson } from '../../adventure.types'
 import GroupFinder from '../../groups/GroupFinder'
 import AdventuresStore from '../Adventures.store'
 import ConnectionManager from './ConnectionManager'
@@ -43,6 +43,16 @@ export default class AdventureFinder {
             groupIds
         )
 
+        if (withPerson[0] && groups[0]) {
+            for (const adventure of withPerson) {
+                if (adventure.target?.groupId) {
+                    adventure.groupTitle = groups.find(
+                        (g) => g.id === adventure.target?.groupId
+                    )?.title
+                }
+            }
+        }
+
         return withPerson
     }
 
@@ -74,7 +84,9 @@ export default class AdventureFinder {
         return withPerson
     }
 
-    private async adventuresToAdventurseWithPerson(adventures: Adventure[]) {
+    private async adventuresToAdventurseWithPerson(
+        adventures: Adventure[]
+    ): Promise<AdventureWithPerson[]> {
         return await Promise.all(
             adventures.map(async (adventure) => {
                 const { casualName, avatar } = await this.loadPoster(adventure)
