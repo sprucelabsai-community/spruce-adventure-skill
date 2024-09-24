@@ -1,3 +1,10 @@
+# [9.11.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.10.4...v9.11.0) (2024-09-24)
+
+
+### Features
+
+* shows adventures for friends ([fd7a8b7](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/fd7a8b7))
+
 ## [9.10.4](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.10.3...v9.10.4) (2024-09-23)
 
 ## [9.10.3](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.10.2...v9.10.3) (2024-09-21)
