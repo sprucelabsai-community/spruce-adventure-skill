@@ -21,9 +21,10 @@ export default async (
 
     const connections = await ConnectionManager.Manager({ stores })
 
-    const sender = MessageSenderImpl.Sender({
+    const sender = await MessageSenderImpl.Sender({
         client,
         connections,
+        stores,
     })
 
     const poster = await AdventurePoster.Poster({

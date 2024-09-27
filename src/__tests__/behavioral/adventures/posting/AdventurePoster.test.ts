@@ -29,9 +29,10 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         const connections = await this.ConnectionManager()
         this.poster = await AdventurePoster.Poster({
             stores: this.stores,
-            messageSender: MessageSenderImpl.Sender({
+            messageSender: await MessageSenderImpl.Sender({
                 client: this.fakedClient,
                 connections,
+                stores: this.stores,
             }),
         })
 
