@@ -118,7 +118,7 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
                             id: 'navigation',
                             label: 'Open navigation',
                             type: 'primary',
-                            onClick: this.handleClickNavigation.bind(this),
+                            onClick: this.handleClickMap.bind(this),
                         },
                     ],
                 },
@@ -126,7 +126,11 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
         })
     }
 
-    public async handleClickNavigation() {
+    public setFooter(footer: CardFooter) {
+        this.cardVc.setFooter(footer)
+    }
+
+    public async handleClickMap() {
         this.maps.openNavigation({
             to: this.adventure.where,
         })

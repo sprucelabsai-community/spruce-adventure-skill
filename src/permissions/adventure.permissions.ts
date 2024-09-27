@@ -123,6 +123,16 @@ const adventurePermissions = buildPermissionContract({
             },
             requireAllStatuses: false,
         },
+        {
+            id: 'can-send-reminders',
+            name: 'Can send reminders',
+            defaults: {
+                loggedIn: {
+                    default: true,
+                },
+            },
+            requireAllStatuses: false,
+        },
     ],
 })
 

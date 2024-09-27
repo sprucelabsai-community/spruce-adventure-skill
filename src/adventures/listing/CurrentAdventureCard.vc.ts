@@ -1,6 +1,7 @@
 import {
     AbstractViewController,
     Card,
+    CardFooter,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
@@ -45,17 +46,58 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
                     ],
                 }).render(),
             },
-            footer: {
-                buttons: [
-                    {
-                        id: 'cancel',
-                        type: 'destructive',
-                        label: 'Cancel this adventure!',
-                        onClick: this.handleClickCancel.bind(this),
-                    },
-                ],
-            },
+            footer: this.renderFooter(),
         })
+    }
+
+    private renderFooter(isReminderEnabled = true): CardFooter {
+        return {
+            buttons: [
+                {
+                    id: 'reminder',
+                    label: 'Send my one reminder',
+                    isEnabled: isReminderEnabled,
+                    onClick: this.handleClickReminder.bind(this),
+                },
+                {
+                    id: 'cancel',
+                    type: 'destructive',
+                    label: 'Cancel this adventure!',
+                    onClick: this.handleClickCancel.bind(this),
+                },
+            ],
+        }
+    }
+
+    private async handleClickReminder() {
+        const didAccept = await this.confirm({
+            title: 'Send Reminder?',
+            message:
+                'You only get one reminder to send to everyone. Are you sure?',
+        })
+
+        if (!didAccept) {
+            return
+        }
+
+        try {
+            const client = await this.connectToApi()
+            await client.emitAndFlattenResponses(
+                'adventure.send-reminder::v2022_09_09'
+            )
+
+            this.baseAdventureCardVc.setFooter(this.renderFooter(false))
+
+            await this.alert({
+                style: 'success',
+                message: 'Your one reminder was sent!',
+            })
+        } catch (err: any) {
+            this.log.error('Failed to send reminder', err)
+            await this.alert({
+                message: err.message ?? 'I could not send that reminder!',
+            })
+        }
     }
 
     private async handleClickCancel() {

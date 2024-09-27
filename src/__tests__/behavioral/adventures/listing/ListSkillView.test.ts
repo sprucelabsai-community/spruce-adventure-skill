@@ -1,11 +1,12 @@
 import {
+    buttonAssert,
     interactor,
     Router,
     toolBeltAssert,
     vcAssert,
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
-import { fake } from '@sprucelabs/spruce-test-fixtures'
+import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { AdventureWithPerson } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
@@ -27,6 +28,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyListViewController
     private static currentAdventure: AdventureWithPerson
     private static adventureRecords: AdventureWithPerson[]
+    private static wasSendReminderHit: boolean
 
     protected static async beforeEach() {
         await super.beforeEach()
@@ -34,11 +36,16 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         this.currentAdventure = generateAdventureWithPersonValues({
             source: { personId: this.fakedPerson.id },
         })
+        this.wasSendReminderHit = false
 
         await this.fakeListAdventuresWithCurrent()
         await this.eventFaker.fakeListFriends(() => [])
         await this.eventFaker.fakeListAdventures(() => {
             return this.adventureRecords
+        })
+
+        await this.eventFaker.fakeSendReminder(() => {
+            this.wasSendReminderHit = true
         })
 
         await this.eventFaker.fakeListGroups()
@@ -261,6 +268,64 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
             header?.title,
             groupTitle,
             `Your adventure card is not rendering the group title in the header`
+        )
+    }
+
+    @test()
+    protected static async rendersSendReminderButtonOnAdventureIfNotSent() {
+        buttonAssert.cardRendersButton(this.currentCardVc, 'reminder')
+        buttonAssert.buttonIsEnabled(this.currentCardVc, 'reminder')
+    }
+
+    @test()
+    protected static async pressingReminderButtonRendersConfirm() {
+        await this.clickReminderAndAssertConfirm()
+    }
+
+    @test()
+    protected static async confirmRemindeEmitsSendReminderEvent() {
+        await this.clickReminderAndAccept()
+
+        assert.isTrue(
+            this.wasSendReminderHit,
+            `Your send reminder event was not hit`
+        )
+    }
+
+    @test()
+    protected static async decliningReminderDoesNotEmitEvent() {
+        const confirmVc = await this.clickReminderAndAssertConfirm()
+        await confirmVc.decline()
+
+        assert.isFalse(
+            this.wasSendReminderHit,
+            `Your send reminder event was hit and it should not have been`
+        )
+    }
+
+    @test()
+    protected static async sendReminderThrowingRendersAlert() {
+        await eventFaker.makeEventThrow('adventure.send-reminder::v2022_09_09')
+        await vcAssert.assertRendersAlert(this.currentCardVc, async () =>
+            this.clickReminderAndAccept()
+        )
+    }
+
+    @test()
+    protected static async reminderButtonIsDisabledAfterSend() {
+        await this.clickReminderAndAccept()
+        buttonAssert.buttonIsDisabled(this.currentCardVc, 'reminder')
+        buttonAssert.cardRendersButton(this.currentCardVc, 'cancel')
+    }
+
+    private static async clickReminderAndAccept() {
+        const confirmVc = await this.clickReminderAndAssertConfirm()
+        await confirmVc.accept()
+    }
+
+    private static async clickReminderAndAssertConfirm() {
+        return await vcAssert.assertRendersConfirm(this.currentCardVc, () =>
+            interactor.clickButton(this.currentCardVc, 'reminder')
         )
     }
 

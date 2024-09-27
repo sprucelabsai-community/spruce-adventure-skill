@@ -19,6 +19,15 @@ export default class EventFaker {
     public fakedFriends: Friend[] = []
     public fakedGroups: ListGroup[] = []
 
+    public async fakeSendReminder(cb?: () => void) {
+        await eventFaker.on('adventure.send-reminder::v2022_09_09', () => {
+            cb?.()
+            return {
+                success: true,
+            }
+        })
+    }
+
     public async fakeAddFriendToGroup(
         cb?: (targetAndPayload: AddFriendToGroupTargetAndPayload) => void
     ) {

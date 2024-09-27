@@ -86,7 +86,7 @@ interface MessageSenderOptions {
 
 export interface SendMessageOptions {
     fromPersonId: string
-    toPeopleIds?: string[]
+    groupId?: string
     message: string
     context: Record<string, any>
 }
