@@ -29,7 +29,7 @@ export default async (
         fromPersonId: personId!,
         groupId: match.target?.groupId,
         message:
-            'Hey {{to}}! {{from}} wanted to remind you about their adventure!\n\n"{{what}}" at {{formatDateTimeUntil when}}!',
+            'Hey {{to}}! {{from}} wanted to remind you about their adventure!\n\n"{{what}}" {{formatDateTimeUntil when}}!',
         context: {
             what: match.what,
             when: match.when,

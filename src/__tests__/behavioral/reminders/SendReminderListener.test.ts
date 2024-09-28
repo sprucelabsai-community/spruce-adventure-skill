@@ -72,7 +72,7 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
             fromPersonId: this.fakedPerson.id,
             groupId,
             message:
-                'Hey {{to}}! {{from}} wanted to remind you about their adventure!\n\n"{{what}}" at {{formatDateTimeUntil when}}!',
+                'Hey {{to}}! {{from}} wanted to remind you about their adventure!\n\n"{{what}}" {{formatDateTimeUntil when}}!',
             context: {
                 what: this.adventure.what,
                 when: this.adventure.when,
