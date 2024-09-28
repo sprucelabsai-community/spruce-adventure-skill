@@ -11,7 +11,7 @@ const listResponsePayloadBuilder = buildSchema({
             minArrayLength: 0,
             options: {
                 schema: {
-                    id: 'adventureWithPerson',
+                    id: 'listAdventure',
                     fields: {
                         ...adventureBuilder.fields,
                         personCasualName: {
@@ -23,6 +23,9 @@ const listResponsePayloadBuilder = buildSchema({
                         },
                         groupTitle: {
                             type: 'text',
+                        },
+                        wasReminderSent: {
+                            type: 'boolean',
                         },
                     },
                 },

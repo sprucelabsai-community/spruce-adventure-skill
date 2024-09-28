@@ -1,7 +1,7 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
-import { AdventureWithPerson } from '../../../../adventure.types'
+import { ListAdventure } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
 import BaseAdventureCardViewController from '../../../../adventures/listing/BaseAdventureCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
@@ -11,7 +11,7 @@ import generateAdventureWithPersonValues from '../../../support/generateAdventur
 @fake.login()
 export default class AdventureCardTest extends AbstractAdventureTest {
     private static vc: AdventureCardViewController
-    private static adventure: AdventureWithPerson
+    private static adventure: ListAdventure
     private static lastPassedTargetAndPayload: RsvpTargetAndPayload | undefined
 
     protected static async beforeEach() {
@@ -190,7 +190,7 @@ export default class AdventureCardTest extends AbstractAdventureTest {
         })
     }
 
-    private static setupVcWithAdventure(adventure: AdventureWithPerson) {
+    private static setupVcWithAdventure(adventure: ListAdventure) {
         this.vc = this.views.Controller('adventure.adventure-card', {
             adventure,
             loggedInPersonId: this.fakedPerson.id,

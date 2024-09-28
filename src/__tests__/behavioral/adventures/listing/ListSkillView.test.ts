@@ -8,7 +8,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
-import { AdventureWithPerson } from '../../../../adventure.types'
+import { ListAdventure } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
 import ListSkillViewController from '../../../../adventures/listing/List.svc'
@@ -27,8 +27,8 @@ import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 @fake.login()
 export default class ListSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyListViewController
-    private static currentAdventure: AdventureWithPerson
-    private static adventureRecords: AdventureWithPerson[]
+    private static currentAdventure: ListAdventure
+    private static adventureRecords: ListAdventure[]
     private static sendReminderTarget?: SendReminderTargetAndPayload['target']
 
     protected static async beforeEach() {
@@ -316,8 +316,19 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     @test()
     protected static async reminderButtonIsDisabledAfterSend() {
         await this.clickReminderAndAccept()
-        buttonAssert.buttonIsDisabled(this.currentCardVc, 'reminder')
+        this.assertReminderButtonDisabled()
         buttonAssert.cardRendersButton(this.currentCardVc, 'cancel')
+    }
+
+    @test()
+    protected static async reminderButtonIsDisabledIfAdventureMarkedAsReminderSent() {
+        this.currentAdventure.wasReminderSent = true
+        await this.reload()
+        this.assertReminderButtonDisabled()
+    }
+
+    private static assertReminderButtonDisabled() {
+        buttonAssert.buttonIsDisabled(this.currentCardVc, 'reminder')
     }
 
     private static async clickReminderAndAccept() {
@@ -367,17 +378,13 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         this.adventureRecords.push(this.currentAdventure)
     }
 
-    private static seedAdventureWithPerson(
-        values?: Partial<AdventureWithPerson>
-    ) {
+    private static seedAdventureWithPerson(values?: Partial<ListAdventure>) {
         const adventure = generateAdventureWithPersonValues(values)
         this.adventureRecords.push(adventure)
         return adventure
     }
 
-    private static resetAdventuresAndSeedOne(
-        values?: Partial<AdventureWithPerson>
-    ) {
+    private static resetAdventuresAndSeedOne(values?: Partial<ListAdventure>) {
         this.resetAdventureRecords()
         this.seedAdventureWithPerson(values)
     }

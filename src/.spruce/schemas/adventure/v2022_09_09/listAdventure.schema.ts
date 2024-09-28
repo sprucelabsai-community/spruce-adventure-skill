@@ -4,8 +4,8 @@ import { SpruceSchemas } from '../../schemas.types'
 import adventureTargetSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureTarget.schema'
 import adventureSourceSchema_v2022_09_09 from '#spruce/schemas/adventure/v2022_09_09/adventureSource.schema'
 
-const adventureWithPersonSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureWithPersonSchema  = {
-	id: 'adventureWithPerson',
+const listAdventureSchema: SpruceSchemas.Adventure.v2022_09_09.ListAdventureSchema  = {
+	id: 'listAdventure',
 	version: 'v2022_09_09',
 	namespace: 'Adventure',
 	name: '',
@@ -83,9 +83,14 @@ const adventureWithPersonSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureWi
 	                type: 'text',
 	                options: undefined
 	            },
+	            /** . */
+	            'wasReminderSent': {
+	                type: 'boolean',
+	                options: undefined
+	            },
 	    }
 }
 
-SchemaRegistry.getInstance().trackSchema(adventureWithPersonSchema)
+SchemaRegistry.getInstance().trackSchema(listAdventureSchema)
 
-export default adventureWithPersonSchema
+export default listAdventureSchema

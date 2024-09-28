@@ -5,14 +5,14 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
-import { AdventureWithPerson } from '../../adventure.types'
+import { ListAdventure } from '../../adventure.types'
 import BaseAdventureCardViewController from './BaseAdventureCard.vc'
 
 export default class CurrentAdventureCardViewController extends AbstractViewController<Card> {
     public static id = 'current-adventure-card'
     protected baseAdventureCardVc: BaseAdventureCardViewController
     private didCancelHandler: ClickCancelHandler
-    private adventure: AdventureWithPerson
+    private adventure: ListAdventure
 
     public constructor(
         options: ViewControllerOptions & CurrentAdventureCardOptions
@@ -29,9 +29,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
         this.baseAdventureCardVc = this.CardVc(adventure)
     }
 
-    private CardVc(
-        adventure: AdventureWithPerson
-    ): BaseAdventureCardViewController {
+    private CardVc(adventure: ListAdventure): BaseAdventureCardViewController {
         return this.Controller('adventure.base-adventure-card', {
             adventure,
             section: {
@@ -139,6 +137,6 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 type ClickCancelHandler = () => void
 
 export interface CurrentAdventureCardOptions {
-    adventure: AdventureWithPerson
+    adventure: ListAdventure
     onDidCancel: ClickCancelHandler
 }

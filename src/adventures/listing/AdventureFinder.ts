@@ -1,7 +1,7 @@
 import { dateUtil } from '@sprucelabs/calendar-utils'
 import { SimpleStoreFactory } from '@sprucelabs/data-stores'
 import { MercuryClient } from '@sprucelabs/mercury-client'
-import { Adventure, AdventureWithPerson } from '../../adventure.types'
+import { Adventure, ListAdventure } from '../../adventure.types'
 import GroupFinder from '../../groups/GroupFinder'
 import AdventuresStore from '../Adventures.store'
 import ConnectionManager from './ConnectionManager'
@@ -86,7 +86,7 @@ export default class AdventureFinder {
 
     private async adventuresToAdventurseWithPerson(
         adventures: Adventure[]
-    ): Promise<AdventureWithPerson[]> {
+    ): Promise<ListAdventure[]> {
         return await Promise.all(
             adventures.map(async (adventure) => {
                 const { casualName, avatar } = await this.loadPoster(adventure)

@@ -1,6 +1,6 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { assert, generateId, test } from '@sprucelabs/test-utils'
-import { AdventureWithPerson } from '../../../../adventure.types'
+import { ListAdventure } from '../../../../adventure.types'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../../support/generateAvatarValues'
 
@@ -187,7 +187,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
             `You need '@seed('adventures', 1, { shouldPostAsFakedPerson: true })' to continue.`
         )
 
-        const expected: AdventureWithPerson[] = [
+        const expected: ListAdventure[] = [
             {
                 ...record,
                 personCasualName: person.casualName,

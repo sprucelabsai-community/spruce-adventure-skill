@@ -5,14 +5,14 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { assertOptions } from '@sprucelabs/schema'
-import { AdventureWithPerson } from '../../adventure.types'
+import { ListAdventure } from '../../adventure.types'
 import BaseAdventureCardViewController from './BaseAdventureCard.vc'
 
 export default class AdventureCardViewController extends AbstractViewController<Card> {
     public static id = 'adventure-card'
     private cardVc: BaseAdventureCardViewController
     private loggedInPersonId: string
-    private adventure: AdventureWithPerson
+    private adventure: ListAdventure
     private buttonGroupVc: ButtonGroupViewController
 
     public constructor(options: ViewControllerOptions & AdventureCardOptions) {
@@ -105,6 +105,6 @@ export default class AdventureCardViewController extends AbstractViewController<
 }
 
 export interface AdventureCardOptions {
-    adventure: AdventureWithPerson
+    adventure: ListAdventure
     loggedInPersonId: string
 }

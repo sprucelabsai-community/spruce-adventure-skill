@@ -12,7 +12,7 @@ import {
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { Person } from '@sprucelabs/spruce-core-schemas'
-import { AdventureWithPerson } from '../../adventure.types'
+import { ListAdventure } from '../../adventure.types'
 import FriendsListToolViewController from '../../friends/listing/FriendsListTool.vc'
 import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 import PostCardViewController from '../posting/PostCard.vc'
@@ -123,7 +123,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
     }
 
     private buildAdventureCards(
-        adventures: AdventureWithPerson[],
+        adventures: ListAdventure[],
         loggedInPerson: Person
     ) {
         for (const adventure of adventures) {
@@ -136,7 +136,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
     }
 
     private AdventureCardVc(
-        adventure: AdventureWithPerson,
+        adventure: ListAdventure,
         loggedInPerson: Person
     ) {
         return this.Controller('adventure.adventure-card', {
@@ -146,7 +146,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
     }
 
     private CurrentAdventureCard(
-        adventure: AdventureWithPerson
+        adventure: ListAdventure
     ): CurrentAdventureCardViewController {
         return this.Controller('adventure.current-adventure-card', {
             adventure,

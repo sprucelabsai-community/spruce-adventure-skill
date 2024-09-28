@@ -4,7 +4,7 @@ import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
 import { generateId } from '@sprucelabs/test-utils'
 import {
     Adventure,
-    AdventureWithPerson,
+    ListAdventure,
     Friend,
     GetGroup,
     Group,
@@ -230,7 +230,7 @@ export default class EventFaker {
         )
     }
 
-    public async fakeListAdventures(cb?: () => void | AdventureWithPerson[]) {
+    public async fakeListAdventures(cb?: () => void | ListAdventure[]) {
         await eventFaker.on('adventure.list::v2022_09_09', () => {
             return {
                 adventures: cb?.() ?? [],

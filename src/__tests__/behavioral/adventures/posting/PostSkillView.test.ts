@@ -4,7 +4,7 @@ import {
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { assert, test } from '@sprucelabs/test-utils'
-import { AdventureWithPerson } from '../../../../adventure.types'
+import { ListAdventure } from '../../../../adventure.types'
 import PostSkillViewController from '../../../../adventures/posting/Post.svc'
 import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
@@ -14,7 +14,7 @@ import generateAdventureWithPersonValues from '../../../support/generateAdventur
 @fake.login()
 export default class PostSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyPostSkillView
-    private static adventuresWithPerson: AdventureWithPerson[] = []
+    private static adventuresWithPerson: ListAdventure[] = []
     private static get postCardVc() {
         return this.vc.getPostCard() as FakePostCard
     }

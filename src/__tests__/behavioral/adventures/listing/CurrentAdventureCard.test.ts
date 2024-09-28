@@ -8,7 +8,7 @@ import {
 import { fake } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
-import { AdventureWithPerson } from '../../../../adventure.types'
+import { ListAdventure } from '../../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import generateAdventureWithPersonValues from '../../../support/generateAdventureWithPersonValues'
@@ -18,7 +18,7 @@ import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 @fake.login()
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     private static vc: CurrentAdventureCardViewController
-    private static adventure: AdventureWithPerson
+    private static adventure: ListAdventure
     private static didCancelHandlerInvoked: boolean
 
     protected static async beforeEach() {

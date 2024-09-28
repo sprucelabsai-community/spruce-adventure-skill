@@ -10,8 +10,7 @@ import { GroupManager } from './groups/GroupManager'
 import { MessageSender } from './messaging/MessageSender'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
-export type AdventureWithPerson =
-    SpruceSchemas.Adventure.v2022_09_09.AdventureWithPerson
+export type ListAdventure = SpruceSchemas.Adventure.v2022_09_09.ListAdventure
 export type Friend = SpruceSchemas.Adventure.v2022_09_09.Friend
 export type Person = SpruceSchemas.Spruce.v2020_07_22.Person
 export type PostAdventure = SpruceSchemas.Adventure.v2022_09_09.PostAdventure

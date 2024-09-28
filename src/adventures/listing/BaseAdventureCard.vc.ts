@@ -10,14 +10,14 @@ import {
     MapViewController,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
-import { AdventureWithPerson } from '../../adventure.types'
+import { ListAdventure } from '../../adventure.types'
 import { AVATAR_PLACEHOLDER } from '../../root/constants'
 
 export default class BaseAdventureCardViewController extends AbstractViewController<Card> {
     public static id = 'base-adventure-card'
     private cardVc: CardViewController
     private mapVc: MapViewController
-    protected adventure: AdventureWithPerson
+    protected adventure: ListAdventure
 
     public constructor(
         options: ViewControllerOptions & BaseAdventureCardOptions
@@ -142,7 +142,7 @@ export default class BaseAdventureCardViewController extends AbstractViewControl
 }
 
 export interface BaseAdventureCardOptions {
-    adventure: AdventureWithPerson
+    adventure: ListAdventure
     footer?: CardFooter
     buttons?: Button[]
     id?: string
