@@ -135,10 +135,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
         }
     }
 
-    private AdventureCardVc(
-        adventure: ListAdventure,
-        loggedInPerson: Person
-    ) {
+    private AdventureCardVc(adventure: ListAdventure, loggedInPerson: Person) {
         return this.Controller('adventure.adventure-card', {
             adventure,
             loggedInPersonId: loggedInPerson.id,
