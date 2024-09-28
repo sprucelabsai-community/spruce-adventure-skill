@@ -57,6 +57,11 @@ const listAdventureSchema: SpruceSchemas.Adventure.v2022_09_09.ListAdventureSche
 	                options: undefined
 	            },
 	            /** . */
+	            'wasReminderSent': {
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** . */
 	            'target': {
 	                type: 'schema',
 	                options: {schema: adventureTargetSchema_v2022_09_09,}
@@ -81,11 +86,6 @@ const listAdventureSchema: SpruceSchemas.Adventure.v2022_09_09.ListAdventureSche
 	            /** . */
 	            'groupTitle': {
 	                type: 'text',
-	                options: undefined
-	            },
-	            /** . */
-	            'wasReminderSent': {
-	                type: 'boolean',
 	                options: undefined
 	            },
 	    }

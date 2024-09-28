@@ -38,6 +38,9 @@ export default buildSchema({
             minArrayLength: 0,
             isRequired: true,
         },
+        wasReminderSent: {
+            type: 'boolean',
+        },
         target: {
             type: 'schema',
             options: {

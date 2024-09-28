@@ -45,6 +45,28 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
         this.assertMessageSent(groupId)
     }
 
+    @test()
+    protected static async setsWasReminderSentOnAdventure() {
+        await this.emit()
+        const adventure = await this.getFirstAdventure()
+        assert.isTrue(
+            adventure.wasReminderSent,
+            `wasReminderSent wasn't set to true`
+        )
+    }
+
+    @test()
+    @seed('adventures', 1)
+    protected static async updatesTheCurrentAdventure() {
+        const [, adventure2] = await this.adventures.find({})
+        await this.emit(adventure2.id)
+        const [updatedAdventure1, updatedAdventure2] =
+            await this.adventures.find({})
+
+        assert.isFalsy(updatedAdventure1.wasReminderSent)
+        assert.isTrue(updatedAdventure2.wasReminderSent)
+    }
+
     private static assertMessageSent(groupId?: string) {
         MockMessageSender.instance.assertSentWithOptions({
             fromPersonId: this.fakedPerson.id,

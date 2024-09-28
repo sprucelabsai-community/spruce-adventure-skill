@@ -24,9 +24,6 @@ const listResponsePayloadBuilder = buildSchema({
                         groupTitle: {
                             type: 'text',
                         },
-                        wasReminderSent: {
-                            type: 'boolean',
-                        },
                     },
                 },
             },

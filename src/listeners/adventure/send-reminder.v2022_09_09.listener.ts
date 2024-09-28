@@ -16,6 +16,8 @@ export default async (
     const adventures = await stores.getStore('adventures')
     const match = await adventures.findOne({ id: adventureId })
 
+    await adventures.update({ id: adventureId }, { wasReminderSent: true })
+
     if (!match) {
         throw new SpruceError({
             code: 'NOT_FOUND',

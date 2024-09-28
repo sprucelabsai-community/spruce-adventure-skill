@@ -57,6 +57,11 @@ const adventureSchema: SpruceSchemas.Adventure.v2022_09_09.AdventureSchema  = {
 	                options: undefined
 	            },
 	            /** . */
+	            'wasReminderSent': {
+	                type: 'boolean',
+	                options: undefined
+	            },
+	            /** . */
 	            'target': {
 	                type: 'schema',
 	                options: {schema: adventureTargetSchema_v2022_09_09,}

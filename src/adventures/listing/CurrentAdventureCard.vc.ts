@@ -26,22 +26,22 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
 
         this.adventure = adventure
         this.didCancelHandler = onDidCancel
-        this.baseAdventureCardVc = this.CardVc(adventure)
+        this.baseAdventureCardVc = this.CardVc()
     }
 
-    private CardVc(adventure: ListAdventure): BaseAdventureCardViewController {
+    private CardVc(): BaseAdventureCardViewController {
         return this.Controller('adventure.base-adventure-card', {
-            adventure,
+            adventure: this.adventure,
             section: {
                 stats: this.Controller('stats', {
                     stats: [
                         {
                             label: 'Total in',
-                            value: adventure.whosIn.length,
+                            value: this.adventure.whosIn.length,
                         },
                         {
                             label: 'Total out',
-                            value: adventure.whosOut.length,
+                            value: this.adventure.whosOut.length,
                         },
                     ],
                 }).render(),
@@ -50,13 +50,16 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
         })
     }
 
-    private renderFooter(isReminderEnabled = true): CardFooter {
+    private renderFooter(): CardFooter {
+        const wasReminderSent = !!this.adventure.wasReminderSent
         return {
             buttons: [
                 {
                     id: 'reminder',
-                    label: 'Send my one reminder',
-                    isEnabled: isReminderEnabled,
+                    label: wasReminderSent
+                        ? 'Reminder already sent!'
+                        : 'Send my one reminder!',
+                    isEnabled: !wasReminderSent,
                     onClick: this.handleClickReminder.bind(this),
                 },
                 {
@@ -91,7 +94,8 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
                 }
             )
 
-            this.baseAdventureCardVc.setFooter(this.renderFooter(false))
+            this.adventure.wasReminderSent = true
+            this.baseAdventureCardVc.setFooter(this.renderFooter())
 
             await this.alert({
                 style: 'success',
