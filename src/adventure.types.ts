@@ -7,6 +7,7 @@ import ConnectionAccepter from './friends/connecting/ConnectionAccepter'
 import FriendFinder from './friends/listing/FriendFinder'
 import GroupFinder from './groups/GroupFinder'
 import { GroupManager } from './groups/GroupManager'
+import { MessageSender } from './messaging/MessageSender'
 
 export type Adventure = SpruceSchemas.Adventure.v2022_09_09.Adventure
 export type AdventureWithPerson =
@@ -32,5 +33,6 @@ declare module '@sprucelabs/spruce-skill-utils/build/types/skill.types' {
         groupFinder: GroupFinder
         groupManager: GroupManager
         connectionAccepter: ConnectionAccepter
+        messageSender: MessageSender
     }
 }

@@ -16,6 +16,7 @@ import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
 import FriendsListToolViewController from '../../../../friends/listing/FriendsListTool.vc'
 import GroupListCardViewController from '../../../../groups/listing/GroupListCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
+import { SendReminderTargetAndPayload } from '../../../support/EventFaker'
 import FakePostCard from '../../../support/FakePostCard'
 import generateAdventureWithPersonValues from '../../../support/generateAdventureWithPersonValues'
 import generateFriendValues from '../../../support/generateFriendValues'
@@ -28,7 +29,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     private static vc: SpyListViewController
     private static currentAdventure: AdventureWithPerson
     private static adventureRecords: AdventureWithPerson[]
-    private static wasSendReminderHit: boolean
+    private static sendReminderTarget?: SendReminderTargetAndPayload['target']
 
     protected static async beforeEach() {
         await super.beforeEach()
@@ -36,7 +37,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         this.currentAdventure = generateAdventureWithPersonValues({
             source: { personId: this.fakedPerson.id },
         })
-        this.wasSendReminderHit = false
+        delete this.sendReminderTarget
 
         await this.fakeListAdventuresWithCurrent()
         await this.eventFaker.fakeListFriends(() => [])
@@ -44,8 +45,8 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
             return this.adventureRecords
         })
 
-        await this.eventFaker.fakeSendReminder(() => {
-            this.wasSendReminderHit = true
+        await this.eventFaker.fakeSendReminder(({ target }) => {
+            this.sendReminderTarget = target
         })
 
         await this.eventFaker.fakeListGroups()
@@ -286,8 +287,9 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     protected static async confirmRemindeEmitsSendReminderEvent() {
         await this.clickReminderAndAccept()
 
-        assert.isTrue(
-            this.wasSendReminderHit,
+        assert.isEqualDeep(
+            this.sendReminderTarget,
+            { adventureId: this.currentAdventure.id },
             `Your send reminder event was not hit`
         )
     }
@@ -297,8 +299,8 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
         const confirmVc = await this.clickReminderAndAssertConfirm()
         await confirmVc.decline()
 
-        assert.isFalse(
-            this.wasSendReminderHit,
+        assert.isFalsy(
+            this.sendReminderTarget,
             `Your send reminder event was hit and it should not have been`
         )
     }

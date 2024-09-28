@@ -7,7 +7,7 @@ import generateUrl from '../utilities/generateUrl'
 import getPerson from '../utilities/getPerson'
 import { sendMessage } from '../utilities/sendMessage'
 
-export default class MessageSenderImpl {
+export default class MessageSenderImpl implements MessageSender {
     public static Class?: new (
         options: MessageSenderConstructorOptions
     ) => MessageSender

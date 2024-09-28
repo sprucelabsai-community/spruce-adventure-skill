@@ -75,4 +75,5 @@ export default async (
     skill.updateContext('groupFinder', groupFinder)
     skill.updateContext('groupManager', groupManager)
     skill.updateContext('connectionAccepter', accepter)
+    skill.updateContext('messageSender', sender)
 }

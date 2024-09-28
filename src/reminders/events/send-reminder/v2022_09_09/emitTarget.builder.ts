@@ -2,7 +2,12 @@ import { buildSchema } from '@sprucelabs/schema'
 
 const sendReminderEmitTargetBuilder = buildSchema({
     id: 'sendReminderEmitTarget',
-    fields: {},
+    fields: {
+        adventureId: {
+            type: 'id',
+            isRequired: true,
+        },
+    },
 })
 
 export default sendReminderEmitTargetBuilder

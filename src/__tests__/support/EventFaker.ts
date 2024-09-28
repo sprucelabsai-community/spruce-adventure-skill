@@ -19,13 +19,18 @@ export default class EventFaker {
     public fakedFriends: Friend[] = []
     public fakedGroups: ListGroup[] = []
 
-    public async fakeSendReminder(cb?: () => void) {
-        await eventFaker.on('adventure.send-reminder::v2022_09_09', () => {
-            cb?.()
-            return {
-                success: true,
+    public async fakeSendReminder(
+        cb?: (targetAndPayload: SendReminderTargetAndPayload) => void
+    ) {
+        await eventFaker.on(
+            'adventure.send-reminder::v2022_09_09',
+            (targetAndPayload) => {
+                cb?.(targetAndPayload)
+                return {
+                    success: true,
+                }
             }
-        })
+        )
     }
 
     public async fakeAddFriendToGroup(
@@ -387,3 +392,6 @@ export type LeaveGroupTargetAndPayload =
 
 export type AddFriendToGroupTargetAndPayload =
     SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetAndPayload
+
+export type SendReminderTargetAndPayload =
+    SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetAndPayload

@@ -12,6 +12,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
     public static id = 'current-adventure-card'
     protected baseAdventureCardVc: BaseAdventureCardViewController
     private didCancelHandler: ClickCancelHandler
+    private adventure: AdventureWithPerson
 
     public constructor(
         options: ViewControllerOptions & CurrentAdventureCardOptions
@@ -23,6 +24,7 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
             'onDidCancel',
         ])
 
+        this.adventure = adventure
         this.didCancelHandler = onDidCancel
         this.baseAdventureCardVc = this.CardVc(adventure)
     }
@@ -83,7 +85,12 @@ export default class CurrentAdventureCardViewController extends AbstractViewCont
         try {
             const client = await this.connectToApi()
             await client.emitAndFlattenResponses(
-                'adventure.send-reminder::v2022_09_09'
+                'adventure.send-reminder::v2022_09_09',
+                {
+                    target: {
+                        adventureId: this.adventure.id,
+                    },
+                }
             )
 
             this.baseAdventureCardVc.setFooter(this.renderFooter(false))
