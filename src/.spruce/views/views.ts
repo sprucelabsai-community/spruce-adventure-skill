@@ -1,5 +1,5 @@
-import RootSkillViewController from '../../root/Root.svc'
 import GroupSkillViewController from '../../groups/Group.svc'
+import RootSkillViewController from '../../root/Root.svc'
 import ListSkillViewController from '../../adventures/listing/List.svc'
 import PostSkillViewController from '../../adventures/posting/Post.svc'
 import ConnectSkillViewController from '../../friends/connecting/Connect.svc'
@@ -17,8 +17,8 @@ import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 import '@sprucelabs/heartwood-view-controllers'
 
 const vcs = {
-    RootSkillViewController,
     GroupSkillViewController,
+    RootSkillViewController,
     ListSkillViewController,
     PostSkillViewController,
     ConnectSkillViewController,
@@ -41,16 +41,16 @@ type LoadOptions<Args extends Record<string,any>[]> = Args[0]['args'] extends Re
 
 declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.types' {
 	interface SkillViewControllerMap {
-		'adventure.root': RootSkillViewController
 		'adventure.group': GroupSkillViewController
+		'adventure.root': RootSkillViewController
 		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
 		'adventure.connect': ConnectSkillViewController
 	}
 
 	interface SkillViewControllerArgsMap {
-		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
 		'adventure.group': LoadOptions<Parameters<GroupSkillViewController['load']>>
+		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
 		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
 		'adventure.connect': LoadOptions<Parameters<ConnectSkillViewController['load']>>
@@ -67,8 +67,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.post-card': PostCardViewController
 		'adventure.friends-list-tool': FriendsListToolViewController
 		'adventure.group-list-card': GroupListCardViewController
-		'adventure.root': RootSkillViewController
 		'adventure.group': GroupSkillViewController
+		'adventure.root': RootSkillViewController
 		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
 		'adventure.connect': ConnectSkillViewController
