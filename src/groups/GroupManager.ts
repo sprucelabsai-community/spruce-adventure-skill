@@ -59,7 +59,7 @@ export default class GroupManagerImpl implements GroupManager {
 
         await this.sendMessage(
             toId,
-            `Hey {{toName}! {{fromName}} has added you to their Adventure Group, "{{title}}". Anytime you want to invite everyone in the group to your own adventure, use this link: https://adventure.spruce.bot`,
+            `Hey {{toName}}! {{fromName}} has added you to their Adventure Group, "{{title}}". Anytime you want to invite everyone in the group to your own adventure, use this link: https://adventure.spruce.bot`,
             {
                 title,
                 toName,
