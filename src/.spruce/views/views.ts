@@ -1,7 +1,7 @@
 import GroupSkillViewController from '../../groups/Group.svc'
 import RootSkillViewController from '../../root/Root.svc'
-import ListSkillViewController from '../../adventures/listing/List.svc'
 import PostSkillViewController from '../../adventures/posting/Post.svc'
+import ListSkillViewController from '../../adventures/listing/List.svc'
 import ConnectSkillViewController from '../../friends/connecting/Connect.svc'
 import FriendSelectionCardViewController from '../../groups/FriendSelectionCard.vc'
 import GroupFormCardViewController from '../../groups/GroupFormCard.vc'
@@ -19,8 +19,8 @@ import '@sprucelabs/heartwood-view-controllers'
 const vcs = {
     GroupSkillViewController,
     RootSkillViewController,
-    ListSkillViewController,
     PostSkillViewController,
+    ListSkillViewController,
     ConnectSkillViewController,
     FriendSelectionCardViewController,
     GroupFormCardViewController,
@@ -43,16 +43,16 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 	interface SkillViewControllerMap {
 		'adventure.group': GroupSkillViewController
 		'adventure.root': RootSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
 	}
 
 	interface SkillViewControllerArgsMap {
 		'adventure.group': LoadOptions<Parameters<GroupSkillViewController['load']>>
 		'adventure.root': LoadOptions<Parameters<RootSkillViewController['load']>>
-		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.post': LoadOptions<Parameters<PostSkillViewController['load']>>
+		'adventure.list': LoadOptions<Parameters<ListSkillViewController['load']>>
 		'adventure.connect': LoadOptions<Parameters<ConnectSkillViewController['load']>>
 	}
 
@@ -69,8 +69,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.friends-list-tool': FriendsListToolViewController
 		'adventure.group': GroupSkillViewController
 		'adventure.root': RootSkillViewController
-		'adventure.list': ListSkillViewController
 		'adventure.post': PostSkillViewController
+		'adventure.list': ListSkillViewController
 		'adventure.connect': ConnectSkillViewController
 	}
 
