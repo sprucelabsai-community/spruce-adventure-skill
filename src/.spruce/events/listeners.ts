@@ -2,20 +2,6 @@ import { EventFeatureListener } from '@sprucelabs/spruce-event-utils'
 
 const listeners: EventFeatureListener[] = [
     {
-        eventName: 'did-boot',
-        eventNamespace: 'skill',
-        version: 'v2022_09_24',
-        callback: require('../../listeners/skill/did-boot.v2022_09_24.listener').default,
-        isGlobal: require('../../listeners/skill/did-boot.v2022_09_24.listener').isGlobal,
-    },
-    {
-        eventName: 'will-boot',
-        eventNamespace: 'skill',
-        version: 'v2021_08_03',
-        callback: require('../../listeners/skill/will-boot.v2021_08_03.listener').default,
-        isGlobal: require('../../listeners/skill/will-boot.v2021_08_03.listener').isGlobal,
-    },
-    {
         eventName: 'add-friend-to-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -28,6 +14,20 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../listeners/adventure/send-reminder.v2022_09_09.listener').default,
         isGlobal: require('../../listeners/adventure/send-reminder.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'did-boot',
+        eventNamespace: 'skill',
+        version: 'v2022_09_24',
+        callback: require('../../listeners/skill/did-boot.v2022_09_24.listener').default,
+        isGlobal: require('../../listeners/skill/did-boot.v2022_09_24.listener').isGlobal,
+    },
+    {
+        eventName: 'will-boot',
+        eventNamespace: 'skill',
+        version: 'v2021_08_03',
+        callback: require('../../listeners/skill/will-boot.v2021_08_03.listener').default,
+        isGlobal: require('../../listeners/skill/will-boot.v2021_08_03.listener').isGlobal,
     },
     {
         eventName: 'register-dashboard-cards',
@@ -58,34 +58,6 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'cancel',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'list',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'rsvp',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'post',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'create-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -100,18 +72,18 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../groups/deleting/listeners/adventure/delete-group.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'leave-group',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../groups/leaving/listeners/adventure/leave-group.v2022_09_09.listener').default,
-        isGlobal: require('../../groups/leaving/listeners/adventure/leave-group.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'get-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').default,
         isGlobal: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'leave-group',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../groups/leaving/listeners/adventure/leave-group.v2022_09_09.listener').default,
+        isGlobal: require('../../groups/leaving/listeners/adventure/leave-group.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list-groups',
@@ -126,6 +98,34 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').default,
         isGlobal: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'cancel',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'list',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'post',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'rsvp',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
     },
 ]
 
