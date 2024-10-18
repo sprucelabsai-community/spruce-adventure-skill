@@ -51,13 +51,10 @@ export default class GroupListCardTest extends AbstractAdventureTest {
 
     @test()
     protected static async hasClientSidePaging() {
-        activeRecordCardAssert.assertPagingOptionsEqual(
-            this.activeRecordCardVc,
-            {
-                pageSize: 5,
-                shouldPageClientSide: true,
-            }
-        )
+        activeRecordCardAssert.pagingOptionsEqual(this.activeRecordCardVc, {
+            pageSize: 5,
+            shouldPageClientSide: true,
+        })
     }
 
     @test()
