@@ -37,18 +37,11 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').isGlobal,
     },
     {
-        eventName: 'rsvp',
+        eventName: 'cancel',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
-        callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'post',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
+        callback: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list',
@@ -58,11 +51,18 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'cancel',
+        eventName: 'post',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
-        callback: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/cancelling/listeners/adventure/cancel.v2022_09_09.listener').isGlobal,
+        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'rsvp',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list-friends',
