@@ -51,18 +51,25 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'post',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'rsvp',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
         isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'list-friends',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').default,
+        isGlobal: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'post',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'accept-connection',
@@ -93,20 +100,6 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../groups/creating/listeners/adventure/create-group.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'get-group',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').default,
-        isGlobal: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'list-friends',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').default,
-        isGlobal: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'leave-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -114,11 +107,11 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../groups/leaving/listeners/adventure/leave-group.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'update-group',
+        eventName: 'get-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
-        callback: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').default,
-        isGlobal: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').isGlobal,
+        callback: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').default,
+        isGlobal: require('../../groups/getting/listeners/adventure/get-group.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list-groups',
@@ -126,6 +119,13 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../groups/listing/listeners/adventure/list-groups.v2022_09_09.listener').default,
         isGlobal: require('../../groups/listing/listeners/adventure/list-groups.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'update-group',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').default,
+        isGlobal: require('../../groups/updating/listeners/adventure/update-group.v2022_09_09.listener').isGlobal,
     },
 ]
 
