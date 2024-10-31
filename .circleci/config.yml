@@ -51,7 +51,7 @@ jobs:
             if [[ ${CIRCLE_BRANCH} != "upgrade-"* ]]; then
               echo  | tee -a .env
               echo HOST="https://sandbox.mercury.spruce.ai" | tee -a .env
-              ~/.yarn/bin/spruce boot || true
+              #~/.yarn/bin/spruce boot || true
             fi
       - run:
           name: "Publish to Prod (disabled)"
