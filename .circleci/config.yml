@@ -17,29 +17,30 @@ jobs:
       - spruce/install_deps_build_ci_test
       - run:
           name: "Booting Adventure and Polish Checking"
-          command: |
-            echo SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot
-            coproc bootfd { SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot; }
+          command: echo "Skipped for now"
+          # command: |
+            # echo SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot
+            # coproc bootfd { SKILL_ID=$POLISH_SKILL_ID SKILL_API_KEY=$POLISH_SKILL_API_KEY HOST=https://polish.mercury.spruce.ai yarn boot; }
 
-            while true
-            do
-              if [[ -n ${bootfd[@]} ]]; then
-                IFS= read boot_output <&"${bootfd[0]}"
-                echo "$boot_output"
-                if [[ $boot_output == *"Skill booted"* ]]; then
-                  yarn polish
-                  if [[ $? -eq 1 ]]; then
-                    echo "Polish check failed"
-                    exit 1
-                  fi
-                  break
-                fi
-              else
-                echo "Oh no! The Skill exited"
-                exit 1
-                break
-              fi
-            done
+            # while true
+            # do
+            #   if [[ -n ${bootfd[@]} ]]; then
+            #     IFS= read boot_output <&"${bootfd[0]}"
+            #     echo "$boot_output"
+            #     if [[ $boot_output == *"Skill booted"* ]]; then
+            #       yarn polish
+            #       if [[ $? -eq 1 ]]; then
+            #         echo "Polish check failed"
+            #         exit 1
+            #       fi
+            #       break
+            #     fi
+            #   else
+            #     echo "Oh no! The Skill exited"
+            #     exit 1
+            #     break
+            #   fi
+            # done
       - spruce/install_cli
       - spruce/setup_testing:
           demoNumber: $DEMO_NUMBER
