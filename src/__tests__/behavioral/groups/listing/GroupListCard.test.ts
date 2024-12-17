@@ -4,7 +4,7 @@ import {
     interactor,
     listAssert,
     MockActiveRecordCard,
-    RedirectDestination,
+    RouterDestination,
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
@@ -224,7 +224,7 @@ export default class GroupListCardTest extends AbstractAdventureTest {
     }
 
     private static async assertRedirects(
-        destination: RedirectDestination,
+        destination: RouterDestination,
         action: () => Promise<void>
     ) {
         await vcAssert.assertActionRedirects({
