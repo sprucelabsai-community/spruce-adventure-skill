@@ -24,7 +24,6 @@ const searchPersonSchema: SpruceSchemas.People.v2022_05_29.SearchPersonSchema  =
 	            /** . */
 	            'phone': {
 	                type: 'phone',
-	                isRequired: true,
 	                options: undefined
 	            },
 	    }
