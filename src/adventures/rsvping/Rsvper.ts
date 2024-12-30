@@ -3,36 +3,37 @@ import { MercuryClient } from '@sprucelabs/mercury-client'
 import { randomUtil } from '@sprucelabs/spruce-skill-utils'
 import { Person } from '../../adventure.types'
 import SpruceError from '../../errors/SpruceError'
+import { MessageSender } from '../../messaging/MessageSender'
 import generateUrl from '../../utilities/generateUrl'
 import getPerson from '../../utilities/getPerson'
 import { sendMessage } from '../../utilities/sendMessage'
 import AdventuresStore from '../Adventures.store'
-import ConnectionManager from '../listing/ConnectionManager'
 
 export default class Rsvper {
     private adventures: AdventuresStore
     private client: MercuryClient
-    private connections: ConnectionManager
+    private messageSender: MessageSender
 
     protected constructor(options: {
         adventures: AdventuresStore
         client: MercuryClient
-        connections: ConnectionManager
+        messageSender: MessageSender
     }) {
-        const { adventures, client, connections } = options
+        const { adventures, client, messageSender } = options
         this.adventures = adventures
         this.client = client
-        this.connections = connections
+        this.messageSender = messageSender
     }
+
     public static async Rsvper(options: {
         stores: Pick<StoreFactory, 'getStore'>
         client: MercuryClient
-        connections: ConnectionManager
+        messageSender: MessageSender
     }) {
-        const { stores, client, connections } = options
+        const { stores, client, messageSender } = options
         const adventures = await stores.getStore('adventures')
 
-        return new this({ adventures, client, connections })
+        return new this({ adventures, client, messageSender })
     }
 
     public async rsvp(options: {
@@ -58,7 +59,11 @@ export default class Rsvper {
         await Promise.all([
             (async () => {
                 if (canIMakeIt) {
-                    await this.messageConnections(posterId, person, url)
+                    await this.messageConnections(
+                        posterId,
+                        person,
+                        updated.target?.groupId
+                    )
                 }
             })(),
             this.sendMessageToPoster(person, canIMakeIt, posterId, url),
@@ -67,33 +72,24 @@ export default class Rsvper {
 
     private async messageConnections(
         posterId: string,
-        person: Person,
-        url: string
+        rsvperPerson: Person,
+        groupId?: string
     ) {
-        const poster = await getPerson(this.client, posterId)
-        const connections =
-            await this.connections.loadConnectionsForPerson(posterId)
-        await Promise.all(
-            connections.map(async (connection) => {
-                if (connection !== person.id) {
-                    await sendMessage({
-                        client: this.client,
-                        message: `${randomUtil.rand([
-                            'Sprucebot adventure update! ⚔️',
-                            '🌲🤖⚔️',
-                            'Hey hey!',
-                        ])}!! ${
-                            person.casualName
-                        } said they can make it for the adventure posted by ${
-                            poster.casualName
-                        }!`,
-                        toId: connection,
-                        linkLabel: 'Adventures',
-                        url,
-                    })
-                }
-            })
-        )
+        const message = `{{greeting}}!! {{rsvperPerson}} said they can make it for the adventure posted by {{from}}!`
+
+        await this.messageSender.sendMessage({
+            fromPersonId: posterId,
+            groupId,
+            context: {
+                greeting: randomUtil.rand([
+                    'Sprucebot adventure update!',
+                    'Hey hey!',
+                ]),
+                rsvperPerson: rsvperPerson.casualName,
+            },
+            message,
+            skipPersonId: rsvperPerson.id,
+        })
     }
 
     private async sendMessageToPoster(

@@ -35,7 +35,7 @@ export default async (
     const rsvp = await Rsvper.Rsvper({
         stores,
         client,
-        connections,
+        messageSender: sender,
     })
 
     const canceller = await AdventureCancellerImpl.Canceller({

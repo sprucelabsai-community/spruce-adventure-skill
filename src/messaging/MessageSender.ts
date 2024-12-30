@@ -37,7 +37,8 @@ export default class MessageSenderImpl implements MessageSender {
     }
 
     public async sendMessage(options: SendMessageOptions) {
-        const { fromPersonId, message, context, groupId } = options
+        const { fromPersonId, message, context, groupId, skipPersonId } =
+            options
         const url = await this.generateUrl()
 
         const group = await this.groups.findOne(
@@ -55,7 +56,7 @@ export default class MessageSenderImpl implements MessageSender {
 
         const from = await this.getPerson(fromPersonId)
         const toPeopleExclutingSender = toPeopleIds.filter(
-            (id) => id !== fromPersonId
+            (id) => id !== fromPersonId && id !== skipPersonId
         )
 
         await Promise.all(
@@ -116,6 +117,7 @@ export interface SendMessageOptions {
     groupId?: string
     message: string
     context: Record<string, any>
+    skipPersonId?: string
 }
 
 export interface MessageSender {

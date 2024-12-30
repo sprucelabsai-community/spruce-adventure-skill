@@ -64,7 +64,6 @@ export default class AdventuresStore extends AbstractStore<
         }
     ) {
         const { totalToSeed, TestClass } = options
-
         const { shouldPostAsFakedPerson, shouldPostToGroup } = custom || {}
 
         let personId = null

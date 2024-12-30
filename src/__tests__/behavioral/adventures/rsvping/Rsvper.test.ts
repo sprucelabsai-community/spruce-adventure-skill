@@ -1,6 +1,7 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
 import { test, assert, generateId } from '@sprucelabs/test-utils'
 import Rsvper from '../../../../adventures/rsvping/Rsvper'
+import MessageSenderImpl from '../../../../messaging/MessageSender'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import { SendMessageTargetAndPayload } from '../../../support/EventFaker'
 
@@ -19,10 +20,15 @@ export default class RsvperTest extends AbstractFriendsTest {
     protected static async beforeEach() {
         await super.beforeEach()
 
+        const connections = await this.ConnectionManager()
         this.rsvper = await Rsvper.Rsvper({
             stores: this.stores,
             client: this.fakedClient,
-            connections: await this.ConnectionManager(),
+            messageSender: await MessageSenderImpl.Sender({
+                client: this.fakedClient,
+                connections,
+                stores: this.stores,
+            }),
         })
 
         this.messageTargetAndPayloads = []
@@ -113,12 +119,36 @@ export default class RsvperTest extends AbstractFriendsTest {
         assert.isEqualDeep(match.whosIn, [])
     }
 
+    @test()
+    @seed('teammates', 2)
+    @seed('groups', 1)
+    @seed('adventures', 1, {
+        shouldPostToGroup: true,
+        shouldPostAsFakedPerson: true,
+    })
+    protected static async onlyMessagesGroupIfGroupIsSelected() {
+        const [, adventure] = await this.adventures.find({})
+        await this.connect(0)
+        await this.setPeopleOnGroup([
+            this.fakedPerson.id,
+            this.teammateId(1),
+            this.teammateId(2),
+        ])
+        await this.rsvpAs(1, true, adventure.id)
+        this.assertMessageNotSentToPerson(this.teammateId(0))
+        this.assertMessageNotSentToPerson(this.teammateId(1))
+        this.assertMessageSentToPerson(this.teammateId(2))
+        this.assertMessageSentToPerson(this.fakedPerson.id)
+    }
+
     private static assertMessageSentToPerson(personId: string) {
-        assert.isTruthy(
-            this.messageTargetAndPayloads.find(
-                (tap) => tap.target?.personId === personId
-            ),
-            `Could not find message sent to person ${personId}`
+        const matches = this.messageTargetAndPayloads.filter(
+            (tap) => tap.target?.personId === personId
+        )
+        assert.isLength(
+            matches,
+            1,
+            `Did not send the correct number of messages to ${personId}`
         )
     }
 
