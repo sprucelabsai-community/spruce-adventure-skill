@@ -8,6 +8,8 @@ const listEventContract = buildEventContract({
         'adventure.list::v2022_09_09': {
             isGlobal: true,
             
+            
+            
             listenPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-adventures"]},
             
             responsePayloadSchema: listResponsePayloadSchema,

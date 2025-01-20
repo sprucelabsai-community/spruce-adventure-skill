@@ -8,6 +8,8 @@ const rsvpEventContract = buildEventContract({
     eventSignatures: {
         'adventure.rsvp::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-rsvp"]},
             
             emitPayloadSchema: rsvpEmitTargetAndPayloadSchema,

@@ -8,6 +8,8 @@ const getEventContract = buildEventContract({
     eventSignatures: {
         'people.get::v2022_05_29': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-get-person","can-search-people"]},
             
             emitPayloadSchema: getEmitTargetAndPayloadSchema,

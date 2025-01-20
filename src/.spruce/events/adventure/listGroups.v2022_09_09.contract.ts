@@ -7,6 +7,8 @@ const listGroupsEventContract = buildEventContract({
     eventSignatures: {
         'adventure.list-groups::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-groups"]},
             
             

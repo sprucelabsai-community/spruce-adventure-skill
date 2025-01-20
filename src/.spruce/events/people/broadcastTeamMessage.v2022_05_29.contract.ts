@@ -8,6 +8,8 @@ const broadcastTeamMessageEventContract = buildEventContract({
     eventSignatures: {
         'people.broadcast-team-message::v2022_05_29': {
             
+            
+            
             emitPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-message-team"]},
             
             emitPayloadSchema: broadcastTeamMessageEmitTargetAndPayloadSchema,

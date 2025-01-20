@@ -8,6 +8,8 @@ const deleteGroupEventContract = buildEventContract({
     eventSignatures: {
         'adventure.delete-group::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-delete-groups"]},
             
             emitPayloadSchema: deleteGroupEmitTargetAndPayloadSchema,

@@ -7,6 +7,8 @@ const registerDashboardCardsEventContract = buildEventContract({
     eventSignatures: {
         'people.register-dashboard-cards::v2022_05_29': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-see-dashboard-cards"]},
             listenPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-register-dashboard-cards"]},
             

@@ -8,6 +8,8 @@ const leaveGroupEventContract = buildEventContract({
     eventSignatures: {
         'adventure.leave-group::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-leave-groups"]},
             
             emitPayloadSchema: leaveGroupEmitTargetAndPayloadSchema,

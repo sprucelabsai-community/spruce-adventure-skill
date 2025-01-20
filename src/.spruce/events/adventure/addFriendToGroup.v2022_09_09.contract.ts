@@ -8,6 +8,8 @@ const addFriendToGroupEventContract = buildEventContract({
     eventSignatures: {
         'adventure.add-friend-to-group::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-add-friend-to-groups"]},
             
             emitPayloadSchema: addFriendToGroupEmitTargetAndPayloadSchema,

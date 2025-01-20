@@ -8,6 +8,8 @@ const listFriendsEventContract = buildEventContract({
     eventSignatures: {
         'adventure.list-friends::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-friends"]},
             
             emitPayloadSchema: listFriendsEmitTargetAndPayloadSchema,

@@ -9,6 +9,8 @@ const sendReminderEventContract = buildEventContract({
         'adventure.send-reminder::v2022_09_09': {
             isGlobal: true,
             
+            
+            
             listenPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-send-reminders"]},
             emitPayloadSchema: sendReminderEmitTargetAndPayloadSchema,
             responsePayloadSchema: sendReminderResponsePayloadSchema,

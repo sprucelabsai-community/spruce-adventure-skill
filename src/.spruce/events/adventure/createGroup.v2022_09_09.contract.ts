@@ -8,6 +8,8 @@ const createGroupEventContract = buildEventContract({
     eventSignatures: {
         'adventure.create-group::v2022_09_09': {
             isGlobal: true,
+            
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-create-groups"]},
             
             emitPayloadSchema: createGroupEmitTargetAndPayloadSchema,
