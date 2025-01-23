@@ -1,3 +1,10 @@
+# [9.14.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.13.46...v9.14.0) (2025-01-23)
+
+
+### Features
+
+* ai instructions baby! ([9ac5870](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/9ac5870))
+
 ## [9.13.46](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.13.45...v9.13.46) (2025-01-20)
 
 ## [9.13.45](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.13.44...v9.13.45) (2025-01-15)
