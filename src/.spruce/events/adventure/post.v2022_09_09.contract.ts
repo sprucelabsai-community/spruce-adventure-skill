@@ -9,7 +9,7 @@ const postEventContract = buildEventContract({
         'adventure.post::v2022_09_09': {
             isGlobal: true,
             
-            
+            aiInstructions: `This allows me to post a new adventure! You will need to lookup what groups I have available to populate groupId in the target.`,
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-post-adventure"]},
             
             emitPayloadSchema: postEmitTargetAndPayloadSchema,

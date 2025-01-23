@@ -9,7 +9,7 @@ const cancelEventContract = buildEventContract({
         'adventure.cancel::v2022_09_09': {
             isGlobal: true,
             
-            
+            aiInstructions: `Cancel an adventure. Make sure to list adventures and filter out the ones that are mine (using source.personId to compare to my id using the whoami event).`,
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-cancel-adventure"]},
             
             emitPayloadSchema: cancelEmitTargetAndPayloadSchema,

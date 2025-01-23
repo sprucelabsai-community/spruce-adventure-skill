@@ -9,7 +9,7 @@ const addFriendToGroupEventContract = buildEventContract({
         'adventure.add-friend-to-group::v2022_09_09': {
             isGlobal: true,
             
-            
+            aiInstructions: `Allows me to see my adventure groups. These are groups of friends and family we use to schedule fun adventures, play dates, etc.`,
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-add-friend-to-groups"]},
             
             emitPayloadSchema: addFriendToGroupEmitTargetAndPayloadSchema,
