@@ -15,6 +15,8 @@ type Options = Omit<
 
 const eventOptions: Options = {
     isGlobal: true,
+    aiInstructions:
+        'Allows me to see my adventure groups. These are groups of friends and family we use to schedule fun adventures, play dates, etc.',
     emitPermissions: buildPermissionReference('adventure.adventure', [
         'can-add-friend-to-groups',
     ]),

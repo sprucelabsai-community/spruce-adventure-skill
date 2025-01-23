@@ -13,6 +13,8 @@ type Options = Omit<
 
 const eventOptions: Options = {
     isGlobal: true,
+    aiInstructions:
+        'Use this to see what adventures me or my friends have posted!',
     listenPermissions: buildPermissionReference('adventure.adventure', [
         'can-list-adventures',
     ]),
