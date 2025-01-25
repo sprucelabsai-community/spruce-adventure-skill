@@ -9,7 +9,7 @@ const listFriendsEventContract = buildEventContract({
         'adventure.list-friends::v2022_09_09': {
             isGlobal: true,
             
-            
+            aiInstructions: `See all friends and family that I'm connected to for hosting Adventures.`,
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-friends"]},
             
             emitPayloadSchema: listFriendsEmitTargetAndPayloadSchema,

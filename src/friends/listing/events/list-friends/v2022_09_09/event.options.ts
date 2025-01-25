@@ -13,6 +13,8 @@ type Options = Omit<
 
 const eventOptions: Options = {
     isGlobal: true,
+    aiInstructions:
+        "See all friends and family that I'm connected to for hosting Adventures.",
     emitPermissions: buildPermissionReference('adventure.adventure', [
         'can-list-friends',
     ]),
