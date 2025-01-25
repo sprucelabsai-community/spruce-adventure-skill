@@ -15,6 +15,8 @@ type Options = Omit<
 
 const eventOptions: Options = {
     isGlobal: true,
+    aiInstructions:
+        'Allows me to send a single reminder to people invited to my adventure. I only get one shot, so I better make it count!',
     listenPermissions: buildPermissionReference('adventure.adventure', [
         'can-send-reminders',
     ]),
