@@ -27,7 +27,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
 
         this.auth = this.views.getAuthenticator()
         this.sessionToken = this.auth.getSessionToken()!
-        this.auth.clearSession()
+        await this.auth.clearSession()
         await this.reload()
     }
 
