@@ -1,3 +1,11 @@
+# [10.0.0](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.15.5...v10.0.0) (2025-02-08)
+
+
+### Breaking Changes
+
+* version updates ([6cdc115](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/6cdc115))
+* version updates ([4f277f3](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/4f277f3))
+
 ## [9.15.5](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.15.4...v9.15.5) (2025-02-01)
 
 ## [9.15.4](https://github.com/sprucelabsai-community/spruce-adventure-skill/compare/v9.15.3...v9.15.4) (2025-02-01)
