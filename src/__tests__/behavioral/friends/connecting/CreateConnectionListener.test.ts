@@ -1,16 +1,17 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class CreateConnectionListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
     }
 
     @test()
-    protected static async hasCreateConnectionListener() {
+    protected async hasCreateConnectionListener() {
         const connectionId = await this.emitCreateConnection()
         const match = await this.getNewestConnection()
 
@@ -19,20 +20,20 @@ export default class CreateConnectionListenerTest extends AbstractAdventureTest 
     }
 
     @test()
-    protected static async storesGroupIdIfPassed() {
+    protected async storesGroupIdIfPassed() {
         const groupId = generateId()
         await this.emitCreateConnection(groupId)
         const match = await this.getNewestConnection()
         assert.isEqual(match.target!.groupId, groupId)
     }
 
-    private static async getNewestConnection() {
+    private async getNewestConnection() {
         const match = await this.connections.findOne({})
         assert.isTruthy(match)
         return match
     }
 
-    private static async emitCreateConnection(groupId?: string) {
+    private async emitCreateConnection(groupId?: string) {
         const [{ connectionId }] =
             await this.fakedClient.emitAndFlattenResponses(
                 'adventure.create-connection::v2022_09_09',

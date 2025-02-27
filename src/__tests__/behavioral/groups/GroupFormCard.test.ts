@@ -4,15 +4,16 @@ import {
     SpyFormCardViewController,
 } from '@sprucelabs/spruce-form-utils'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyGroupFormCard } from './SpyGroupFormCard'
 
 @fake.login()
+@suite()
 export default class GroupFormCardTest extends AbstractAdventureTest {
-    private static vc: SpyGroupFormCard
+    private vc!: SpyGroupFormCard
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.views.setController('adventure.group-form-card', SpyGroupFormCard)
@@ -24,17 +25,17 @@ export default class GroupFormCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersAsFormCard() {
+    protected async rendersAsFormCard() {
         vcAssert.assertRendersAsInstanceOf(this.vc, FormCardViewController)
     }
 
     @test()
-    protected static async rendersAForm() {
+    protected async rendersAForm() {
         formAssert.cardRendersForm(this.vc)
     }
 
     @test()
-    protected static async rendersExpectedFields() {
+    protected async rendersExpectedFields() {
         formAssert.formRendersFields(this.vc.getFormVc(), [
             'title',
             'description',

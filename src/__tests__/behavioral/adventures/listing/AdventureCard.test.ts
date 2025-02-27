@@ -1,6 +1,12 @@
 import { interactor, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, errorAssert, generateId, test } from '@sprucelabs/test-utils'
+import {
+    assert,
+    errorAssert,
+    generateId,
+    test,
+    suite,
+} from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
 import BaseAdventureCardViewController from '../../../../adventures/listing/BaseAdventureCard.vc'
@@ -9,12 +15,13 @@ import { RsvpTargetAndPayload } from '../../../support/EventFaker'
 import generateAdventureWithPersonValues from '../../../support/generateAdventureWithPersonValues'
 
 @fake.login()
+@suite()
 export default class AdventureCardTest extends AbstractAdventureTest {
-    private static vc: AdventureCardViewController
-    private static adventure: ListAdventure
-    private static lastPassedTargetAndPayload: RsvpTargetAndPayload | undefined
+    private vc!: AdventureCardViewController
+    private adventure!: ListAdventure
+    private lastPassedTargetAndPayload!: RsvpTargetAndPayload | undefined
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.adventure = generateAdventureWithPersonValues()
         this.setupVcWithAdventure(this.adventure)
@@ -25,7 +32,7 @@ export default class AdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async throwsWithMissing() {
+    protected async throwsWithMissing() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.views.Controller('adventure.adventure-card', {})
@@ -37,7 +44,7 @@ export default class AdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async adventureCardRendersBase() {
+    protected async adventureCardRendersBase() {
         vcAssert.assertRendersAsInstanceOf(
             this.vc,
             BaseAdventureCardViewController
@@ -45,88 +52,88 @@ export default class AdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async adventureCardRendersInOutButtons() {
+    protected async adventureCardRendersInOutButtons() {
         vcAssert.assertCardRendersButtons(this.vc, ['in', 'out'])
     }
 
     @test()
-    protected static async clickingImInRendersConfirm() {
+    protected async clickingImInRendersConfirm() {
         await this.assertClickingImInRendersConfirm()
     }
 
     @test()
-    protected static async clickingImOutRendersConfirm() {
+    protected async clickingImOutRendersConfirm() {
         await this.assertClickingImOutRendersConfirm()
     }
 
     @test()
-    protected static inButtonSelectedIfIn() {
+    protected inButtonSelectedIfIn() {
         this.setupVcWithWhosIn([this.fakedPerson.id])
         this.assertImInButtonSelected()
     }
 
     @test()
-    protected static inNotSelectedIfPersonNotRsvpd() {
+    protected inNotSelectedIfPersonNotRsvpd() {
         this.setupVcWithWhosIn([generateId()])
         this.assertNoButtonSelected()
     }
 
     @test()
-    protected static knowsIfPersonIsNotFirstRsvp() {
+    protected knowsIfPersonIsNotFirstRsvp() {
         this.setupVcWithWhosIn([generateId(), this.fakedPerson.id])
         this.assertImInButtonSelected()
     }
 
     @test()
-    protected static async outButtonSelectedIfOUt() {
+    protected async outButtonSelectedIfOUt() {
         this.setupVcWithWhosOut([this.fakedPerson.id])
         this.assertImOutButtonSelected()
     }
 
     @test()
-    protected static async outButtonMtachesId() {
+    protected async outButtonMtachesId() {
         this.setupVcWithWhosOut([generateId()])
         this.assertNoButtonSelected()
     }
 
     @test()
-    protected static async canMatchOutWhenNotFirst() {
+    protected async canMatchOutWhenNotFirst() {
         this.setupVcWithWhosOut([generateId(), this.fakedPerson.id])
         this.assertImOutButtonSelected()
     }
 
     @test()
-    protected static async passesExpectedTargetToRsvpListener() {
+    protected async passesExpectedTargetToRsvpListener() {
         const confirmVc = await this.assertClickingImInRendersConfirm()
         await confirmVc.accept()
         this.assertLastCanIMakeItInPayloadEquals(true)
     }
 
     @test()
-    protected static async passesExpectedTargetToRsvpListenerWhenOut() {
+    protected async passesExpectedTargetToRsvpListenerWhenOut() {
         const confirmVc = await this.assertClickingImOutRendersConfirm()
         await confirmVc.accept()
         this.assertLastCanIMakeItInPayloadEquals(false)
     }
 
     @test()
-    protected static async doesNotRsvpOnDecline() {
+    protected async doesNotRsvpOnDecline() {
         await this.clickImOutAndDecline()
         assert.isUndefined(this.lastPassedTargetAndPayload)
     }
 
     @test()
-    protected static async decliningDoesNotSelectAButton() {
+    protected async decliningDoesNotSelectAButton() {
         await this.clickImOutAndDecline()
         this.assertNoButtonSelected()
     }
 
-    private static async clickImOutAndDecline() {
+    private async clickImOutAndDecline() {
         const confirmVc = await this.assertClickingImOutRendersConfirm()
         await confirmVc.decline()
     }
 
-    private static assertLastCanIMakeItInPayloadEquals(canIMakeIt: boolean) {
+    private assertLastCanIMakeItInPayloadEquals(canIMakeIt: boolean) {
         delete this.lastPassedTargetAndPayload?.source
         assert.isEqualDeep(this.lastPassedTargetAndPayload, {
             target: {
@@ -138,31 +145,31 @@ export default class AdventureCardTest extends AbstractAdventureTest {
         })
     }
 
-    private static setupVcWithWhosIn(whosIn: string[]) {
+    private setupVcWithWhosIn(whosIn: string[]) {
         const adventure = generateAdventureWithPersonValues()
         adventure.whosIn = whosIn
         this.setupVcWithAdventure(adventure)
     }
 
-    private static setupVcWithWhosOut(whosOut: string[]) {
+    private setupVcWithWhosOut(whosOut: string[]) {
         const adventure = generateAdventureWithPersonValues()
         adventure.whosOut = whosOut
         this.setupVcWithAdventure(adventure)
     }
 
-    private static assertImInButtonSelected() {
+    private assertImInButtonSelected() {
         const [inVc, outVc] = this.getRsvpButtons()
         assert.isTrue(this.views.render(inVc).isSelected)
         assert.isFalse(this.views.render(outVc).isSelected)
     }
 
-    private static assertImOutButtonSelected() {
+    private assertImOutButtonSelected() {
         const [inVc, outVc] = this.getRsvpButtons()
         assert.isFalse(this.views.render(inVc).isSelected)
         assert.isTrue(this.views.render(outVc).isSelected)
     }
 
-    private static assertNoButtonSelected() {
+    private assertNoButtonSelected() {
         const [inVc, outVc] = this.getRsvpButtons()
         assert.isFalsy(
             this.views.render(inVc).isSelected,
@@ -174,23 +181,23 @@ export default class AdventureCardTest extends AbstractAdventureTest {
         )
     }
 
-    private static async assertClickingImInRendersConfirm() {
+    private async assertClickingImInRendersConfirm() {
         return vcAssert.assertRendersConfirm(this.vc, async () => {
             await interactor.clickButton(this.vc, 'in')
         })
     }
 
-    private static getRsvpButtons() {
+    private getRsvpButtons() {
         return vcAssert.assertCardRendersButtons(this.vc, ['in', 'out'])
     }
 
-    private static async assertClickingImOutRendersConfirm() {
+    private async assertClickingImOutRendersConfirm() {
         return vcAssert.assertRendersConfirm(this.vc, async () => {
             await interactor.clickButton(this.vc, 'out')
         })
     }
 
-    private static setupVcWithAdventure(adventure: ListAdventure) {
+    private setupVcWithAdventure(adventure: ListAdventure) {
         this.vc = this.views.Controller('adventure.adventure-card', {
             adventure,
             loggedInPersonId: this.fakedPerson.id,

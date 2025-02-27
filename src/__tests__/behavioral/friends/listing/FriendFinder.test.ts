@@ -1,13 +1,20 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import FriendFinder from '../../../../friends/listing/FriendFinder'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 
 @fake.login()
+@suite()
 export default class FriendFinderTest extends AbstractFriendsTest {
-    private static finder: FriendFinder
-    private static passedPeopleIds?: string[] | null
-    protected static async beforeEach(): Promise<void> {
+    private finder!: FriendFinder
+    private passedPeopleIds?: string[] | null
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.finder = await FriendFinder.Finder({
@@ -23,7 +30,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async canCreateFriendFinder() {
+    protected async canCreateFriendFinder() {
         await this.connectToOneFriend()
 
         const group = await this.getFirstGroup()
@@ -32,7 +39,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async throwsWithNotFoundWithBadGroupId() {
+    protected async throwsWithNotFoundWithBadGroupId() {
         const err = await assert.doesThrowAsync(() =>
             this.findInGroup(generateId())
         )
@@ -42,7 +49,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async returnsInGroupIfInGroup() {
+    protected async returnsInGroupIfInGroup() {
         const friend = await this.connectToOneFriend()
         const match = await this.addPeopleToGroup([friend.id])
         await this.assertFirstPersonIsInGroup(match.id, true)
@@ -50,7 +57,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async canFindIfSecondPersonInGroup() {
+    protected async canFindIfSecondPersonInGroup() {
         const friend = await this.connectToOneFriend()
         const match = await this.addPeopleToGroup([generateId(), friend.id])
         await this.assertFirstPersonIsInGroup(match.id, true)
@@ -60,7 +67,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     @seed('groups', 1)
     @seed('organizations', 1)
     @seed('guests', 1)
-    protected static async ifPassingGroupReturnsPeopleInGroupAsWell() {
+    protected async ifPassingGroupReturnsPeopleInGroupAsWell() {
         const group = await this.setPeopleOnGroup([this.fakedGuests[0].id])
 
         await this.findInGroup(group.id)
@@ -71,7 +78,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
     @seed('groups', 1)
     @seed('organizations', 1)
     @seed('guests', 1)
-    protected static async returnsSelfIfListedInGroup() {
+    protected async returnsSelfIfListedInGroup() {
         const group = await this.setPeopleOnGroup([this.fakedPerson.id], {
             sourcePersonId: this.fakedGuests[0].id,
         })
@@ -80,11 +87,11 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         this.assertPeoplePassedToListPeople([this.fakedPerson.id])
     }
 
-    private static assertPeoplePassedToListPeople(expected: string[]) {
+    private assertPeoplePassedToListPeople(expected: string[]) {
         assert.isEqualDeep(this.passedPeopleIds, expected)
     }
 
-    private static async addPeopleToGroup(peopleIds: string[]) {
+    private async addPeopleToGroup(peopleIds: string[]) {
         return await this.groups.updateOne(
             {},
             {
@@ -93,7 +100,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         )
     }
 
-    private static async assertFirstPersonIsInGroup(
+    private async assertFirstPersonIsInGroup(
         groupId: string,
         isInGroup: boolean
     ) {
@@ -101,7 +108,7 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         assert.isEqual(match.isInGroup, isInGroup)
     }
 
-    private static async connectToOneFriend() {
+    private async connectToOneFriend() {
         const friend = this.generateFriendValues()
         await this.fakeListPeople([friend])
         await this.connectToMe(friend.id)
@@ -109,14 +116,14 @@ export default class FriendFinderTest extends AbstractFriendsTest {
         return friend
     }
 
-    private static async findInGroup(groupId: string) {
+    private async findInGroup(groupId: string) {
         return await this.finder.findForPerson({
             arePartOfGroupId: groupId,
             personId: this.fakedPerson.id,
         })
     }
 
-    private static async connectToMe(friendId: string) {
+    private async connectToMe(friendId: string) {
         await this.createConnection(this.fakedPerson.id, friendId)
     }
 }

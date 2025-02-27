@@ -1,12 +1,19 @@
 import { MercuryClient } from '@sprucelabs/mercury-client'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class RsvpListenerTest extends AbstractAdventureTest {
     @seed('adventures', 1)
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.bootSkill()
         await this.eventFaker.fakeSendMessage()
@@ -15,26 +22,26 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async throwsNotFoundWithBadAdventureId() {
+    protected async throwsNotFoundWithBadAdventureId() {
         const id = generateId()
         const err = await assert.doesThrowAsync(() => this.emitRsvp({ id }))
         errorAssert.assertError(err, 'NOT_FOUND')
     }
 
     @test()
-    protected static async noCrashWithGoodAdventureId() {
+    protected async noCrashWithGoodAdventureId() {
         const success = await this.rsvpFirstAdventure()
         assert.isTrue(success)
     }
 
     @test()
-    protected static async addsRsvpToAdventure() {
+    protected async addsRsvpToAdventure() {
         await this.rsvpFirstAdventure()
         await this.assertFakedPersonIsIn()
     }
 
     @test()
-    protected static async canAddManyRsvps() {
+    protected async canAddManyRsvps() {
         await this.rsvpFirstAdventure()
         const { client, person } =
             await this.people.loginAsDemoPerson('555-555-1234')
@@ -44,14 +51,14 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async addsRsvpIfCantAttending() {
+    protected async addsRsvpIfCantAttending() {
         await this.rsvpImOut()
         await this.assertWhoseIn([])
         await this.assertWhoseOut([this.fakedPerson.id])
     }
 
     @test()
-    protected static async canUpdateRsvp() {
+    protected async canUpdateRsvp() {
         await this.rsvpImOut()
         await this.rsvpFirstAdventure()
         await this.assertFakedPersonIsIn()
@@ -60,15 +67,15 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
         await this.assertWhoseIn([])
     }
 
-    private static async rsvpImOut() {
+    private async rsvpImOut() {
         await this.rsvpFirstAdventure({ canIMakeIt: false })
     }
 
-    private static async assertFakedPersonIsIn() {
+    private async assertFakedPersonIsIn() {
         await this.assertWhoseIn([this.fakedPerson.id])
     }
 
-    private static async assertWhoseIn(expected: string[]) {
+    private async assertWhoseIn(expected: string[]) {
         const adventure = await this.getFirstAdventure()
         assert.isEqualDeep(
             adventure.whosIn,
@@ -77,7 +84,7 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
         )
     }
 
-    private static async assertWhoseOut(expected: string[]) {
+    private async assertWhoseOut(expected: string[]) {
         const adventure = await this.getFirstAdventure()
         assert.isEqualDeep(
             adventure.whosOut,
@@ -86,7 +93,7 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
         )
     }
 
-    private static async rsvpFirstAdventure(options?: {
+    private async rsvpFirstAdventure(options?: {
         client?: MercuryClient
         canIMakeIt?: boolean
     }) {
@@ -95,7 +102,7 @@ export default class RsvpListenerTest extends AbstractAdventureTest {
         return success
     }
 
-    private static async emitRsvp(options: {
+    private async emitRsvp(options: {
         id: string
         client?: MercuryClient
         canIMakeIt?: boolean

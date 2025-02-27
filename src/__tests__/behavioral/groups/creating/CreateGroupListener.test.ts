@@ -1,11 +1,12 @@
 import { fake, SpruceSchemas } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { Group } from '../../../../adventure.types'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class CreateGroupListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
         await this.eventFaker.fakeSendMessage()
@@ -13,18 +14,18 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async skillIsListening() {
+    protected async skillIsListening() {
         await this.emitCreateGroup()
     }
 
     @test()
-    protected static async createsAGroupRecord() {
+    protected async createsAGroupRecord() {
         await this.emitCreateGroup()
         await this.getFirstGroup()
     }
 
     @test()
-    protected static async savesExpectedValues() {
+    protected async savesExpectedValues() {
         const values = this.eventFaker.generateCreateGroupValues()
         values.people = [generateId(), generateId()]
         await this.emitCreateGroup(values)
@@ -40,14 +41,14 @@ export default class CreateGroupListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async returnsTheGroupThatWasCreated() {
+    protected async returnsTheGroupThatWasCreated() {
         const group = await this.emitCreateGroup()
         const match = await this.getFirstGroup(false)
 
         assert.isEqualDeep(group, match)
     }
 
-    private static async emitCreateGroup(
+    private async emitCreateGroup(
         values?: SpruceSchemas.Adventure.v2022_09_09.CreateGroup
     ) {
         const [{ group }] = await this.fakedClient.emitAndFlattenResponses(

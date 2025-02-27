@@ -1,5 +1,5 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 
 import { Group } from '../../../../adventure.types'
 import AdventurePoster from '../../../../adventures/posting/AdventurePoster'
@@ -12,14 +12,14 @@ import {
 import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()
+@suite()
 export default class AdventurePosterTest extends AbstractFriendsTest {
-    private static poster: AdventurePoster
-    private static sendMessageTargetAndPayloads: SendMessageTargetAndPayload[] =
-        []
+    private poster!: AdventurePoster
+    private sendMessageTargetAndPayloads: SendMessageTargetAndPayload[] = []
 
     @seed('organizations', 1)
     @seed('teammates', 1)
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.sendMessageTargetAndPayloads = []
@@ -42,7 +42,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async messagesFirstConnection() {
+    protected async messagesFirstConnection() {
         const id = await this.connect(0)
 
         await this.post()
@@ -55,7 +55,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
     @test()
     @seed('teammates', 1)
-    protected static async messagesAllConnections() {
+    protected async messagesAllConnections() {
         await this.connect(0)
         await this.connect(1)
         await this.post()
@@ -63,7 +63,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async passesGenerateUrlToListView() {
+    protected async passesGenerateUrlToListView() {
         const url = generateId()
 
         let passedTargetAndPayload: GenerateUrlTargetAndPayload | undefined
@@ -82,7 +82,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async passesExpectedTemplateAndContext() {
+    protected async passesExpectedTemplateAndContext() {
         await this.connect(0)
 
         const post = await this.post()
@@ -105,7 +105,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async passesExpectedContextIfSendingToGroup() {
+    protected async passesExpectedContextIfSendingToGroup() {
         await this.addTeammatesToGroup()
         const group = await this.getFirstGroup()
         await this.postAndAssertGroupTitleInContext(group)
@@ -114,7 +114,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
     @test()
     @seed('groups', 1)
     @seed('teammates', 3)
-    protected static async sendsMessageToEveryPersonInTheGroup() {
+    protected async sendsMessageToEveryPersonInTheGroup() {
         const { group, friendIds } = await this.addTeammatesToGroup()
         await this.post(group.id)
         const toPeopleIds = this.sendMessageTargetAndPayloads.map(
@@ -130,7 +130,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 2)
-    protected static async dropsInTheCorrectGroupTitle() {
+    protected async dropsInTheCorrectGroupTitle() {
         const [, group] = await this.groups.find({})
         await this.addTeammatesToGroup(group.id)
         await this.postAndAssertGroupTitleInContext(group)
@@ -138,7 +138,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async doesNotSendtoSelfIfInGroup() {
+    protected async doesNotSendtoSelfIfInGroup() {
         const group = await this.setPeopleOnGroup([this.myId])
         await this.post(group.id)
         this.assertTotalMessagesSent(0)
@@ -146,13 +146,13 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
 
     @test()
     @seed('groups', 1)
-    protected static async sendsNoticeToGroupOwner() {
+    protected async sendsNoticeToGroupOwner() {
         const group = await this.setPeopleOnGroup([])
         await this.post(group.id, this.fakedTeammates[0].id)
         this.assertTotalMessagesSent(1)
     }
 
-    private static assertTotalMessagesSent(expected: number) {
+    private assertTotalMessagesSent(expected: number) {
         assert.isLength(
             this.sendMessageTargetAndPayloads,
             expected,
@@ -160,24 +160,24 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         )
     }
 
-    private static async addTeammatesToGroup(groupId?: string) {
+    private async addTeammatesToGroup(groupId?: string) {
         const friendIds = this.fakedTeammates.map((t) => t.id)
         const group = await this.setPeopleOnGroup(friendIds, { groupId })
         return { group, friendIds }
     }
 
-    private static async postAndAssertGroupTitleInContext(
+    private async postAndAssertGroupTitleInContext(
         group: Omit<Group, 'source'>
     ) {
         await this.post(group.id)
         assert.isEqual(this.firstMessage.context?.groupTitle, group.title)
     }
 
-    private static get firstMessage() {
+    private get firstMessage() {
         return this.sendMessageTargetAndPayload.payload.message!
     }
 
-    private static async post(groupId?: string, posterId?: string) {
+    private async post(groupId?: string, posterId?: string) {
         return await this.poster.create({
             personId: posterId ?? this.myId,
             groupId,
@@ -185,7 +185,7 @@ export default class AdventurePosterTest extends AbstractFriendsTest {
         })
     }
 
-    private static get sendMessageTargetAndPayload() {
+    private get sendMessageTargetAndPayload() {
         return this.sendMessageTargetAndPayloads[0]
     }
 }

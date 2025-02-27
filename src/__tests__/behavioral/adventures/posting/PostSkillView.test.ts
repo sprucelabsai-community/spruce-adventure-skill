@@ -3,7 +3,7 @@ import {
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../../../adventure.types'
 import PostSkillViewController from '../../../../adventures/posting/Post.svc'
 import PostCardViewController from '../../../../adventures/posting/PostCard.vc'
@@ -12,14 +12,15 @@ import FakePostCard from '../../../support/FakePostCard'
 import generateAdventureWithPersonValues from '../../../support/generateAdventureWithPersonValues'
 
 @fake.login()
+@suite()
 export default class PostSkillViewTest extends AbstractAdventureTest {
-    private static vc: SpyPostSkillView
-    private static adventuresWithPerson: ListAdventure[] = []
-    private static get postCardVc() {
+    private vc!: SpyPostSkillView
+    private adventuresWithPerson: ListAdventure[] = []
+    private get postCardVc() {
         return this.vc.getPostCard() as FakePostCard
     }
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         await this.eventFaker.fakeListAdventures(() => {
@@ -37,28 +38,28 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
         await this.load()
     }
 
-    private static Vc(): SpyPostSkillView {
+    private Vc(): SpyPostSkillView {
         return this.views.Controller('adventure.post', {}) as SpyPostSkillView
     }
 
     @test()
-    protected static async requiresLogin() {
+    protected async requiresLogin() {
         await vcAssert.assertLoginIsRequired(this.vc)
     }
 
     @test()
-    protected static async hasDurationUtilConfigured() {
+    protected async hasDurationUtilConfigured() {
         vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
     }
 
     @test()
-    protected static async rendersPostCard() {
+    protected async rendersPostCard() {
         const postVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
         vcAssert.assertRendersAsInstanceOf(postVc, PostCardViewController)
     }
 
     @test()
-    protected static async postingAdventureRedirectsToRoot() {
+    protected async postingAdventureRedirectsToRoot() {
         await this.postCardVc.fillWithRandomValues()
 
         await vcAssert.assertActionRedirects({
@@ -71,19 +72,19 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async redirectsToRootIfAlreadyHasActiveAdventure() {
+    protected async redirectsToRootIfAlreadyHasActiveAdventure() {
         this.pushAdventureByMe()
         await this.assertLoadRedirectsToList()
     }
 
     @test()
-    protected static async doesNotRedirectIfNotOwnAdventure() {
+    protected async doesNotRedirectIfNotOwnAdventure() {
         this.pushAdventureByAnother()
         await this.load()
     }
 
     @test()
-    protected static async redirectsToListEvenIfOwnAdventureIsNotFirst() {
+    protected async redirectsToListEvenIfOwnAdventureIsNotFirst() {
         this.vc = this.Vc()
         this.pushAdventureByAnother()
         this.pushAdventureByMe()
@@ -95,12 +96,12 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadsPostCardOnLoad() {
+    protected async loadsPostCardOnLoad() {
         await this.load()
         assert.isTrue(this.postCardVc.getIsLoaded(), 'Post card not loaded')
     }
 
-    private static async assertLoadRedirectsToList() {
+    private async assertLoadRedirectsToList() {
         await vcAssert.assertActionRedirects({
             action: () => this.load(),
             destination: {
@@ -110,16 +111,16 @@ export default class PostSkillViewTest extends AbstractAdventureTest {
         })
     }
 
-    private static pushAdventureByAnother() {
+    private pushAdventureByAnother() {
         const adventure = generateAdventureWithPersonValues()
         this.adventuresWithPerson.push(adventure)
     }
 
-    private static async load() {
+    private async load() {
         await this.views.load(this.vc)
     }
 
-    private static pushAdventureByMe() {
+    private pushAdventureByMe() {
         const adventure = generateAdventureWithPersonValues()
         adventure.source.personId = this.fakedPerson.id
         this.adventuresWithPerson.push(adventure)

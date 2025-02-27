@@ -7,7 +7,7 @@ import {
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../../../adventure.types'
 import AdventureCardViewController from '../../../../adventures/listing/AdventureCard.vc'
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
@@ -25,13 +25,14 @@ import { assertActionRendersConfirmCancelDialog } from './assertActionRendersCon
 import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 
 @fake.login()
+@suite()
 export default class ListSkillViewTest extends AbstractAdventureTest {
-    private static vc: SpyListViewController
-    private static currentAdventure: ListAdventure
-    private static adventureRecords: ListAdventure[]
-    private static sendReminderTarget?: SendReminderTargetAndPayload['target']
+    private vc!: SpyListViewController
+    private currentAdventure!: ListAdventure
+    private adventureRecords!: ListAdventure[]
+    private sendReminderTarget?: SendReminderTargetAndPayload['target']
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.currentAdventure = generateAdventureWithPersonValues({
@@ -71,12 +72,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async hasDurationUtilConfigured() {
+    protected async hasDurationUtilConfigured() {
         vcDurationAssert.durationUtilIsConfiguredForVc(this.vc)
     }
 
     @test()
-    protected static async redirectsIfLoadsAndFindsNoAdventures() {
+    protected async redirectsIfLoadsAndFindsNoAdventures() {
         await this.eventFaker.fakeListAdventures()
         await vcAssert.assertActionRedirects({
             action: () => this.load(),
@@ -88,7 +89,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async showsExpectedCardsWithAdventure() {
+    protected async showsExpectedCardsWithAdventure() {
         const currentVc = this.assertRendersCard('current')
         vcAssert.assertRendersAsInstanceOf(
             currentVc,
@@ -97,7 +98,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersToolBeltWithExpectedTools() {
+    protected async rendersToolBeltWithExpectedTools() {
         toolBeltAssert.rendersToolBelt(this.vc)
         toolBeltAssert.toolInstanceOf(
             this.vc,
@@ -113,7 +114,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async showsPostAdventureCardWithBusyToStart() {
+    protected async showsPostAdventureCardWithBusyToStart() {
         this.vc = this.Vc()
         vcAssert.assertSkillViewRendersCard(this.vc, 'loading')
         vcAssert.assertCardIsBusy(this.vc.getLoadingCardVc())
@@ -124,7 +125,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async noPostCardWithAdventures() {
+    protected async noPostCardWithAdventures() {
         this.vc = this.Vc()
         this.seedAdventureWithPerson()
         this.views.render(this.vc)
@@ -134,24 +135,24 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async noPostCardIfHasCurrent() {
+    protected async noPostCardIfHasCurrent() {
         vcAssert.assertSkillViewDoesNotRenderCard(this.vc, 'post')
     }
 
     @test()
-    protected static async loadsFriendTool() {
+    protected async loadsFriendTool() {
         const tool = this.vc.getFriendsTool()
         tool.assertIsLoaded()
     }
 
     @test()
-    protected static async loadsGroupsTool() {
+    protected async loadsGroupsTool() {
         const tool = this.vc.getGroupsTool()
         tool.assertIsLoaded()
     }
 
     @test()
-    protected static async currentCardHasProperAdventure() {
+    protected async currentCardHasProperAdventure() {
         assert.isEqualDeep(
             this.currentCardVc.getAdventure(),
             this.currentAdventure
@@ -159,12 +160,12 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async listSkillViewRequiresLogin() {
+    protected async listSkillViewRequiresLogin() {
         await vcAssert.assertLoginIsRequired(this.vc)
     }
 
     @test()
-    protected static async cancellingCurrentRedirectsToAdd() {
+    protected async cancellingCurrentRedirectsToAdd() {
         await this.eventFaker.fakeCancelAdventure()
         const { confirmCancelVc: confirm } =
             await assertActionRendersConfirmCancelDialog(
@@ -181,7 +182,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadsAdventuresFromConnections() {
+    protected async loadsAdventuresFromConnections() {
         const adventure = this.seedAdventureWithPerson()
 
         await this.reload()
@@ -191,7 +192,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadsManyAdventuresAndKeepsOwnFirst() {
+    protected async loadsManyAdventuresAndKeepsOwnFirst() {
         this.resetAdventureRecords()
         const adventure = this.seedAdventureWithPerson()
         this.seedCurrentAdventure()
@@ -204,7 +205,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async passesProperLoggedInPersonIdToAdventureCard() {
+    protected async passesProperLoggedInPersonIdToAdventureCard() {
         this.resetAdventuresAndSeedOne()
 
         await this.reload()
@@ -214,7 +215,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async toolIsFocusedIfHaveCurrentAdventureButNoFriends() {
+    protected async toolIsFocusedIfHaveCurrentAdventureButNoFriends() {
         this.vc = this.Vc()
         await toolBeltAssert.actionFocusesTool(this.vc, 'friends', () =>
             this.load()
@@ -222,7 +223,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async doesNotFocuseToolIfHasConnections() {
+    protected async doesNotFocuseToolIfHasConnections() {
         this.vc = this.Vc()
         await this.eventFaker.fakeListFriends(() => [generateFriendValues()])
         await assert.doesThrowAsync(() =>
@@ -233,7 +234,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async showsPostCardIfThereAreAdventures() {
+    protected async showsPostCardIfThereAreAdventures() {
         this.resetAdventuresAndSeedOne()
         await this.reload()
         const cardVc = vcAssert.assertSkillViewRendersCard(this.vc, 'post')
@@ -241,7 +242,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async postingFromListPageReloadsPage() {
+    protected async postingFromListPageReloadsPage() {
         this.resetAdventuresAndSeedOne()
         await this.eventFaker.fakePostAdventure()
 
@@ -257,7 +258,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersGroupTitleInHeaderOfAdventureCard() {
+    protected async rendersGroupTitleInHeaderOfAdventureCard() {
         const groupTitle = generateId()
         this.resetAdventuresAndSeedOne({ groupTitle })
         await this.reload()
@@ -273,18 +274,18 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersSendReminderButtonOnAdventureIfNotSent() {
+    protected async rendersSendReminderButtonOnAdventureIfNotSent() {
         buttonAssert.cardRendersButton(this.currentCardVc, 'reminder')
         buttonAssert.buttonIsEnabled(this.currentCardVc, 'reminder')
     }
 
     @test()
-    protected static async pressingReminderButtonRendersConfirm() {
+    protected async pressingReminderButtonRendersConfirm() {
         await this.clickReminderAndAssertConfirm()
     }
 
     @test()
-    protected static async confirmRemindeEmitsSendReminderEvent() {
+    protected async confirmRemindeEmitsSendReminderEvent() {
         await this.clickReminderAndAccept()
 
         assert.isEqualDeep(
@@ -295,7 +296,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async decliningReminderDoesNotEmitEvent() {
+    protected async decliningReminderDoesNotEmitEvent() {
         const confirmVc = await this.clickReminderAndAssertConfirm()
         await confirmVc.decline()
 
@@ -306,7 +307,7 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async sendReminderThrowingRendersAlert() {
+    protected async sendReminderThrowingRendersAlert() {
         await eventFaker.makeEventThrow('adventure.send-reminder::v2022_09_09')
         await vcAssert.assertRendersAlert(this.currentCardVc, async () =>
             this.clickReminderAndAccept()
@@ -314,77 +315,77 @@ export default class ListSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async reminderButtonIsDisabledAfterSend() {
+    protected async reminderButtonIsDisabledAfterSend() {
         await this.clickReminderAndAccept()
         this.assertReminderButtonDisabled()
         buttonAssert.cardRendersButton(this.currentCardVc, 'cancel')
     }
 
     @test()
-    protected static async reminderButtonIsDisabledIfAdventureMarkedAsReminderSent() {
+    protected async reminderButtonIsDisabledIfAdventureMarkedAsReminderSent() {
         this.currentAdventure.wasReminderSent = true
         await this.reload()
         this.assertReminderButtonDisabled()
     }
 
-    private static assertReminderButtonDisabled() {
+    private assertReminderButtonDisabled() {
         buttonAssert.buttonIsDisabled(this.currentCardVc, 'reminder')
     }
 
-    private static async clickReminderAndAccept() {
+    private async clickReminderAndAccept() {
         const confirmVc = await this.clickReminderAndAssertConfirm()
         await confirmVc.accept()
     }
 
-    private static async clickReminderAndAssertConfirm() {
+    private async clickReminderAndAssertConfirm() {
         return await vcAssert.assertRendersConfirm(this.currentCardVc, () =>
             interactor.clickButton(this.currentCardVc, 'reminder')
         )
     }
 
-    private static resetAdventureRecords() {
+    private resetAdventureRecords() {
         this.adventureRecords = []
     }
 
-    private static async load() {
+    private async load() {
         await this.views.load(this.vc)
     }
 
-    private static async fakeListAdventuresWithCurrent() {
+    private async fakeListAdventuresWithCurrent() {
         await this.eventFaker.fakeListAdventures(() => [this.currentAdventure])
     }
 
-    private static assertRendersCard(id: string) {
+    private assertRendersCard(id: string) {
         return vcAssert.assertSkillViewRendersCard(this.vc, id)
     }
 
-    private static get currentCardVc() {
+    private get currentCardVc() {
         return this.vc.getCurrentCardVc()!
     }
 
-    private static async reload() {
+    private async reload() {
         this.vc = this.Vc()
         await this.load()
     }
 
-    private static Vc(): SpyListViewController {
+    private Vc(): SpyListViewController {
         return this.views.Controller(
             'adventure.list',
             {}
         ) as SpyListViewController
     }
 
-    private static seedCurrentAdventure() {
+    private seedCurrentAdventure() {
         this.adventureRecords.push(this.currentAdventure)
     }
 
-    private static seedAdventureWithPerson(values?: Partial<ListAdventure>) {
+    private seedAdventureWithPerson(values?: Partial<ListAdventure>) {
         const adventure = generateAdventureWithPersonValues(values)
         this.adventureRecords.push(adventure)
         return adventure
     }
 
-    private static resetAdventuresAndSeedOne(values?: Partial<ListAdventure>) {
+    private resetAdventuresAndSeedOne(values?: Partial<ListAdventure>) {
         this.resetAdventureRecords()
         this.seedAdventureWithPerson(values)
     }

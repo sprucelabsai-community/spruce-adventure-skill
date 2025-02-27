@@ -6,7 +6,7 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { eventFaker, fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, test } from '@sprucelabs/test-utils'
+import { assert, test, suite } from '@sprucelabs/test-utils'
 import { Adventure } from '../../../../adventure.types'
 import { PostCardOptions } from '../../../../adventures/posting/PostCard.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
@@ -14,10 +14,11 @@ import { PostTargetAndPayload } from '../../../support/EventFaker'
 import FakePostCard from '../../../support/FakePostCard'
 
 @fake.login()
+@suite()
 export default class PostCardTest extends AbstractAdventureTest {
-    private static vc: FakePostCard
+    private vc!: FakePostCard
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.eventFaker.fakeListGroups()
 
@@ -26,28 +27,28 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersForm() {
+    protected async rendersForm() {
         formAssert.cardRendersForm(this.vc)
     }
 
     @test()
-    protected static async isNotBusy() {
+    protected async isNotBusy() {
         vcAssert.assertCardIsNotBusy(this.vc)
     }
 
     @test()
-    protected static async postFormRendersExpectedFields() {
+    protected async postFormRendersExpectedFields() {
         this.assertRendersFields(['what', 'when', 'where'])
     }
 
     @test()
-    protected static async submittingFormRendersConfirm() {
+    protected async submittingFormRendersConfirm() {
         await this.fillOutForm()
         await this.submitAndAssertConfirm()
     }
 
     @test()
-    protected static async confirmingSubmitPostsAdventure() {
+    protected async confirmingSubmitPostsAdventure() {
         let passedPayload: PostTargetAndPayload['payload'] | undefined
         let passedTarget: PostTargetAndPayload['target'] | undefined
 
@@ -63,7 +64,7 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async passesBackAdventureToOnPost() {
+    protected async passesBackAdventureToOnPost() {
         const adventure = this.eventFaker.generateAdventureValues()
         let passedAdventure: Adventure | undefined
 
@@ -81,7 +82,7 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersAlertWhenFailingToSave() {
+    protected async rendersAlertWhenFailingToSave() {
         await eventFaker.makeEventThrow('adventure.post::v2022_09_09')
         await vcAssert.assertRendersAlert(this.vc, () =>
             this.fillOutFormSubmitAndAccept()
@@ -89,7 +90,7 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async cancellingSaveDoesNotSave() {
+    protected async cancellingSaveDoesNotSave() {
         let wasHit = false
 
         await this.eventFaker.fakePostAdventure(() => {
@@ -103,45 +104,45 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async ifPartOfGroupRendersGroupsList() {
+    protected async ifPartOfGroupRendersGroupsList() {
         await this.seedGroupAndLoad()
         this.assertRendersGroupsList()
     }
 
     @test()
-    protected static async noGroupDoesNotRenderGroupsList() {
+    protected async noGroupDoesNotRenderGroupsList() {
         await this.load()
         assert.doesThrow(() => this.assertRendersGroupsList())
     }
 
     @test()
-    protected static async grousListRendersRowForFirstGroup() {
+    protected async grousListRendersRowForFirstGroup() {
         await this.seedGroupAndLoad()
         this.assertRendersRowForEachGroup()
     }
 
     @test()
-    protected static async rendersRowForAllGroups() {
+    protected async rendersRowForAllGroups() {
         this.seedGroup()
         await this.seedGroupAndLoad()
         this.assertRendersRowForEachGroup()
     }
 
     @test()
-    protected static async rendersFriendsRowInGroupsList() {
+    protected async rendersFriendsRowInGroupsList() {
         await this.seedGroupAndLoad()
         listAssert.listRendersRow(this.groupListVc, 'friends')
     }
 
     @test()
-    protected static async rendersTogglesForGroupsRows() {
+    protected async rendersTogglesForGroupsRows() {
         await this.seedGroupAndLoad()
         this.assertGroupsListRendersRow(this.group1Id)
         this.assertGroupsListRendersRow('friends')
     }
 
     @test()
-    protected static async friendsListIsSelectedByToStart() {
+    protected async friendsListIsSelectedByToStart() {
         await this.seedGroupAndLoad()
 
         this.assertSelectedGroups({
@@ -151,7 +152,7 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async selectingGroupDeselectsFriends() {
+    protected async selectingGroupDeselectsFriends() {
         await this.seedGroupAndLoad()
         await this.clickToggleInGroupsRow(this.group1Id)
         this.assertSelectedGroups({
@@ -168,7 +169,7 @@ export default class PostCardTest extends AbstractAdventureTest {
 
     @test('can post and target group 0', 0)
     @test('can post and target group 1', 1)
-    protected static async targetsGroupIfSelected(idx: number) {
+    protected async targetsGroupIfSelected(idx: number) {
         let passedTarget: PostTargetAndPayload['target'] | undefined
 
         await this.eventFaker.fakePostAdventure(({ target }) => {
@@ -189,7 +190,7 @@ export default class PostCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async selectingFriendDoesNotTargetGroup() {
+    protected async selectingFriendDoesNotTargetGroup() {
         await this.seedGroupAndLoad()
         let passedTarget: PostTargetAndPayload['target'] | undefined
 
@@ -203,11 +204,11 @@ export default class PostCardTest extends AbstractAdventureTest {
         assert.isFalsy(passedTarget, `Should not have a target`)
     }
 
-    private static get group1Id(): string {
+    private get group1Id(): string {
         return this.fakedGroups[0].id
     }
 
-    private static assertSelectedGroups(expected: {
+    private assertSelectedGroups(expected: {
         [x: string]: boolean | undefined
         friends: boolean
     }) {
@@ -219,82 +220,80 @@ export default class PostCardTest extends AbstractAdventureTest {
         )
     }
 
-    private static async clickToggleInGroupsRow(row: string) {
+    private async clickToggleInGroupsRow(row: string) {
         await interactor.clickToggleInRow(this.groupListVc, row)
     }
 
-    private static assertGroupsListValues(expected: RowValues[]) {
+    private assertGroupsListValues(expected: RowValues[]) {
         const values = this.groupListVc.getValues()
         assert.isEqualDeep(values, expected)
     }
 
-    private static assertGroupsListRendersRow(row: string) {
+    private assertGroupsListRendersRow(row: string) {
         listAssert.rowRendersToggle(this.groupListVc, row, 'isSelected')
     }
 
-    private static get groupListVc() {
+    private get groupListVc() {
         return this.vc.getGroupsListVc()
     }
 
-    private static assertRendersRowForEachGroup() {
+    private assertRendersRowForEachGroup() {
         listAssert.listRendersRows(
             this.groupListVc,
             this.fakedGroups.map((group) => group.id)
         )
     }
 
-    private static get fakedGroups() {
+    private get fakedGroups() {
         return this.eventFaker.fakedGroups
     }
 
-    private static async seedGroupAndLoad() {
+    private async seedGroupAndLoad() {
         this.seedGroup()
         await this.load()
     }
 
-    private static seedGroup() {
+    private seedGroup() {
         this.eventFaker.seedGroup()
     }
 
-    private static assertRendersGroupsList() {
+    private assertRendersGroupsList() {
         listAssert.cardRendersList(this.vc, 'groups')
     }
 
-    private static async load() {
+    private async load() {
         await this.vc.load()
     }
 
-    private static async fillOutFormSubmitAndAccept() {
+    private async fillOutFormSubmitAndAccept() {
         const adventure = await this.fillOutForm()
         await this.submitAndConfirm()
         return adventure
     }
 
-    private static async fillOutForm() {
+    private async fillOutForm() {
         return this.vc.fillWithRandomValues()
     }
 
-    private static async submitAndConfirm() {
+    private async submitAndConfirm() {
         return this.vc.submitAndConfirm()
     }
 
-    private static async submitAndAssertConfirm() {
+    private async submitAndAssertConfirm() {
         return this.vc.submitAndAssertConfirm()
     }
 
-    private static PostCardVc(
-        options?: Partial<PostCardOptions>
-    ): FakePostCard {
+    private PostCardVc(options?: Partial<PostCardOptions>): FakePostCard {
         return this.views.Controller('adventure.post-card', {
             ...options,
         }) as FakePostCard
     }
 
-    private static assertRendersFields(expected: AdventureKey[]) {
+    private assertRendersFields(expected: AdventureKey[]) {
         formAssert.formRendersFields(this.formVc, expected)
     }
 
-    private static get formVc() {
+    private get formVc() {
         return this.vc.getFormVc()
     }
 }

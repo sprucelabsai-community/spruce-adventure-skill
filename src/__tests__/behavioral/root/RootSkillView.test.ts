@@ -4,19 +4,20 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test } from '@sprucelabs/test-utils'
+import { test, suite } from '@sprucelabs/test-utils'
 import RootSkillViewController from '../../../root/Root.svc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 import { SpyCurrentCard } from '../../support/SpyCurrentCard'
 
 @fake.login()
+@suite()
 export default class RootSkillViewTest extends AbstractAdventureTest {
-    private static vc: SpyRootViewController
+    private vc!: SpyRootViewController
 
-    private static sessionToken: string
-    private static auth: Authenticator
+    private sessionToken!: string
+    private auth!: Authenticator
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.views.setController('adventure.root', SpyRootViewController)
@@ -32,7 +33,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersLoadingIntroCardToStart() {
+    protected async rendersLoadingIntroCardToStart() {
         this.vc = this.Vc()
         const cardVc = this.assertRendersCard('intro')
         vcAssert.assertCardIsBusy(cardVc)
@@ -40,7 +41,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersIntroCardWithTalkingSprucebotAfterLoad() {
+    protected async rendersIntroCardWithTalkingSprucebotAfterLoad() {
         this.assertDoesNotRenderCard('post')
         const cardVc = this.assertRendersCard('intro')
         vcAssert.assertCardRendersTalkingSprucebot(cardVc)
@@ -48,14 +49,14 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async loadTriggersRender() {
+    protected async loadTriggersRender() {
         this.vc = this.Vc()
         await this.loadVc()
         vcAssert.assertTriggerRenderCount(this.vc, 1)
     }
 
     @test()
-    protected static async redirectToListIfLoggedIn() {
+    protected async redirectToListIfLoggedIn() {
         this.auth.setSessionToken(this.sessionToken, this.fakedPerson)
         await vcAssert.assertActionRedirects({
             action: () => this.reload(),
@@ -67,7 +68,7 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async clickingSkipRedirectsToList() {
+    protected async clickingSkipRedirectsToList() {
         await vcAssert.assertActionRedirects({
             action: () => this.clickNextOnIntro(),
             router: this.views.getRouter(),
@@ -77,31 +78,31 @@ export default class RootSkillViewTest extends AbstractAdventureTest {
         })
     }
 
-    private static async reload() {
+    private async reload() {
         this.vc = this.Vc()
         await this.loadVc()
     }
 
-    private static Vc(): SpyRootViewController {
+    private Vc(): SpyRootViewController {
         return this.views.Controller(
             'adventure.root',
             {}
         ) as SpyRootViewController
     }
 
-    private static async loadVc() {
+    private async loadVc() {
         await this.views.load(this.vc)
     }
 
-    private static assertDoesNotRenderCard(id: string) {
+    private assertDoesNotRenderCard(id: string) {
         vcAssert.assertSkillViewDoesNotRenderCard(this.vc, id)
     }
 
-    private static assertRendersCard(id: string) {
+    private assertRendersCard(id: string) {
         return vcAssert.assertSkillViewRendersCard(this.vc, id)
     }
 
-    private static async clickNextOnIntro() {
+    private async clickNextOnIntro() {
         await interactor.clickButton(this.vc.getIntroCard()!, 'next')
     }
 }

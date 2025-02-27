@@ -1,5 +1,11 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import { Adventure } from '../../../adventure.types'
 import MessageSenderImpl, {
     MessageSender,
@@ -8,11 +14,12 @@ import MessageSenderImpl, {
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class SendReminderListenerTest extends AbstractAdventureTest {
-    private static adventure: Adventure
+    private adventure!: Adventure
 
     @seed('adventures', 1)
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         MessageSenderImpl.Class = MockMessageSender
         await this.bootSkill()
@@ -20,25 +27,25 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async throwsIfNoCurrent() {
+    protected async throwsIfNoCurrent() {
         const err = await assert.doesThrowAsync(() => this.emit(generateId()))
         errorAssert.assertError(err, 'NOT_FOUND')
     }
 
     @test()
-    protected static async noErrorIfCurrentAdventure() {
+    protected async noErrorIfCurrentAdventure() {
         const success = await this.emit()
         assert.isTrue(success)
     }
 
     @test()
-    protected static async callsMessageSenderWithExpectedOptions() {
+    protected async callsMessageSenderWithExpectedOptions() {
         await this.emit()
         this.assertMessageSent()
     }
 
     @test()
-    protected static async passesGroupIdToMessageContext() {
+    protected async passesGroupIdToMessageContext() {
         const groupId = generateId()
         await this.adventures.update({}, { target: { groupId } })
         await this.emit()
@@ -46,7 +53,7 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async setsWasReminderSentOnAdventure() {
+    protected async setsWasReminderSentOnAdventure() {
         await this.emit()
         const adventure = await this.getFirstAdventure()
         assert.isTrue(
@@ -57,7 +64,7 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('adventures', 1)
-    protected static async updatesTheCurrentAdventure() {
+    protected async updatesTheCurrentAdventure() {
         const [, adventure2] = await this.adventures.find({})
         await this.emit(adventure2.id)
         const [updatedAdventure1, updatedAdventure2] =
@@ -67,7 +74,7 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
         assert.isTrue(updatedAdventure2.wasReminderSent)
     }
 
-    private static assertMessageSent(groupId?: string) {
+    private assertMessageSent(groupId?: string) {
         MockMessageSender.instance.assertSentWithOptions({
             fromPersonId: this.fakedPerson.id,
             groupId,
@@ -80,7 +87,7 @@ export default class SendReminderListenerTest extends AbstractAdventureTest {
         })
     }
 
-    private static async emit(adventureId?: string) {
+    private async emit(adventureId?: string) {
         const [{ success }] = await this.fakedClient.emitAndFlattenResponses(
             'adventure.send-reminder::v2022_09_09',
             {

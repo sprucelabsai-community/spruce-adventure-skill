@@ -6,7 +6,7 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake, TestRouter } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { Friend } from '../../../../adventure.types'
 import { FriendsListOptions } from '../../../../friends/listing/FriendsListTool.vc'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
@@ -15,10 +15,11 @@ import buildInviteDestination from '../../groups/buildInviteDestination'
 import { SpyFriendListTool } from '../SpyFriendListTool'
 
 @fake.login()
+@suite()
 export default class FriendsToolTest extends AbstractAdventureTest {
-    private static vc: SpyFriendListTool
+    private vc!: SpyFriendListTool
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.eventFaker.fakeListFriends()
 
@@ -33,17 +34,17 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async friendsToolRendersActiveRecordCard() {
+    protected async friendsToolRendersActiveRecordCard() {
         activeRecordCardAssert.rendersAsActiveRecordCard(this.vc)
     }
 
     @test()
-    protected static async rendersInviteButton() {
+    protected async rendersInviteButton() {
         buttonAssert.cardRendersButton(this.vc, 'invite')
     }
 
     @test()
-    protected static async pagesAsExpected() {
+    protected async pagesAsExpected() {
         activeRecordCardAssert.pagingOptionsEqual(this.activeRecordCardVc, {
             pageSize: 5,
             shouldPageClientSide: true,
@@ -51,7 +52,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersRowForEachFriend() {
+    protected async rendersRowForEachFriend() {
         const friends: Friend[] = [
             {
                 id: generateId(),
@@ -76,7 +77,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async clickInviteCreatesPartialConnectionAndRedirectsToInvite() {
+    protected async clickInviteCreatesPartialConnectionAndRedirectsToInvite() {
         const connection = this.eventFaker.generatePendingConnectionValues()
 
         await this.eventFaker.fakeCreateConnection(() => {
@@ -93,7 +94,7 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async doesNotRenderToggleInRowByDefault() {
+    protected async doesNotRenderToggleInRowByDefault() {
         const friend: Friend = {
             id: generateId(),
             casualName: generateId(),
@@ -108,14 +109,14 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async shouldNotRenderFooterInNoFooterButtons() {
+    protected async shouldNotRenderFooterInNoFooterButtons() {
         this.vc = this.Vc({ shouldAllowInvite: false })
         await this.load()
         vcAssert.assertCardDoesNotRenderFooter(this.vc)
     }
 
     @test()
-    protected static async rendersYouIfRowHasYoursef() {
+    protected async rendersYouIfRowHasYoursef() {
         const friend: Friend = {
             id: this.fakedPerson.id,
             casualName: this.fakedPerson.casualName,
@@ -127,25 +128,25 @@ export default class FriendsToolTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersExpectedInviteButtonLabel() {
+    protected async rendersExpectedInviteButtonLabel() {
         await this.load()
         const { footer } = this.views.render(this.vc)
         assert.isEqual(footer?.buttons?.[0].label, 'Invite a friend!')
     }
 
-    private static get listVc() {
+    private get listVc() {
         return this.activeRecordCardVc.getListVcs()[0]
     }
 
-    private static async load() {
+    private async load() {
         await this.views.load(this.vc)
     }
 
-    private static get activeRecordCardVc() {
+    private get activeRecordCardVc() {
         return this.vc.getActiveCardVc()
     }
 
-    private static Vc(options?: FriendsListOptions): SpyFriendListTool {
+    private Vc(options?: FriendsListOptions): SpyFriendListTool {
         return this.views.Controller('adventure.friends-list-tool', {
             ...options,
         }) as SpyFriendListTool

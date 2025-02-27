@@ -4,23 +4,24 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert } from '@sprucelabs/test-utils'
+import { test, suite, assert } from '@sprucelabs/test-utils'
 import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
 import FriendsDashboardCardViewController from '../../../peopleDashboardCards/FriendsDashboardCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class FriendsDashboardCardTest extends AbstractAdventureTest {
-    private static vc: FriendsDashboardCardViewController
+    private vc!: FriendsDashboardCardViewController
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.vc = this.views.Controller('adventure.friends-dashboard-card', {})
         await this.eventFaker.fakeListFriends()
     }
 
     @test()
-    protected static async canCreateFriendsDashboardCard() {
+    protected async canCreateFriendsDashboardCard() {
         vcAssert.assertRendersAsInstanceOf(
             this.vc,
             FriendsListToolViewController
@@ -28,12 +29,12 @@ export default class FriendsDashboardCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersGoToAdventuresButton() {
+    protected async rendersGoToAdventuresButton() {
         vcAssert.assertCardRendersButton(this.vc, 'adventures')
     }
 
     @test()
-    protected static async clickingAdventuresRedirectsToAdventures() {
+    protected async clickingAdventuresRedirectsToAdventures() {
         await this.load()
         await vcAssert.assertActionRedirects({
             action: () => interactor.clickButton(this.vc, 'adventures'),
@@ -45,7 +46,7 @@ export default class FriendsDashboardCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async callsLoadAndPassesThroughOptions() {
+    protected async callsLoadAndPassesThroughOptions() {
         let passedOptions: SkillViewControllerLoadOptions | undefined
         //@ts-ignore
         this.vc.friendsListCardVc.load = async (options) => {
@@ -61,7 +62,7 @@ export default class FriendsDashboardCardTest extends AbstractAdventureTest {
         )
     }
 
-    private static async load() {
+    private async load() {
         await this.views.load(this.vc)
     }
 }

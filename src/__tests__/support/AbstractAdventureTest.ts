@@ -14,12 +14,12 @@ import { generatePostAdventureValues } from '../behavioral/adventures/posting/ge
 import EventFaker from './EventFaker'
 
 export default abstract class AbstractAdventureTest extends AbstractSpruceFixtureTest {
-    protected static eventFaker: EventFaker
-    protected static adventures: AdventuresStore
-    protected static connections: ConnectionsStore
-    protected static groups: GroupsStore
+    protected eventFaker!: EventFaker
+    protected adventures!: AdventuresStore
+    protected connections!: ConnectionsStore
+    protected groups!: GroupsStore
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         this.views.setController('active-record-card', MockActiveRecordCard)
         this.eventFaker = new EventFaker()
@@ -30,19 +30,19 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         vcDurationAssert.beforeEach(this.views.getFactory())
     }
 
-    protected static async ConnectionManager(): Promise<ConnectionManager> {
+    protected async ConnectionManager(): Promise<ConnectionManager> {
         return await ConnectionManager.Manager({
             stores: this.stores,
         })
     }
 
-    protected static GroupFinder(): Promise<GroupFinder> {
+    protected GroupFinder(): Promise<GroupFinder> {
         return GroupFinder.Finder({
             stores: this.stores,
         })
     }
 
-    protected static async seedAdventure(
+    protected async seedAdventure(
         posterId?: string,
         values?: Partial<Adventure>
     ) {
@@ -56,7 +56,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         })
     }
 
-    protected static async getFirstGroup(shouldIncludePrivateFields = true) {
+    protected async getFirstGroup(shouldIncludePrivateFields = true) {
         const match = await this.groups.findOne(
             {},
             { shouldIncludePrivateFields }
@@ -68,7 +68,7 @@ export default abstract class AbstractAdventureTest extends AbstractSpruceFixtur
         return match as Group
     }
 
-    protected static async getFirstAdventure() {
+    protected async getFirstAdventure() {
         const adventure = await this.adventures.findOne({})
         assert.isTruthy(
             adventure,

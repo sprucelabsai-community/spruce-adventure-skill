@@ -1,5 +1,11 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import AdventureCancellerImpl from '../../../../adventures/cancelling/AdventureCanceller'
 import {
     MessageSender,
@@ -8,11 +14,12 @@ import {
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class CancellerTest extends AbstractAdventureTest {
-    private static spySender: SpySender
-    private static canceller: AdventureCancellerImpl
+    private spySender!: SpySender
+    private canceller!: AdventureCancellerImpl
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         this.spySender = new SpySender()
 
@@ -23,7 +30,7 @@ export default class CancellerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async throwsWithMissing() {
+    protected async throwsWithMissing() {
         const err = await assert.doesThrowAsync(() =>
             //@ts-ignore
             AdventureCancellerImpl.Canceller({})
@@ -36,7 +43,7 @@ export default class CancellerTest extends AbstractAdventureTest {
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async sendsCancelMessageIfMessageIsPassedToCancel() {
+    protected async sendsCancelMessageIfMessageIsPassedToCancel() {
         const message = generateId()
 
         await this.cancel(message)
@@ -49,22 +56,22 @@ export default class CancellerTest extends AbstractAdventureTest {
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async shouldNotSendMessageIfNoMessagePassed() {
+    protected async shouldNotSendMessageIfNoMessagePassed() {
         await this.cancel()
         this.assertNoMessageSent()
     }
 
     @test()
-    protected static async shouldNotSendIfNoAdventureCancelled() {
+    protected async shouldNotSendIfNoAdventureCancelled() {
         await this.cancel(generateId())
         this.assertNoMessageSent()
     }
 
-    private static assertNoMessageSent() {
+    private assertNoMessageSent() {
         assert.isFalsy(this.spySender.lastFromPersonId)
     }
 
-    private static async cancel(message?: string) {
+    private async cancel(message?: string) {
         await this.canceller.cancel(this.fakedPerson.id, message)
     }
 }

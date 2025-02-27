@@ -1,6 +1,6 @@
 import { listAssert, vcAssert } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import FriendsListToolViewController from '../../../friends/listing/FriendsListTool.vc'
 import { FriendSelectionCardLoadOptions } from '../../../groups/FriendSelectionCard.vc'
 import AbstractAdventureTest from '../../support/AbstractAdventureTest'
@@ -8,10 +8,11 @@ import { SpyFriendListTool } from '../friends/SpyFriendListTool'
 import { SpyFriendSelectionCard } from './SpyFriendSelectionCard'
 
 @fake.login()
+@suite()
 export default class FriendSelectionCardTest extends AbstractAdventureTest {
-    private static vc: SpyFriendSelectionCard
+    private vc!: SpyFriendSelectionCard
 
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
 
         this.views.setController(
@@ -33,7 +34,7 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersAsFriendListTool() {
+    protected async rendersAsFriendListTool() {
         vcAssert.assertRendersAsInstanceOf(
             this.vc,
             FriendsListToolViewController
@@ -41,20 +42,20 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersToggleInFriendRow() {
+    protected async rendersToggleInFriendRow() {
         const friend = this.eventFaker.seedFriend()
         await this.load()
         this.assertRowRendersToggle(friend.id)
     }
 
     @test()
-    protected static async doesNotRenderTogglesIfNotMyGroupAndPersonInGroup() {
+    protected async doesNotRenderTogglesIfNotMyGroupAndPersonInGroup() {
         const friend = await this.loadWithFriendWhoIsNotSelectable()
         listAssert.rowDoesNotRenderToggle(this.listVc, friend.id)
     }
 
     @test()
-    protected static async rendersTogglesForFriendIfIsMyGroup() {
+    protected async rendersTogglesForFriendIfIsMyGroup() {
         const friend = this.eventFaker.seedFriend()
         friend.isInGroup = true
         await this.loadMyGroup()
@@ -62,7 +63,7 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersTogogleForMyselfAsPartOfOthersGroup() {
+    protected async rendersTogogleForMyselfAsPartOfOthersGroup() {
         const friend = this.eventFaker.seedFriend({
             id: this.fakedPerson.id,
             isInGroup: true,
@@ -72,19 +73,19 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async doesNotBlowUpIfTryingToSelectFriendThatDoesNotExist() {
+    protected async doesNotBlowUpIfTryingToSelectFriendThatDoesNotExist() {
         await this.load()
         await this.selectFriends([generateId()])
     }
 
     @test()
-    protected static async doesNotBlowUpIfTryingToSelectFriendThatIsNotSelectable() {
+    protected async doesNotBlowUpIfTryingToSelectFriendThatIsNotSelectable() {
         const friend = await this.loadWithFriendWhoIsNotSelectable()
         await this.vc.setSelectedFriends([friend.id])
     }
 
     @test()
-    protected static async rendersExpectedInviteButtonLabelWhenLoadingWithGroup() {
+    protected async rendersExpectedInviteButtonLabelWhenLoadingWithGroup() {
         this.vc.enableInvite()
         await this.loadMyGroup()
 
@@ -95,32 +96,30 @@ export default class FriendSelectionCardTest extends AbstractAdventureTest {
         )
     }
 
-    private static async loadMyGroup() {
+    private async loadMyGroup() {
         await this.load({ group: { id: generateId(), isMine: true } })
     }
 
-    private static async selectFriends(ids: string[]) {
+    private async selectFriends(ids: string[]) {
         await this.vc.setSelectedFriends(ids)
     }
 
-    private static async loadWithFriendWhoIsNotSelectable() {
+    private async loadWithFriendWhoIsNotSelectable() {
         const friend = this.eventFaker.seedFriend()
         friend.isInGroup = true
         await this.load({ group: { id: generateId(), isMine: false } })
         return friend
     }
 
-    private static assertRowRendersToggle(id: string) {
+    private assertRowRendersToggle(id: string) {
         listAssert.rowRendersToggle(this.listVc, id, 'isSelected')
     }
 
-    private static get listVc() {
+    private get listVc() {
         return this.vc.getListVc()
     }
 
-    private static async load(
-        options?: Partial<FriendSelectionCardLoadOptions>
-    ) {
+    private async load(options?: Partial<FriendSelectionCardLoadOptions>) {
         await this.vc.load({
             ...this.views.getRouter().buildLoadOptions(),
             ...options,

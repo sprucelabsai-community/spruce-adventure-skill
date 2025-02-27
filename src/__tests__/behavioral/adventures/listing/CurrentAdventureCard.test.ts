@@ -6,7 +6,7 @@ import {
     vcDurationAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { errorAssert } from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../../../adventure.types'
 import CurrentAdventureCardViewController from '../../../../adventures/listing/CurrentAdventureCard.vc'
@@ -16,12 +16,13 @@ import { assertActionRendersConfirmCancelDialog } from './assertActionRendersCon
 import ControlledConfirmCancelCard from './ControlledConfirmCancelCard'
 
 @fake.login()
+@suite()
 export default class CurrentAdventureCardTest extends AbstractAdventureTest {
-    private static vc: CurrentAdventureCardViewController
-    private static adventure: ListAdventure
-    private static didCancelHandlerInvoked: boolean
+    private vc!: CurrentAdventureCardViewController
+    private adventure!: ListAdventure
+    private didCancelHandlerInvoked!: boolean
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         vcDurationAssert.beforeEach(this.views.getFactory())
@@ -42,7 +43,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async throwsIfMissingAdventure() {
+    protected async throwsIfMissingAdventure() {
         const err = assert.doesThrow(() =>
             //@ts-ignore
             this.views.Controller('adventure.current-adventure-card', {})
@@ -54,7 +55,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersMapWithExpectedPin() {
+    protected async rendersMapWithExpectedPin() {
         const mapVc = this.mapVc
         mapAssert.assertMapHasPin(mapVc, {
             address: this.adventure.where,
@@ -67,7 +68,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async clickingNavButtonOnPinOpensNavigation() {
+    protected async clickingNavButtonOnPinOpensNavigation() {
         await mapInteractor.clickButtonOnPin(this.mapVc, 0, 'navigation')
         const maps = this.views.getMaps()
         assert.isEqualDeep(maps.lastOpenNavigationOptions, {
@@ -76,17 +77,17 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async assertCurrentCardRendersCancelButton() {
+    protected async assertCurrentCardRendersCancelButton() {
         vcAssert.assertCardRendersButton(this.vc, 'cancel')
     }
 
     @test()
-    protected static async clickingCancelRendersConfirm() {
+    protected async clickingCancelRendersConfirm() {
         await this.clickCancelAndAssertConfirm()
     }
 
     @test()
-    protected static async confirmingCancelEmitsCancelEvent() {
+    protected async confirmingCancelEmitsCancelEvent() {
         let passedMessage: string | undefined | null
         const message = generateId()
 
@@ -103,7 +104,7 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async decliningCancelDoesNotEmit() {
+    protected async decliningCancelDoesNotEmit() {
         let wasHit = false
         await this.eventFaker.fakeCancelAdventure(() => {
             wasHit = true
@@ -120,11 +121,11 @@ export default class CurrentAdventureCardTest extends AbstractAdventureTest {
         assert.isFalse(this.didCancelHandlerInvoked)
     }
 
-    private static get mapVc() {
+    private get mapVc() {
         return mapAssert.assertCardRendersMap(this.vc)
     }
 
-    private static async clickCancelAndAssertConfirm() {
+    private async clickCancelAndAssertConfirm() {
         const action = () => interactor.clickButton(this.vc, 'cancel')
         const vc = this.vc
 

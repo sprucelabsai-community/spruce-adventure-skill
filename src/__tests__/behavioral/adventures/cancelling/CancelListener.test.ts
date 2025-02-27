@@ -1,15 +1,16 @@
 import { tomorrowLunch, tomorrowStartOfDay } from '@sprucelabs/calendar-utils'
 import { Skill } from '@sprucelabs/spruce-skill-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { AdventureCanceller } from '../../../../adventures/cancelling/AdventureCanceller'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class CancelListenerTest extends AbstractAdventureTest {
-    private static skill: Skill
+    private skill!: Skill
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.eventFaker.fakeGenerateUrl()
         const { skill } = await this.bootSkill()
@@ -17,13 +18,13 @@ export default class CancelListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async zeroCancelledToStart() {
+    protected async zeroCancelledToStart() {
         await this.assertCancels(0)
     }
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async cancelsMine() {
+    protected async cancelsMine() {
         await this.assertCancels(1)
         const total = await this.adventures.count({})
         assert.isEqual(total, 0)
@@ -31,13 +32,13 @@ export default class CancelListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('adventures', 1)
-    protected static async doesNotDeleteOtherPeoples() {
+    protected async doesNotDeleteOtherPeoples() {
         await this.assertCancels(0)
     }
 
     @test()
     @seed('adventures', 2, { shouldPostAsFakedPerson: true })
-    protected static async deletesNewestAdventure() {
+    protected async deletesNewestAdventure() {
         const [a1, a2] = await this.adventures.find({})
 
         await this.updateAdventureWhen(a1.id, tomorrowLunch())
@@ -51,7 +52,7 @@ export default class CancelListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('adventures', 1)
-    protected static async canOptionallyPassCancelMessageToSendOutToConnections() {
+    protected async canOptionallyPassCancelMessageToSendOutToConnections() {
         const canceller = new SpyCanceller()
         this.skill.updateContext('canceller', canceller)
 
@@ -61,30 +62,30 @@ export default class CancelListenerTest extends AbstractAdventureTest {
         assert.isEqual(canceller.lastMessage, message)
     }
 
-    private static async assertAdventureDoesNotExist(id: string) {
+    private async assertAdventureDoesNotExist(id: string) {
         const match2 = await this.findById(id)
         assert.isFalsy(match2)
     }
 
-    private static async assertAdventureExists(id: string) {
+    private async assertAdventureExists(id: string) {
         const match = await this.findById(id)
         assert.isTruthy(match)
     }
 
-    private static findById(id: string) {
+    private findById(id: string) {
         return this.adventures.findOne({ id })
     }
 
-    private static async updateAdventureWhen(id: string, when: number) {
+    private async updateAdventureWhen(id: string, when: number) {
         await this.adventures.updateOne({ id }, { when })
     }
 
-    private static async assertCancels(total: number) {
+    private async assertCancels(total: number) {
         const totalCancelled = await this.emitCancel()
         assert.isEqual(totalCancelled, total)
     }
 
-    private static async emitCancel(message?: string) {
+    private async emitCancel(message?: string) {
         const [{ totalCancelled }] =
             await this.fakedClient.emitAndFlattenResponses(
                 'adventure.cancel::v2022_09_09',
@@ -98,8 +99,8 @@ export default class CancelListenerTest extends AbstractAdventureTest {
 }
 
 class SpyCanceller implements AdventureCanceller {
-    public lastPosterId: string | undefined
-    public lastMessage: string | undefined
+    public lastPosterId!: string | undefined
+    public lastMessage!: string | undefined
 
     public async cancel(
         posterId: string,

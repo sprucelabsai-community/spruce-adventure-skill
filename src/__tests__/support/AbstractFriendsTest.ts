@@ -5,7 +5,7 @@ import AbstractAdventureTest from './AbstractAdventureTest'
 import generateFriendValues from './generateFriendValues'
 
 export default class AbstractFriendsTest extends AbstractAdventureTest {
-    protected static async createConnection(
+    protected async createConnection(
         fromPersonId: string,
         toPersonId?: string,
         isConfirmed = true
@@ -17,7 +17,7 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
         })
     }
 
-    protected static async createConnectionWithGroup(options: {
+    protected async createConnectionWithGroup(options: {
         fromPersonId: string
         toPersonId?: string
         groupId?: string
@@ -42,21 +42,21 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
         return id
     }
 
-    protected static teammateId(idx: number) {
+    protected teammateId(idx: number) {
         return this.fakedTeammates[idx].id
     }
 
-    protected static get myId() {
+    protected get myId() {
         return this.fakedPerson.id
     }
 
-    protected static async connect(teammateIdx: number) {
+    protected async connect(teammateIdx: number) {
         const id = this.teammateId(teammateIdx)
         await this.createConnection(this.myId, id)
         return id
     }
 
-    protected static async fakeListPeople(friends: Friend[]) {
+    protected async fakeListPeople(friends: Friend[]) {
         await this.eventFaker.fakeListPeople(() => {
             const people: Person[] = friends.map((f) => {
                 const friend = { ...f }
@@ -72,7 +72,7 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
         })
     }
 
-    protected static async setPeopleOnGroup(
+    protected async setPeopleOnGroup(
         people: string[],
         options?: { sourcePersonId?: string; groupId?: string }
     ) {
@@ -89,7 +89,7 @@ export default class AbstractFriendsTest extends AbstractAdventureTest {
         })
     }
 
-    protected static generateFriendValues(
+    protected generateFriendValues(
         inviteSender: Friend['inviteSender'] = 'me'
     ): Friend {
         return generateFriendValues(inviteSender)

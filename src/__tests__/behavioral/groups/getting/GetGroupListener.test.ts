@@ -1,31 +1,38 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, errorAssert, generateId } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    errorAssert,
+    generateId,
+} from '@sprucelabs/test-utils'
 import { Group } from '../../../../adventure.types'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 
 @fake.login()
+@suite()
 export default class GetGroupListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.bootSkill()
     }
 
     @test()
     @seed('groups', 1)
-    protected static async throwsNotFoundWithBadGroupId() {
+    protected async throwsNotFoundWithBadGroupId() {
         await this.emitAndAssertThrowsNotFound()
     }
 
     @test()
     @seed('groups', 1)
-    protected static async canFindOwnGroup() {
+    protected async canFindOwnGroup() {
         const group = await this.getFirstGroup(false)
         await this.assertGetGroupResultMatches(group, true)
     }
 
     @test()
     @seed('groups', 1)
-    protected static async throwsNotFoundIfNotPartOfGroupNorCreator() {
+    protected async throwsNotFoundIfNotPartOfGroupNorCreator() {
         const group = await this.groups.updateOne(
             {},
             { source: { personId: generateId() } }
@@ -35,7 +42,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('groups', 1)
-    protected static async returnsIfImAFriend() {
+    protected async returnsIfImAFriend() {
         const { group, sourcePersonId } =
             await this.setRandomSourcePersonAndAddMeToGroup()
 
@@ -44,7 +51,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
         await this.assertGetGroupResultMatches(group, false)
     }
 
-    private static async setRandomSourcePersonAndAddMeToGroup() {
+    private async setRandomSourcePersonAndAddMeToGroup() {
         const sourcePersonId = generateId()
         const group = await this.groups.updateOne(
             {},
@@ -56,7 +63,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
         return { group, sourcePersonId }
     }
 
-    private static async assertGetGroupResultMatches(
+    private async assertGetGroupResultMatches(
         group: Omit<Group, 'source'>,
         isMine: boolean
     ) {
@@ -69,7 +76,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
         assert.isEqualDeep(match, expected)
     }
 
-    private static async emitAndAssertThrowsNotFound(id?: string) {
+    private async emitAndAssertThrowsNotFound(id?: string) {
         const err = await assert.doesThrowAsync(() =>
             this.emitGetGroup(id ?? generateId())
         )
@@ -77,7 +84,7 @@ export default class GetGroupListenerTest extends AbstractAdventureTest {
         errorAssert.assertError(err, 'NOT_FOUND')
     }
 
-    private static async emitGetGroup(id: string) {
+    private async emitGetGroup(id: string) {
         const [{ group }] = await this.fakedClient.emitAndFlattenResponses(
             'adventure.get-group::v2022_09_09',
             { target: { id } }

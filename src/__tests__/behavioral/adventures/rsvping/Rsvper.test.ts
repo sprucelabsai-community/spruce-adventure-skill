@@ -1,23 +1,24 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import Rsvper from '../../../../adventures/rsvping/Rsvper'
 import MessageSenderImpl from '../../../../messaging/MessageSender'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 import { SendMessageTargetAndPayload } from '../../../support/EventFaker'
 
 @fake.login()
+@suite()
 export default class RsvperTest extends AbstractFriendsTest {
-    private static messageTargetAndPayloads: SendMessageTargetAndPayload[] = []
-    private static rsvper: Rsvper
+    private messageTargetAndPayloads: SendMessageTargetAndPayload[] = []
+    private rsvper!: Rsvper
 
-    private static get lastSendMessageTargetAndPayload() {
+    private get lastSendMessageTargetAndPayload() {
         return this.messageTargetAndPayloads[0]
     }
 
     @seed('organizations', 1)
     @seed('teammates', 1)
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         const connections = await this.ConnectionManager()
@@ -41,14 +42,14 @@ export default class RsvperTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async imInMessagesPoster() {
+    protected async imInMessagesPoster() {
         await this.connect(0)
         await this.rsvpAs(0)
         this.assertMessageSentToPerson(this.fakedPerson.id)
     }
 
     @test()
-    protected static async passesExpectedUrl() {
+    protected async passesExpectedUrl() {
         const url = generateId()
         await this.eventFaker.fakeGenerateUrl(() => url)
         await this.connect(0)
@@ -62,7 +63,7 @@ export default class RsvperTest extends AbstractFriendsTest {
 
     @test()
     @seed('teammates', 1)
-    protected static async sendsToAllConnectionsWhenIn() {
+    protected async sendsToAllConnectionsWhenIn() {
         await this.connect(0)
         await this.connect(1)
         await this.rsvpAs(0)
@@ -70,7 +71,7 @@ export default class RsvperTest extends AbstractFriendsTest {
     }
 
     @test()
-    protected static async doesNotSendToRsvper() {
+    protected async doesNotSendToRsvper() {
         await this.connect(0)
         await this.rsvpAs(0)
         this.assertMessageNotSentToPerson(this.teammateId(0))
@@ -78,7 +79,7 @@ export default class RsvperTest extends AbstractFriendsTest {
 
     @test()
     @seed('teammates', 3)
-    protected static async sendsToEveryConnection() {
+    protected async sendsToEveryConnection() {
         await this.connect(0)
         await this.connect(1)
         await this.connect(2)
@@ -92,7 +93,7 @@ export default class RsvperTest extends AbstractFriendsTest {
 
     @test()
     @seed('teammates', 3)
-    protected static async dontMessageTeammatesIfDeclining() {
+    protected async dontMessageTeammatesIfDeclining() {
         await this.connect(0)
         await this.connect(1)
         await this.connect(2)
@@ -106,7 +107,7 @@ export default class RsvperTest extends AbstractFriendsTest {
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async updatesCurrentAdventure() {
+    protected async updatesCurrentAdventure() {
         await this.connect(0)
         const [a1, a2] = await this.adventures.find({})
         await this.rsvpAs(0, true, a2.id)
@@ -126,7 +127,7 @@ export default class RsvperTest extends AbstractFriendsTest {
         shouldPostToGroup: true,
         shouldPostAsFakedPerson: true,
     })
-    protected static async onlyMessagesGroupIfGroupIsSelected() {
+    protected async onlyMessagesGroupIfGroupIsSelected() {
         const [, adventure] = await this.adventures.find({})
         await this.connect(0)
         await this.setPeopleOnGroup([
@@ -141,7 +142,7 @@ export default class RsvperTest extends AbstractFriendsTest {
         this.assertMessageSentToPerson(this.fakedPerson.id)
     }
 
-    private static assertMessageSentToPerson(personId: string) {
+    private assertMessageSentToPerson(personId: string) {
         const matches = this.messageTargetAndPayloads.filter(
             (tap) => tap.target?.personId === personId
         )
@@ -152,7 +153,7 @@ export default class RsvperTest extends AbstractFriendsTest {
         )
     }
 
-    private static assertMessageNotSentToPerson(personId: string) {
+    private assertMessageNotSentToPerson(personId: string) {
         assert.isFalsy(
             this.messageTargetAndPayloads.find(
                 (tap) => tap.target?.personId === personId
@@ -161,11 +162,7 @@ export default class RsvperTest extends AbstractFriendsTest {
         )
     }
 
-    private static async rsvpAs(
-        idx: number,
-        canIMakeIt = true,
-        adventureId?: string
-    ) {
+    private async rsvpAs(idx: number, canIMakeIt = true, adventureId?: string) {
         const adventure = await this.getFirstAdventure()
         const id = adventure.id
         await this.rsvper.rsvp({

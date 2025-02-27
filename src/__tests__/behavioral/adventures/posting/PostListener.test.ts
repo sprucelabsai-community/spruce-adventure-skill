@@ -1,13 +1,14 @@
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import { PostAdventure } from '../../../../adventure.types'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { PostTargetAndPayload } from '../../../support/EventFaker'
 import { generatePostAdventureValues } from './generatePostAdventureValues'
 
 @fake.login()
+@suite()
 export default class PostListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
         await this.eventFaker.fakeSendMessage()
@@ -15,7 +16,7 @@ export default class PostListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async postingAdventureSavesUnderCurrentPerson() {
+    protected async postingAdventureSavesUnderCurrentPerson() {
         const adventure = this.generatePostAdventureValues()
         const created = await this.emitPostAdventure(adventure)
 
@@ -28,14 +29,14 @@ export default class PostListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async passesGroupIdToThePoster() {
+    protected async passesGroupIdToThePoster() {
         const groupId = generateId()
         await this.emitPostAdventure(undefined, { groupId })
         const saved = await this.getFirstAdventure()
         assert.isEqualDeep(saved.target, { groupId })
     }
 
-    private static async emitPostAdventure(
+    private async emitPostAdventure(
         values?: PostAdventure,
         target?: PostTargetAndPayload['target']
     ) {
@@ -52,7 +53,7 @@ export default class PostListenerTest extends AbstractAdventureTest {
         return adventure
     }
 
-    private static generatePostAdventureValues(): PostAdventure {
+    private generatePostAdventureValues(): PostAdventure {
         return generatePostAdventureValues()
     }
 }

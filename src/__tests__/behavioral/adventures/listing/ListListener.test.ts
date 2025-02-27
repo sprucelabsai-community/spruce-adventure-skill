@@ -1,32 +1,33 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../../../adventure.types'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { generateAvatarValues } from '../../../support/generateAvatarValues'
 
 @fake.login()
+@suite()
 export default class ListListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.bootSkill()
         await this.eventFaker.fakeGetPerson(() => this.fakedPerson)
     }
 
     @test()
-    protected static async skillIsListening() {
+    protected async skillIsListening() {
         await this.emit()
     }
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async returnsOwnsAdventure() {
+    protected async returnsOwnsAdventure() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
     @test()
     @seed('adventures', 1)
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async onlyReturnsYoursWithoutFriends() {
+    protected async onlyReturnsYoursWithoutFriends() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
@@ -34,13 +35,13 @@ export default class ListListenerTest extends AbstractAdventureTest {
     @seed('adventures', 1)
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
     @seed('adventures', 1)
-    protected static async onlyReturnsYoursWithoutFriendsInTheMiddle() {
+    protected async onlyReturnsYoursWithoutFriendsInTheMiddle() {
         await this.assertOnlyLoggedInPersonsAdventure()
     }
 
     @test()
     @seed('adventures', 1, { shouldPostAsFakedPerson: true })
-    protected static async dropsInAvatar() {
+    protected async dropsInAvatar() {
         this.fakedPerson.avatar = {
             ...generateAvatarValues(),
         }
@@ -48,21 +49,21 @@ export default class ListListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async returnsAdventuresFromConnections() {
+    protected async returnsAdventuresFromConnections() {
         const toId = await this.seedAdventurePostedByFriend()
         await this.createConnection(this.fakedPerson.id, toId)
         await this.assertReturnsOneAdventure()
     }
 
     @test()
-    protected static async canReturnAdventureFromReverseConnection() {
+    protected async canReturnAdventureFromReverseConnection() {
         const fromId = await this.seedAdventurePostedByFriend()
         await this.createConnection(fromId, this.fakedPerson.id)
         await this.assertReturnsOneAdventure()
     }
 
     @test()
-    protected static async canCheckMultipleConnections() {
+    protected async canCheckMultipleConnections() {
         const friend1 = await this.seedAdventurePostedByFriend()
         const friend2 = await this.seedAdventurePostedByFriend()
         await this.createConnection(friend1, this.fakedPerson.id)
@@ -71,14 +72,14 @@ export default class ListListenerTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async ignoresOtherPeoplesConnections() {
+    protected async ignoresOtherPeoplesConnections() {
         const friend = await this.seedAdventurePostedByFriend()
         await this.createConnection(friend, generateId())
         await this.assertTotalAdventures(0)
     }
 
     @test()
-    protected static async sortsDateTimeAsc() {
+    protected async sortsDateTimeAsc() {
         let passedOptions: Record<string, any> | undefined
 
         this.adventures.find = async (_, options) => {
@@ -107,7 +108,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async shouldReturnAdventuresPostedToGroupsImIn() {
+    protected async shouldReturnAdventuresPostedToGroupsImIn() {
         await this.assertTotalAdventures(1)
     }
 
@@ -120,7 +121,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async doesNotReturnAdventuresPostedToGroupsImNotIn() {
+    protected async doesNotReturnAdventuresPostedToGroupsImNotIn() {
         await this.assertTotalAdventures(0)
     }
 
@@ -137,16 +138,16 @@ export default class ListListenerTest extends AbstractAdventureTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async returnsIfPartOfMultipleAdventuresInSameGroup() {
+    protected async returnsIfPartOfMultipleAdventuresInSameGroup() {
         await this.assertTotalAdventures(2)
     }
 
-    private static async assertReturnsOneAdventure() {
+    private async assertReturnsOneAdventure() {
         const expected = 1
         await this.assertTotalAdventures(expected)
     }
 
-    private static async assertTotalAdventures(expected: number) {
+    private async assertTotalAdventures(expected: number) {
         const adventures = await this.emit()
         assert.isLength(
             adventures,
@@ -155,7 +156,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         )
     }
 
-    private static async createConnection(fromId: string, toId: string) {
+    private async createConnection(fromId: string, toId: string) {
         await this.connections.createOne({
             isConfirmed: true,
             source: {
@@ -167,14 +168,14 @@ export default class ListListenerTest extends AbstractAdventureTest {
         })
     }
 
-    private static async seedAdventurePostedByFriend(when?: number) {
+    private async seedAdventurePostedByFriend(when?: number) {
         const personId = generateId()
         const adventure = await this.seedAdventure(personId)
         adventure.when = when ?? adventure.when
         return personId
     }
 
-    private static async assertOnlyLoggedInPersonsAdventure() {
+    private async assertOnlyLoggedInPersonsAdventure() {
         const actual = await this.emit()
         const person = this.fakedPerson
         const record = await this.adventures.findOne({
@@ -197,7 +198,7 @@ export default class ListListenerTest extends AbstractAdventureTest {
         assert.isEqualDeep(actual, expected)
     }
 
-    private static async emit() {
+    private async emit() {
         const [{ adventures }] = await this.fakedClient.emitAndFlattenResponses(
             'adventure.list::v2022_09_09'
         )

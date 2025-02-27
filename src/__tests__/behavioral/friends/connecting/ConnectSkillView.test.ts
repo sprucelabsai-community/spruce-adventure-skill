@@ -3,7 +3,7 @@ import {
     vcAssert,
 } from '@sprucelabs/heartwood-view-controllers'
 import { fake } from '@sprucelabs/spruce-test-fixtures'
-import { assert, generateId, test } from '@sprucelabs/test-utils'
+import { assert, generateId, test, suite } from '@sprucelabs/test-utils'
 import { Friend } from '../../../../adventure.types'
 
 import ConnectSkillViewController, {
@@ -17,11 +17,12 @@ import {
 import generateFriendValues from '../../../support/generateFriendValues'
 
 @fake.login()
+@suite()
 export default class AcceptSkillViewTest extends AbstractAdventureTest {
-    private static vc: SpyConnectSkillView
-    private static friends: Friend[]
+    private vc!: SpyConnectSkillView
+    private friends!: Friend[]
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
         await this.eventFaker.fakeListFriends(() => {
             return this.friends
@@ -37,7 +38,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async listsPendingConnections() {
+    protected async listsPendingConnections() {
         let wasHit = false
         let passedPayload: ListFriendsTargetAndPayload['payload'] | undefined
 
@@ -53,12 +54,12 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersAExpectedCard() {
+    protected async rendersAExpectedCard() {
         vcAssert.assertSkillViewRendersActiveRecordCard(this.vc, 'pending')
     }
 
     @test()
-    protected static async listsRecordForEachPending() {
+    protected async listsRecordForEachPending() {
         await this.setFriendsAndLoad([
             generateFriendValues(),
             generateFriendValues(),
@@ -71,7 +72,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async rendersExpectedButtonsForWhomeverSent() {
+    protected async rendersExpectedButtonsForWhomeverSent() {
         await this.setFriendsAndLoad([
             generateFriendValues('me'),
             generateFriendValues('them'),
@@ -105,7 +106,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async acceptsConnectionIfPassedThroughArgs() {
+    protected async acceptsConnectionIfPassedThroughArgs() {
         let wasHit = false
         const connectionId = generateId()
         let passedTarget: AcceptConnectionTargetAndPayload['target'] | undefined
@@ -120,7 +121,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
     }
 
     @test()
-    protected static async doesNotLoadIfAcceptingConnection() {
+    protected async doesNotLoadIfAcceptingConnection() {
         await this.eventFaker.fakeAcceptConnection()
         let wasHit = false
         await this.eventFaker.fakeListFriends(() => {
@@ -131,7 +132,7 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
         assert.isFalse(wasHit)
     }
 
-    private static async loadAndAssertRedirect(connectionId: string) {
+    private async loadAndAssertRedirect(connectionId: string) {
         await vcAssert.assertActionRedirects({
             action: () => this.load({ connection: connectionId }),
             destination: {
@@ -141,20 +142,20 @@ export default class AcceptSkillViewTest extends AbstractAdventureTest {
         })
     }
 
-    private static async setFriendsAndLoad(friends: Friend[]) {
+    private async setFriendsAndLoad(friends: Friend[]) {
         this.setFriends(friends)
         await this.load()
     }
 
-    private static setFriends(friends: Friend[]) {
+    private setFriends(friends: Friend[]) {
         this.friends = friends
     }
 
-    private static async load(args?: ConnectSkillViewArgs) {
+    private async load(args?: ConnectSkillViewArgs) {
         await this.views.load(this.vc, args)
     }
 
-    private static get friendsListVc() {
+    private get friendsListVc() {
         return this.vc.getListVc()
     }
 }

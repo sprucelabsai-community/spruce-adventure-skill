@@ -1,25 +1,32 @@
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId, errorAssert } from '@sprucelabs/test-utils'
+import {
+    test,
+    suite,
+    assert,
+    generateId,
+    errorAssert,
+} from '@sprucelabs/test-utils'
 import AbstractAdventureTest from '../../../support/AbstractAdventureTest'
 import { UpdateGroup } from '../../../support/EventFaker'
 
 @fake.login()
+@suite()
 export default class UpdateGroupListenerTest extends AbstractAdventureTest {
-    protected static async beforeEach(): Promise<void> {
+    protected async beforeEach(): Promise<void> {
         await super.beforeEach()
         await this.bootSkill()
         await this.eventFaker.fakeGetPerson()
     }
 
     @test()
-    protected static async throwsNotFoundWithBadId() {
+    protected async throwsNotFoundWithBadId() {
         const err = await assert.doesThrowAsync(() => this.emitUpdateGroup())
         errorAssert.assertError(err, 'NOT_FOUND')
     }
 
     @test()
     @seed('groups', 1)
-    protected static async throwsIfTryingToUpdateGroupThatIsNotMine() {
+    protected async throwsIfTryingToUpdateGroupThatIsNotMine() {
         const group = await this.groups.updateOne(
             {},
             {
@@ -37,7 +44,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('groups', 1)
-    protected static async canUpdateGroupIfOwn() {
+    protected async canUpdateGroupIfOwn() {
         const updates: UpdateGroup = {
             title: generateId(),
             people: [generateId()],
@@ -55,7 +62,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('groups', 2)
-    protected static async actuallyUpdatesTheCorretGroup() {
+    protected async actuallyUpdatesTheCorretGroup() {
         const [group1, group2] = await this.groups.find({})
         const updates: UpdateGroup = {
             title: generateId(),
@@ -72,7 +79,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
 
     @test()
     @seed('groups', 1)
-    protected static async retunsTheUpdatedGroup() {
+    protected async retunsTheUpdatedGroup() {
         const updates: UpdateGroup = {
             title: generateId(),
             people: [generateId()],
@@ -87,7 +94,7 @@ export default class UpdateGroupListenerTest extends AbstractAdventureTest {
         })
     }
 
-    private static async emitUpdateGroup(id?: string, values?: UpdateGroup) {
+    private async emitUpdateGroup(id?: string, values?: UpdateGroup) {
         const [{ group }] = await this.fakedClient.emitAndFlattenResponses(
             'adventure.update-group::v2022_09_09',
             {

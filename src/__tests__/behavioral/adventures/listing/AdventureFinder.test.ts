@@ -2,15 +2,16 @@ import { dateUtil } from '@sprucelabs/calendar-utils'
 import { Person } from '@sprucelabs/spruce-core-schemas'
 import { generateUploadedImageValues } from '@sprucelabs/spruce-image-utils'
 import { fake, seed } from '@sprucelabs/spruce-test-fixtures'
-import { test, assert, generateId } from '@sprucelabs/test-utils'
+import { test, suite, assert, generateId } from '@sprucelabs/test-utils'
 import AdventureFinder from '../../../../adventures/listing/AdventureFinder'
 import AbstractFriendsTest from '../../../support/AbstractFriendsTest'
 
 @fake.login()
+@suite()
 export default class AdventureFinderTest extends AbstractFriendsTest {
-    private static finder: AdventureFinder
+    private finder!: AdventureFinder
 
-    protected static async beforeEach() {
+    protected async beforeEach() {
         await super.beforeEach()
 
         this.finder = await AdventureFinder.Finder({
@@ -24,7 +25,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
     @test()
     @seed('locations', 1)
     @seed('teammates', 5)
-    protected static async finderReturnsNameOfPoster() {
+    protected async finderReturnsNameOfPoster() {
         for (const teammate of this.fakedTeammates) {
             this.assignAvatarToTeammate(teammate)
             await this.seedAdventureAndConnectWithPerson(teammate.id)
@@ -51,9 +52,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldCreateAsFakedPerson: false,
         shouldAddFakedPersonAsMember: true,
     })
-    protected static async showsAdventures2HoursPast(
-        shouldPostToGroup: boolean
-    ) {
+    protected async showsAdventures2HoursPast(shouldPostToGroup: boolean) {
         let groupId: string | undefined
 
         if (shouldPostToGroup) {
@@ -71,7 +70,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldCreateAsFakedPerson: false,
         shouldAddFakedPersonAsMember: true,
     })
-    protected static async findsAdventurePostedInSecondGroupImPartOf() {
+    protected async findsAdventurePostedInSecondGroupImPartOf() {
         await this.eventFaker.fakeGetPerson()
         const [group1, group2] = await this.groups.find({})
         await this.seedAdventureTargetingGroup(group1.id)
@@ -90,7 +89,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
     })
     @seed('locations', 1)
     @seed('teammates', 1)
-    protected static async mixesInAdventuresPostedByFriendAndInGroup() {
+    protected async mixesInAdventuresPostedByFriendAndInGroup() {
         await this.eventFaker.fakeGetPerson()
         const teammate = this.fakedTeammates[0]
 
@@ -108,7 +107,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async returnsGroupTitleInSingleResponse() {
+    protected async returnsGroupTitleInSingleResponse() {
         await this.eventFaker.fakeGetPerson()
         const [match] = await this.findAdventures()
         const actual = match.groupTitle
@@ -128,7 +127,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async returnsGroupTitleInMultipleResponses() {
+    protected async returnsGroupTitleInMultipleResponses() {
         await this.eventFaker.fakeGetPerson()
         const [adventure1, adventure2] = await this.findAdventures()
         await this.assertEqualsFirstGroupsTitle(adventure1.groupTitle)
@@ -146,7 +145,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async matchesGroupTitleToAdventureIfOneAdventureIsNotInGroup() {
+    protected async matchesGroupTitleToAdventureIfOneAdventureIsNotInGroup() {
         await this.eventFaker.fakeGetPerson()
         await this.seedAdventureAndConnectWithPerson(this.fakedTeammates[0].id)
         const [adventure1, adventure2] = await this.findAdventures()
@@ -171,7 +170,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         shouldPostAsFakedPerson: false,
         shouldPostToGroup: true,
     })
-    protected static async matchesGroupTitleAccrossMultipleGroups() {
+    protected async matchesGroupTitleAccrossMultipleGroups() {
         await this.eventFaker.fakeGetPerson()
         const adventures = await this.findAdventures()
 
@@ -188,12 +187,12 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         }
     }
 
-    private static async seedAdventureAndConnectWithPerson(teammateId: string) {
+    private async seedAdventureAndConnectWithPerson(teammateId: string) {
         await this.seedAdventure(teammateId)
         await this.createConnection(this.myId, teammateId)
     }
 
-    private static async assertEqualsFirstGroupsTitle(actual?: string | null) {
+    private async assertEqualsFirstGroupsTitle(actual?: string | null) {
         const group = await this.getFirstGroup()
         assert.isEqual(
             actual,
@@ -202,7 +201,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         )
     }
 
-    private static async seedAdventureTargetingGroup(groupId: string) {
+    private async seedAdventureTargetingGroup(groupId: string) {
         await this.seedAdventure(generateId(), {
             target: {
                 groupId,
@@ -210,7 +209,7 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         })
     }
 
-    private static async assertTotalAdventures(expected: number) {
+    private async assertTotalAdventures(expected: number) {
         const adventures = await this.findAdventures()
         assert.isLength(
             adventures,
@@ -219,21 +218,18 @@ export default class AdventureFinderTest extends AbstractFriendsTest {
         )
     }
 
-    private static async seedAdventureStartingIn(
-        hours: number,
-        groupId?: string
-    ) {
+    private async seedAdventureStartingIn(hours: number, groupId?: string) {
         await this.seedAdventure(this.myId, {
             when: dateUtil.addMinutes(new Date().getTime(), hours * 60),
             target: groupId ? { groupId } : undefined,
         })
     }
 
-    private static async findAdventures() {
+    private async findAdventures() {
         return await this.finder.findForPerson(this.myId)
     }
 
-    private static assignAvatarToTeammate(teammate: Person) {
+    private assignAvatarToTeammate(teammate: Person) {
         teammate.avatar = {
             ...generateUploadedImageValues().sizes,
             name: generateId(),
