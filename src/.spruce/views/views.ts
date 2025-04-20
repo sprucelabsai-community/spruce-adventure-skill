@@ -11,8 +11,8 @@ import AdventureCardViewController from '../../adventures/listing/AdventureCard.
 import BaseAdventureCardViewController from '../../adventures/listing/BaseAdventureCard.vc'
 import CurrentAdventureCardViewController from '../../adventures/listing/CurrentAdventureCard.vc'
 import PostCardViewController from '../../adventures/posting/PostCard.vc'
-import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 import FriendsListToolViewController from '../../friends/listing/FriendsListTool.vc'
+import GroupListCardViewController from '../../groups/listing/GroupListCard.vc'
 
 import '@sprucelabs/heartwood-view-controllers'
 
@@ -30,8 +30,8 @@ const vcs = {
     BaseAdventureCardViewController,
     CurrentAdventureCardViewController,
     PostCardViewController,
-    GroupListCardViewController,
     FriendsListToolViewController,
+    GroupListCardViewController,
 }
 
 export const pluginsByName = {
@@ -67,8 +67,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.base-adventure-card': BaseAdventureCardViewController
 		'adventure.current-adventure-card': CurrentAdventureCardViewController
 		'adventure.post-card': PostCardViewController
-		'adventure.group-list-card': GroupListCardViewController
 		'adventure.friends-list-tool': FriendsListToolViewController
+		'adventure.group-list-card': GroupListCardViewController
 		'adventure.group': GroupSkillViewController
 		'adventure.root': RootSkillViewController
 		'adventure.post': PostSkillViewController
@@ -85,8 +85,8 @@ declare module '@sprucelabs/heartwood-view-controllers/build/types/heartwood.typ
 		'adventure.base-adventure-card': ConstructorParameters<typeof BaseAdventureCardViewController>[0]
 		'adventure.current-adventure-card': ConstructorParameters<typeof CurrentAdventureCardViewController>[0]
 		'adventure.post-card': ConstructorParameters<typeof PostCardViewController>[0]
-		'adventure.group-list-card': ConstructorParameters<typeof GroupListCardViewController>[0]
 		'adventure.friends-list-tool': ConstructorParameters<typeof FriendsListToolViewController>[0]
+		'adventure.group-list-card': ConstructorParameters<typeof GroupListCardViewController>[0]
 	}
 
 	interface ViewControllerPlugins {
