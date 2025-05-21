@@ -16,18 +16,18 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../listeners/skill/will-boot.v2021_08_03.listener').isGlobal,
     },
     {
-        eventName: 'send-reminder',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../reminders/listeners/adventure/send-reminder.v2022_09_09.listener').default,
-        isGlobal: require('../../reminders/listeners/adventure/send-reminder.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'register-dashboard-cards',
         eventNamespace: 'people',
         version: 'v2022_05_29',
         callback: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').default,
         isGlobal: require('../../peopleDashboardCards/listeners/people/register-dashboard-cards.v2022_05_29.listener').isGlobal,
+    },
+    {
+        eventName: 'send-reminder',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../reminders/listeners/adventure/send-reminder.v2022_09_09.listener').default,
+        isGlobal: require('../../reminders/listeners/adventure/send-reminder.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'cancel',
@@ -44,11 +44,25 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
     },
     {
+        eventName: 'list',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
+    },
+    {
         eventName: 'rsvp',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').default,
         isGlobal: require('../../adventures/rsvping/listeners/adventure/rsvp.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'list-friends',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').default,
+        isGlobal: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'accept-connection',
@@ -65,11 +79,11 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../friends/connecting/listeners/adventure/create-connection.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'list-friends',
+        eventName: 'create-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
-        callback: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').default,
-        isGlobal: require('../../friends/listing/listeners/adventure/list-friends.v2022_09_09.listener').isGlobal,
+        callback: require('../../groups/creating/listeners/adventure/create-group.v2022_09_09.listener').default,
+        isGlobal: require('../../groups/creating/listeners/adventure/create-group.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'delete-group',
@@ -79,25 +93,11 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../groups/deleting/listeners/adventure/delete-group.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'create-group',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../groups/creating/listeners/adventure/create-group.v2022_09_09.listener').default,
-        isGlobal: require('../../groups/creating/listeners/adventure/create-group.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'add-friend-to-group',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
         callback: require('../../groups/friends/listeners/adventure/add-friend-to-group.v2022_09_09.listener').default,
         isGlobal: require('../../groups/friends/listeners/adventure/add-friend-to-group.v2022_09_09.listener').isGlobal,
-    },
-    {
-        eventName: 'list',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'get-group',
