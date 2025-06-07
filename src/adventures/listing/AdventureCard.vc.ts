@@ -53,7 +53,7 @@ export default class AdventureCardViewController extends AbstractViewController<
             selected.push('out')
         }
 
-        const buttonGroupVc = this.Controller('buttonGroup', {
+        const buttonGroupVc = this.Controller('button-group', {
             selected,
             onWillChangeSelection: this.handleWillRsvp.bind(this),
             onSelectionChange: this.handleClickRsvp.bind(this),

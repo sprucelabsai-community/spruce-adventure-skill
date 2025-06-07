@@ -59,7 +59,7 @@ export default class PostCardViewController extends AbstractViewController<Card>
 
     private FormVc() {
         return this.Controller(
-            'bigForm',
+            'big-form',
             buildBigForm({
                 schema: postAdventureSchema,
                 onSubmit: this.handleSubmit.bind(this),

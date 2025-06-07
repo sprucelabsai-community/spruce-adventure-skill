@@ -57,7 +57,7 @@ export default class ListSkillViewController extends AbstractSkillViewController
     }
 
     private ToolBeltVc(): ToolBeltViewController {
-        return this.Controller('toolBelt', {
+        return this.Controller('tool-belt', {
             tools: [
                 {
                     id: 'friends',
