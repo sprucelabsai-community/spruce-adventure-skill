@@ -1,6 +1,6 @@
 import { generateId } from '@sprucelabs/test-utils'
 import { ListAdventure } from '../../adventure.types'
-import generateAdventureValues from './generateAdventureValues'
+import generateAdventureValues from '../../adventures/generateAdventureValues'
 import { generateAvatarValues } from './generateAvatarValues'
 
 export default function generateAdventureWithPersonValues(

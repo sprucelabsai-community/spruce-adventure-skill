@@ -14,7 +14,7 @@ import {
 import { StoreSeedOptions } from '@sprucelabs/spruce-test-fixtures'
 import { generateId } from '@sprucelabs/test-utils'
 import adventureSchema from '#spruce/schemas/adventure/v2022_09_09/adventure.schema'
-import generateAdventureValues from '../__tests__/support/generateAdventureValues'
+import generateAdventureValues from './generateAdventureValues'
 
 export default class AdventuresStore extends AbstractStore<
     FullSchema,

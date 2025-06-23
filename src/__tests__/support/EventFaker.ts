@@ -11,8 +11,8 @@ import {
     ListGroup,
     Person,
 } from '../../adventure.types'
-import generateAddressValues from './generateAddressValues'
-import generateAdventureValues from './generateAdventureValues'
+import generateAddressValues from '../../adventures/generateAddressValues'
+import generateAdventureValues from '../../adventures/generateAdventureValues'
 import generateFriendValues from './generateFriendValues'
 
 export default class EventFaker {
