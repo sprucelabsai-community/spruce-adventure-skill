@@ -67,7 +67,7 @@
     "@sprucelabs/spruce-skill-utils": "^32.0.23",
     "@sprucelabs/spruce-store-plugin": "^68.0.25",
     "@sprucelabs/spruce-view-plugin": "^53.0.25",
-    "dotenv": "^16.5.0"
+    "dotenv": "^16.6.0"
   },
   "devDependencies": {
     "@sprucelabs/heartwood-polish": "^7.2.166",
