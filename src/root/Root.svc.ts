@@ -1,12 +1,12 @@
 import {
     AbstractSkillViewController,
+    buildSkillViewLayout,
     Button,
     CardSection,
     CardViewController,
     Router,
     SkillView,
     SkillViewControllerLoadOptions,
-    splitCardsIntoLayouts,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 
@@ -118,7 +118,11 @@ export default class RootSkillViewController extends AbstractSkillViewController
         return {
             shouldCenterVertically: true,
             layouts: this.introCardVc
-                ? splitCardsIntoLayouts([this.introCardVc.render()], 2)
+                ? [
+                      buildSkillViewLayout('two-col', {
+                          cards: [this.introCardVc.render()],
+                      }),
+                  ]
                 : [],
         }
     }

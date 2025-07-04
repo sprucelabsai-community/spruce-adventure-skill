@@ -2,11 +2,11 @@ import {
     AbstractSkillViewController,
     ActiveRecordCardViewController,
     buildActiveRecordCard,
+    buildSkillViewLayout,
     ListCell,
     ListRow,
     SkillView,
     SkillViewControllerLoadOptions,
-    splitCardsIntoLayouts,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import { Friend } from '../../adventure.types'
@@ -109,7 +109,11 @@ export default class ConnectSkillViewController extends AbstractSkillViewControl
 
     public render(): SkillView {
         return {
-            layouts: splitCardsIntoLayouts([this.cardVc.render()], 3),
+            layouts: [
+                buildSkillViewLayout('one-col', {
+                    cards: [this.cardVc.render()],
+                }),
+            ],
         }
     }
 }

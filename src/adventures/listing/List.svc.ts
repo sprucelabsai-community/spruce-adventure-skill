@@ -1,11 +1,11 @@
 import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractSkillViewController,
+    buildSkillViewLayout,
     Card,
     Router,
     SkillView,
     SkillViewControllerLoadOptions,
-    splitCardsIntoLayouts,
     ToolBelt,
     ToolBeltViewController,
     ViewController,
@@ -166,10 +166,11 @@ export default class ListSkillViewController extends AbstractSkillViewController
         }
 
         return {
-            layouts: splitCardsIntoLayouts(
-                cards.map((c) => c.render()),
-                3
-            ),
+            layouts: [
+                buildSkillViewLayout('three-col', {
+                    cards: cards.map((c) => c.render()),
+                }),
+            ],
         }
     }
 }

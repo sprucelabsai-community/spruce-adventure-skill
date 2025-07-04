@@ -1,10 +1,10 @@
 import { durationUtil } from '@sprucelabs/calendar-utils'
 import {
     AbstractSkillViewController,
+    buildSkillViewLayout,
     Router,
     SkillView,
     SkillViewControllerLoadOptions,
-    splitCardsIntoLayouts,
     ViewControllerOptions,
 } from '@sprucelabs/heartwood-view-controllers'
 import PostCardViewController from './PostCard.vc'
@@ -65,7 +65,11 @@ export default class PostSkillViewController extends AbstractSkillViewController
 
     public render(): SkillView {
         return {
-            layouts: splitCardsIntoLayouts([this.postCardVc.render()], 2),
+            layouts: [
+                buildSkillViewLayout('two-col', {
+                    cards: [this.postCardVc.render()],
+                }),
+            ],
         }
     }
 }
