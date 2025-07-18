@@ -62,11 +62,11 @@
     "@sprucelabs/spruce-form-utils": "^23.0.0",
     "@sprucelabs/spruce-image-utils": "^13.0.0",
     "@sprucelabs/spruce-invite-utils": "^13.0.0",
-    "@sprucelabs/spruce-permission-plugin": "^40.0.0",
+    "@sprucelabs/spruce-permission-plugin": "^40.0.1",
     "@sprucelabs/spruce-skill-booter": "^70.0.1",
     "@sprucelabs/spruce-skill-utils": "^32.0.40",
     "@sprucelabs/spruce-store-plugin": "^70.0.1",
-    "@sprucelabs/spruce-view-plugin": "^55.0.0",
+    "@sprucelabs/spruce-view-plugin": "^55.0.1",
     "dotenv": "^17.2.0"
   },
   "devDependencies": {
