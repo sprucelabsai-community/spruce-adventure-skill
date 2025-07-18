@@ -58,7 +58,7 @@ export default class ConfirmCancelCardViewController extends AbstractViewControl
                 ],
                 onCancel: this.onCancelHandler,
                 submitButtonLabel: 'Cancel this Adventure',
-                shouldShowCancelButton: false,
+                shouldRenderCancelButton: false,
                 onSubmit: async ({ values }) => {
                     this.cardVc.setIsBusy(true)
                     await this.onConfirmHandler(values?.message)
