@@ -119,7 +119,7 @@ export default class RootSkillViewController extends AbstractSkillViewController
             shouldCenterVertically: true,
             layouts: this.introCardVc
                 ? [
-                      buildSkillViewLayout('two-col', {
+                      buildSkillViewLayout('one-col', {
                           cards: [this.introCardVc.render()],
                       }),
                   ]
