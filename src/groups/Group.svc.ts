@@ -6,8 +6,6 @@ import {
     Router,
     Card,
     CardViewController,
-    LayoutStyle,
-    buildSkillViewLayout,
 } from '@sprucelabs/heartwood-view-controllers'
 import { Friend, ListGroup } from '../adventure.types'
 import FriendSelectionCardViewController from './FriendSelectionCard.vc'
@@ -250,17 +248,17 @@ export default class GroupSkillViewController extends AbstractSkillViewControlle
     }
 
     public render(): SkillView {
-        const style: LayoutStyle = this.shouldRenderForm ? 'two-col' : 'one-col'
         return {
+            shouldCenterVertically: true,
             layouts: [
-                buildSkillViewLayout(style, {
+                {
                     cards: [
                         this.shouldRenderForm
                             ? this.formCardVc.render()
                             : this.detailCardVc.render(),
                         this.friendSelectionCardVc.render(),
                     ].filter(Boolean) as Card[],
-                }),
+                },
             ],
         }
     }

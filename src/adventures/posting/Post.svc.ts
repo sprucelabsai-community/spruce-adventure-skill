@@ -66,7 +66,7 @@ export default class PostSkillViewController extends AbstractSkillViewController
     public render(): SkillView {
         return {
             layouts: [
-                buildSkillViewLayout('two-col', {
+                buildSkillViewLayout('one-col', {
                     cards: [this.postCardVc.render()],
                 }),
             ],
