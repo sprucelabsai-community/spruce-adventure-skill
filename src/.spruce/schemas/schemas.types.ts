@@ -1340,6 +1340,101 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
+		interface SendReminderEmitTarget {
+			
+				
+				'adventureId': string
+		}
+
+		interface SendReminderEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'sendReminderEmitTarget',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'adventureId': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface SendReminderEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface SendReminderEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target': SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTarget
+		}
+
+		interface SendReminderEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'sendReminderEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		interface SendReminderEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface SendReminderResponsePayload {
+			
+				
+				'success': boolean
+		}
+
+		interface SendReminderResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'sendReminderResponsePayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'success': {
+			                type: 'boolean',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface SendReminderResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderResponsePayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
 		interface ListAdventure {
 			
 				
@@ -1522,6 +1617,50 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
+		interface PostEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target'?: SpruceSchemas.Adventure.v2022_09_09.PostEmitTarget | undefined | null
+				
+				'payload': SpruceSchemas.Adventure.v2022_09_09.PostEmitPayload
+		}
+
+		interface PostEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'postEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.PostEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface PostEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
 		interface PostAdventure {
 			
 				/** What are you gonna do?. Describe the adventure! This is what I'll message to your friends! Heads up, you can only have 1 adventure at a time! */
@@ -1600,50 +1739,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface PostEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target'?: SpruceSchemas.Adventure.v2022_09_09.PostEmitTarget | undefined | null
-				
-				'payload': SpruceSchemas.Adventure.v2022_09_09.PostEmitPayload
-		}
-
-		interface PostEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'postEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.PostEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		interface PostEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.PostEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
 		interface PostResponsePayload {
 			
 				
@@ -1666,101 +1761,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface PostResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.PostResponsePayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface SendReminderEmitTarget {
-			
-				
-				'adventureId': string
-		}
-
-		interface SendReminderEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'sendReminderEmitTarget',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'adventureId': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface SendReminderEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface SendReminderEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target': SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTarget
-		}
-
-		interface SendReminderEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'sendReminderEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		interface SendReminderEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface SendReminderResponsePayload {
-			
-				
-				'success': boolean
-		}
-
-		interface SendReminderResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'sendReminderResponsePayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'success': {
-			                type: 'boolean',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface SendReminderResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.SendReminderResponsePayloadSchema> {}
 
 	}
 
@@ -1900,6 +1900,108 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
+		interface ListFriendsEmitPayload {
+			
+				
+				'filter'?: ("confirmed" | "pending") | undefined | null
+				
+				'isInGroupId'?: string | undefined | null
+		}
+
+		interface ListFriendsEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsEmitPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'filter': {
+			                type: 'select',
+			                options: {choices: [{"value":"confirmed","label":"Confirmed"},{"value":"pending","label":"Pending"}],}
+			            },
+			            /** . */
+			            'isInGroupId': {
+			                type: 'id',
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface ListFriendsEmitPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface ListFriendsEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'payload'?: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayload | undefined | null
+		}
+
+		interface ListFriendsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface ListFriendsEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface ListFriendsResponsePayload {
+			
+				
+				'friends': SpruceSchemas.Adventure.v2022_09_09.Friend[]
+		}
+
+		interface ListFriendsResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listFriendsResponsePayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'friends': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema,}
+			            },
+			    }
+		}
+
+		interface ListFriendsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsResponsePayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
 		interface CancelEmitPayload {
 			
 				
@@ -2014,6 +2116,42 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface CreateConnectionEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface CreateConnectionEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target'?: SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTarget | undefined | null
+		}
+
+		interface CreateConnectionEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'createConnectionEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		interface CreateConnectionEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -2145,34 +2283,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListFriendsEmitPayload {
+		interface DeleteGroupEmitTarget {
 			
 				
-				'filter'?: ("confirmed" | "pending") | undefined | null
-				
-				'isInGroupId'?: string | undefined | null
+				'groupId': string
 		}
 
-		interface ListFriendsEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'listFriendsEmitPayload',
+		interface DeleteGroupEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'deleteGroupEmitTarget',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'filter': {
-			                type: 'select',
-			                options: {choices: [{"value":"confirmed","label":"Confirmed"},{"value":"pending","label":"Pending"}],}
-			            },
-			            /** . */
-			            'isInGroupId': {
+			            'groupId': {
 			                type: 'id',
+			                isRequired: true,
 			                options: undefined
 			            },
 			    }
 		}
 
-		interface ListFriendsEmitPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema> {}
+		interface DeleteGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetSchema> {}
 
 	}
 
@@ -2180,16 +2312,16 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListFriendsEmitTargetAndPayload {
+		interface DeleteGroupEmitTargetAndPayload {
 			
 				/** Source. */
 				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
 				
-				'payload'?: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayload | undefined | null
+				'target': SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTarget
 		}
 
-		interface ListFriendsEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'listFriendsEmitTargetAndPayload',
+		interface DeleteGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'deleteGroupEmitTargetAndPayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
@@ -2201,14 +2333,15 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
 			            },
 			            /** . */
-			            'payload': {
+			            'target': {
 			                type: 'schema',
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitPayloadSchema,}
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetSchema,}
 			            },
 			    }
 		}
 
-		interface ListFriendsEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsEmitTargetAndPayloadSchema> {}
+		interface DeleteGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -2216,30 +2349,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListFriendsResponsePayload {
+		interface DeleteGroupResponsePayload {
 			
 				
-				'friends': SpruceSchemas.Adventure.v2022_09_09.Friend[]
+				'success': boolean
 		}
 
-		interface ListFriendsResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listFriendsResponsePayload',
+		interface DeleteGroupResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'deleteGroupResponsePayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'friends': {
-			                type: 'schema',
+			            'success': {
+			                type: 'boolean',
 			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.FriendSchema,}
+			                options: undefined
 			            },
 			    }
 		}
 
-		interface ListFriendsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListFriendsResponsePayloadSchema> {}
+		interface DeleteGroupResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupResponsePayloadSchema> {}
 
 	}
 
@@ -2448,101 +2579,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface DeleteGroupEmitTarget {
-			
-				
-				'groupId': string
-		}
-
-		interface DeleteGroupEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'deleteGroupEmitTarget',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'groupId': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface DeleteGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface DeleteGroupEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target': SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTarget
-		}
-
-		interface DeleteGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'deleteGroupEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		interface DeleteGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface DeleteGroupResponsePayload {
-			
-				
-				'success': boolean
-		}
-
-		interface DeleteGroupResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'deleteGroupResponsePayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'success': {
-			                type: 'boolean',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface DeleteGroupResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.DeleteGroupResponsePayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
 		interface LeaveGroupEmitTarget {
 			
 				
@@ -2638,64 +2674,28 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListGroup {
+		interface AddFriendToGroupEmitTarget {
 			
 				
-				'id': string
-				/** Name. Give your group a helpful name, like "Besties" or "Work Squad" */
-				'title': string
-				/** Description. */
-				'description'?: string | undefined | null
-				
-				'people': string[]
-				
-				'isMine': boolean
+				'groupId': string
 		}
 
-		interface ListGroupSchema extends SpruceSchema.Schema {
-			id: 'listGroup',
+		interface AddFriendToGroupEmitTargetSchema extends SpruceSchema.Schema {
+			id: 'addFriendToGroupEmitTarget',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'id': {
+			            'groupId': {
 			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			            /** Name. Give your group a helpful name, like "Besties" or "Work Squad" */
-			            'title': {
-			                label: 'Name',
-			                type: 'text',
-			                isRequired: true,
-			                hint: 'Give your group a helpful name, like "Besties" or "Work Squad"',
-			                options: undefined
-			            },
-			            /** Description. */
-			            'description': {
-			                label: 'Description',
-			                type: 'text',
-			                options: undefined
-			            },
-			            /** . */
-			            'people': {
-			                type: 'id',
-			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: undefined
-			            },
-			            /** . */
-			            'isMine': {
-			                type: 'boolean',
 			                isRequired: true,
 			                options: undefined
 			            },
 			    }
 		}
 
-		interface ListGroupEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListGroupSchema> {}
+		interface AddFriendToGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetSchema> {}
 
 	}
 
@@ -2703,30 +2703,102 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
-		interface ListGroupsResponsePayload {
+		interface AddFriendToGroupEmitPayload {
 			
 				
-				'groups': SpruceSchemas.Adventure.v2022_09_09.ListGroup[]
+				'friendId': string
 		}
 
-		interface ListGroupsResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'listGroupsResponsePayload',
+		interface AddFriendToGroupEmitPayloadSchema extends SpruceSchema.Schema {
+			id: 'addFriendToGroupEmitPayload',
 			version: 'v2022_09_09',
 			namespace: 'Adventure',
 			name: '',
 			    fields: {
 			            /** . */
-			            'groups': {
-			                type: 'schema',
+			            'friendId': {
+			                type: 'id',
 			                isRequired: true,
-			                isArray: true,
-			                minArrayLength: 0,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.ListGroupSchema,}
+			                options: undefined
 			            },
 			    }
 		}
 
-		interface ListGroupsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListGroupsResponsePayloadSchema> {}
+		interface AddFriendToGroupEmitPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface AddFriendToGroupEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target': SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTarget
+				
+				'payload': SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayload
+		}
+
+		interface AddFriendToGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'addFriendToGroupEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface AddFriendToGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetAndPayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface AddFriendToGroupResponsePayload {
+			
+				
+				'success': boolean
+		}
+
+		interface AddFriendToGroupResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'addFriendToGroupResponsePayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'success': {
+			                type: 'boolean',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface AddFriendToGroupResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupResponsePayloadSchema> {}
 
 	}
 
@@ -2756,6 +2828,51 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface UpdateGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface UpdateGroupEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target': SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTarget
+				
+				'payload': SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitPayload
+		}
+
+		interface UpdateGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'updateGroupEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetSchema,}
+			            },
+			            /** . */
+			            'payload': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitPayloadSchema,}
+			            },
+			    }
+		}
+
+		interface UpdateGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -2927,6 +3044,102 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 	namespace SpruceSchemas.Adventure.v2022_09_09 {
 
 		
+		interface ListGroup {
+			
+				
+				'id': string
+				/** Name. Give your group a helpful name, like "Besties" or "Work Squad" */
+				'title': string
+				/** Description. */
+				'description'?: string | undefined | null
+				
+				'people': string[]
+				
+				'isMine': boolean
+		}
+
+		interface ListGroupSchema extends SpruceSchema.Schema {
+			id: 'listGroup',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'id': {
+			                type: 'id',
+			                isRequired: true,
+			                options: undefined
+			            },
+			            /** Name. Give your group a helpful name, like "Besties" or "Work Squad" */
+			            'title': {
+			                label: 'Name',
+			                type: 'text',
+			                isRequired: true,
+			                hint: 'Give your group a helpful name, like "Besties" or "Work Squad"',
+			                options: undefined
+			            },
+			            /** Description. */
+			            'description': {
+			                label: 'Description',
+			                type: 'text',
+			                options: undefined
+			            },
+			            /** . */
+			            'people': {
+			                type: 'id',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: undefined
+			            },
+			            /** . */
+			            'isMine': {
+			                type: 'boolean',
+			                isRequired: true,
+			                options: undefined
+			            },
+			    }
+		}
+
+		interface ListGroupEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListGroupSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface ListGroupsResponsePayload {
+			
+				
+				'groups': SpruceSchemas.Adventure.v2022_09_09.ListGroup[]
+		}
+
+		interface ListGroupsResponsePayloadSchema extends SpruceSchema.Schema {
+			id: 'listGroupsResponsePayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** . */
+			            'groups': {
+			                type: 'schema',
+			                isRequired: true,
+			                isArray: true,
+			                minArrayLength: 0,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.ListGroupSchema,}
+			            },
+			    }
+		}
+
+		interface ListGroupsResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.ListGroupsResponsePayloadSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
 		interface GetGroupEmitTarget {
 			
 				
@@ -2949,6 +3162,43 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface GetGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetSchema> {}
+
+	}
+
+
+	namespace SpruceSchemas.Adventure.v2022_09_09 {
+
+		
+		interface GetGroupEmitTargetAndPayload {
+			
+				/** Source. */
+				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
+				
+				'target': SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTarget
+		}
+
+		interface GetGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
+			id: 'getGroupEmitTargetAndPayload',
+			version: 'v2022_09_09',
+			namespace: 'Adventure',
+			name: '',
+			    fields: {
+			            /** Source. */
+			            'source': {
+			                label: 'Source',
+			                type: 'schema',
+			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
+			            },
+			            /** . */
+			            'target': {
+			                type: 'schema',
+			                isRequired: true,
+			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetSchema,}
+			            },
+			    }
+		}
+
+		interface GetGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetAndPayloadSchema> {}
 
 	}
 
@@ -3043,256 +3293,6 @@ declare module '@sprucelabs/spruce-core-schemas/build/.spruce/schemas/core.schem
 		}
 
 		interface GetGroupResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.GetGroupResponsePayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface CreateConnectionEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target'?: SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTarget | undefined | null
-		}
-
-		interface CreateConnectionEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'createConnectionEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		interface CreateConnectionEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.CreateConnectionEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface UpdateGroupEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target': SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTarget
-				
-				'payload': SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitPayload
-		}
-
-		interface UpdateGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'updateGroupEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		interface UpdateGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.UpdateGroupEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface GetGroupEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target': SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTarget
-		}
-
-		interface GetGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'getGroupEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetSchema,}
-			            },
-			    }
-		}
-
-		interface GetGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.GetGroupEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface AddFriendToGroupEmitTarget {
-			
-				
-				'groupId': string
-		}
-
-		interface AddFriendToGroupEmitTargetSchema extends SpruceSchema.Schema {
-			id: 'addFriendToGroupEmitTarget',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'groupId': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface AddFriendToGroupEmitTargetEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface AddFriendToGroupEmitPayload {
-			
-				
-				'friendId': string
-		}
-
-		interface AddFriendToGroupEmitPayloadSchema extends SpruceSchema.Schema {
-			id: 'addFriendToGroupEmitPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'friendId': {
-			                type: 'id',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface AddFriendToGroupEmitPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface AddFriendToGroupEmitTargetAndPayload {
-			
-				/** Source. */
-				'source'?: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSource | undefined | null
-				
-				'target': SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTarget
-				
-				'payload': SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayload
-		}
-
-		interface AddFriendToGroupEmitTargetAndPayloadSchema extends SpruceSchema.Schema {
-			id: 'addFriendToGroupEmitTargetAndPayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** Source. */
-			            'source': {
-			                label: 'Source',
-			                type: 'schema',
-			                options: {schema: SpruceSchemas.SpruceEventUtils.v2021_09_13.EventSourceSchema,}
-			            },
-			            /** . */
-			            'target': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetSchema,}
-			            },
-			            /** . */
-			            'payload': {
-			                type: 'schema',
-			                isRequired: true,
-			                options: {schema: SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitPayloadSchema,}
-			            },
-			    }
-		}
-
-		interface AddFriendToGroupEmitTargetAndPayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupEmitTargetAndPayloadSchema> {}
-
-	}
-
-
-	namespace SpruceSchemas.Adventure.v2022_09_09 {
-
-		
-		interface AddFriendToGroupResponsePayload {
-			
-				
-				'success': boolean
-		}
-
-		interface AddFriendToGroupResponsePayloadSchema extends SpruceSchema.Schema {
-			id: 'addFriendToGroupResponsePayload',
-			version: 'v2022_09_09',
-			namespace: 'Adventure',
-			name: '',
-			    fields: {
-			            /** . */
-			            'success': {
-			                type: 'boolean',
-			                isRequired: true,
-			                options: undefined
-			            },
-			    }
-		}
-
-		interface AddFriendToGroupResponsePayloadEntity extends SchemaEntity<SpruceSchemas.Adventure.v2022_09_09.AddFriendToGroupResponsePayloadSchema> {}
 
 	}
 
