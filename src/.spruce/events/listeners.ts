@@ -44,13 +44,6 @@ const listeners: EventFeatureListener[] = [
         isGlobal: require('../../adventures/listing/listeners/adventure/list.v2022_09_09.listener').isGlobal,
     },
     {
-        eventName: 'post',
-        eventNamespace: 'adventure',
-        version: 'v2022_09_09',
-        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
-        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
-    },
-    {
         eventName: 'rsvp',
         eventNamespace: 'adventure',
         version: 'v2022_09_09',
@@ -70,6 +63,13 @@ const listeners: EventFeatureListener[] = [
         version: 'v2022_09_09',
         callback: require('../../friends/connecting/listeners/adventure/create-connection.v2022_09_09.listener').default,
         isGlobal: require('../../friends/connecting/listeners/adventure/create-connection.v2022_09_09.listener').isGlobal,
+    },
+    {
+        eventName: 'post',
+        eventNamespace: 'adventure',
+        version: 'v2022_09_09',
+        callback: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').default,
+        isGlobal: require('../../adventures/posting/listeners/adventure/post.v2022_09_09.listener').isGlobal,
     },
     {
         eventName: 'list-friends',
