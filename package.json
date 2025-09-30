@@ -59,15 +59,15 @@
     "@sprucelabs/spruce-core-schemas": "^41.1.18",
     "@sprucelabs/spruce-event-plugin": "^74.1.23",
     "@sprucelabs/spruce-event-utils": "^41.0.117",
-    "@sprucelabs/spruce-form-utils": "^28.0.13",
-    "@sprucelabs/spruce-image-utils": "^18.0.14",
+    "@sprucelabs/spruce-form-utils": "^28.0.14",
+    "@sprucelabs/spruce-image-utils": "^18.0.15",
     "@sprucelabs/spruce-invite-utils": "^18.0.13",
     "@sprucelabs/spruce-permission-plugin": "^45.0.71",
     "@sprucelabs/spruce-skill-booter": "^74.1.23",
     "@sprucelabs/spruce-skill-utils": "^32.0.110",
     "@sprucelabs/spruce-store-plugin": "^74.1.23",
     "@sprucelabs/spruce-view-plugin": "^59.0.69",
-    "dotenv": "^17.2.2"
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
     "@sprucelabs/heartwood-polish": "^7.2.308",
