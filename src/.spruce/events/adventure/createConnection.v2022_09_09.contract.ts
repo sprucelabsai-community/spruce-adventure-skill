@@ -10,6 +10,7 @@ const createConnectionEventContract = buildEventContract({
             isGlobal: true,
             
             
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-create-connection"]},
             
             emitPayloadSchema: createConnectionEmitTargetAndPayloadSchema,

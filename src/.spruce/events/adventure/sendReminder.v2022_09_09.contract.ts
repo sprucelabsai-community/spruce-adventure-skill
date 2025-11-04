@@ -9,7 +9,8 @@ const sendReminderEventContract = buildEventContract({
         'adventure.send-reminder::v2022_09_09': {
             isGlobal: true,
             
-            aiInstructions: `Allows me to send a single reminder to people invited to my adventure. I only get one shot, so I better make it count!`,
+            aiInstructions: "Allows me to send a single reminder to people invited to my adventure. I only get one shot, so I better make it count!",
+            
             
             listenPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-send-reminders"]},
             emitPayloadSchema: sendReminderEmitTargetAndPayloadSchema,

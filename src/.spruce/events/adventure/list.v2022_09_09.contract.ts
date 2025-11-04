@@ -8,7 +8,8 @@ const listEventContract = buildEventContract({
         'adventure.list::v2022_09_09': {
             isGlobal: true,
             
-            aiInstructions: `Use this to see what adventures me or my friends have posted!`,
+            aiInstructions: "Use this to see what adventures me or my friends have posted!",
+            
             
             listenPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-list-adventures"]},
             

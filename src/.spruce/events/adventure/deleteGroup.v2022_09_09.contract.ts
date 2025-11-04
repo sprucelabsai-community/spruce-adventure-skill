@@ -10,6 +10,7 @@ const deleteGroupEventContract = buildEventContract({
             isGlobal: true,
             
             
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-delete-groups"]},
             
             emitPayloadSchema: deleteGroupEmitTargetAndPayloadSchema,

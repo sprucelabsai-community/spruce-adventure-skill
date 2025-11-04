@@ -10,6 +10,7 @@ const getEventContract = buildEventContract({
             isGlobal: true,
             
             
+            
             emitPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-get-person","can-search-people"]},
             
             emitPayloadSchema: getEmitTargetAndPayloadSchema,

@@ -10,6 +10,7 @@ const acceptConnectionEventContract = buildEventContract({
             isGlobal: true,
             
             
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-accept-connection"]},
             
             emitPayloadSchema: acceptConnectionEmitTargetAndPayloadSchema,

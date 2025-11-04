@@ -10,6 +10,7 @@ const leaveGroupEventContract = buildEventContract({
             isGlobal: true,
             
             
+            
             emitPermissions: {"contractId":"adventure.adventure","permissionIdsAny":["can-leave-groups"]},
             
             emitPayloadSchema: leaveGroupEmitTargetAndPayloadSchema,

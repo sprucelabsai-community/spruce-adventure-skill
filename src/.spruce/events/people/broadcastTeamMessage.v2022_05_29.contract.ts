@@ -10,6 +10,7 @@ const broadcastTeamMessageEventContract = buildEventContract({
             
             
             
+            
             emitPermissions: {"contractId":"people.people-contract","permissionIdsAny":["can-message-team"]},
             
             emitPayloadSchema: broadcastTeamMessageEmitTargetAndPayloadSchema,
