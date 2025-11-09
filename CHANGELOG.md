@@ -1,3 +1,7 @@
+## <small>14.0.25 (2025-11-09)</small>
+
+* patch: version updates ([4d6b621](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/4d6b621))
+
 ## <small>14.0.24 (2025-11-09)</small>
 
 * patch: version updates ([1133e72](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/1133e72))
