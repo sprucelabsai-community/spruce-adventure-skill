@@ -1,3 +1,7 @@
+## <small>14.4.3 (2026-01-06)</small>
+
+* patch: version updates ([529b3a2](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/529b3a2))
+
 ## <small>14.4.2 (2025-12-15)</small>
 
 * patch: version updates ([bab9db6](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/bab9db6))
