@@ -1,3 +1,7 @@
+## <small>14.4.9 (2026-02-18)</small>
+
+* chore: run fix.lint and resolve lint issues ([970b197](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/970b197))
+
 ## <small>14.4.8 (2026-01-30)</small>
 
 * patch: version updates ([9027bbc](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/9027bbc))
