@@ -1,3 +1,7 @@
+## <small>14.4.10 (2026-02-21)</small>
+
+* patch: version updates ([e911cad](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/e911cad))
+
 ## <small>14.4.9 (2026-02-18)</small>
 
 * chore: run fix.lint and resolve lint issues ([970b197](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/970b197))
