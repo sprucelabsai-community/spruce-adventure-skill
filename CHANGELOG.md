@@ -1,3 +1,8 @@
+## <small>14.4.12 (2026-02-23)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai-community/spruce-adventure-skill ([0ac2fac](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/0ac2fac))
+* patch: version updates ([533a97a](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/533a97a))
+
 ## <small>14.4.11 (2026-02-23)</small>
 
 * patch: version updates ([7b2dd55](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/7b2dd55))
