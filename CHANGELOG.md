@@ -1,3 +1,9 @@
+## <small>14.4.14 (2026-04-17)</small>
+
+* Merge branch 'master' of github.com:sprucelabsai-community/spruce-adventure-skill ([69fe093](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/69fe093))
+* Upgrade dependencies for TypeScript 6 compatibility ([3df49e0](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/3df49e0))
+* patch: version updates ([6fa3c98](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/6fa3c98))
+
 ## <small>14.4.13 (2026-04-17)</small>
 
 * patch: version updates ([07f9d10](https://github.com/sprucelabsai-community/spruce-adventure-skill/commit/07f9d10))
