@@ -7,28 +7,30 @@ export default class SpruceError extends AbstractSpruceError<ErrorOptions> {
         let message
 
         switch (options?.code) {
-            case 'NOT_FOUND':
-                message = `I could not find what you are looking for!`
+            case 'NOT_YOUR_GROUP':
+                message = 'A Not your group just happened!'
                 break
 
-            case 'NOT_YOUR_GROUP':
-                message = `You can't do this because you're not the owner of this group!`
+            case 'NOT_FOUND':
+                message = 'A Not found just happened!'
                 break
 
             case 'CANNOT_LEAVE_OWN_GROUP':
-                message = `You cannot leave your own group! But, you can delete it!`
+                message = 'A Cannot leave own group just happened!'
                 break
 
             case 'CANNOT_LEAVE_GROUP_YOU_ARE_NOT_PART_OF':
-                message = 'You cannot leave a group you are not part of!'
+                message =
+                    'A Cannot leave group you are not part of just happened!'
                 break
 
             case 'CANNOT_ADD_FRIEND_TO_GROUP_YOU_ARE_NOT_PART_OF':
-                message = `You can't add a person to this group because you are not part of it!`
+                message =
+                    'A Cannot add friend to group you are not part of just happened!'
                 break
 
             case 'ALREADY_IN_GROUP':
-                message = 'Already in group!'
+                message = 'A Already in group just happened!'
                 break
 
             default:
